@@ -30,7 +30,7 @@ struct Continent {
 class Board {
 public:
 	std::vector<Node*> listOfNeightbors[10];
-	std::vector<Node*> completeList;
+	std::vector<Node*> countryList;
 	std::vector<Continent*> listOfContinent;
 	Board();
 	~Board();
@@ -40,8 +40,12 @@ public:
 	int initList();
 	void printBoard();
 	int fillNodes();
-	int createContinent(std::string _name, int _Bonus);
+	int createContinent(std::string _name, int numOfCountries);
 	int addToContinent(int index, Node* u);
+
+private:
+	int counter;
 };
+
 
 #endif //!map
