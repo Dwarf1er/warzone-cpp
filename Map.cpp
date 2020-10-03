@@ -40,12 +40,12 @@ int Board::initList() {
 
 void Board::printBoard() {
 	for (int x = 0; x < counter; x++) {
-		printf("n%d: ", x);
+		printf("%d: ", x);
 		int y = 0;
 		for (y; y < listOfNeightbors[x].size(); y++) {
 			printf("-> %d ", listOfNeightbors[x][y]->getID());
 		}
-
+		printf("\n");
 		printf("\n");
 	}
 
