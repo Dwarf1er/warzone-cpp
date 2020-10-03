@@ -5,22 +5,43 @@
 #include <string>
 #include <vector>
 
-class Map
+class Node
 {
 
 public:
-	Map();
-	Map(std::string continent1, std::string continent2);
-
-	void addContinentEdge(std::vector<std::string> adj[], std::string continent1, std::string continent2);
-
-	std::vector<std::string> getContinents();
-	std::vector<std::string> getCountries();
-
-	std::vector<std::string> getContinentsConnections();
-	std::vector<std::string> getCountriesConnections();
+	Node();
+	Node(int _ID);
+	~Node();
+	int getID() { return ID; }
+	
 private:
-	int vertices;
+	int ID;
+};
+
+struct Continent {
+	std::vector<Node*> territories;
+	std::string name;
+	int numberOfTerritories;
+	Continent();
+	~Continent();
+	int bonus;
+};
+
+class Board {
+public:
+	std::vector<Node*> listOfNeightbors[10];
+	std::vector<Node*> completeList;
+	std::vector<Continent*> listOfContinent;
+	Board();
+	~Board();
+
+	Node* createNode();
+	int addEdge(Node* u, Node* v);
+	int initList();
+	void printBoard();
+	int fillNodes();
+	int createContinent(std::string _name, int _Bonus);
+	int addToContinent(int index, Node* u);
 };
 
 #endif //!map
