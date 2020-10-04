@@ -31,7 +31,7 @@ int Board::addEdge(Node* u, Node* v) {
 }
 
 int Board::initList() {
-	for (int i = 0; i < 10; i++) {
+	for (int i = 0; i < 9; i++) {
 		countryList.push_back(createNode());
 		listOfNeightbors[i].push_back(countryList.back());
 	}
@@ -41,7 +41,7 @@ int Board::initList() {
 void Board::printBoard() {
 	for (int x = 0; x < counter; x++) {
 		printf("%d: ", x);
-		int y = 0;
+		int y = 1;
 		for (y; y < listOfNeightbors[x].size(); y++) {
 			printf("-> %d ", listOfNeightbors[x][y]->getID());
 		}
