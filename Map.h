@@ -24,7 +24,6 @@ struct Continent {
 	int numberOfTerritories;
 	Continent();
 	~Continent();
-	int bonus;
 };
 
 class Board {

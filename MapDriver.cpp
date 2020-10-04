@@ -2,7 +2,7 @@
 #include <iostream>
 
 int main(void) {
-	
+
 	Board* Game = new Board();
 
 	Game->initList();
