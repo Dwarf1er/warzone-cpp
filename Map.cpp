@@ -46,7 +46,7 @@ void Board::printBoard() {
 
 	//Print Continent with its countries
 	Continent continent;
-	printf("Continents: \n");
+	printf("Continents and its countries: \n");
 
 	for (int y = 0; y < listOfContinent.size(); y++) {
 		std::cout << listOfContinent[y]->name << "\t";
@@ -61,7 +61,7 @@ void Board::printBoard() {
 	printf("\n");
 
 	//Print specifically for america and its adjacent 
-	printf("For America: \n");
+	printf("Continent: America \n");
 	for (int i = 0; i < listOfContinent.size(); i++) {
 		if (listOfContinent[i]->name == "America") {
 			for (int j = 0; j < listOfContinent[i]->territories.size(); j++)
@@ -84,6 +84,7 @@ int Board::fillNodes() {
 	createContinent("America", 6);			//0
 	createContinent("Australia", 3);		//1
 
+	//Add to America
 	addToContinent(0, countryList[0]);
 	addToContinent(0, countryList[1]);
 	addToContinent(0, countryList[2]);
@@ -91,11 +92,12 @@ int Board::fillNodes() {
 	addToContinent(0, countryList[4]);
 	addToContinent(0, countryList[6]);
 
+	//Add to Australia
 	addToContinent(1, countryList[5]);
 	addToContinent(1, countryList[7]);
 	addToContinent(1, countryList[8]);
 
-
+	//For America
 	addEdge(countryList[0], countryList[1]);
 	addEdge(countryList[0], countryList[3]);
 	addEdge(countryList[1], countryList[2]);
@@ -104,6 +106,7 @@ int Board::fillNodes() {
 	addEdge(countryList[3], countryList[4]);
 	addEdge(countryList[3], countryList[6]);
 
+	//For Australia
 	addEdge(countryList[5], countryList[8]);
 	addEdge(countryList[7], countryList[8]);
 

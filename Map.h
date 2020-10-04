@@ -13,7 +13,7 @@ public:
 	Node(int _ID);
 	~Node();
 	int getID() { return ID; }
-	
+
 private:
 	int ID;
 };
@@ -45,6 +45,5 @@ public:
 private:
 	int counter;
 };
-
 
 #endif //!map
