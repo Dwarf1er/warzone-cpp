@@ -3,16 +3,21 @@
 
 Node::Node() {
 	ID = 0;
+	numberOfArmies = 0;
+	playerOwner = nullptr;
 }
 
 Node::Node(int _ID) {
 	ID = _ID;
+	numberOfArmies = 0;
+	playerOwner = nullptr;
 }
 
 Node::~Node() {}
 
 Board::Board() {
 	counter = 0;
+	numberOfPlayers = 0;
 }
 
 Board::~Board() {}
@@ -79,6 +84,7 @@ void Board::printBoard() {
 }
 
 //Fills in the board with continent and countries and its connection
+//Section needed for maploader
 int Board::fillNodes() {
 
 	createContinent("America", 6);			//0
@@ -133,6 +139,7 @@ int Board::addToContinent(int index, Node* u) {
 
 	return 0;
 }
+
 
 Continent::Continent() {
 	name = "";

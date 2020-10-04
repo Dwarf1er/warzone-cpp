@@ -13,9 +13,15 @@ public:
 	Node(int _ID);
 	~Node();
 	int getID() { return ID; }
+	int getNumberOfArmies() { return numberOfArmies; }
+	void setNumberOfArmies(int num) { numberOfArmies = num; }
+	Player* getPlayerOwner() { return playerOwner; }
+	void setPlayerOwner(Player* p) { playerOwner = p; }
 
 private:
 	int ID;
+	int numberOfArmies;
+	Player* playerOwner;
 };
 
 struct Continent {
@@ -41,9 +47,26 @@ public:
 	int fillNodes();
 	int createContinent(std::string _name, int numOfCountries);
 	int addToContinent(int index, Node* u);
+	int setUnit(int index, Player* player, int numTokens);
 
 private:
 	int counter;
+	int numberOfPlayers;
+};
+
+class Player {
+public:
+	Player();
+	~Player();
+	void setID(int _ID) { playerID = _ID; }
+	int getID() { return playerID; }
+	void setNumberOfArmies(int num) { numberOfArmies = num; }
+	int getNumberOfArmies() { return numberOfArmies; }
+	int giveArmyUnites(int num) { numberOfArmies += num; }
+
+private:
+	int playerID;
+	int numberOfArmies;
 };
 
 #endif //!map
