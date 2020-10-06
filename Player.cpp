@@ -9,14 +9,15 @@ using namespace std;
 	//default constructor
 Player::Player() {
 	vector<Territory*> playerTerritories;
-	vector<Card*> playerCards;
+	Hand* playerCards;
 	playerOrders = nullptr;
 	playerArmies = nullptr;
 }
 
 	//parametrized constructor
-Player::Player(vector<Territory*> playerTerritories_, vector<Card*> playerCards_, Order* playerOrders_, int* playerArmies_) {
+Player::Player(vector<Territory*> playerTerritories_, Hand* playerCards_, Order* playerOrders_, int* playerArmies_) {
 	playerTerritories = playerTerritories_;
+	//remove territories from the list
 	playerCards = playerCards_;
 	playerOrders = *playerOrders_;
 	playerArmies = playerArmies_;
@@ -46,7 +47,7 @@ vector<Territory*> Player::getPlayerTerritories() {
 	return playerTerritories;
 }
 
-vector<Card*> Player::getPlayerCards() {
+Hand* Player::getPlayerCards() {
 	return playerCards;
 }
 
@@ -61,9 +62,10 @@ int* Player::getPlayerArmies() {
 //mutators
 void Player::setPlayerTerritories(vector<Territory*> playerTerritories_) {
 	playerTerritories = playerTerritories_;
+	//remove territories from the list!!!!
 }
 
-void Player::setPlayerCards(vector<Card*> playerCards_) {
+void Player::setPlayerCards(Hand* playerCards_) {
 	playerCards = playerCards_;
 }
 
@@ -77,7 +79,7 @@ void Player::setPlayerArmies(int* playerArmies_) {
 
 //required methods
 void Player::issueOrder() {
-
+	
 }
 
 vector<Territory*> Player::toDefend() {
