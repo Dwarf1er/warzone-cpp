@@ -81,6 +81,10 @@ void Board::printBoard() {
 			}
 		}
 	}
+
+	printf("\n");
+	printf("\n");
+	printf("\n");
 }
 
 //Fills in the board with continent and countries and its connection
