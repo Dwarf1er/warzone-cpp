@@ -39,7 +39,7 @@ int Board::addEdge(Node* u, Node* v) {
 
 //Initialized nodes for countries and neighbors
 int Board::initList() {
-	for (int i = 0; i < 9; i++) {
+	for (int i = 0; i < MAX_SIZE; i++) {
 		countryList.push_back(createNode());
 		listOfNeightbors[i].push_back(countryList.back());
 	}
@@ -89,6 +89,7 @@ int Board::fillNodes() {
 
 	createContinent("America", 6);			//0
 	createContinent("Australia", 3);		//1
+	createContinent("Bobland", 2);
 
 	//Add to America
 	addToContinent(0, countryList[0]);
@@ -103,6 +104,10 @@ int Board::fillNodes() {
 	addToContinent(1, countryList[7]);
 	addToContinent(1, countryList[8]);
 
+	//Add to bobland
+	addToContinent(2, countryList[9]);
+	addToContinent(2, countryList[10]);
+
 	//For America
 	addEdge(countryList[0], countryList[1]);
 	addEdge(countryList[0], countryList[3]);
@@ -115,6 +120,10 @@ int Board::fillNodes() {
 	//For Australia
 	addEdge(countryList[5], countryList[8]);
 	addEdge(countryList[7], countryList[8]);
+
+	//For bobland
+	addEdge(countryList[9], countryList[10]);
+	addEdge(countryList[10], countryList[9]);
 
 	return 0;
 }
