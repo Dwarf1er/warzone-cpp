@@ -1,6 +1,7 @@
 #pragma once
 #ifndef MAP_H
 #define MAP_H
+#define MAX_SIZE 50
 
 #include <string>
 #include <vector>
@@ -34,7 +35,7 @@ struct Continent {
 
 class Board {
 public:
-	std::vector<Node*> listOfNeightbors[10];
+	std::vector<Node*> listOfNeightbors[MAX_SIZE];
 	std::vector<Node*> countryList;
 	std::vector<Continent*> listOfContinent;
 	Board();
