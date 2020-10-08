@@ -1,6 +1,7 @@
 #include "Map.h"
 #include <iostream>
 #include <vector>
+#include <queue>
 
 Territory::Territory() {
 	ID = 0;
@@ -83,26 +84,6 @@ void Map::printBoard() {
 	printf("\n");
 	printf("\n");
 	printf("\n");
-
-	/*
-	//Checking for duplicates 
-	for (int i = 0; i < listOfContinent.size() - 1; i++) {
-		for (int j = 0; j < listOfContinent[i]->territories.size(); j++) {
-			for (int k = i + 1; k < listOfContinent.size(); k++) {
-				for (int l = 0; l < listOfContinent[k]->territories.size(); l++) {
-					if (listOfContinent[i]->territories[j] == listOfContinent[k]->territories[l]) {
-						printf("Error Found duplicate of territories");
-					}
-					else {
-						printf("Good to go \n");
-					}
-					std::cout << listOfContinent[i]->name << listOfContinent[i]->territories[j]->getID() << "\t";
-					std::cout << listOfContinent[k]->name << listOfContinent[k]->territories[l]->getID() << std::endl;
-				}
-			}
-		}
-	}
-	*/
 }
 
 //Fills in the board with continent and countries and its connection
@@ -223,20 +204,7 @@ int Map::traversal(int index, std::vector<Territory*> territoryVec)
 	return 1; // if true
 }
 
-int Map::validate() {
-	//check whole graph connected
-	if (!traversal(1, nodeList)) {
-		return -1;
-	}
-
-	//check subgraph connected
-	for (int i = 0; i < listOfContinent.size(); i++) {
-		if (!traversal(1, listOfContinent[0]->territories)) {
-			return -1;
-		}
-	}
-
-	//check for duplicate
+int Map::duplicateCheck() {
 	for (int i = 0; i < listOfContinent.size() - 1; i++) {
 		for (int j = 0; j < listOfContinent[i]->territories.size(); j++) {
 			for (int k = i + 1; k < listOfContinent.size(); k++) {
@@ -253,6 +221,52 @@ int Map::validate() {
 			}
 		}
 	}
+	return 0;
+}
+
+/*
+int Map::BFS1(int u) {
+	std::queue<int> q;
+	std::vector<bool> v;
+	std::vector<std::vector<int> > g;
+	q.push(u);
+	v[u] = true;
+
+	while (!q.empty()) {
+		int f = q.front();
+		q.pop();
+		std::cout << f << " ";
+
+		for (auto i = g[f].begin(); i != g[f].end(); i++) {
+			if (!v[*i]) {
+				q.push(*i);
+				v[*i] = true;
+			}
+		}
+	}
+}
+*/
+
+//Validation check
+int Map::validate() {
+	/*
+	//check whole graph connected
+	if (!traversal(1, nodeList)) {
+		return -1;
+	}
+
+	//check subgraph connected
+	for (int i = 0; i < listOfContinent.size(); i++) {
+		if (!traversal(1, listOfContinent[0]->territories)) {
+			return -1;
+		}
+	}
+	*/
+	//check for duplicate
+
+	//Call method to check for duplicate territories 
+	duplicateCheck();
+	return 0;
 }
 
 

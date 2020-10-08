@@ -53,6 +53,7 @@ public:
 	int BFS(int index, std::vector<bool>& visited);
 	int validate();
 	int duplicateCheck();
+	int BFS1(int u);
 
 private:
 	int counter;
