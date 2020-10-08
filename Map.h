@@ -39,6 +39,7 @@ public:
 	std::vector<Node*> listOfNeightbors[MAX_SIZE];
 	std::vector<Node*> countryList;
 	std::vector<Continent*> listOfContinent;
+	std::vector<Node*> listOfContinentNeightbors;
 	Board();
 	~Board();
 
@@ -55,22 +56,5 @@ private:
 	int counter;
 	//int numberOfPlayers;
 };
-
-/*
-class Player {
-public:
-	Player();
-	~Player();
-	void setID(int _ID) { playerID = _ID; }
-	int getID() { return playerID; }
-	void setNumberOfArmies(int num) { numberOfArmies = num; }
-	int getNumberOfArmies() { return numberOfArmies; }
-	int giveArmyUnites(int num) { numberOfArmies += num; }
-
-private:
-	int playerID;
-	int numberOfArmies;
-};
-*/
 
 #endif //!map
