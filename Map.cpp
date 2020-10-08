@@ -1,5 +1,6 @@
 #include "Map.h"
 #include <iostream>
+#include <vector>
 
 Node::Node() {
 	ID = 0;
@@ -39,7 +40,7 @@ int Board::addEdge(Node* u, Node* v) {
 
 //Initialized nodes for countries and neighbors
 int Board::initList() {
-	for (int i = 0; i < 9; i++) {
+	for (int i = 0; i < MAX_SIZE; i++) {
 		countryList.push_back(createNode());
 		listOfNeightbors[i].push_back(countryList.back());
 	}
@@ -81,6 +82,28 @@ void Board::printBoard() {
 			}
 		}
 	}
+
+	printf("\n");
+	printf("\n");
+	printf("\n");
+
+
+	for (int i = 0; i < listOfContinent.size() - 1; i++) {
+		for (int j = 0; j < listOfContinent[i]->territories.size(); j++) {
+			for (int k = i + 1; k < listOfContinent.size(); k++) {
+				for (int l = 0; l < listOfContinent[k]->territories.size(); l++) {
+					if (listOfContinent[i]->territories[j] == listOfContinent[k]->territories[l]) {
+						printf("Error Found duplicate of territories");
+					}
+					else {
+						printf("Good to go \n");
+					}
+					std::cout <<listOfContinent[i]->name << listOfContinent[i]->territories[j]->getID() << "\t";
+					std::cout << listOfContinent[k]->name << listOfContinent[k]->territories[l]->getID() << std::endl;
+				}
+			}
+		}
+	}
 }
 
 //Fills in the board with continent and countries and its connection
@@ -89,6 +112,7 @@ int Board::fillNodes() {
 
 	createContinent("America", 6);			//0
 	createContinent("Australia", 3);		//1
+	createContinent("Bobland", 2);
 
 	//Add to America
 	addToContinent(0, countryList[0]);
@@ -103,6 +127,13 @@ int Board::fillNodes() {
 	addToContinent(1, countryList[7]);
 	addToContinent(1, countryList[8]);
 
+	//Add to bobland
+	addToContinent(2, countryList[9]);
+	addToContinent(2, countryList[10]);
+
+	//Adding continent connection
+	//addEdge(0, 1);
+
 	//For America
 	addEdge(countryList[0], countryList[1]);
 	addEdge(countryList[0], countryList[3]);
@@ -115,6 +146,11 @@ int Board::fillNodes() {
 	//For Australia
 	addEdge(countryList[5], countryList[8]);
 	addEdge(countryList[7], countryList[8]);
+	addEdge(countryList[8], countryList[9]);
+
+	//For bobland
+	addEdge(countryList[9], countryList[10]);
+	addEdge(countryList[10], countryList[9]);
 
 	return 0;
 }
