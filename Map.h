@@ -9,7 +9,6 @@
 
 class Territory
 {
-
 public:
 	Territory();
 	Territory(int _ID);
@@ -37,7 +36,7 @@ struct Continent {
 class Map {
 public:
 	std::vector<Territory*> listOfNeightbors[MAX_SIZE];
-	std::vector<Territory*> countryList;
+	std::vector<Territory*> nodeList;
 	std::vector<Continent*> listOfContinent;
 	std::vector<Territory*> listOfContinentNeightbors;
 	Map();
@@ -50,10 +49,12 @@ public:
 	int fillNodes();
 	int createContinent(std::string _name, int numOfCountries);
 	int addToContinent(int index, Territory* u);
-	//int setUnit(int index, Player* player, int numTokens);
+	int traversal(int index, std::vector<Territory*> territoryVec);
+	int BFS(int index, std::vector<bool>& visited);
+	int validate();
+	int duplicateCheck();
 
 private:
 	int counter;
 };
-
 #endif //!map
