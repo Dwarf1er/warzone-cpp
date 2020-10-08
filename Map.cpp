@@ -2,36 +2,33 @@
 #include <iostream>
 #include <vector>
 
-Node::Node() {
+Territory::Territory() {
 	ID = 0;
 	numberOfArmies = 0;
-	//playerOwner = nullptr;
 }
 
-Node::Node(int _ID) {
+Territory::Territory(int _ID) {
 	ID = _ID;
 	numberOfArmies = 0;
-	//playerOwner = nullptr;
 }
 
-Node::~Node() {}
+Territory::~Territory() {}
 
-Board::Board() {
+Map::Map() {
 	counter = 0;
-	//numberOfPlayers = 0;
 }
 
-Board::~Board() {}
+Map::~Map() {}
 
 //Create Nodes
-Node* Board::createNode() {
-	Node* temp = new Node(counter);
+Territory* Map::createNode() {
+	Territory* temp = new Territory(counter);
 	counter++;
 	return temp;
 }
 
 //Add edge methods
-int Board::addEdge(Node* u, Node* v) {
+int Map::addEdge(Territory* u, Territory* v) {
 	listOfNeightbors[u->getID()].push_back(v);
 	listOfNeightbors[v->getID()].push_back(u);
 
@@ -39,7 +36,7 @@ int Board::addEdge(Node* u, Node* v) {
 }
 
 //Initialized nodes for countries and neighbors
-int Board::initList() {
+int Map::initList() {
 	for (int i = 0; i < MAX_SIZE; i++) {
 		countryList.push_back(createNode());
 		listOfNeightbors[i].push_back(countryList.back());
@@ -48,7 +45,7 @@ int Board::initList() {
 }
 
 //Prints the connection between data
-void Board::printBoard() {
+void Map::printBoard() {
 
 	//Print Continent with its countries
 	Continent continent;
@@ -87,7 +84,7 @@ void Board::printBoard() {
 	printf("\n");
 	printf("\n");
 
-
+	//Checking for duplicates 
 	for (int i = 0; i < listOfContinent.size() - 1; i++) {
 		for (int j = 0; j < listOfContinent[i]->territories.size(); j++) {
 			for (int k = i + 1; k < listOfContinent.size(); k++) {
@@ -108,7 +105,7 @@ void Board::printBoard() {
 
 //Fills in the board with continent and countries and its connection
 //Section needed for maploader
-int Board::fillNodes() {
+int Map::fillNodes() {
 
 	createContinent("America", 6);			//0
 	createContinent("Australia", 3);		//1
@@ -130,9 +127,6 @@ int Board::fillNodes() {
 	//Add to bobland
 	addToContinent(2, countryList[9]);
 	addToContinent(2, countryList[10]);
-
-	//Adding continent connection
-	//addEdge(0, 1);
 
 	//For America
 	addEdge(countryList[0], countryList[1]);
@@ -156,7 +150,7 @@ int Board::fillNodes() {
 }
 
 //Create continent with a name and limit of number of countries
-int Board::createContinent(std::string _name, int numOfCountries) {
+int Map::createContinent(std::string _name, int numOfCountries) {
 	Continent* temp = new Continent();
 	temp->name = _name;
 	temp->numberOfTerritories = numOfCountries;
@@ -167,7 +161,7 @@ int Board::createContinent(std::string _name, int numOfCountries) {
 }
 
 //Add continent and its node
-int Board::addToContinent(int index, Node* u) {
+int Map::addToContinent(int index, Territory* u) {
 	Continent* temp = listOfContinent.at(index);
 	temp->territories.push_back(u);
 	temp->numberOfTerritories++;

@@ -3,7 +3,7 @@
 
 int main(void) {
 
-	Board* Game = new Board();
+	Map* Game = new Map();
 
 	Game->initList();
 	Game->fillNodes();
@@ -11,5 +11,4 @@ int main(void) {
 	printf("======================================= Part 1 =======================================\n");
 	Game->printBoard();
 	printf("======================================= Part 1 End =======================================");
-
 }

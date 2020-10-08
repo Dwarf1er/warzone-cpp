@@ -7,13 +7,13 @@
 #include <string>
 #include <vector>
 
-class Node
+class Territory
 {
 
 public:
-	Node();
-	Node(int _ID);
-	~Node();
+	Territory();
+	Territory(int _ID);
+	~Territory();
 	int getID() { return ID; }
 	int getNumberOfArmies() { return numberOfArmies; }
 	void setNumberOfArmies(int num) { numberOfArmies = num; }
@@ -27,34 +27,33 @@ private:
 };
 
 struct Continent {
-	std::vector<Node*> territories;
+	std::vector<Territory*> territories;
 	std::string name;
 	int numberOfTerritories;
 	Continent();
 	~Continent();
 };
 
-class Board {
+class Map {
 public:
-	std::vector<Node*> listOfNeightbors[MAX_SIZE];
-	std::vector<Node*> countryList;
+	std::vector<Territory*> listOfNeightbors[MAX_SIZE];
+	std::vector<Territory*> countryList;
 	std::vector<Continent*> listOfContinent;
-	std::vector<Node*> listOfContinentNeightbors;
-	Board();
-	~Board();
+	std::vector<Territory*> listOfContinentNeightbors;
+	Map();
+	~Map();
 
-	Node* createNode();
-	int addEdge(Node* u, Node* v);
+	Territory* createNode();
+	int addEdge(Territory* u, Territory* v);
 	int initList();
 	void printBoard();
 	int fillNodes();
 	int createContinent(std::string _name, int numOfCountries);
-	int addToContinent(int index, Node* u);
+	int addToContinent(int index, Territory* u);
 	//int setUnit(int index, Player* player, int numTokens);
 
 private:
 	int counter;
-	//int numberOfPlayers;
 };
 
 #endif //!map
