@@ -82,12 +82,12 @@ void Player::operator=(const Player& p) {
 
 //stream insertion operator overloading
 ostream& operator<<(ostream& out, const Player& p) {
+	out << "Player ID: " << p.playerID << endl;
 	for (Territory* t : p.playerTerritories) {
-		out << "Territory: " << *t << endl;
+		out << "Territories: " << *t << endl;
 	}
 	//out << "Player Hand: " << p.playerCards << endl;
 	//out << "Player Orders" << p.playerOrders << endl;
-	out << "Player ID: " << p.playerID << endl;
 	return out;
 }
 

@@ -6,7 +6,6 @@
 
 #include <string>
 #include <vector>
-#include <ostream>
 
 class Territory
 {
@@ -20,6 +19,8 @@ public:
 	//Player* getPlayerOwner() { return playerOwner; }
 	//void setPlayerOwner(Player* p) { playerOwner = p; }
 	friend std::ostream& operator<<(std::ostream& out, const Territory& t);
+	friend std::istream& operator>>(std::istream& in, Territory& t);
+	void operator = (const Territory& t);
 
 private:
 	int ID;

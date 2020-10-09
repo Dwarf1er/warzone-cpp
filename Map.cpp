@@ -1,6 +1,5 @@
 #include "Map.h"
 #include <iostream>
-#include <ostream>
 #include <vector>
 #include <queue>
 
@@ -16,11 +15,25 @@ Territory::Territory(int _ID) {
 
 Territory::~Territory() {}
 
-std::ostream& operator<<(std::ostream& out, const Territory& t) {
-	out << "Territory ID: " << t.ID << std::endl;
-	out << "Territory Number of Armies" << t.numberOfArmies << std::endl;
+//Assignment operator overloading
+void Territory::operator=(const Territory& t) {
+	ID = t.ID;
+	numberOfArmies = t.numberOfArmies;
+}
 
+//Stream insertion operators overloading
+std::ostream& operator<<(std::ostream& out, const Territory& t) {
+	out << std::endl << "\tTerritory ID: " << t.ID << std::endl;
+	out << "\tTerritory Number of Armies: " << t.numberOfArmies << std::endl;
 	return out;
+}
+
+std::istream& operator>>(std::istream& in, Territory& t) {
+	std::cout << "Enter territory ID: ";
+	in >> t.ID;
+	std::cout << "Enter the number of armies: ";
+	in >> t.numberOfArmies;
+	return in;
 }
 
 Map::Map() {
