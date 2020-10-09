@@ -50,10 +50,12 @@ public:
 	int createContinent(std::string _name, int numOfCountries);
 	int addToContinent(int index, Territory* u);
 	int traversal(int index, std::vector<Territory*> territoryVec);
-	int BFS(int index, std::vector<bool>& visited);
 	int validate();
+	int initNode();
 	int duplicateCheck();
-	int BFS1(int u);
+	int BFS1(int u, std::vector<Territory*> nodeList);
+	int checkConnectedGraph(int index, std::vector<Territory*> vec);
+	int BFS(int index, std::vector<bool>& visited);
 
 private:
 	int counter;

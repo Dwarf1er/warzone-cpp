@@ -45,6 +45,13 @@ int Map::initList() {
 	return 0;
 }
 
+//Initialized single node
+int Map::initNode() {
+	nodeList.push_back(createNode());
+	listOfNeightbors->push_back(nodeList.back());
+	return 0;
+}
+
 //Prints the connection between data
 void Map::printBoard() {
 
@@ -132,8 +139,6 @@ int Map::fillNodes() {
 	return 0;
 }
 
-
-
 //Create continent with a name and limit of number of countries
 int Map::createContinent(std::string _name, int numOfCountries) {
 	Continent* temp = new Continent();
@@ -155,55 +160,7 @@ int Map::addToContinent(int index, Territory* u) {
 	return 0;
 }
 
-
-int Map::BFS(int index, std::vector<bool>& visited) {
-	std::vector<int> q;
-	visited[index - (size_t)1] = true;
-	q.push_back(index);
-
-	while (!q.empty()) {
-		index = q.front();
-		q.erase(q.begin());
-		size_t SIZE = listOfNeightbors[index].size();
-		for (int i = 1; i < SIZE; i++) {
-			int targetIndex = listOfNeightbors[index][i]->getID();
-			if (!visited[targetIndex - (size_t)1]) {
-				visited[targetIndex - (size_t)1] = true;
-				q.push_back(targetIndex);
-			}
-		}
-	}
-	return 0;
-}
-
-int Map::traversal(int index, std::vector<Territory*> territoryVec)
-{
-	std::vector<bool> visited;
-	for (int i = 0; i < nodeList.size(); i++) {
-		visited.push_back(false);
-	}
-	BFS(index, visited);
-
-	if (territoryVec.size() == nodeList.size()) {
-		for (int i = 0; i < territoryVec.size(); i++) {
-			//If it was not visited then its false
-			if (!visited[i]) {
-				return 0;
-			}
-		}
-	}
-	else {
-		for (int i = 0; i < territoryVec.size(); i++) {
-			int target = territoryVec[i]->getID();
-			bool found = false;
-			if (!visited[target]) {
-				return 0;
-			}
-		}
-	}
-	return 1; // if true
-}
-
+//Duplicate territories check
 int Map::duplicateCheck() {
 	for (int i = 0; i < listOfContinent.size() - 1; i++) {
 		for (int j = 0; j < listOfContinent[i]->territories.size(); j++) {
@@ -224,51 +181,96 @@ int Map::duplicateCheck() {
 	return 0;
 }
 
-/*
-int Map::BFS1(int u) {
-	std::queue<int> q;
-	std::vector<bool> v;
-	std::vector<std::vector<int> > g;
-	q.push(u);
-	v[u] = true;
-
-	while (!q.empty()) {
-		int f = q.front();
-		q.pop();
-		std::cout << f << " ";
-
-		for (auto i = g[f].begin(); i != g[f].end(); i++) {
-			if (!v[*i]) {
-				q.push(*i);
-				v[*i] = true;
-			}
-		}
-	}
-}
-*/
-
 //Validation check
 int Map::validate() {
 	/*
-	//check whole graph connected
-	if (!traversal(1, nodeList)) {
+	//Check whole graph is connected
+	if (!checkConnectedGraph(1, nodeList))
+	{
 		return -1;
 	}
-
-	//check subgraph connected
-	for (int i = 0; i < listOfContinent.size(); i++) {
-		if (!traversal(1, listOfContinent[0]->territories)) {
+	*/
+	//check all subgraphs are connected
+	/*for (int c = 0; c < listOfContinent.size(); c++)
+	{
+		if (!checkConnectedGraph(1, listOfContinent[0]->territories))
+		{
 			return -1;
 		}
 	}
 	*/
-	//check for duplicate
 
 	//Call method to check for duplicate territories 
 	duplicateCheck();
+	printf("\n");
+	std::vector<bool> visited;
+
+	for (int i = 0; i < nodeList.size(); i++)
+	{
+		visited.push_back(false);
+	}
+	std::cout << visited.size() << std::endl;
 	return 0;
 }
 
+int Map::BFS(int index, std::vector<bool>& visited)
+{
+	std::vector<int> q;
+	visited[index - (size_t)1] = true;
+	q.push_back(index);
+
+	while (!q.empty())
+	{
+		index = q.front();
+		q.erase(q.begin());
+		size_t SIZE = listOfNeightbors[index].size();
+
+		for (int i = 1; i < SIZE; i++)
+		{
+			int targetIndex = listOfNeightbors[index][i]->getID();
+			if (!visited[targetIndex - (size_t)1])
+			{
+				visited[targetIndex - (size_t)1] = true;
+				q.push_back(targetIndex);
+			}
+		}
+	}
+	return 0;
+}
+
+int Map::checkConnectedGraph(int index, std::vector<Territory*> vec)
+{
+	std::vector<bool> visited;
+	for (int i = 0; i < nodeList.size(); i++)
+	{
+		visited.push_back(false);
+	}
+	BFS(index, visited);
+
+	if (vec.size() == nodeList.size())
+	{
+		for (int i = 0; i < vec.size(); i++)
+		{
+			if (!visited[i])
+			{
+				return 0; //false
+			}
+		}
+	}
+	else
+	{
+		for (int i = 0; i < vec.size(); i++)
+		{
+			int target = vec[i]->getID();
+			bool found = false;
+			if (!visited[target])
+			{
+				return 0; //false
+			}
+		}
+	}
+	return 1; //true
+}
 
 Continent::Continent() {
 	name = "";
