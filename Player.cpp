@@ -7,7 +7,7 @@ using namespace std;
 
 //constructors
 	//default constructor
-Player::Player() : playerTerritories(), playerCards(nullptr), playerOrderList(nullptr), playerArmies(0), playerID(0) {
+Player::Player() : playerTerritories(), playerCards(), playerOrderList(), playerArmies(0), playerID(0) {
 }
 
 //parametrized constructor
@@ -91,7 +91,9 @@ ostream& operator<<(ostream& out, const Player& p) {
 	/*for (Orders* o : p.playerOrderList) {
 		out << "Orders: " << *o << endl;
 	}*/
-	for (Card* c : p.playerCards) {
+
+	vector<Card*> Cards = p.playerCards->get_hand(); //FUCK THIS
+	for (Card* c : Cards) {
 		out << "Territories: " << *c << endl;
 	}
 	return out;

@@ -1,5 +1,6 @@
 // WarzoneCpp.cpp : This file contains the 'main' function. Program execution begins and ends there.
 #include "Player.h"
+#include "Cards.h"
 #include "Map.h"
 #include <iostream>
 
@@ -33,7 +34,9 @@ int main()
     vector<Territory*> territories;
     Territory* t = new Territory();
     Orders* order = new Orders();
-    Hand* h = new Hand();
+    Deck* deck = new Deck();
+    deck->push_card(CardType::Spy);
+    Hand* h = new Hand(deck);
 
     //1) Verifying that players have a collection of territories
 
