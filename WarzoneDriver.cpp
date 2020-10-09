@@ -27,25 +27,36 @@ int main()
         //TODO
 
     //PART 3 - Player tests
-
+    
+    cout << "\n===PART 3 - Player tests===" << endl;
     Player* p = new Player();
     vector<Territory*> territories;
     Territory* t = new Territory();
+    Orders* order = new Orders();
+    Hand* h = new Hand();
 
     //1) Verifying that players have a collection of territories
 
+    cout << "\n===1) Verifying that players have a collection of territories===" << endl;
     territories.push_back(t);
     p->setPlayerTerritories(territories);
     cout << *p;
 
     //2) Verifying that players have a collection of cards (i.e a hand of cards)
-        //TODO
+    
+    cout << "\n===2) Verifying that players have a collection of cards (i.e a hand of cards)===" << endl;
+    p->setPlayerCards(h);
+    cout << *p;
+
     //3) Verifying that players have a collection of territories returned by .toDefend()
         //TODO
     //4) Verifying that players have a collection of territories returned by .toAttack()
         //TODO
     //5) Verifying that players can use the method .issueOrder() to add an order to their list of orders
-        //TODO
+    
+    cout << "\n===5) Verifying that players can use the method .issueOrder() to add an order to their list of orders===" << endl;
+    //p->issueOrder(order);
+    cout << *p;
 
     //PART 4 - Orders tests
     //1) Create an order of every type and place them in an Orderlist object for the following tests

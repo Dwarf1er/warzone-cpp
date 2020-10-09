@@ -24,7 +24,7 @@ void Territory::operator=(const Territory& t) {
 //Stream insertion operators overloading
 std::ostream& operator<<(std::ostream& out, const Territory& t) {
 	out << std::endl << "\tTerritory ID: " << t.ID << std::endl;
-	out << "\tTerritory Number of Armies: " << t.numberOfArmies << std::endl;
+	out << "\tTerritory Number of Armies: " << t.numberOfArmies;
 	return out;
 }
 

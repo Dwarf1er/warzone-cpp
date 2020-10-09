@@ -27,6 +27,12 @@
     <ClCompile Include="WarzoneDriver.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Orders.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Cards.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Map.h">
@@ -38,7 +44,7 @@
     <ClInclude Include="Cards.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Order.h">
+    <ClInclude Include="Orders.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
