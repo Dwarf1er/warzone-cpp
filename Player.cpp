@@ -7,20 +7,20 @@ using namespace std;
 
 //constructors
 	//default constructor
-Player::Player() : playerTerritories(vector<Territory*>), playerCards(nullptr), playerOrders(nullptr), playerArmies(0), playerID(0) {
+Player::Player() : playerTerritories(), playerCards(nullptr), playerOrders(nullptr), playerArmies(0), playerID(0) {
 }
 
-	//parametrized constructor
+//parametrized constructor
 Player::Player(vector<Territory*> playerTerritories_, Hand* playerCards_, Order* playerOrders_, int playerArmies_, int playerID_) : playerTerritories(playerTerritories_), playerCards(playerCards_), playerOrders(playerOrders_), playerArmies(playerArmies_), playerID(playerID_) {
 	//remove territories from the global list!!!!
 }
-	//copy constructor
-Player::Player(const Player &p) :  playerTerritories(p.playerTerritories), playerCards(new Hand(*(p.playerCards))), playerOrders(new Order(*(p.playerOrders))), playerArmies(p.playerArmies), playerID(p.playerID){
+//copy constructor
+Player::Player(const Player& p) : playerTerritories(p.playerTerritories), playerCards(new Hand(*(p.playerCards))), playerOrders(new Order(*(p.playerOrders))), playerArmies(p.playerArmies), playerID(p.playerID) {
 }
 
 //destructor
 Player::~Player() {
-	for(Territory t : playerTerritories) {
+	for (Territory* t : playerTerritories) {
 		delete t;
 		t = nullptr;
 	}
@@ -29,7 +29,7 @@ Player::~Player() {
 	playerCards = nullptr;
 	delete playerOrders;
 	playerOrders = nullptr;
-	
+
 	playerArmies = 0;
 	playerID = 0;
 }
@@ -47,14 +47,15 @@ Order* Player::getPlayerOrders() {
 	return playerOrders;
 }
 
-int* Player::getPlayerArmies() {
+int Player::getPlayerArmies() {
 	return playerArmies;
 }
 
 //mutators
 void Player::setPlayerTerritories(vector<Territory*> playerTerritories_) {
-	playerTerritories = playerTerritories_;
-	//remove territories from the list!!!!
+	for (Territory* t : playerTerritories_) {
+		this->playerTerritories.push_back(t);
+	}
 }
 
 void Player::setPlayerCards(Hand* playerCards_) {
@@ -71,17 +72,19 @@ void Player::setPlayerArmies(int playerArmies_) {
 
 //operator overloading
 	//assignment operator overloading
-Player& Player::operator=(const Player& p){
+void Player::operator=(const Player& p) {
 	playerTerritories = p.playerTerritories;
 	playerCards = new Hand(*(p.playerCards));
-	playerOrders = new Order(*(p.playerOrders)); 
+	playerOrders = new Order(*(p.playerOrders));
 	playerArmies = p.playerArmies;
 	playerID = p.playerID;
 }
 
-	//stream insertion operator overloading
+//stream insertion operator overloading
 ostream& operator<<(ostream& out, const Player& p) {
-	//out << "Player Territories: " << p.playerTerritories << endl;
+	for (Territory* t : p.playerTerritories) {
+		out << "Territory: " << *t << endl;
+	}
 	//out << "Player Hand: " << p.playerCards << endl;
 	//out << "Player Orders" << p.playerOrders << endl;
 	out << "Player ID: " << p.playerID << endl;
@@ -105,6 +108,6 @@ vector<Territory*> Player::toDefend() {
 	return this->getPlayerTerritories();
 }
 
-vector<Territory*> Player::toAttack() {
+//vector<Territory*> Player::toAttack() {
 	//return some random territories that are available
-}
+//}
