@@ -139,17 +139,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Map.cpp" />
+    <ClCompile Include="MapDriver.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="WarzoneCpp.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Player.h" />
-    <ClCompile Include="Map.cpp" />
-    <ClCompile Include="MapDriver.cpp" />
-    <ClCompile Include="WarzoneCpp.cpp" />
-  </ItemGroup>
-  <ItemGroup>
     <ClInclude Include="Map.h" />
+    <ClInclude Include="Player.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
