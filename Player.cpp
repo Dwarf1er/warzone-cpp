@@ -95,7 +95,7 @@ ostream& operator<<(ostream& out, const Player& p) {
 		for (Orders* o : p.playerOrderList->get_orders()) {
 			out << "Orders: " << *o << endl;
 		}
-		out << "I HATE SO MUCH OF THE THINGS YOU DECIDE TO BE";
+		out << "Orders should be printing here";
 	}
 
 	else {
@@ -104,7 +104,7 @@ ostream& operator<<(ostream& out, const Player& p) {
 
 	if (p.playerCards != nullptr) {
 		for (Card* c : p.playerCards->get_hand()) {
-			out << "\nCards: " << *c << endl;
+			out << "\nCard: " << *c << endl;
 		}
 	}
 
@@ -129,9 +129,11 @@ void Player::issueOrder(Orders* order) {
 }
 
 vector<Territory*> Player::toDefend() {
-	return this->getPlayerTerritories();
+	vector<Territory*> toDefend{ new Territory(), new Territory() };
+	return toDefend;
 }
 
-//vector<Territory*> Player::toAttack() {
-	//return some random territories that are available
-//}
+vector<Territory*> Player::toAttack() {
+	vector<Territory*> toDefend{ new Territory(), new Territory() };
+	return toDefend;
+}
