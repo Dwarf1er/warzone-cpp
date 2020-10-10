@@ -24,7 +24,7 @@ void OrderList::move(int i, int j) {
     //check if i,j falls within the vector size
     if ((i < oList.size() && i >= 0) && (j < oList.size() && j >= 0)) {
         //create a temporary order object and store the vector item at current index
-        Orders temp{
+        Orders* temp{
             oList.at(i)
         };
         //removes the item
@@ -44,6 +44,10 @@ void OrderList::remove(int i) {
         //removes the current index item
         oList.erase(oList.begin() + i);
     }
+}
+vector<Orders*> OrderList::get_orders()
+{
+    return oList;
 };
 
 //operator overloading

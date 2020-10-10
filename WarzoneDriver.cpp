@@ -52,13 +52,20 @@ int main()
     cout << *p;
 
     //3) Verifying that players have a collection of territories returned by .toDefend()
-        //TODO
+    
+    cout << "\n===3) Verifying that players have a collection of territories returned by .toDefend()===" << endl;
+    vector<Territory*> territoriesToDefend = p->toDefend();
+    cout << "\nTerritories to defend: " << endl;
+    for (Territory* t : territoriesToDefend) {
+        cout << *t << endl;
+    }
+
     //4) Verifying that players have a collection of territories returned by .toAttack()
         //TODO
     //5) Verifying that players can use the method .issueOrder() to add an order to their list of orders
     
     cout << "\n===5) Verifying that players can use the method .issueOrder() to add an order to their list of orders===" << endl;
-    //p->issueOrder(order);
+    p->issueOrder(order);
     cout << *p;
 
     //PART 4 - Orders tests

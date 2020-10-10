@@ -61,12 +61,13 @@ void Player::setPlayerTerritories(vector<Territory*> playerTerritories_) {
 void Player::setPlayerCards(Hand* playerCards_) {
 	playerCards = playerCards_;
 }
-/*
-void Player::setPlayerOrders(OrderList* playerOrders_) {
-	for (OrderList* o : playerOrders_) {
-		this->playerOrderList.push_back(o);
+
+void Player::setPlayerOrders(Orders* playerOrders_) {
+	if (playerOrderList == nullptr) {
+		playerOrderList = new OrderList();
 	}
-}*/
+	playerOrderList->get_orders().push_back(playerOrders_);
+}
 
 void Player::setPlayerArmies(int playerArmies_) {
 	playerArmies = playerArmies_;
@@ -85,17 +86,32 @@ void Player::operator=(const Player& p) {
 //stream insertion operator overloading
 ostream& operator<<(ostream& out, const Player& p) {
 	out << "\nPlayer ID: " << p.playerID << endl;
+
 	for (Territory* t : p.playerTerritories) {
 		out << "Territories: " << *t << endl;
 	}
-	/*for (Orders* o : p.playerOrderList) {
-		out << "Orders: " << *o << endl;
-	}*/
-
-	vector<Card*> Cards = p.playerCards->get_hand(); //FUCK THIS
-	for (Card* c : Cards) {
-		out << "Territories: " << *c << endl;
+	
+	if (p.playerOrderList != nullptr) {
+		for (Orders* o : p.playerOrderList->get_orders()) {
+			out << "Orders: " << *o << endl;
+		}
+		out << "I HATE SO MUCH OF THE THINGS YOU DECIDE TO BE";
 	}
+
+	else {
+		out << "\nOrders not initialized";
+	}
+
+	if (p.playerCards != nullptr) {
+		for (Card* c : p.playerCards->get_hand()) {
+			out << "\nCards: " << *c << endl;
+		}
+	}
+
+	else {
+		out << "\nHand not initialized";
+	}
+
 	return out;
 }
 
@@ -106,12 +122,11 @@ istream& operator>>(istream& in, Player& p) {
 	in >> p.playerID;
 	return in;
 }
-/*
+
 //required methods
 void Player::issueOrder(Orders* order) {
-	OrderList o = new OrderList();
 	this->setPlayerOrders(order);
-}*/
+}
 
 vector<Territory*> Player::toDefend() {
 	return this->getPlayerTerritories();

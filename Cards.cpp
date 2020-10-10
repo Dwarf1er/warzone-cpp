@@ -107,7 +107,7 @@ Hand& Hand::operator=(const Hand&)
 }
 
 vector<Card*> Hand::get_hand()
-{
+{/*
 	vector<Card*> hand;
 
 	for (int i = 0; i < cards.size(); i++)
@@ -116,12 +116,13 @@ vector<Card*> Hand::get_hand()
 			hand.push_back(cards.at(i));
 	}
 
-	return hand;
+	return hand;*/
+	return cards;
 }
 
 ostream& operator<<(ostream& os, const Card& card)
 {
-	os << "card type=" << card.card_type << " drawn=" << card.drawn << std::endl;
+	os << "\n\tcard type = " << card.card_type << " drawn = " << card.drawn << std::endl;
 	return os;
 }
 

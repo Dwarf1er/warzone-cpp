@@ -5,7 +5,7 @@
 using std::vector;
 using std::ostream;
 
-enum class CardType {
+enum /*class*/ CardType {
 	Spy, Bomb, Reinforcement, Blockade, Airlift, Diplomacy
 };
 

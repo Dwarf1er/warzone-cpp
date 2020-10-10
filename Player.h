@@ -36,7 +36,7 @@ public:
 	//mutators
 	void setPlayerTerritories(vector<Territory*> playerTerritories_);
 	void setPlayerCards(Hand* playerCards_);
-	void setPlayerOrders(OrderList* playerOrderList_);
+	void setPlayerOrders(Orders* playerOrderList_);
 	void setPlayerArmies(int playerArmies_);
 
 	//operator overloading

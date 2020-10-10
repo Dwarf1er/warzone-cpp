@@ -66,9 +66,10 @@ class OrderList {
     * The OrdersList class implements a move() method to move an order in the list of orders.
     */
 private:
-    vector<Orders> oList;
+    vector<Orders*> oList;
 public:
     OrderList();
     void move(int i, int j);
     void remove(int i);
+    vector<Orders*> get_orders();
 };
