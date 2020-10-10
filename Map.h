@@ -1,7 +1,7 @@
 #pragma once
 #ifndef MAP_H
 #define MAP_H
-#define MAX_SIZE 50
+#define MAX_SIZE 100
 
 #include <string>
 #include <vector>
