@@ -18,6 +18,9 @@ public:
 	void setNumberOfArmies(int num) { numberOfArmies = num; }
 	//Player* getPlayerOwner() { return playerOwner; }
 	//void setPlayerOwner(Player* p) { playerOwner = p; }
+	friend std::ostream& operator<<(std::ostream& out, const Territory& t);
+	friend std::istream& operator>>(std::istream& in, Territory& t);
+	void operator = (const Territory& t);
 
 private:
 	int ID;
@@ -54,6 +57,7 @@ public:
 	int validate();
 	int duplicateCheck();
 	int BFS1(int u);
+	int listAllNodes();
 
 private:
 	int counter;

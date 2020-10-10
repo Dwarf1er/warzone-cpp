@@ -15,6 +15,27 @@ Territory::Territory(int _ID) {
 
 Territory::~Territory() {}
 
+//Assignment operator overloading
+void Territory::operator=(const Territory& t) {
+	ID = t.ID;
+	numberOfArmies = t.numberOfArmies;
+}
+
+//Stream insertion operators overloading
+std::ostream& operator<<(std::ostream& out, const Territory& t) {
+	out << std::endl << "\tTerritory ID: " << t.ID << std::endl;
+	out << "\tTerritory Number of Armies: " << t.numberOfArmies;
+	return out;
+}
+
+std::istream& operator>>(std::istream& in, Territory& t) {
+	std::cout << "Enter territory ID: ";
+	in >> t.ID;
+	std::cout << "Enter the number of armies: ";
+	in >> t.numberOfArmies;
+	return in;
+}
+
 Map::Map() {
 	counter = 0;
 }
@@ -26,6 +47,14 @@ Territory* Map::createNode() {
 	Territory* temp = new Territory(counter);
 	counter++;
 	return temp;
+}
+
+//List all nodes
+int Map::listAllNodes() {
+	for (int i = 0; i < nodeList.size(); i++) {
+		std::cout << nodeList[i]->getID() << std::endl;
+	}
+	return 0;
 }
 
 //Add edge methods
@@ -231,12 +260,10 @@ int Map::BFS1(int u) {
 	std::vector<std::vector<int> > g;
 	q.push(u);
 	v[u] = true;
-
 	while (!q.empty()) {
 		int f = q.front();
 		q.pop();
 		std::cout << f << " ";
-
 		for (auto i = g[f].begin(); i != g[f].end(); i++) {
 			if (!v[*i]) {
 				q.push(*i);
@@ -254,7 +281,6 @@ int Map::validate() {
 	if (!traversal(1, nodeList)) {
 		return -1;
 	}
-
 	//check subgraph connected
 	for (int i = 0; i < listOfContinent.size(); i++) {
 		if (!traversal(1, listOfContinent[0]->territories)) {
