@@ -20,7 +20,7 @@ void loadmap() {
 	bool check = true;
 	int x;
 
-	Board graph;
+	Map graph;
 	bool continentcheck = false;
 	bool countrycheck = false;
 	bool bordercheck = false;
@@ -107,7 +107,7 @@ void loadmap() {
 					int num2 = x;
 
 					try {
-						graph.addToContinent(num2 - 1, graph.countryList[add]);
+						graph.addToContinent(num2 - 1, graph.nodeList[add]);
 					}
 
 					catch (...) {
@@ -181,7 +181,7 @@ void loadmap() {
 					for (a = s.begin() + 1;a < s.end();a++) {
 
 						if (*a != ' ') {
-							graph.addEdge(graph.countryList[*first], graph.countryList[*a]);
+							graph.addEdge(graph.nodeList[*first], graph.nodeList[*a]);
 						}
 
 
@@ -191,10 +191,6 @@ void loadmap() {
 				}
 				
 			}
-		
-			
-		
-			
 		}
 		error++;
 			if (error >= 200) {

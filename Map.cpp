@@ -64,7 +64,7 @@ void Map::printBoard() {
 	printf("\n");
 
 	//Print specifically for america and its adjacent 
-	printf("Continent: America \n");
+	//printf("Continent: America \n");
 	for (int i = 0; i < listOfContinent.size(); i++) {
 		if (listOfContinent[i]->name == "America") {
 			for (int j = 0; j < listOfContinent[i]->territories.size(); j++)

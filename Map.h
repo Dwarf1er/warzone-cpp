@@ -3,8 +3,6 @@
 #define MAP_H
 #define MAX_SIZE 100
 
-#define MAX_SIZE 50
-
 #include <string>
 #include <vector>
 
