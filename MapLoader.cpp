@@ -9,7 +9,7 @@ using namespace std;
 
 void loadmap() {
 	fstream infile;
-	infile.open("europe.map");
+	infile.open("artic.map");
 
 	string s;
 	int cont = 0;
@@ -22,7 +22,7 @@ void loadmap() {
 	bool continentcheck = false;
 	bool countrycheck = false;
 	bool bordercheck = false;
-	int more = 0;  //find better name l8tr
+
 	
 	
 	graph.initList();
@@ -33,7 +33,7 @@ void loadmap() {
 	
 	while (infile >> s)
 	{
-		
+		int more = 0;  //find better name l8tr
 
 		if (!s.compare("[continents]")) {
 			cout << "works" << endl;
@@ -72,20 +72,25 @@ void loadmap() {
 		if (!s.compare("[countries]")) {   //while will not work
 			
 			cout << "works2" << endl;
+			getline(infile, s);
+			string::iterator a;
+			int add = 1;
+			while(conti) {
+				
 			
-			for(int i=0; i<24;i++) {
-				if (!s.compare("172")) {
+				
+				
+
+
+				infile >> s;   //gets the country number
+				if (!s.compare("[borders]")) {
 					cout << "STOP2" << endl;
 
 					break;
 				}
 
-
-				infile >> x;   //gets the country number
 				
-
-				int num1 = x;
-				cout << num1 << endl;
+				cout << s << endl;
 				
 				infile >> s;
 
@@ -99,9 +104,9 @@ void loadmap() {
 				cout << num2 << endl;
 				
 				
-				cout << num2 - 1 << "GOT" << num1 << endl;
-				graph.addToContinent(num2-1, graph.countryList[num1]);
-
+				cout << (num2 - 1) << "GOT" << add << endl;
+				graph.addToContinent(num2-1, graph.countryList[add]);
+				add++;
 				infile >> s;
 
 
@@ -109,22 +114,33 @@ void loadmap() {
 
 				infile >> s;
 				cout << s << endl;
+		
 
-				
+				if (!s.compare("[")) {
+					cout << "STOP2alt" << endl;
+
+					break;
+				}
 			
 			}
 			
 		}
-		string::iterator a;
-		string::iterator first;
-		//string::iterator b;
+		
+		
+		
+	
+		
 
-		if (!s.compare("[borders]")) {        //while will work now
+		if (!s.compare("[borders]")) {        
+
+			string::iterator a;
+			string::iterator first;
 			cout << "works3" << endl;
 			getline(infile, s);
 			cout << s << "EMPTY" << endl;
+			bordercheck = true;
 			
-			for (int i = 0; i<25; i++) {
+			while(conti) {
 				cout << "pre" << endl;
 				getline(infile, s);
 				cout << "post" << endl;
@@ -146,6 +162,7 @@ void loadmap() {
 					
 					
 					
+					
 					if (*a != ' ') {
 						cout << *first << " THIS ONE " << *a << endl;
 						graph.addEdge(graph.countryList[*first], graph.countryList[*a]);   
@@ -163,6 +180,9 @@ void loadmap() {
 			
 		}
 		graph.printBoard();
+		
+
+		//check errors
 
 	}
 
