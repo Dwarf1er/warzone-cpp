@@ -37,10 +37,7 @@ void loadmap() {
 	while (infile >> s)
 	{
 
-		int more;  
-
 		int more = 0;  
-
 
 		if (!s.compare("[continents]")) {
 			continentcheck = true;
