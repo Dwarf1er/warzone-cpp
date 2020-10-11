@@ -1,8 +1,7 @@
 #pragma once
 #ifndef MAP_H
 #define MAP_H
-
-#define MAX_SIZE 50
+#define MAX_SIZE 100
 
 #include <string>
 #include <vector>
@@ -16,13 +15,10 @@ public:
 	int getID() { return ID; }
 	int getNumberOfArmies() { return numberOfArmies; }
 	void setNumberOfArmies(int num) { numberOfArmies = num; }
-	//Player* getPlayerOwner() { return playerOwner; }
-	//void setPlayerOwner(Player* p) { playerOwner = p; }
 
 private:
 	int ID;
 	int numberOfArmies;
-	//Player* playerOwner;
 };
 
 struct Continent {
@@ -49,11 +45,12 @@ public:
 	int fillNodes();
 	int createContinent(std::string _name, int numOfCountries);
 	int addToContinent(int index, Territory* u);
-	int traversal(int index, std::vector<Territory*> territoryVec);
-	int BFS(int index, std::vector<bool>& visited);
 	int validate();
 	int duplicateCheck();
-	int BFS1(int u);
+	int DFS(Territory* currentNode, std::vector<Territory*> *_nodeVec);
+	bool isIn(Territory* currentNode, std::vector<Territory*> *nodeVec);
+	int territorySizeCheck();
+	int subgraphCheck(int continentIndex ,std::vector<Territory*>* vec);
 
 private:
 	int counter;

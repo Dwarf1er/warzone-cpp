@@ -32,7 +32,6 @@ Territory* Map::createNode() {
 int Map::addEdge(Territory* u, Territory* v) {
 	listOfNeightbors[u->getID()].push_back(v);
 	listOfNeightbors[v->getID()].push_back(u);
-
 	return 0;
 }
 
@@ -65,7 +64,7 @@ void Map::printBoard() {
 	printf("\n");
 
 	//Print specifically for america and its adjacent 
-	printf("Continent: America \n");
+	//printf("Continent: America \n");
 	for (int i = 0; i < listOfContinent.size(); i++) {
 		if (listOfContinent[i]->name == "America") {
 			for (int j = 0; j < listOfContinent[i]->territories.size(); j++)
@@ -80,14 +79,12 @@ void Map::printBoard() {
 			}
 		}
 	}
-
 	printf("\n");
 	printf("\n");
 	printf("\n");
 }
 
 //Fills in the board with continent and countries and its connection
-//Section needed for maploader
 int Map::fillNodes() {
 
 	createContinent("America", 6);			//0
@@ -129,10 +126,9 @@ int Map::fillNodes() {
 	addEdge(nodeList[9], nodeList[10]);
 	addEdge(nodeList[10], nodeList[9]);
 
+
 	return 0;
 }
-
-
 
 //Create continent with a name and limit of number of countries
 int Map::createContinent(std::string _name, int numOfCountries) {
@@ -141,7 +137,6 @@ int Map::createContinent(std::string _name, int numOfCountries) {
 	temp->numberOfTerritories = numOfCountries;
 	listOfContinent.push_back(temp);
 	temp = nullptr;
-
 	return 0;
 }
 
@@ -151,60 +146,45 @@ int Map::addToContinent(int index, Territory* u) {
 	temp->territories.push_back(u);
 	temp->numberOfTerritories++;
 	temp = nullptr;
-
 	return 0;
 }
 
+int Map::territorySizeCheck() {
+	int nodeCounter = 0;
 
-int Map::BFS(int index, std::vector<bool>& visited) {
-	std::vector<int> q;
-	visited[index - (size_t)1] = true;
-	q.push_back(index);
-
-	while (!q.empty()) {
-		index = q.front();
-		q.erase(q.begin());
-		size_t SIZE = listOfNeightbors[index].size();
-		for (int i = 1; i < SIZE; i++) {
-			int targetIndex = listOfNeightbors[index][i]->getID();
-			if (!visited[targetIndex - (size_t)1]) {
-				visited[targetIndex - (size_t)1] = true;
-				q.push_back(targetIndex);
-			}
-		}
+	for (int i = 0; i < listOfContinent.size(); i++) {
+		nodeCounter += listOfContinent[i]->territories.size();
 	}
-	return 0;
+	return nodeCounter;
 }
 
-int Map::traversal(int index, std::vector<Territory*> territoryVec)
-{
-	std::vector<bool> visited;
-	for (int i = 0; i < nodeList.size(); i++) {
-		visited.push_back(false);
-	}
-	BFS(index, visited);
-
-	if (territoryVec.size() == nodeList.size()) {
-		for (int i = 0; i < territoryVec.size(); i++) {
-			//If it was not visited then its false
-			if (!visited[i]) {
-				return 0;
-			}
+//Check if node is in the nodeVec
+bool Map::isIn(Territory* currentNode, std::vector<Territory*>* nodeVec) {
+	for (int i = 0; i < nodeVec->size(); i++) {
+		if (currentNode->getID() == (*nodeVec)[i]->getID()) {
+			return true;
 		}
 	}
-	else {
-		for (int i = 0; i < territoryVec.size(); i++) {
-			int target = territoryVec[i]->getID();
-			bool found = false;
-			if (!visited[target]) {
-				return 0;
-			}
-		}
-	}
-	return 1; // if true
+	return false;
 }
 
+//Traversal Using DFS
+int Map::DFS(Territory* _currentNode, std::vector<Territory*>* _nodeVec) {
+	if (isIn(_currentNode, _nodeVec)) {
+		return false;
+	}
+	(*_nodeVec).push_back(_currentNode);
+
+	for (int i = 0; i < listOfNeightbors[_currentNode->getID()].size(); i++) {
+		if (!isIn(listOfNeightbors[_currentNode->getID()].at(i), _nodeVec)) {
+			DFS(listOfNeightbors[_currentNode->getID()].at(i), _nodeVec);
+		}
+	}
+}
+
+//Duplicate territories check
 int Map::duplicateCheck() {
+	printf("\nUnique territories check:\n");
 	for (int i = 0; i < listOfContinent.size() - 1; i++) {
 		for (int j = 0; j < listOfContinent[i]->territories.size(); j++) {
 			for (int k = i + 1; k < listOfContinent.size(); k++) {
@@ -212,63 +192,58 @@ int Map::duplicateCheck() {
 					if (listOfContinent[i]->territories[j] == listOfContinent[k]->territories[l]) {
 						printf("Error Found duplicate of territories");
 					}
-					else {
-						printf("Good to go \n");
-					}
 					std::cout << listOfContinent[i]->name << listOfContinent[i]->territories[j]->getID() << "\t";
 					std::cout << listOfContinent[k]->name << listOfContinent[k]->territories[l]->getID() << std::endl;
 				}
 			}
 		}
 	}
+	printf("\nThere is not duplicate territories found. The map is valid\n");
 	return 0;
 }
-
-/*
-int Map::BFS1(int u) {
-	std::queue<int> q;
-	std::vector<bool> v;
-	std::vector<std::vector<int> > g;
-	q.push(u);
-	v[u] = true;
-
-	while (!q.empty()) {
-		int f = q.front();
-		q.pop();
-		std::cout << f << " ";
-
-		for (auto i = g[f].begin(); i != g[f].end(); i++) {
-			if (!v[*i]) {
-				q.push(*i);
-				v[*i] = true;
-			}
-		}
-	}
-}
-*/
 
 //Validation check
 int Map::validate() {
-	/*
-	//check whole graph connected
-	if (!traversal(1, nodeList)) {
-		return -1;
+
+	std::vector<Territory*> visited;
+	int territorySize = territorySizeCheck();
+
+	DFS(listOfContinent[0]->territories[0], &visited);
+	//std::cout << visited.size() << std::endl;
+
+	/*for (int i = 0; i < visited.size(); i++) {
+		std::cout << visited[i]->getID() << std::endl;
+	}*/
+	if (visited.size() == territorySize) {
+		printf("The graph is connected \n");
 	}
 
-	//check subgraph connected
 	for (int i = 0; i < listOfContinent.size(); i++) {
-		if (!traversal(1, listOfContinent[0]->territories)) {
-			return -1;
-		}
+		std::vector<Territory*> bde;
+		subgraphCheck(i, &bde);
 	}
-	*/
-	//check for duplicate
 
 	//Call method to check for duplicate territories 
 	duplicateCheck();
+	printf("\n");
+
 	return 0;
 }
 
+int Map::subgraphCheck(int continentIndex, std::vector<Territory*>* vec) {
+	for (int i = 0; i < listOfContinent.size(); i++) {
+		if (i != continentIndex) {
+			for (int j = 0; j < listOfContinent[i]->territories.size(); j++) {
+				vec->push_back(listOfContinent[i]->territories[j]);
+			}
+		}
+	}
+	DFS(listOfContinent[continentIndex]->territories[0], vec);
+	if (vec->size() == territorySizeCheck()) {
+		std::cout << "\n" <<listOfContinent[continentIndex]->name << ": is a connected subgraph" << std::endl;
+	}
+	return 0;
+}
 
 Continent::Continent() {
 	name = "";
