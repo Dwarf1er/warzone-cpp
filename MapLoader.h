@@ -1,3 +1,11 @@
 #pragma once
+#ifndef MapLoader_H
+#define MapLoader_H
 
-void loadmap();
+class MapLoader {
+public:
+	MapLoader();
+	~MapLoader();
+	void loadmap();
+};
+#endif //!map

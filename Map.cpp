@@ -85,8 +85,7 @@ void Map::printBoard() {
 }
 
 //Fills in the board with continent and countries and its connection
-//Section needed for maploader
-/*int Board::fillNodes() {
+int Map::fillNodes() {
 
 	createContinent("America", 6);			//0
 	createContinent("Australia", 3);		//1
@@ -129,7 +128,7 @@ void Map::printBoard() {
 
 
 	return 0;
-}*/
+}
 
 //Create continent with a name and limit of number of countries
 int Map::createContinent(std::string _name, int numOfCountries) {
@@ -185,6 +184,7 @@ int Map::DFS(Territory* _currentNode, std::vector<Territory*>* _nodeVec) {
 
 //Duplicate territories check
 int Map::duplicateCheck() {
+	printf("\nUnique territories check:\n");
 	for (int i = 0; i < listOfContinent.size() - 1; i++) {
 		for (int j = 0; j < listOfContinent[i]->territories.size(); j++) {
 			for (int k = i + 1; k < listOfContinent.size(); k++) {
@@ -192,15 +192,13 @@ int Map::duplicateCheck() {
 					if (listOfContinent[i]->territories[j] == listOfContinent[k]->territories[l]) {
 						printf("Error Found duplicate of territories");
 					}
-					else {
-						printf("Good to go \n");
-					}
 					std::cout << listOfContinent[i]->name << listOfContinent[i]->territories[j]->getID() << "\t";
 					std::cout << listOfContinent[k]->name << listOfContinent[k]->territories[l]->getID() << std::endl;
 				}
 			}
 		}
 	}
+	printf("\nThere is not duplicate territories found. The map is valid\n");
 	return 0;
 }
 
@@ -211,11 +209,11 @@ int Map::validate() {
 	int territorySize = territorySizeCheck();
 
 	DFS(listOfContinent[0]->territories[0], &visited);
-	std::cout << visited.size() << std::endl;
+	//std::cout << visited.size() << std::endl;
 
-	for (int i = 0; i < visited.size(); i++) {
+	/*for (int i = 0; i < visited.size(); i++) {
 		std::cout << visited[i]->getID() << std::endl;
-	}
+	}*/
 	if (visited.size() == territorySize) {
 		printf("The graph is connected \n");
 	}
@@ -242,7 +240,7 @@ int Map::subgraphCheck(int continentIndex, std::vector<Territory*>* vec) {
 	}
 	DFS(listOfContinent[continentIndex]->territories[0], vec);
 	if (vec->size() == territorySizeCheck()) {
-		std::cout << listOfContinent[continentIndex]->name << ": is a connected subgraph" << std::endl;
+		std::cout << "\n" <<listOfContinent[continentIndex]->name << ": is a connected subgraph" << std::endl;
 	}
 	return 0;
 }

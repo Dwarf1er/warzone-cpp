@@ -3,11 +3,19 @@
 #include <string>
 #include <fstream>
 #include <sstream>
+#include <direct.h>
 #include "Map.h"
 
 using namespace std;
 
-void loadmap() {
+MapLoader::MapLoader(){
+}
+
+MapLoader::~MapLoader(){
+}
+
+
+void MapLoader::loadmap() {
 	fstream infile;
 	string map;
 	cout << "Enter map name with extension: ";
@@ -54,18 +62,15 @@ void loadmap() {
 				//num
 				infile >> x;
 				int num = x;
-
 				graph.createContinent(name, more);
 				more++;
 				infile >> s;  //color ignorer
-
 			}
 		}
 
 		if (continentcheck == true) {
 			if (!s.compare("[countries]")) {
 				countrycheck = true;
-
 				getline(infile, s);
 				string::iterator a;
 				int add = 1;
@@ -118,12 +123,9 @@ void loadmap() {
 						cout << "major";
 						break;
 					}
-
 					o++;
-
 				}
 			}
-
 		}
 
 		if (!s.compare("[borders]")) {
@@ -141,7 +143,6 @@ void loadmap() {
 						cout << "major error";
 						break;
 					}
-
 					u++;
 
 					getline(infile, s);
@@ -177,26 +178,22 @@ void loadmap() {
 
 	for (int i = 0; i < 1; i++) {
 		if (continentcheck == false) {
-			cout << "error1: continent section invalid" << endl;
+			cout << "Error1: continent section invalid" << endl;
 			break;
 		}
 
-
 		if (countrycheck == false) {
-			cout << "error2: country section invald" << endl;
+			cout << "Error2: country section invald" << endl;
 			break;
 		}
 
 		if (bordercheck == false) {
-			cout << "error3: border section invalid" << endl;
+			cout << "Error3: border section invalid" << endl;
 			break;
 		}
-
 	}
-
 	if (continentcheck == true && countrycheck == true && bordercheck == true) {
 		graph.printBoard();
 	}
 	infile.close();
 }
-
