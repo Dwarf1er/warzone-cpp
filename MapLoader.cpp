@@ -36,7 +36,11 @@ void loadmap() {
 	int error = 0;
 	while (infile >> s)
 	{
-		int more = 0;  //find better name l8tr
+
+		int more;  
+
+		int more = 0;  
+
 
 		if (!s.compare("[continents]")) {
 			continentcheck = true;
