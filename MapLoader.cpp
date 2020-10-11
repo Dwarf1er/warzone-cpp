@@ -39,7 +39,7 @@ void loadmap() {
 
 		int more;  
 
-		int more = 0;  
+		more = 0;  
 
 
 		if (!s.compare("[continents]")) {
