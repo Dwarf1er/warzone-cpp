@@ -1,6 +1,7 @@
 #include "Map.h"
 #include "MapLoader.h"
 #include <iostream>
+#include <conio.h>
 
 int main(void) {
 
@@ -14,4 +15,6 @@ int main(void) {
 	//printf("======================================= Part 1 End =======================================");
 
 	loadmap();
+
+	auto result = _getch();
 }
