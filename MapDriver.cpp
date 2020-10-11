@@ -1,5 +1,6 @@
 #include "Map.h"
 #include <iostream>
+#include <conio.h>
 
 int main(void) {
 
@@ -12,4 +13,6 @@ int main(void) {
 	Game->validate();
 	Game->printBoard();
 	printf("======================================= Part 1 End =======================================");
+	
+	auto result = _getch();
 }
