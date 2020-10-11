@@ -39,7 +39,7 @@ int Board::addEdge(Node* u, Node* v) {
 
 //Initialized nodes for countries and neighbors
 int Board::initList() {
-	for (int i = 0; i < 9; i++) {
+	for (int i = 0; i < MAX_SIZE; i++) {
 		countryList.push_back(createNode());
 		listOfNeightbors[i].push_back(countryList.back());
 	}
@@ -85,7 +85,7 @@ void Board::printBoard() {
 
 //Fills in the board with continent and countries and its connection
 //Section needed for maploader
-int Board::fillNodes() {
+/*int Board::fillNodes() {
 
 	createContinent("America", 6);			//0
 	createContinent("Australia", 3);		//1
@@ -117,7 +117,7 @@ int Board::fillNodes() {
 	addEdge(countryList[7], countryList[8]);
 
 	return 0;
-}
+}*/
 
 //Create continent with a name and limit of number of countries
 int Board::createContinent(std::string _name, int numOfCountries) {
