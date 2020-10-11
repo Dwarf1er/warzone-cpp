@@ -9,19 +9,22 @@ using namespace std;
 
 void loadmap() {
 	fstream infile;
-	infile.open("artic.map");
+	string map;
+	cout << "Enter map name with extension: ";
+	cin >> map;
+	infile.open(map);
 
 	string s;
 	int cont = 0;
 	int country = 0;
 	bool check = true;
-	bool conti = true;
 	int x;
-	int y;
+
 	Board graph;
 	bool continentcheck = false;
 	bool countrycheck = false;
 	bool bordercheck = false;
+	bool mapcheck = false;
 
 	
 	
@@ -30,34 +33,32 @@ void loadmap() {
 
 
 	// extracting words from the file 
-	
+	int error = 0;
 	while (infile >> s)
 	{
 		int more = 0;  //find better name l8tr
 
 		if (!s.compare("[continents]")) {
-			cout << "works" << endl;
 			continentcheck = true;
-			while(conti) {
-				
+			int g = 0;
+			while(check) {
+				if (g >= 100) {
+					cout << "major";
+					break;
+				}
+				g++;
 				
 				infile >> s;
 				if (!s.compare("[countries]")) {
-					cout << "stop1" << endl;
-					
 					break;
 				}
-				//cout << s << endl;
-				//name var
+
 				string name = s;
-				cout << name << endl;
 			   
 				//num
 				infile >> x;
 				int num = x;
-				cout << num  << endl;
-					
-				cout << name << "IS POS: " << more << endl;
+
 				graph.createContinent(name, more);
 				more++;
 				infile >> s;  //color ignorer
@@ -69,62 +70,77 @@ void loadmap() {
 		}
 		
 		
-		if (!s.compare("[countries]")) {   //while will not work
-			
-			cout << "works2" << endl;
-			getline(infile, s);
-			string::iterator a;
-			int add = 1;
-			while(conti) {
-				
-			
-				
-				
+		if (continentcheck == true) {
+			if (!s.compare("[countries]")) {
+				countrycheck = true;
+
+				getline(infile, s);
+				string::iterator a;
+				int add = 1;
+				int o = 0;
+				while (check) {
+					if (o>=100) {
+						break;
+					}
+					
+					infile >> s;   //gets the country number
+					if (!s.compare("[borders]")) {
+						break;
+					}
+
+					
+					if (s.empty()) {
+						cout << "major ";
+						break;
+					}
+
+					infile >> s;
 
 
-				infile >> s;   //gets the country number
-				if (!s.compare("[borders]")) {
-					cout << "STOP2" << endl;
+					if (s.empty()) {
+						cout << "major";
+						break;
+					}
 
-					break;
+					infile >> x;   //gets the conitnent it belongs to
+					int num2 = x;
+
+					try {
+						graph.addToContinent(num2 - 1, graph.countryList[add]);
+					}
+
+					catch (...) {
+						cout << "major ";
+						break;
+					}
+					
+					add++;
+					infile >> s;
+
+
+
+
+					if (s.empty()) {
+						cout << "major";
+						break;
+					}
+
+					infile >> s;
+
+
+					if (s.empty()) {
+						cout << "major";
+						break;
+					}
+					
+					o++;
+
 				}
-
-				
-				cout << s << endl;
-				
-				infile >> s;
-
-				
-				cout << s << endl;
-				
-
-				
-				infile >> x;   //gets the conitnent it belongs to
-				int num2 = x;
-				cout << num2 << endl;
-				
-				
-				cout << (num2 - 1) << "GOT" << add << endl;
-				graph.addToContinent(num2-1, graph.countryList[add]);
-				add++;
-				infile >> s;
-
-
-				cout << s << endl;
-
-				infile >> s;
-				cout << s << endl;
-		
-
-				if (!s.compare("[")) {
-					cout << "STOP2alt" << endl;
-
-					break;
-				}
-			
 			}
 			
 		}
+		
+		
 		
 		
 		
@@ -132,44 +148,44 @@ void loadmap() {
 		
 
 		if (!s.compare("[borders]")) {        
+			if (countrycheck == true) {
+				string::iterator a;
+				string::iterator first;
 
-			string::iterator a;
-			string::iterator first;
-			cout << "works3" << endl;
-			getline(infile, s);
-			cout << s << "EMPTY" << endl;
-			bordercheck = true;
-			
-			while(conti) {
-				cout << "pre" << endl;
 				getline(infile, s);
-				cout << "post" << endl;
-				cout << s << endl;
-				
-				if (s.empty()) {
-					cout << "STOP" << endl;
-					break;
-				}
-				
-				
-				first = s.begin();
-				//b = s.end()-1;
-				
-				cout << *first << endl;
-				
-				for (a = s.begin()+1;a < s.end();a++) {
-					cout << *a << endl;;
+
+				bordercheck = true;
+				int u = 0;
+				while (check) {
 					
-					
-					
-					
-					if (*a != ' ') {
-						cout << *first << " THIS ONE " << *a << endl;
-						graph.addEdge(graph.countryList[*first], graph.countryList[*a]);   
-						cout << *first << "THIS ONE2" << *a <<endl;
+					if (u >= 100) {
+						cout << "major error";
+						break;
+					}
+
+					u++;
+
+
+					getline(infile, s);
+
+					if (s.empty()) {
+						
+						break;
 					}
 
 
+					first = s.begin();
+
+
+					for (a = s.begin() + 1;a < s.end();a++) {
+
+						if (*a != ' ') {
+							graph.addEdge(graph.countryList[*first], graph.countryList[*a]);
+						}
+
+
+
+					}
 					
 				}
 				
@@ -179,14 +195,45 @@ void loadmap() {
 		
 			
 		}
-		graph.printBoard();
-		
+		error++;
+			if (error >= 200) {
+				cout << "major error";
+				break;
+		}
 
 		//check errors
+		if (mapcheck) {
+			cout << "INVALID FORMAT" << endl;
+			break;
+		}
+	}
+	
+	for (int i = 0; i < 1; i++) {
+		if (continentcheck == false) {
+			cout << "error1: continent section invalid" << endl;
+			break;
+		}
+
+
+		if (countrycheck == false) {
+			cout << "error2: country section invald" << endl;
+			break;
+		}
+
+		if (bordercheck == false) {
+			cout << "error3: border section invalid" << endl;
+			break;
+		}
 
 	}
 
 
+	
+	
+	
+	if (continentcheck == true && countrycheck == true && bordercheck == true) {
+		graph.printBoard();
+	}
 	infile.close();
 }
 
