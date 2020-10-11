@@ -1,0 +1,55 @@
+; map: austria-hungary.map
+; map made with the map maker
+; yura.net Risk 1.0.9.7
+
+[files]
+pic austria-hungary_pic.png
+map austria-hungary_map.gif
+crd austria-hungary.cards
+
+[continents]
+Austria 15 #ffcc00
+Hungary 3 #0099cc
+Bosnia_and_Herzegovina 1 #00cc66
+
+[countries]
+1 Bohemia_(Praha) 1 248 47
+2 Moravia_(Brno) 1 325 92
+3 Silesia_(Opava) 1 385 34
+4 Dalmatia_(Spalato) 1 314 350
+5 Croatia_and_Slavonia_(Agram) 2 299 247
+6 Bosnia_and_Herzegovina_(Sarajevo) 3 389 336
+7 Galicia_(Lemberg) 1 568 47
+8 Bucovina_(Czernowitz) 1 647 118
+9 Lower_Austria_(Wien) 1 315 131
+10 Upper_Austria_(Linz) 1 236 128
+11 Carinthia_(Klagenfurt) 1 236 203
+12 Carniola_(Laibach) 1 249 237
+13 Salzburg_(Salzburg) 1 199 152
+14 Styria_(Graz) 1 279 186
+15 Tyrol_(Innsbruck) 1 136 176
+16 Voralberg_(Bregenz) 1 112 133
+17 Küstenland_(Terst) 1 223 265
+18 West_Hungary_(West_Budapest) 2 395 162
+19 East_Hungary_(East_Budapest) 2 415 177
+
+[borders]
+1 10 9 2
+2 1 9 3 18
+3 2 7 18
+4 5 6
+5 6 4 17 12 14 19
+6 4 5
+7 3 8 18
+8 7 19
+9 2 10 1 18
+10 9 13 14 1
+11 14 12 17 15 13
+12 17 5 14 11
+13 15 11 14 10
+14 12 5 13 10 11 18
+15 16 11 13
+16 15
+17 5 12 11
+18 19 7 14 9 2 3
+19 18 8 5

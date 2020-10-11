@@ -86,7 +86,7 @@ void Map::printBoard() {
 
 //Fills in the board with continent and countries and its connection
 //Section needed for maploader
-int Map::fillNodes() {
+/*int Board::fillNodes() {
 
 	createContinent("America", 6);			//0
 	createContinent("Australia", 3);		//1
@@ -129,7 +129,7 @@ int Map::fillNodes() {
 
 
 	return 0;
-}
+}*/
 
 //Create continent with a name and limit of number of countries
 int Map::createContinent(std::string _name, int numOfCountries) {
