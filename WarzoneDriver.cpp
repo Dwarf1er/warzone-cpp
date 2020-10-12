@@ -3,18 +3,29 @@
 #include "Cards.h"
 #include "Map.h"
 #include <iostream>
+#include "MapLoader.h"
+#include <conio.h>
 
 int main()
 {
     //PART 1 - Map tests
 
     Map* Game = new Map();
+    MapLoader mapLoad;
+
     Game->initList();
     Game->fillNodes();
+    printf("======================================= Part 1 =======================================\n");
+    Game->validate();
+    Game->printBoard();
+    printf("======================================= Part 1 End =======================================\n");
+
+    printf("======================================= Part 2 =======================================\n");
+    mapLoad.loadmap();
+    printf("======================================= Part 2 End =======================================\n");
 
     //1) Verifying that the map is a connected graph
     
-    Game->Map::listAllNodes();
 
     //2) Verifying that continents are a connected subgraph
         //TODO
@@ -29,7 +40,7 @@ int main()
 
     //PART 3 - Player tests
     
-    cout << "\n===PART 3 - Player tests===" << endl;
+    printf("======================================= Part 3 =======================================\n");
     Player* p = new Player();
     vector<Territory*> territories;
     Territory* t = new Territory();
@@ -74,7 +85,8 @@ int main()
     cout << "\n===5) Verifying that players can use the method .issueOrder() to add an order to their list of orders===" << endl;
     p->issueOrder(order);
     cout << *p;
-
+    printf("======================================= Part 3 end =======================================\n");
+    printf("======================================= Part 4 =======================================\n");
     //PART 4 - Orders tests
     //1) Create an order of every type and place them in an Orderlist object for the following tests
         //TODO
@@ -92,7 +104,9 @@ int main()
         //TODO
     //8) Verifying that the OrdersList implements the move() method to move an order in the list of order
         //TODO
-
+    printf("======================================= Part 4 end =======================================\n");
+    
+    printf("======================================= Part 5  =======================================\n");
     //PART 5 - Cards tests
     //1) Create a deck of cards containing all types of cards
         //TODO
@@ -100,6 +114,7 @@ int main()
         //TODO
     //3) Call the play method of all the cards in the hand
         //TODO
-
+    printf("======================================= Part 5 end =======================================\n");
+    auto result = _getch();
     return 0;
 }

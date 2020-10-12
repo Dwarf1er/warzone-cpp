@@ -142,15 +142,24 @@
     <ClCompile Include="Cards.cpp" />
     <ClCompile Include="Map.cpp" />
     <ClCompile Include="MapDriver.cpp" />
+    <ClCompile Include="MapLoader.cpp" />
     <ClCompile Include="Orders.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="WarzoneDriver.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Cards.h" />
+    <ClInclude Include="MapLoader.h" />
     <ClInclude Include="Map.h" />
     <ClInclude Include="Orders.h" />
     <ClInclude Include="Player.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="artic.map" />
+    <None Include="austria-hungary.map" />
+    <None Include="bad map1.map" />
+    <None Include="bad map2.map" />
+    <None Include="bad map3.map" />
+    <None Include="europe.map" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
