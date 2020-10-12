@@ -6,7 +6,7 @@ using std::vector;
 using std::ostream;
 
 enum /*class*/ CardType {
-	SPY, BOMB, Reinforcement, BLOCKADE, AIRLIFT, Diplomacy
+	SPY, BOMB, REINFORCEMENT, BLOCKADE, AIRLIFT, DIPLOMACY
 };
 
 class Card {
@@ -20,6 +20,7 @@ public:
 	friend ostream& operator<<(ostream&, const Card&);
 
 	CardType get_card_type();
+	std::string get_card_type_name();
 	bool get_drawn();
 	void set_drawn(bool);
 	void play();
@@ -33,7 +34,7 @@ public:
 	Deck& operator=(const Deck&);
 	friend ostream& operator<<(ostream&, const Deck&);
 	Deck(vector<Card>);
-	vector<Card*> get_cards();
+	vector<Card*> get_cards_in_Deck();
 	vector<Card*> get_deck();
 	void push_card(CardType);
 	void draw();
@@ -47,5 +48,5 @@ public:
 	Hand(const Hand&);
 	friend ostream& operator<<(ostream&, const Hand&);
 	Hand& operator=(const Hand&);
-	vector<Card*> get_hand();
+	vector<Card*> get_cards_in_hand();
 };

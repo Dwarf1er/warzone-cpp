@@ -1,4 +1,7 @@
 #include "Cards.h"
+#include "Orders.h"
+
+#include <iostream>
 
 Card::Card(CardType card_type) {
 	this->card_type = card_type;
@@ -15,6 +18,25 @@ CardType Card::get_card_type() {
 	return card_type;
 }
 
+string Card::get_card_type_name()
+{
+	switch (card_type)
+	{
+	case SPY:
+		return "SPY";
+	case BOMB:
+		return "BOMB";
+	case REINFORCEMENT:
+		return "REINFORCEMENT";
+	case BLOCKADE:
+		return "BLOCKADE";
+	case AIRLIFT:
+		return "AIRLIFT";
+	case DIPLOMACY:
+		return "DIPLOMACY";
+	}
+}
+
 bool Card::get_drawn() {
 	return drawn;
 }
@@ -25,7 +47,29 @@ void Card::set_drawn(bool _drawn) {
 
 void Card::play() {
 	if (!drawn) return;
+
 	//create special orders
+	switch (card_type)
+	{
+	case SPY:
+		std::cout << "special SPY order created\n";
+		break;
+	case BOMB:
+		std::cout << "special BOMB order created\n";
+		break;
+	case REINFORCEMENT:
+		std::cout << "special REINFORCEMENT order created\n";
+		break;
+	case BLOCKADE:
+		std::cout << "special BLOCKADE order created\n";
+		break;
+	case AIRLIFT:
+		std::cout << "special AIRLIFT order created\n";
+		break;
+	case DIPLOMACY:
+		std::cout << "special DIPLOMACY order created\n";
+		break;
+	}
 
 	set_drawn(false);
 }
@@ -49,7 +93,7 @@ Deck::Deck(vector<Card> _cards)
 	}
 }
 
-vector<Card*> Deck::get_cards()
+vector<Card*> Deck::get_cards_in_Deck()
 {
 	return cards;
 }
@@ -83,6 +127,7 @@ void Deck::draw()
 	int random = (1 + rand()) % deck.size();
 
 	deck.at(random)->set_drawn(true);
+	cout << "draw card\n";
 }
 
 Deck::~Deck()
@@ -96,7 +141,7 @@ Deck::~Deck()
 
 Hand::Hand(Deck* _deck)
 {
-	cards = _deck->get_cards();
+	cards = _deck->get_cards_in_Deck();
 }
 
 Hand::Hand(const Hand& other) : cards(other.cards) {}
@@ -106,8 +151,8 @@ Hand& Hand::operator=(const Hand&)
 	return *this;
 }
 
-vector<Card*> Hand::get_hand()
-{/*
+vector<Card*> Hand::get_cards_in_hand()
+{
 	vector<Card*> hand;
 
 	for (int i = 0; i < cards.size(); i++)
@@ -116,22 +161,21 @@ vector<Card*> Hand::get_hand()
 			hand.push_back(cards.at(i));
 	}
 
-	return hand;*/
-	return cards;
+	return hand;
 }
 
 ostream& operator<<(ostream& os, const Card& card)
 {
-	os << "\n\tcard type = " << card.card_type << " drawn = " << card.drawn << std::endl;
+	os << "card type = " << card.card_type << " drawn = " << card.drawn << std::endl;
 	return os;
 }
 
 ostream& operator<<(ostream& os, const Deck& deck)
 {
-	os << "cards=[";
+	os << "cards in deck=[";
 	for (int i = 0; i < deck.cards.size(); i++)
 	{
-		os << deck.cards.at(i) << (i == deck.cards.size() - 1 ? "" : ",");
+		os << deck.cards.at(i)->get_card_type_name() << (i == deck.cards.size() - 1 ? "" : ",");
 	}
 	os << "]" << std::endl;
 
@@ -140,10 +184,12 @@ ostream& operator<<(ostream& os, const Deck& deck)
 
 ostream& operator<<(ostream& os, const Hand& hand)
 {
-	os << "cards=[";
+	os << "cards in hand=[";
+
 	for (int i = 0; i < hand.cards.size(); i++)
 	{
-		os << hand.cards.at(i) << (i == hand.cards.size() - 1 ? "" : ",");
+		if(hand.cards.at(i)->get_drawn())
+			os << hand.cards.at(i)->get_card_type_name() << (i == hand.cards.size() - 1 ? "" : ",");
 	}
 	os << "]" << std::endl;
 	return os;

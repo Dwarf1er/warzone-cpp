@@ -10,6 +10,7 @@
 #include "MapLoaderDriver.h"
 #include "PlayerDriver.h"
 #include "OrdersDriver.h"
+#include "CardsDriver.h"
 
 int main()
 {
@@ -35,7 +36,7 @@ int main()
     
     // Part 5 - Cards
     printf("======================================= Part 5  =======================================\n");
-
+    CardsDriver cardDriver;
     printf("======================================= Part 5 end =======================================\n");
     
     auto result = _getch();
