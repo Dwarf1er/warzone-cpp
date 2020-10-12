@@ -21,6 +21,7 @@ void Territory::operator=(const Territory& t) {
 	numberOfArmies = t.numberOfArmies;
 }
 
+
 //Stream insertion operators overloading
 std::ostream& operator<<(std::ostream& out, const Territory& t) {
 	out << std::endl << "\tTerritory ID: " << t.ID << std::endl;
@@ -47,14 +48,6 @@ Territory* Map::createNode() {
 	Territory* temp = new Territory(counter);
 	counter++;
 	return temp;
-}
-
-//List all nodes
-int Map::listAllNodes() {
-	for (int i = 0; i < nodeList.size(); i++) {
-		std::cout << nodeList[i]->getID() << std::endl;
-	}
-	return 0;
 }
 
 //Add edge methods

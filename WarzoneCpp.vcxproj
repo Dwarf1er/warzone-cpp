@@ -143,7 +143,9 @@
     <ClCompile Include="Map.cpp" />
     <ClCompile Include="MapDriver.cpp" />
     <ClCompile Include="MapLoader.cpp" />
-    <ClCompile Include="WarzoneCpp.cpp" />
+    <ClCompile Include="Orders.cpp" />
+    <ClCompile Include="Player.cpp" />
+    <ClCompile Include="WarzoneDriver.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MapLoader.h" />

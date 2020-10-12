@@ -3,6 +3,7 @@
 #include <iostream>
 #include <conio.h>
 
+/*
 int main(void) {
 	Map* Game = new Map();
 	MapLoader mapLoad;
@@ -19,3 +20,4 @@ int main(void) {
 	printf("======================================= Part 2 End =======================================\n");
 	auto result = _getch();
 }
+*/
