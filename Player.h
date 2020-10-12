@@ -1,8 +1,9 @@
 #pragma once
+#include <iostream>
 #include <vector>
 #include "Map.h"
-#include "Orders.h"
 #include "Cards.h"
+#include "Orders.h"
 
 using namespace std;
 using std::vector;
@@ -17,8 +18,6 @@ private:
 	//helper attributes
 	int playerArmies; //represent the number of armies of the player
 	int playerID; //represents the player ID's
-
-
 
 public:
 	//constructor(s) and destructor

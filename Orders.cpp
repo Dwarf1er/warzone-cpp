@@ -1,7 +1,4 @@
 ﻿#include "Orders.h"
-#include <iostream>
-#include <string>
-using namespace std;
 
 Orders::Orders() {
 	description = "Default";
@@ -51,9 +48,6 @@ bool Deploy::validate() {
 	};
 	return true;
 }
-
-
-//getters & setters
 
 //string Deploy::orderName() {
 //	return "Deploy";
@@ -142,7 +136,6 @@ void Advance::setTerritory1(string tr1) {
 void Advance::setTerritory2(string tr2) {
 	territory2 = tr2;
 }
-
 
 //-------------Bomb-----------------//
 /*
@@ -302,6 +295,8 @@ void Airlift::setInitTerritory(string tt1) {
 void Airlift::setTargetTerritory(string tt2) {
 	targetTerritory = tt2;
 }
+
+
 //-------------Negotiate------------//
 /*
 prevent attacks between the current player
@@ -322,7 +317,8 @@ bool Negotiate::validate() {
 }
 void Negotiate::execute() {
 	printf("Negotiate: \n");
-	cout << "\n Negotiate prevents attacks from " << getNegotiatePlayer() << "until the end of turn" << endl;
+	//cout << "\n Negotiate prevents attacks from " << getNegotiatePlayer() << "until the end of turn" << endl;
+	cout << "\n Negotiate prevents attacks from TEMP until the end of turn" << endl;
 	if (validate()) {
 		cout << "Negotiation is successful, the attack was halted. ";
 	}
@@ -337,8 +333,8 @@ void Negotiate::setCheckValid(bool valid) {
 	checkValid = valid;
 }
 
-Player Negotiate::getNegotiatePlayer() {
-	return *negotiatePlayer;//getting incomplete player type error
+Player* Negotiate::getNegotiatePlayer() {
+	return negotiatePlayer;//getting incomplete player type error
 }
 void Negotiate::setNegotiatePlayer(Player* p1) {
 	negotiatePlayer = p1;

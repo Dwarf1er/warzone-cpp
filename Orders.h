@@ -2,7 +2,8 @@
 #include <iostream>
 #include<string>
 #include<vector>
-#include "Player.h"
+class Player;
+
 using namespace std;
 
 class Orders {
@@ -14,7 +15,7 @@ private:
 	->Every order subclass must implement the validate() method that is used to validate if the
 	order is valid.
 	->Every order subclass must implement the execute() method that first validates the order,
-	and executes its action if it is valid, according to the order’s meaning and the player’s state.
+	and executes its action if it is valid, according to the orderï¿½s meaning and the playerï¿½s state.
 	*/
 public:
 	Orders();
@@ -128,6 +129,7 @@ private:
 	string initTerritory;
 	string targetTerritory;
 	bool checkValid{ false };
+
 public:
 	Airlift();
 	Airlift(int army, string tt1, string tt2);
@@ -145,6 +147,7 @@ public:
 	void setInitTerritory(string tt1);
 	void setTargetTerritory(string tt2);
 };
+
 //-------------------Negotiate----------------//
 class Negotiate : public Orders {
 	//cant fight 
@@ -153,18 +156,20 @@ class Negotiate : public Orders {
 private:
 	bool checkValid{ false };
 	Player* negotiatePlayer;
+	
+
 public:
 	Negotiate();
 	Negotiate(Player* p1);
 
-	//void orderProcedure();
+	void orderProcedure();
 	bool validate();
 	void execute();
 
 	bool getCheckValid();
 	void setCheckValid(bool valid);
 
-	Player getNegotiatePlayer();
+	Player* getNegotiatePlayer();
 	void setNegotiatePlayer(Player* p1);
 };
 
