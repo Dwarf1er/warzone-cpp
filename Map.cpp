@@ -15,6 +15,28 @@ Territory::Territory(int _ID) {
 
 Territory::~Territory() {}
 
+//Assignment operator overloading
+void Territory::operator=(const Territory& t) {
+	ID = t.ID;
+	numberOfArmies = t.numberOfArmies;
+}
+
+
+//Stream insertion operators overloading
+std::ostream& operator<<(std::ostream& out, const Territory& t) {
+	out << std::endl << "\tTerritory ID: " << t.ID << std::endl;
+	out << "\tTerritory Number of Armies: " << t.numberOfArmies;
+	return out;
+}
+
+std::istream& operator>>(std::istream& in, Territory& t) {
+	std::cout << "Enter territory ID: ";
+	in >> t.ID;
+	std::cout << "Enter the number of armies: ";
+	in >> t.numberOfArmies;
+	return in;
+}
+
 Map::Map() {
 	counter = 0;
 }
@@ -217,7 +239,6 @@ int Map::validate() {
 	if (visited.size() == territorySize) {
 		printf("The graph is connected \n");
 	}
-
 	for (int i = 0; i < listOfContinent.size(); i++) {
 		std::vector<Territory*> bde;
 		subgraphCheck(i, &bde);
