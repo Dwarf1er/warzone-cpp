@@ -1,6 +1,3 @@
-#pragma once
-#include <iostream>
-#include <vector>
 #include "Player.h"
 
 using namespace std;
@@ -66,7 +63,7 @@ void Player::setPlayerOrders(Orders* playerOrders_) {
 	if (playerOrderList == nullptr) {
 		playerOrderList = new OrderList();
 	}
-	playerOrderList->get_orders().push_back(playerOrders_);
+	playerOrderList->getOList().push_back(playerOrders_);
 }
 
 void Player::setPlayerArmies(int playerArmies_) {
@@ -92,7 +89,7 @@ ostream& operator<<(ostream& out, const Player& p) {
 	}
 	
 	if (p.playerOrderList != nullptr) {
-		for (Orders* o : p.playerOrderList->get_orders()) {
+		for (Orders* o : p.playerOrderList->getOList()) {
 			out << "Orders: " << *o << endl;
 		}
 		out << "Orders should be printing here";

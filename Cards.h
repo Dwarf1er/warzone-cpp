@@ -6,7 +6,7 @@ using std::vector;
 using std::ostream;
 
 enum /*class*/ CardType {
-	Spy, Bomb, Reinforcement, Blockade, Airlift, Diplomacy
+	SPY, BOMB, Reinforcement, BLOCKADE, AIRLIFT, Diplomacy
 };
 
 class Card {
