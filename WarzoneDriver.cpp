@@ -2,6 +2,7 @@
 #include "Player.h"
 #include "Cards.h"
 #include "Map.h"
+#include "Orders.h"
 #include <iostream>
 #include "MapLoader.h"
 #include <conio.h>
@@ -46,7 +47,7 @@ int main()
     Territory* t = new Territory();
     Orders* order = new Orders();
     Deck* deck = new Deck();
-    deck->push_card(CardType::Spy);
+    deck->push_card(CardType::SPY);
     Hand* h = new Hand(deck);
 
     //1) Verifying that players have a collection of territories
@@ -87,6 +88,51 @@ int main()
     cout << *p;
     printf("======================================= Part 3 end =======================================\n");
     printf("======================================= Part 4 =======================================\n");
+    Bomb* bB = new Bomb();
+    Airlift* aL = new Airlift();
+    Negotiate* nT = new Negotiate();
+    Blockade* bD = new Blockade();
+    Advance* aV = new Advance();
+    Deploy* dP = new Deploy();
+
+    OrderList oL;
+    oL.addOrders(bB);
+    oL.addOrders(aL);
+    oL.addOrders(nT);
+    oL.addOrders(bD);
+    oL.addOrders(aV);
+    oL.addOrders(dP);
+
+    for (int i = 0; i < 6; i++) {
+        printf("%d \t", i);
+        oL.getOList()[i]->execute();
+    }
+
+    printf("\n");
+
+    oL.move(0, 3);
+    for (int i = 0; i < 6; i++) {
+        printf("%d \t", i);
+        oL.getOList()[i]->execute();
+    }
+
+    printf("\n");
+
+    oL.remove(0);
+    for (int i = 0; i < 5; i++) {
+        printf("%d \t", i);
+        oL.getOList()[i]->execute();
+    }
+
+    printf("\ncout:\n");
+    std::cout << *bB << std::endl;
+    std::cout << *aL << std::endl;
+    std::cout << *nT << std::endl;
+    std::cout << *bD << std::endl;
+    std::cout << *aV << std::endl;
+    std::cout << *dP << std::endl;
+
+
     //PART 4 - Orders tests
     //1) Create an order of every type and place them in an Orderlist object for the following tests
         //TODO
