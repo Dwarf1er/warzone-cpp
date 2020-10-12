@@ -86,7 +86,7 @@ int main()
     p->issueOrder(order);
     cout << *p;
     printf("======================================= Part 3 end =======================================\n");
-
+    printf("======================================= Part 4 =======================================\n");
     //PART 4 - Orders tests
     //1) Create an order of every type and place them in an Orderlist object for the following tests
         //TODO
@@ -104,7 +104,9 @@ int main()
         //TODO
     //8) Verifying that the OrdersList implements the move() method to move an order in the list of order
         //TODO
-
+    printf("======================================= Part 4 end =======================================\n");
+    
+    printf("======================================= Part 5  =======================================\n");
     //PART 5 - Cards tests
     //1) Create a deck of cards containing all types of cards
         //TODO
@@ -112,7 +114,7 @@ int main()
         //TODO
     //3) Call the play method of all the cards in the hand
         //TODO
-
+    printf("======================================= Part 5 end =======================================\n");
     auto result = _getch();
     return 0;
 }
