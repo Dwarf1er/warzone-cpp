@@ -140,18 +140,28 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Cards.cpp" />
+    <ClCompile Include="CardsDriver.cpp" />
     <ClCompile Include="Map.cpp" />
     <ClCompile Include="MapDriver.cpp" />
     <ClCompile Include="MapLoader.cpp" />
+    <ClCompile Include="MapLoaderDriver.cpp" />
     <ClCompile Include="Orders.cpp" />
+    <ClCompile Include="OrdersDriver.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="PlayerDriver.cpp" />
     <ClCompile Include="WarzoneDriver.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Cards.h" />
+    <ClInclude Include="CardsDriver.h" />
+    <ClInclude Include="MapDriver.h" />
     <ClInclude Include="MapLoader.h" />
     <ClInclude Include="Map.h" />
+    <ClInclude Include="MapLoaderDriver.h" />
     <ClInclude Include="Orders.h" />
+    <ClInclude Include="OrdersDriver.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="PlayerDriver.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="artic.map" />

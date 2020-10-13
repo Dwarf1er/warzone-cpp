@@ -100,7 +100,7 @@ ostream& operator<<(ostream& out, const Player& p) {
 	}
 
 	if (p.playerCards != nullptr) {
-		for (Card* c : p.playerCards->get_hand()) {
+		for (Card* c : p.playerCards->get_cards_in_hand()) {
 			out << "\nCard: " << *c << endl;
 		}
 	}
