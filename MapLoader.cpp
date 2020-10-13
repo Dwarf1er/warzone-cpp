@@ -1,4 +1,4 @@
-#include<iostream>
+#include <iostream>
 #include "MapLoader.h"
 #include <string>
 #include <fstream>
@@ -155,14 +155,18 @@ void MapLoader::loadmap() {
 						break;
 					}
 
-					first = s.begin();
+					char* index = NULL;
+					char* neighbor = NULL;
+					char* context = NULL;
+					char delim[] = " ";
 
-					for (a = s.begin() + 1;a < s.end();a++) {
-
-						if (*a != ' ') {
-							graph.addEdge(graph.nodeList[*first], graph.nodeList[*a]);
-						}
-					}
+					index = strtok_s((char*)s.c_str(), delim, &context);
+					neighbor = strtok_s(NULL, delim, &context);
+					do
+					{
+						graph.addEdge(graph.nodeList[atoi(index) - 1], graph.nodeList[atoi(neighbor) - 1]);
+						neighbor = strtok_s(NULL, delim, &context);
+					} while (neighbor);
 				}
 			}
 		}

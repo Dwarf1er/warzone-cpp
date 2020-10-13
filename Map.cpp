@@ -54,7 +54,7 @@ Territory* Map::createNode() {
 //Add edge methods
 int Map::addEdge(Territory* u, Territory* v) {
 	listOfNeightbors[u->getID()].push_back(v);
-	listOfNeightbors[v->getID()].push_back(u);
+	//listOfNeightbors[v->getID()].push_back(u);
 	return 0;
 }
 
@@ -130,23 +130,32 @@ int Map::fillNodes() {
 	addToContinent(2, nodeList[10]);
 
 	//For America
+	addEdge(nodeList[1], nodeList[0]);
 	addEdge(nodeList[0], nodeList[1]);
+	addEdge(nodeList[3], nodeList[0]);
 	addEdge(nodeList[0], nodeList[3]);
+	addEdge(nodeList[2], nodeList[1]);
 	addEdge(nodeList[1], nodeList[2]);
+	addEdge(nodeList[4], nodeList[1]);
 	addEdge(nodeList[1], nodeList[4]);
+	addEdge(nodeList[5], nodeList[2]);
 	addEdge(nodeList[2], nodeList[5]);
 	addEdge(nodeList[3], nodeList[4]);
+	addEdge(nodeList[4], nodeList[3]);
+	addEdge(nodeList[6], nodeList[3]);
 	addEdge(nodeList[3], nodeList[6]);
 
 	//For Australia
+	addEdge(nodeList[8], nodeList[5]);
 	addEdge(nodeList[5], nodeList[8]);
+	addEdge(nodeList[8], nodeList[7]);
 	addEdge(nodeList[7], nodeList[8]);
+	addEdge(nodeList[9], nodeList[8]);
 	addEdge(nodeList[8], nodeList[9]);
 
 	//For bobland
-	addEdge(nodeList[9], nodeList[10]);
 	addEdge(nodeList[10], nodeList[9]);
-
+	addEdge(nodeList[9], nodeList[10]);
 
 	return 0;
 }
