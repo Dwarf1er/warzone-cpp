@@ -152,6 +152,7 @@
     <ClCompile Include="WarzoneDriver.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Cards.h" />
     <ClInclude Include="CardsDriver.h" />
     <ClInclude Include="MapDriver.h" />
     <ClInclude Include="MapLoader.h" />

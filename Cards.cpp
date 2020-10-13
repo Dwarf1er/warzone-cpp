@@ -1,6 +1,6 @@
 #include "Cards.h"
+#include <ctime>
 #include "Orders.h"
-
 #include <iostream>
 
 Card::Card(CardType card_type) {
@@ -100,6 +100,7 @@ vector<Card*> Deck::get_cards_in_Deck()
 
 vector<Card*> Deck::get_deck()
 {
+	//return cards that haven't been drawn
 	vector<Card*> deck;
 
 	for (int i = 0; i < cards.size(); i++)
@@ -127,7 +128,7 @@ void Deck::draw()
 	int random = (1 + rand()) % deck.size();
 
 	deck.at(random)->set_drawn(true);
-	cout << "draw card\n";
+	cout << "draw card " + deck.at(random)->get_card_type_name() + "\n";
 }
 
 Deck::~Deck()
@@ -153,6 +154,7 @@ Hand& Hand::operator=(const Hand&)
 
 vector<Card*> Hand::get_cards_in_hand()
 {
+	//return drawn cards
 	vector<Card*> hand;
 
 	for (int i = 0; i < cards.size(); i++)

@@ -1,9 +1,9 @@
 #pragma once
 #include <ostream>
 #include <vector>
-#include <ctime>
 using std::vector;
 using std::ostream;
+using std::istream;
 
 enum /*class*/ CardType {
 	SPY, BOMB, REINFORCEMENT, BLOCKADE, AIRLIFT, DIPLOMACY
@@ -18,6 +18,8 @@ public:
 	Card(const Card&);
 	Card& operator=(const Card&);
 	friend ostream& operator<<(ostream&, const Card&);
+	friend istream& operator>>(istream& in, Card& card);
+
 
 	CardType get_card_type();
 	std::string get_card_type_name();
@@ -33,6 +35,7 @@ public:
 	Deck(const Deck&);
 	Deck& operator=(const Deck&);
 	friend ostream& operator<<(ostream&, const Deck&);
+	friend istream& operator>>(istream& in, Deck& deck);
 	Deck(vector<Card>);
 	vector<Card*> get_cards_in_Deck();
 	vector<Card*> get_deck();
@@ -47,6 +50,7 @@ public:
 	Hand(Deck*);
 	Hand(const Hand&);
 	friend ostream& operator<<(ostream&, const Hand&);
+	friend istream& operator>>(istream& in, Hand& hand);
 	Hand& operator=(const Hand&);
 	vector<Card*> get_cards_in_hand();
 };
