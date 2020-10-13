@@ -197,27 +197,6 @@ void MapLoader::loadmap() {
 		}
 	}
 	if (continentCheck == true && countryCheck == true && borderCheck == true) {
-		std::vector<Territory*> visited;
-		int territorySize = graph.territorySizeCheck();
-
-		graph.DFS(graph.listOfContinent[0]->territories[0], &visited);
-
-		//If needed uncomment, it checks all visited nodes
-		/*for (int i = 0; i < visited.size(); i++) {
-			std::cout << visited[i]->getID() << std::endl;
-		}*/
-
-		//Checking if the visited nodes = territory size
-		if (visited.size() == territorySize) {
-			printf("The graph is connected \n");
-		}
-
-		//Checks for connected subgraph
-		for (int i = 0; i < graph.listOfContinent.size(); i++) {
-			std::vector<Territory*> bde;
-			graph.subgraphCheck(i, &bde);
-		}
-
 		//Call method to check for duplicate territories 
 		graph.validate();
 		printf("\n");
