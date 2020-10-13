@@ -92,7 +92,7 @@ ostream& operator<<(ostream& out, const Player& p) {
 		for (Orders* o : p.playerOrderList->getOList()) {
 			out << "Orders: " << *o << endl;
 		}
-		out << "Orders should be printing here";
+		out << "Orders should be printing here\n";
 	}
 
 	else {
