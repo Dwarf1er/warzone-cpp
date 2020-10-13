@@ -97,7 +97,7 @@ void Advance::execute() {
 	printf("Advance: \n");
 	//cout << "The army has advanced to the targeted adjacent territory: " << getTerritory2() << endl;
 
-	cout << "\n The army will advance from " << getTerritory1() << "to " << getTerritory2() << endl;
+	cout << "\nThe army will advance from " << getTerritory1() << "to " << getTerritory2() << endl;
 	if (validate() == true) {
 		cout << "The advancement order has been validated, proceeding to execute: ..." << endl;
 		printf("Advance ok\n");
@@ -166,10 +166,10 @@ bool Bomb::validate() {
 }
 void Bomb::execute() {
 	printf("Bomb: ");
-	cout << "\n The bomb will be launched on the the following territory: " << getBombTargetTerritory() << endl;
+	cout << "\nThe bomb will be launched on the the following territory: " << getBombTargetTerritory() << endl;
 	if (validate() == true) {
 		//printf("Bomb ok\n");
-		cout << "\nThe bomb has been Launched. Half enemy forces have been wiped out\n";
+		cout << "The bomb has been Launched. Half enemy forces have been wiped out\n";
 	}
 	else {
 		cout << "The order is not validated yet....standing by." << endl;
@@ -221,10 +221,10 @@ bool Blockade::validate() {
 }
 void Blockade::execute() {
 	printf("Blockade: \n");
-	cout << "\n The blockade will be imposed on the following territory: " << getBlockedTerritory() << endl;
+	cout << "\nThe blockade will be imposed on the following territory: " << getBlockedTerritory() << endl;
 
 	if (validate()) {
-		cout << "Players army has been Tripled and the current territory is now neutral";
+		cout << "Players army has been Tripled and the current territory is now neutral\n";
 
 	}
 	else {
@@ -267,9 +267,9 @@ bool Airlift::validate()
 }
 void Airlift::execute() {
 	printf("Airlift: \n");
-	cout << "\n The army of " << getAirArmy() << " will be airlifted from: " << getInitTerritory() << "to " << getTargetTerritory() << endl;
+	cout << "\nThe army of " << getAirArmy() << " will be airlifted from: " << getInitTerritory() << "to " << getTargetTerritory() << endl;
 	if (validate()) {
-		cout << "Your army has been airlifted successfully";
+		cout << "Your army has been airlifted successfully\n";
 	}
 	else {
 		cout << "The order is not validated yet....standing by." << endl;
@@ -318,9 +318,9 @@ bool Negotiate::validate() {
 void Negotiate::execute() {
 	printf("Negotiate: \n");
 	//cout << "\n Negotiate prevents attacks from " << getNegotiatePlayer() << "until the end of turn" << endl;
-	cout << "\n Negotiate prevents attacks from TEMP until the end of turn" << endl;
+	cout << "\nNegotiate prevents attacks from TEMP until the end of turn" << endl;
 	if (validate()) {
-		cout << "Negotiation is successful, the attack was halted. ";
+		cout << "Negotiation is successful, the attack was halted.\n";
 	}
 	else {
 		cout << "The order is not validated yet....standing by." << endl;

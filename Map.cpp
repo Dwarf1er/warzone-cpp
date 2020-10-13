@@ -29,6 +29,7 @@ std::ostream& operator<<(std::ostream& out, const Territory& t) {
 	return out;
 }
 
+
 std::istream& operator>>(std::istream& in, Territory& t) {
 	std::cout << "Enter territory ID: ";
 	in >> t.ID;
@@ -73,12 +74,11 @@ void Map::printBoard() {
 	Continent continent;
 	printf("Continents and its countries: \n");
 
-	for (int y = 0; y < listOfContinent.size(); y++) {
-		std::cout << listOfContinent[y]->name << "\t";
+	for (int i = 0; i < listOfContinent.size(); i++) {
+		std::cout << listOfContinent[i]->name << "\t";
 
-		int z = 0;
-		for (z; z < listOfContinent[y]->territories.size(); z++) {
-			printf("-> %d ", listOfContinent[y]->territories[z]->getID());
+		for (int j = 0; j < listOfContinent[i]->territories.size(); j++) {
+			printf("-> %d ", listOfContinent[i]->territories[j]->getID());
 		}
 		printf("\n");
 	}
@@ -86,7 +86,6 @@ void Map::printBoard() {
 	printf("\n");
 
 	//Print specifically for america and its adjacent 
-	//printf("Continent: America \n");
 	for (int i = 0; i < listOfContinent.size(); i++) {
 		if (listOfContinent[i]->name == "America") {
 			for (int j = 0; j < listOfContinent[i]->territories.size(); j++)
@@ -111,7 +110,7 @@ int Map::fillNodes() {
 
 	createContinent("America", 6);			//0
 	createContinent("Australia", 3);		//1
-	createContinent("Bobland", 2);
+	createContinent("Bobland", 2);			//2
 
 	//Add to America
 	addToContinent(0, nodeList[0]);
@@ -171,6 +170,7 @@ int Map::addToContinent(int index, Territory* u) {
 	return 0;
 }
 
+//Check the size of territory of a continent
 int Map::territorySizeCheck() {
 	int nodeCounter = 0;
 
@@ -190,7 +190,7 @@ bool Map::isIn(Territory* currentNode, std::vector<Territory*>* nodeVec) {
 	return false;
 }
 
-//Traversal Using DFS
+//Traversal Using DFS to compare current node to the nodeVec
 int Map::DFS(Territory* _currentNode, std::vector<Territory*>* _nodeVec) {
 	if (isIn(_currentNode, _nodeVec)) {
 		return false;
@@ -206,6 +206,7 @@ int Map::DFS(Territory* _currentNode, std::vector<Territory*>* _nodeVec) {
 
 //Duplicate territories check
 int Map::duplicateCheck() {
+
 	printf("\nUnique territories check:\n");
 	for (int i = 0; i < listOfContinent.size() - 1; i++) {
 		for (int j = 0; j < listOfContinent[i]->territories.size(); j++) {
@@ -231,14 +232,18 @@ int Map::validate() {
 	int territorySize = territorySizeCheck();
 
 	DFS(listOfContinent[0]->territories[0], &visited);
-	//std::cout << visited.size() << std::endl;
 
+	//If needed uncomment, it checks all visited nodes
 	/*for (int i = 0; i < visited.size(); i++) {
 		std::cout << visited[i]->getID() << std::endl;
 	}*/
+
+	//Checking if the visited nodes = territory size
 	if (visited.size() == territorySize) {
 		printf("The graph is connected \n");
 	}
+
+	//Checks for connected subgraph
 	for (int i = 0; i < listOfContinent.size(); i++) {
 		std::vector<Territory*> bde;
 		subgraphCheck(i, &bde);
@@ -251,6 +256,7 @@ int Map::validate() {
 	return 0;
 }
 
+//Checking for connectivity for subgraph
 int Map::subgraphCheck(int continentIndex, std::vector<Territory*>* vec) {
 	for (int i = 0; i < listOfContinent.size(); i++) {
 		if (i != continentIndex) {

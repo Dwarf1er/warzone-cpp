@@ -12,16 +12,18 @@
 #include "OrdersDriver.h"
 #include "CardsDriver.h"
 
+//Main method that contains all part to run at once
 int main()
 {
     // Part 1 - Map
     printf("======================================= Part 1 =======================================\n");
-    MapDriver map;
+    MapDriver mapDriver;
     printf("======================================= Part 1 End =======================================\n");
 
     // Part 2 - MapLoader
     printf("======================================= Part 2 =======================================\n");
-    MapLoaderDriver mapLoader;
+    MapLoaderDriver mapLoaderDriver;
+
     printf("======================================= Part 2 End =======================================\n");
 
     // Part 3 - Player

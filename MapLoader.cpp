@@ -14,8 +14,10 @@ MapLoader::MapLoader(){
 MapLoader::~MapLoader(){
 }
 
-
+//Method to load map from a .map file
 void MapLoader::loadmap() {
+
+	//Get the file name with extension 
 	fstream infile;
 	string map;
 	cout << "Enter map name with extension: ";
@@ -29,21 +31,20 @@ void MapLoader::loadmap() {
 	int x;
 
 	Map graph;
-	bool continentcheck = false;
-	bool countrycheck = false;
-	bool bordercheck = false;
-	bool mapcheck = false;
+	bool continentCheck = false;
+	bool countryCheck = false;
+	bool borderCheck = false;
+	bool mapCheck = false;
 
 	graph.initList();
 
-	// extracting words from the file 
+	// Extracting words from the file 
 	int error = 0;
 	while (infile >> s)
 	{
 		int more = 0;
-
 		if (!s.compare("[continents]")) {
-			continentcheck = true;
+			continentCheck = true;
 			int g = 0;
 			while (check) {
 				if (g >= 100) {
@@ -68,9 +69,9 @@ void MapLoader::loadmap() {
 			}
 		}
 
-		if (continentcheck == true) {
+		if (continentCheck == true) {
 			if (!s.compare("[countries]")) {
-				countrycheck = true;
+				countryCheck = true;
 				getline(infile, s);
 				string::iterator a;
 				int add = 1;
@@ -80,7 +81,8 @@ void MapLoader::loadmap() {
 						break;
 					}
 
-					infile >> s;   //gets the country number
+					//Gets Country number
+					infile >> s;   
 					if (!s.compare("[borders]")) {
 						break;
 					}
@@ -97,7 +99,8 @@ void MapLoader::loadmap() {
 						break;
 					}
 
-					infile >> x;   //gets the conitnent it belongs to
+					//Gets the continent it belongs to
+					infile >> x;   
 					int num2 = x;
 
 					try {
@@ -129,13 +132,13 @@ void MapLoader::loadmap() {
 		}
 
 		if (!s.compare("[borders]")) {
-			if (countrycheck == true) {
+			if (countryCheck == true) {
 				string::iterator a;
 				string::iterator first;
 
 				getline(infile, s);
 
-				bordercheck = true;
+				borderCheck = true;
 				int u = 0;
 				while (check) {
 
@@ -169,30 +172,55 @@ void MapLoader::loadmap() {
 			break;
 		}
 
-		//check errors
-		if (mapcheck) {
+		//Checks for error in the file
+		if (mapCheck) {
 			cout << "INVALID FORMAT" << endl;
 			break;
 		}
 	}
 
+	//Different section of errors
 	for (int i = 0; i < 1; i++) {
-		if (continentcheck == false) {
+		if (continentCheck == false) {
 			cout << "Error1: continent section invalid" << endl;
 			break;
 		}
 
-		if (countrycheck == false) {
+		if (countryCheck == false) {
 			cout << "Error2: country section invald" << endl;
 			break;
 		}
 
-		if (bordercheck == false) {
+		if (borderCheck == false) {
 			cout << "Error3: border section invalid" << endl;
 			break;
 		}
 	}
-	if (continentcheck == true && countrycheck == true && bordercheck == true) {
+	if (continentCheck == true && countryCheck == true && borderCheck == true) {
+		std::vector<Territory*> visited;
+		int territorySize = graph.territorySizeCheck();
+
+		graph.DFS(graph.listOfContinent[0]->territories[0], &visited);
+
+		//If needed uncomment, it checks all visited nodes
+		/*for (int i = 0; i < visited.size(); i++) {
+			std::cout << visited[i]->getID() << std::endl;
+		}*/
+
+		//Checking if the visited nodes = territory size
+		if (visited.size() == territorySize) {
+			printf("The graph is connected \n");
+		}
+
+		//Checks for connected subgraph
+		for (int i = 0; i < graph.listOfContinent.size(); i++) {
+			std::vector<Territory*> bde;
+			graph.subgraphCheck(i, &bde);
+		}
+
+		//Call method to check for duplicate territories 
+		graph.validate();
+		printf("\n");
 		graph.printBoard();
 	}
 	infile.close();

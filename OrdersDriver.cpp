@@ -17,6 +17,7 @@ OrdersDriver::OrdersDriver()
     oL.addOrders(aV);
     oL.addOrders(dP);
 
+    printf("============================= Current Order List =============================\n");
     for (int i = 0; i < 6; i++) {
         printf("%d \t", i);
         oL.getOList()[i]->execute();
@@ -24,6 +25,7 @@ OrdersDriver::OrdersDriver()
 
     printf("\n");
 
+    printf("============================= Using move() List =============================\n");
     oL.move(0, 3);
     for (int i = 0; i < 6; i++) {
         printf("%d \t", i);
@@ -32,6 +34,7 @@ OrdersDriver::OrdersDriver()
 
     printf("\n");
 
+    printf("============================= Using remove() List =============================\n");
     oL.remove(0);
     for (int i = 0; i < 5; i++) {
         printf("%d \t", i);
