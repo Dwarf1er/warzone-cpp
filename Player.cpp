@@ -92,7 +92,7 @@ ostream& operator<<(ostream& out, const Player& p) {
 		for (Orders* o : p.playerOrderList->getOList()) {
 			out << "Orders: " << *o << endl;
 		}
-		out << "Orders should be printing here";
+		out << "Orders should be printing here\n";
 	}
 
 	else {
@@ -100,7 +100,7 @@ ostream& operator<<(ostream& out, const Player& p) {
 	}
 
 	if (p.playerCards != nullptr) {
-		for (Card* c : p.playerCards->get_hand()) {
+		for (Card* c : p.playerCards->get_cards_in_hand()) {
 			out << "\nCard: " << *c << endl;
 		}
 	}
