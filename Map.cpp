@@ -15,6 +15,12 @@ Territory::Territory(int _ID) {
 
 Territory::~Territory() {}
 
+//Copy constructor 
+Territory::Territory(const Territory& t1) {
+	std::cout << "Copy constructor called" << std::endl;
+	ID = t1.ID;
+}
+
 //Assignment operator overloading
 void Territory::operator=(const Territory& t) {
 	ID = t.ID;
@@ -276,7 +282,7 @@ int Map::subgraphCheck(int continentIndex, std::vector<Territory*>* vec) {
 	}
 	DFS(listOfContinent[continentIndex]->territories[0], vec);
 	if (vec->size() == territorySizeCheck()) {
-		std::cout << "\n" <<listOfContinent[continentIndex]->name << ": is a connected subgraph" << std::endl;
+		std::cout << "\n" << listOfContinent[continentIndex]->name << ": is a connected subgraph" << std::endl;
 	}
 	return 0;
 }

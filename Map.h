@@ -15,13 +15,15 @@ public:
 	int getID() { return ID; }
 	int getNumberOfArmies() { return numberOfArmies; }
 	void setNumberOfArmies(int num) { numberOfArmies = num; }
+	//Copy Constructor 
+	Territory(const Territory& t1);
 	friend std::ostream& operator<<(std::ostream& out, const Territory& t);
 	friend std::istream& operator>>(std::istream& in, Territory& t);
 	void operator=(const Territory& t);
 
 private:
 	int ID;
-	int numberOfArmies;
+	int numberOfArmies=0;
 };
 
 struct Continent {
@@ -50,10 +52,10 @@ public:
 	int addToContinent(int index, Territory* u);
 	int validate();
 	int duplicateCheck();
-	int DFS(Territory* currentNode, std::vector<Territory*> *_nodeVec);
-	bool isIn(Territory* currentNode, std::vector<Territory*> *nodeVec);
+	int DFS(Territory* currentNode, std::vector<Territory*>* _nodeVec);
+	bool isIn(Territory* currentNode, std::vector<Territory*>* nodeVec);
 	int territorySizeCheck();
-	int subgraphCheck(int continentIndex ,std::vector<Territory*>* vec);
+	int subgraphCheck(int continentIndex, std::vector<Territory*>* vec);
 
 private:
 	int counter;
