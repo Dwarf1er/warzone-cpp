@@ -1,6 +1,5 @@
 #include <iostream>
 #include "MapLoader.h"
-#include <string>
 #include <fstream>
 #include <sstream>
 #include <direct.h>
@@ -15,13 +14,17 @@ MapLoader::~MapLoader(){
 }
 
 //Method to load map from a .map file
-void MapLoader::loadmap() {
+void MapLoader::loadmap(string file) {
 
 	//Get the file name with extension 
 	fstream infile;
+	
 	string map;
-	cout << "Enter map name with extension: ";
-	cin >> map;
+	map = file;
+	//cout << "Enter map name with extension: ";
+	cout << "Loading map: " << map << endl;
+	printf("\n");
+	
 	infile.open(map);
 
 	string s;

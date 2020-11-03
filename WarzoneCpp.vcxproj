@@ -116,6 +116,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -141,6 +142,7 @@
   <ItemGroup>
     <ClCompile Include="Cards.cpp" />
     <ClCompile Include="CardsDriver.cpp" />
+    <ClCompile Include="Game.cpp" />
     <ClCompile Include="Map.cpp" />
     <ClCompile Include="MapDriver.cpp" />
     <ClCompile Include="MapLoader.cpp" />
@@ -154,6 +156,7 @@
   <ItemGroup>
     <ClInclude Include="Cards.h" />
     <ClInclude Include="CardsDriver.h" />
+    <ClInclude Include="Game.h" />
     <ClInclude Include="MapDriver.h" />
     <ClInclude Include="MapLoader.h" />
     <ClInclude Include="Map.h" />
