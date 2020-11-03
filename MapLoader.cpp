@@ -15,14 +15,16 @@ MapLoader::~MapLoader(){
 }
 
 //Method to load map from a .map file
-void MapLoader::loadmap() {
+void MapLoader::loadmap(std::string mapName) {
 
 	//Get the file name with extension 
 	fstream infile;
+	/*
 	string map;
 	cout << "Enter map name with extension: ";
 	cin >> map;
-	infile.open(map);
+	*/
+	infile.open(mapName);
 
 	string s;
 	int cont = 0;

@@ -5,10 +5,7 @@
 #include "PlayerDriver.h"
 #include "OrdersDriver.h"
 #include "CardsDriver.h"
-
-//Test To check file in directory 
-#include <filesystem>
-namespace fs = std::filesystem;
+#include "Game.h"
 
 //Main method that contains all part to run at once
 int main()
@@ -43,13 +40,8 @@ int main()
 
 	//Part 1 - Game Start 
 	printf("======================================= Part 1  =======================================\n");
-	std::string path = "../WarzoneCpp";
-	for (const auto& entry : fs::directory_iterator(path)) {
-		if (entry.path().extension() == ".map") {
-			std::cout << entry.path() << std::endl;
-		}
-	}
-
+	Game games;
+	games.initGame();
 	printf("======================================= Part 1 end =======================================\n");
 
 	printf("hi");
