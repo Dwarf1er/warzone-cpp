@@ -20,7 +20,7 @@ void Game::getListOfMap(){
 	std::string path = "../WarzoneCpp";
 	for (const auto& entry : fs::directory_iterator(path)) {
 		if (entry.path().extension() == ".map") {
-			std::cout << i << ": " << entry.path().filename() << std::endl;
+			std::cout << i+1 << ": " << entry.path().filename() << std::endl;
 			listOfFile.push_back(entry.path().filename().string());
 			i++;
 		}
@@ -37,7 +37,7 @@ void Game::initGame(){
 	while (true) {
 		std::cout << "Which file would you like to load ? " << std::endl;
 		std::cin >> userFileInput;
-		maploaders.loadmap(listOfFile[userFileInput]);
+		maploaders.loadmap(listOfFile[userFileInput-1]);
 	}
 }
 
