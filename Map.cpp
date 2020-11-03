@@ -23,6 +23,7 @@ Territory::Territory(const Territory& t1) {
 
 //Assignment operator overloading
 void Territory::operator=(const Territory& t) {
+	std::cout << "Assignment operator called" << std::endl;
 	ID = t.ID;
 	numberOfArmies = t.numberOfArmies;
 }
