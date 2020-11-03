@@ -5,7 +5,7 @@
 #include "PlayerDriver.h"
 #include "OrdersDriver.h"
 #include "CardsDriver.h"
-#include "Game.h"
+#include "GameEngine.h"
 
 //Main method that contains all part to run at once
 int main()
@@ -40,7 +40,7 @@ int main()
 
 	//Part 1 - Game Start 
 	printf("======================================= Part 1  =======================================\n");
-	Game games;
+	GameEngine games;
 	games.initGame();
 	printf("======================================= Part 1 end =======================================\n");
 

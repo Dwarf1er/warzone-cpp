@@ -6,10 +6,10 @@
 
 #include <iostream>
 
-class Game {
+class GameEngine {
 	public:
-		Game();
-		~Game();
+		GameEngine();
+		~GameEngine();
 		void initGame();
 		void getListOfMap();
 
