@@ -16,8 +16,8 @@ class Game {
 	private:
 		Player* currentPlayer;
 		int numOfPlayer;
-		std::vector<Player> playersVec;
-		std::vector<Player> playerOrder;
+		std::vector<Player*> playersVec;
+		std::vector<Player*> playerOrder;
 		std::vector<std::string> listOfFile;
 };
 

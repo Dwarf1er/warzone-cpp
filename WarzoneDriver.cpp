@@ -44,7 +44,6 @@ int main()
 	games.initGame();
 	printf("======================================= Part 1 end =======================================\n");
 
-	printf("hi");
 	auto result = _getch();
 	return 0;
 }

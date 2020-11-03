@@ -6,7 +6,7 @@ class MapLoader {
 public:
 	MapLoader();
 	~MapLoader();
-	void loadmap(std::string mapName);
+	void loadmap(std::string file);
 
 private:
 };
