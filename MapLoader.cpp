@@ -22,7 +22,7 @@ void MapLoader::loadmap(string file) {
 	string map;
 	map = file;
 	//cout << "Enter map name with extension: ";
-	cout << "Loading map: " << map << endl;
+	cout << "Loading map..... " << map << endl;
 	printf("\n");
 	
 	infile.open(map);
