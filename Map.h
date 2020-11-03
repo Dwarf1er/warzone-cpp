@@ -17,9 +17,11 @@ public:
 	void setNumberOfArmies(int num) { numberOfArmies = num; }
 	//Copy Constructor 
 	Territory(const Territory& t1);
+	//Assignment operator
+	void operator=(const Territory& t);
 	friend std::ostream& operator<<(std::ostream& out, const Territory& t);
 	friend std::istream& operator>>(std::istream& in, Territory& t);
-	void operator=(const Territory& t);
+	
 
 private:
 	int ID;
