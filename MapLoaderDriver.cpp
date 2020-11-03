@@ -9,8 +9,8 @@
 
 MapLoaderDriver::MapLoaderDriver()
 {
-	MapLoader mapLoad;
-	mapLoad.loadmap();
+	/*MapLoader mapLoad;
+	mapLoad.loadmap();*/
 }
 
 MapLoaderDriver::~MapLoaderDriver()

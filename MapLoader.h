@@ -1,7 +1,7 @@
 #pragma once
 #ifndef MapLoader_H
 #define MapLoader_H
-
+#include <string>
 class MapLoader {
 public:
 	MapLoader();

@@ -34,10 +34,6 @@ void Game::initGame(){
 	getListOfMap();
 	printf("\n");
 
-	for (int i = 0; i < listOfFile.size(); i++) {
-		std::cout << listOfFile[i] << std::endl;
-	}
-
 	while (true) {
 		std::cout << "Which file would you like to load ? " << std::endl;
 		std::cin >> userFileInput;
