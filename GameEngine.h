@@ -16,6 +16,7 @@ class GameEngine {
 	private:
 		Player* currentPlayer;
 		int numOfPlayer;
+		int observerOption;
 		std::vector<Player*> playersVec;
 		std::vector<Player*> playerOrder;
 		std::vector<std::string> listOfFile;

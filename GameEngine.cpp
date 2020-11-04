@@ -55,6 +55,7 @@ void GameEngine::initGame(){
 	while (true){
 		std::cout << "Please enter the number of player (2-5)" << std::endl;
 		std::cin >> numOfPlayer;
+		printf("Creating Players.....");
 		printf("\n");
 
 		if (numOfPlayer < 2 || numOfPlayer > 5) {
@@ -82,7 +83,29 @@ void GameEngine::initGame(){
 		p->setPlayerCards(playerCard);
 		p->setPlayerOrders(playerOrder);
 		std::cout << *p << "Number Of Armies:" << p->getPlayerArmies() << std::endl;
-		std::cout << numOfPlayer << std::endl;
+	}
+
+	//Options for observer 
+	printf("\n");
+	printf("Observer Options: \n");
+	printf("Press 1 to open or Press 2 to close it \n");
+	
+	while (true) {
+		cin >> observerOption;
+		if (observerOption == 1) {
+			printf("Observer turned on!\n");
+			break;
+		}
+		if (observerOption == 2) {
+			printf("Observer turned off!\n");
+			break;
+		}
+
+		if (observerOption != (1 || 2)) {
+			std::cin.clear();
+			std::cin.ignore(1000, '\n');
+			printf("Please enter the number 1 or 2\n");
+		}
 	}
 }
 
