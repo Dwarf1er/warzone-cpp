@@ -37,6 +37,7 @@ public:
 	void setPlayerCards(Hand* playerCards_);
 	void setPlayerOrders(Orders* playerOrderList_);
 	void setPlayerArmies(int playerArmies_);
+	void setPlayerID(int playerID_);
 
 	//operator overloading
 		//assignment operator overloading
