@@ -82,7 +82,8 @@ void GameEngine::initGame(){
 		p->setPlayerTerritories(playerTerritories);
 		p->setPlayerCards(playerCard);
 		p->setPlayerOrders(playerOrder);
-		std::cout << *p << "Number Of Armies:" << p->getPlayerArmies() << std::endl;
+		std::cout << *p << "Number Of Armies: " << p->getPlayerArmies() << std::endl;
+		std::cout << "Player Cards: " << *p->getPlayerCards() << std::endl;
 	}
 
 	//Options for observer 
@@ -107,5 +108,18 @@ void GameEngine::initGame(){
 			printf("Please enter the number 1 or 2\n");
 		}
 	}
+
+	//Creating the cards and its deck 
+	printf("\n");
+	vector<Card> cards; 
+	cards.push_back(Card(CardType::SPY));
+	cards.push_back(Card(CardType::BOMB));
+	cards.push_back(Card(CardType::REINFORCEMENT));
+	cards.push_back(Card(CardType::BLOCKADE));
+	cards.push_back(Card(CardType::AIRLIFT));
+	cards.push_back(Card(CardType::DIPLOMACY));
+	Deck* deck = new Deck(cards);
+	std::cout << *deck << std::endl;
+
 }
 
