@@ -1,6 +1,6 @@
 #pragma once
-#ifndef Game_H
-#define Game_H
+#ifndef GameEngine_H
+#define GameEngine_H
 #include "Player.h"
 #include "Map.h"
 

@@ -34,10 +34,10 @@ void MapLoader::loadmap(string file) {
 	int x;
 
 	Map graph;
-	bool continentCheck = false;
-	bool countryCheck = false;
-	bool borderCheck = false;
-	bool mapCheck = false;
+	continentCheck = false;
+	countryCheck = false;
+	borderCheck = false;
+	mapCheck = false;
 
 	graph.initList();
 
@@ -189,17 +189,17 @@ void MapLoader::loadmap(string file) {
 	//Different section of errors
 	for (int i = 0; i < 1; i++) {
 		if (continentCheck == false) {
-			cout << "Error1: continent section invalid" << endl;
+			cout << "Error 1: continent section invalid" << endl;
 			break;
 		}
 
 		if (countryCheck == false) {
-			cout << "Error2: country section invald" << endl;
+			cout << "Error 2: country section invalid" << endl;
 			break;
 		}
 
 		if (borderCheck == false) {
-			cout << "Error3: border section invalid" << endl;
+			cout << "Error 3: border section invalid" << endl;
 			break;
 		}
 	}
@@ -211,3 +211,9 @@ void MapLoader::loadmap(string file) {
 	}
 	infile.close();
 }
+
+bool MapLoader::getContinentCheck()
+{
+	return continentCheck;
+}
+

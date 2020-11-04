@@ -45,10 +45,18 @@ void GameEngine::initGame() {
 			std::cin.clear();
 			std::cin.ignore(1000, '\n');
 			std::cout << "Incorrect input. Please select among the selection number" << std::endl;
-		}
 
-		maploaders.loadmap(listOfFile[userFileInput - 1]);
-		break;
+		}
+		while (true) {
+			if (maploaders.getContinentCheck() == false) {
+				printf("Please change choice \n");
+				break;
+			}
+			else {
+				maploaders.loadmap(listOfFile[userFileInput - 1]);
+				break;
+			}
+		}
 	}
 
 	//Ask the user for the number of player to play	
