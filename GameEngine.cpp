@@ -1,5 +1,7 @@
 #include "GameEngine.h"
 #include "MapLoader.h"
+#include "Player.h"
+#include "Cards.h"
 
 //Test To check file in directory 
 #include <filesystem>
@@ -46,13 +48,41 @@ void GameEngine::initGame(){
 		
 		std::cin >> userFileInput;
 		maploaders.loadmap(listOfFile[userFileInput-1]);
+		break;
 	}
 
-	//Create number of player entered by user
-	std::cout << "Please enter the number of player (2-5)" << std::endl;
-	std::cin >> numOfPlayer;
+	//Ask the user for the number of player to play	
 	while (true){
+		std::cout << "Please enter the number of player (2-5)" << std::endl;
+		std::cin >> numOfPlayer;
+		printf("\n");
 
+		if (numOfPlayer < 2 || numOfPlayer > 5) {
+			std::cin.clear();
+			std::cin.ignore(1000, '\n');
+			std::cout << "Invalid number of players. Please enter between 2-5 players." << std::endl;
+		}
+		else {
+			break;
+		}
+	}
+
+	//Creating the players based on the number of player from user
+	for (int i = 0; i < numOfPlayer; i++) {
+		vector<Territory*> playerTerritories;
+		Territory* t = new Territory();
+		Orders* playerOrder = new Orders();
+		Deck* deck = new Deck();
+		deck->push_card(CardType::SPY);
+		Hand* playerCard = new Hand(deck);
+		Player* p = new Player();
+		p->setPlayerID(i + 1);
+		p->setPlayerArmies(5);
+		p->setPlayerTerritories(playerTerritories);
+		p->setPlayerCards(playerCard);
+		p->setPlayerOrders(playerOrder);
+		std::cout << *p << "Number Of Armies:" << p->getPlayerArmies() << std::endl;
+		std::cout << numOfPlayer << std::endl;
 	}
 }
 

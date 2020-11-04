@@ -70,6 +70,10 @@ void Player::setPlayerArmies(int playerArmies_) {
 	playerArmies = playerArmies_;
 }
 
+void Player::setPlayerID(int playerID_) {
+	playerID = playerID_;
+}
+
 //operator overloading
 	//assignment operator overloading
 void Player::operator=(const Player& p) {
