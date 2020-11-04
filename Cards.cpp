@@ -174,7 +174,7 @@ ostream& operator<<(ostream& os, const Card& card)
 
 ostream& operator<<(ostream& os, const Deck& deck)
 {
-	os << "cards in deck=[";
+	os << "Cards in deck=[";
 	for (int i = 0; i < deck.cards.size(); i++)
 	{
 		os << deck.cards.at(i)->get_card_type_name() << (i == deck.cards.size() - 1 ? "" : ",");
