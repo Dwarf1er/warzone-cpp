@@ -2,10 +2,16 @@
 //
 
 #include <iostream>
+#include "CardsDriver.h"
+
 
 int main()
 {
     std::cout << "Hello World!\n";
+
+    CardsDriver* cards_driver = new CardsDriver();
+    cards_driver->driver();
+    delete cards_driver;
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu

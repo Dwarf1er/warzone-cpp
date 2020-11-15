@@ -116,6 +116,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -139,7 +140,47 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Cards.cpp" />
+    <ClCompile Include="CardsDriver.cpp" />
+<<<<<<< HEAD
     <ClCompile Include="WarzoneCpp.cpp" />
+=======
+    <ClCompile Include="GameEngine.cpp" />
+    <ClCompile Include="Map.cpp" />
+    <ClCompile Include="MapDriver.cpp" />
+    <ClCompile Include="MapLoader.cpp" />
+    <ClCompile Include="MapLoaderDriver.cpp" />
+    <ClCompile Include="Orders.cpp" />
+    <ClCompile Include="OrdersDriver.cpp" />
+    <ClCompile Include="Player.cpp" />
+    <ClCompile Include="PlayerDriver.cpp" />
+    <ClCompile Include="WarzoneDriver.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Cards.h" />
+    <ClInclude Include="CardsDriver.h" />
+    <ClInclude Include="GameEngine.h" />
+    <ClInclude Include="MapDriver.h" />
+    <ClInclude Include="MapLoader.h" />
+    <ClInclude Include="Map.h" />
+    <ClInclude Include="MapLoaderDriver.h" />
+    <ClInclude Include="Orders.h" />
+    <ClInclude Include="OrdersDriver.h" />
+    <ClInclude Include="Player.h" />
+    <ClInclude Include="PlayerDriver.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="artic.map" />
+    <None Include="austria-hungary.map" />
+    <None Include="bad map1.map" />
+    <None Include="bad map2.map" />
+    <None Include="bad map3.map" />
+    <None Include="europe.map" />
+>>>>>>> 38c6f105adc966e4ce2c1c8ca1228fb45e276e63
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Cards.h" />
+    <ClInclude Include="CardsDriver.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
