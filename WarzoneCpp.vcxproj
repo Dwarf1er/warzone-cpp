@@ -142,6 +142,9 @@
   <ItemGroup>
     <ClCompile Include="Cards.cpp" />
     <ClCompile Include="CardsDriver.cpp" />
+<<<<<<< HEAD
+    <ClCompile Include="WarzoneCpp.cpp" />
+=======
     <ClCompile Include="GameEngine.cpp" />
     <ClCompile Include="Map.cpp" />
     <ClCompile Include="MapDriver.cpp" />
@@ -173,6 +176,11 @@
     <None Include="bad map2.map" />
     <None Include="bad map3.map" />
     <None Include="europe.map" />
+>>>>>>> 38c6f105adc966e4ce2c1c8ca1228fb45e276e63
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Cards.h" />
+    <ClInclude Include="CardsDriver.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

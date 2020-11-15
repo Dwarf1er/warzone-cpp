@@ -18,6 +18,17 @@
     <ClCompile Include="Map.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+<<<<<<< HEAD
+    <ClCompile Include="Cards.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CardsDriver.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Cards.h">
+=======
     <ClCompile Include="MapDriver.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -75,11 +86,14 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="OrdersDriver.h">
+>>>>>>> 38c6f105adc966e4ce2c1c8ca1228fb45e276e63
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="CardsDriver.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+<<<<<<< HEAD
+=======
     <ClInclude Include="Cards.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -94,5 +108,6 @@
     <None Include="bad map1.map" />
     <None Include="bad map2.map" />
     <None Include="bad map3.map" />
+>>>>>>> 38c6f105adc966e4ce2c1c8ca1228fb45e276e63
   </ItemGroup>
 </Project>
