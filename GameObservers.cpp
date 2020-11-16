@@ -1,8 +1,7 @@
 #include "GameObservers.h"
-
 #include <iostream>
 
-Observer::~Observer(){};
+Observer::~Observer(){}
 
 Observer::Observer(){};
 
@@ -51,13 +50,18 @@ PhaseObserver::~PhaseObserver()
 
 void PhaseObserver::Update()
 {
-	display();
+	if(_isEnabled) { display(); }
 }
 
 void PhaseObserver::display()
 {
 	//get variables from model
 	cout << endl; //add variables
+}
+
+void PhaseObserver::setSwitch(bool b)
+{
+	_isEnabled = b;
 }
 
 StatisticsObserver::StatisticsObserver() {}
@@ -75,11 +79,16 @@ StatisticsObserver::~StatisticsObserver()
 
 void StatisticsObserver::Update()
 {
-	display();
+	if (_isEnabled) { display(); }
 }
 
 void StatisticsObserver::display()
 {
 	//get variables from model
 	cout << endl; //add variables
+}
+
+void StatisticsObserver::setSwitch(bool b)
+{
+	_isEnabled = b;
 }

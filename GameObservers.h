@@ -7,6 +7,8 @@ class Observer
 public:
 	~Observer();
 	virtual void Update() = 0;
+	virtual void setSwitch(bool);
+	static bool _isEnabled;
 protected:
 	Observer();
 };
@@ -14,8 +16,8 @@ protected:
 class Subject
 {
 public:
-	virtual void Attach(Observer* o);
-	virtual void Detach(Observer* o);
+	virtual void Attach(Observer*);
+	virtual void Detach(Observer*);
 	virtual void Notify();
 	Subject();
 	~Subject();
@@ -27,10 +29,11 @@ class PhaseObserver : Observer
 {
 public:
 	PhaseObserver();
-	PhaseObserver(Subject* s); //parameter: Model Pointer
+	PhaseObserver(Subject*); //parameter: Model Pointer
 	~PhaseObserver();
 	void Update() override;
 	void display();
+	void setSwitch(bool) override;
 private:
 	Subject* _subject; //Model Pointer
 };
@@ -39,10 +42,11 @@ class StatisticsObserver : Observer
 {
 public:
 	StatisticsObserver();
-	StatisticsObserver(Subject* s); //parameter: Model Pointer
+	StatisticsObserver(Subject*); //parameter: Model Pointer
 	~StatisticsObserver();
 	void Update() override;
 	void display();
+	void setSwitch(bool) override;
 private:
 	Subject* _subject; //Model Pointer
 };
