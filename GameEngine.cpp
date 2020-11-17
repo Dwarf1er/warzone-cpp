@@ -2,9 +2,11 @@
 #include "MapLoader.h"
 #include "Player.h"
 #include "Cards.h"
+#include <algorithm>
 
 //Test To check file in directory 
 #include <filesystem>
+#include <random>
 namespace fs = std::filesystem;
 
 GameEngine::GameEngine() {
@@ -26,6 +28,41 @@ void GameEngine::getListOfMap() {
 			listOfFile.push_back(entry.path().filename().string());
 			i++;
 		}
+	}
+}
+
+//Start up phase, choosing the game parameters
+void GameEngine::startupPhase() {
+	int A = 0;
+	initGame();
+
+	//1 - randomize player order
+	if (!playersVec.empty())
+		std::shuffle(std::begin(playersVec), std::end(playersVec), std::default_random_engine());
+	else
+		cout << "No players are currently in the game, the initialization failed" << endl;
+
+	//2 - assign territories to players one by one in a round-robin fashion
+
+
+	//3 - giving players an initial number of armies
+	switch (numOfPlayer) {
+		case 2:
+			A = 40;
+			break;
+		case 3:
+			A = 35;
+			break;
+		case 4:
+			A = 30;
+			break;
+		case 5:
+			A = 25;
+			break;
+	}
+
+	for (int i = 0; i < numOfPlayer; i++) {
+		playersVec[i]->setPlayerArmies(A);
 	}
 }
 
