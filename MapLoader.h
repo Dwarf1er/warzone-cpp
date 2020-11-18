@@ -6,7 +6,7 @@ class MapLoader {
 public:
 	MapLoader();
 	~MapLoader();
-	void loadmap(std::string file);
+	Map loadmap(std::string file);
 	bool getContinentCheck();
 
 private:

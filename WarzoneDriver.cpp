@@ -45,6 +45,12 @@ int main()
 	games.initGame();
 	printf("======================================= Part 1 end =======================================\n");
 
+	//Part 2 - StartUp Phase
+	cout << "======================================= Part 2  =======================================" << endl;
+	StartUp startup;
+	startup.startupPhase();
+	cout << "======================================= Part 2 end =======================================" << endl;
+
 	auto result = _getch();
 	return 0;
 }

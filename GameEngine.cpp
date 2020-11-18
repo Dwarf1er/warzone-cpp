@@ -4,6 +4,8 @@
 #include "Cards.h"
 #include <algorithm>
 
+//===GameEngine Class (Part 1)===//
+
 //Test To check file in directory 
 #include <filesystem>
 #include <random>
@@ -31,39 +33,19 @@ void GameEngine::getListOfMap() {
 	}
 }
 
-//Start up phase, choosing the game parameters
-void GameEngine::startupPhase() {
-	int A = 0;
-	initGame();
+//Return the playersVec
+vector<Player*> GameEngine::getPlayers() {
+	return playersVec;
+}
 
-	//1 - randomize player order
-	if (!playersVec.empty())
-		std::shuffle(std::begin(playersVec), std::end(playersVec), std::default_random_engine());
-	else
-		cout << "No players are currently in the game, the initialization failed" << endl;
+//Return the numOfPlayer
+int GameEngine::getNumPlayers() {
+	return numOfPlayer;
+}
 
-	//2 - assign territories to players one by one in a round-robin fashion
-
-
-	//3 - giving players an initial number of armies
-	switch (numOfPlayer) {
-		case 2:
-			A = 40;
-			break;
-		case 3:
-			A = 35;
-			break;
-		case 4:
-			A = 30;
-			break;
-		case 5:
-			A = 25;
-			break;
-	}
-
-	for (int i = 0; i < numOfPlayer; i++) {
-		playersVec[i]->setPlayerArmies(A);
-	}
+//Return map
+Map* GameEngine::getMap() {
+	return map;
 }
 
 //Initialize the game 
@@ -93,7 +75,7 @@ void GameEngine::initGame() {
 				break;
 			}
 		}*/
-		maploaders.loadmap(listOfFile[userFileInput - 1]);
+		map = maploaders.loadmap(listOfFile[userFileInput - 1]);
 		break;
 	}
 
@@ -167,5 +149,99 @@ void GameEngine::initGame() {
 	Deck* deck = new Deck(cards);
 	std::cout << *deck << std::endl;
 
+}
+
+//===StartUp Class (Part 2)===//
+
+//constructors
+	//default constructor
+StartUp::StartUp(): engine() {
+}
+	//copy constructor
+StartUp::StartUp(const StartUp& s): engine(s.engine) {
+}
+
+//destructor
+StartUp::~StartUp() {
+	delete engine;
+	engine = nullptr;
+}
+
+//operator overloading
+void StartUp::operator=(const StartUp& s) {
+	engine = s.engine;
+}
+
+ostream& operator<<(ostream& out, const StartUp& s) {
+	out << "\nGame Engine: " << s.engine << endl;
+}
+
+istream& operator>>(istream& in, const StartUp& s) {
+	//in >> s.engine;
+	return in;
+}
+
+//Start up phase, choosing the game parameters
+void StartUp::startupPhase() {
+	int A = 0;
+	engine->initGame();
+
+	//1 - randomize player order
+	cout << "Randomizing the order of the players..." << endl;
+	if (!engine->getPlayers().empty()) //randomizing the order of the players inside the vector of players
+		std::shuffle(std::begin(engine->getPlayers()), std::end(engine->getPlayers()), std::default_random_engine());
+	else
+		cout << "No players are currently in the game, the initialization failed, it is not Antoine's fault, he has been asking his team to communicate since the beginning of the semester" << endl;
+
+	cout << "Player order for this game" << endl;
+	for (Player* p : engine->getPlayers()) {
+		cout << "Player" + p->getPlayerID() << endl;
+	}
+
+	//2 - assign territories to players one by one in a round-robin fashion
+	cout << "Assigning the territories randomly to all players..." << endl;
+	if (!engine->getMap()->nodeList.empty()) {
+		std::shuffle(std::begin(engine->getMap()->nodeList), std::end(engine->getMap()->nodeList), std::default_random_engine());
+		while (!engine->getMap()->nodeList.empty()) {
+			for (Player* p : engine->getPlayers()) {
+				p->getPlayerTerritories().push_back(engine->getMap()->nodeList.back());
+				engine->getMap()->nodeList.pop_back();
+			}
+		}
+
+		for (Player* p : engine->getPlayers()) {
+			cout << p << endl; //ostream overlaod for Territory does not work and it is not Antoine's fault, he asked his team to add their own ostream overloads for their classes
+		}
+	}
+	else
+		cout << "The map has loading problems, it is not Antoine's fault, he has been asking his team to communicate since the beginning of the semester" << endl;
+
+	//3 - giving players an initial number of armies
+	cout << "Giving players their initial amount of armies..." << endl;
+	switch (engine->getNumPlayers()) {
+	case 2:
+		A = 40;
+		break;
+	case 3:
+		A = 35;
+		break;
+	case 4:
+		A = 30;
+		break;
+	case 5:
+		A = 25;
+		break;
+	default:
+		cout << "Invalid player number" << endl;
+		break;
+	}
+
+	for (int i = 0; i < engine->getNumPlayers(); i++) {
+		engine->getPlayers()[i]->setPlayerArmies(A);
+	}
+
+	for (Player* p : engine->getPlayers()) {
+		cout << "Armies: " + p->getPlayerArmies() << endl;
+	}
 }
 

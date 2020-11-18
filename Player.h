@@ -31,6 +31,7 @@ public:
 	Hand* getPlayerCards(); //returns the cards owned by the player
 	OrderList* getPlayerOrders(); //returns the OrderList queued by the player
 	int getPlayerArmies(); //returns the armies of the player
+	int getPlayerID(); //returns the ID of the player
 
 	//mutators
 	void setPlayerTerritories(vector<Territory*> playerTerritories_);

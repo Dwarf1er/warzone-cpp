@@ -9,7 +9,6 @@ Player::Player() : playerTerritories(), playerCards(), playerOrderList(), player
 
 //parametrized constructor
 Player::Player(vector<Territory*> playerTerritories_, Hand* playerCards_, OrderList* playerOrders_, int playerArmies_, int playerID_) : playerTerritories(playerTerritories_), playerCards(playerCards_), playerOrderList(playerOrders_), playerArmies(playerArmies_), playerID(playerID_) {
-	//remove territories from the global list!!!!
 }
 //copy constructor
 Player::Player(const Player& p) : playerTerritories(p.playerTerritories), playerCards(new Hand(*(p.playerCards))), playerOrderList(new OrderList(*(p.playerOrderList))), playerArmies(p.playerArmies), playerID(p.playerID) {
@@ -46,6 +45,10 @@ OrderList* Player::getPlayerOrders() {
 
 int Player::getPlayerArmies() {
 	return playerArmies;
+}
+
+int Player::getPlayerID() {
+	return playerID;
 }
 
 //mutators

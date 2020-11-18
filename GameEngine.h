@@ -21,7 +21,25 @@ class GameEngine {
 		~GameEngine();
 		void initGame();
 		void getListOfMap();
-		void startupPhase();
+		vector<Player*> getPlayers();
+		int getNumPlayers();
+		Map* getMap();
+		vector<Territory*> getTerritories();
 };
 
+class StartUp {
+	private:
+		GameEngine* engine; //assignment + insertion + copy const.
+	public:
+		//Constructor(s) and destructor
+		StartUp();
+		StartUp(const StartUp& s); //copy constructor
+		~StartUp();
+
+		//required methods
+		void startupPhase();
+		void operator=(const StartUp& s); //assignment operator
+		friend ostream& operator<<(ostream& out, const StartUp& s); //ostream operator
+		friend istream& operator>>(istream& in, const StartUp& s); //istream operator
+};
 #endif
