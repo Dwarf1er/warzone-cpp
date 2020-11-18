@@ -208,7 +208,9 @@ void StartUp::startupPhase() {
 		while (!engine->getMap()->nodeList.empty()) {
 			for (Player* p : engine->getPlayers()) {
 				//p->getPlayerTerritories().push_back(engine->getMap()->nodeList.back());
-				p->setPlayerTerritories(engine->getMap()->nodeList.pop_back());
+				//p->setPlayerTerritories(engine->getMap()->nodeList);
+				vector<Territory*> territories = p->getPlayerTerritories();
+				territories.push_back(engine->getMap()->nodeList.back());
 				engine->getMap()->nodeList.pop_back();
 			}
 		}
@@ -224,15 +226,19 @@ void StartUp::startupPhase() {
 	cout << "Giving players their initial amount of armies..." << endl;
 	switch (engine->getNumPlayers()) {
 	case 2:
+		cout << "Giving the 2 players 40 armies each" << endl;
 		A = 40;
 		break;
 	case 3:
+		cout << "Giving the 3 players 35 armies each" << endl;
 		A = 35;
 		break;
 	case 4:
+		cout << "Giving the 4 players 30 armies each" << endl;
 		A = 30;
 		break;
 	case 5:
+		cout << "Giving the 5 players 25 armies each" << endl;
 		A = 25;
 		break;
 	default:
@@ -245,7 +251,7 @@ void StartUp::startupPhase() {
 	}
 
 	for (Player* p : engine->getPlayers()) {
-		cout << "Armies: " + p->getPlayerArmies() << endl;
+		cout << *p << endl;
 	}
 }
 
