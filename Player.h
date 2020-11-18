@@ -18,6 +18,7 @@ private:
 	//helper attributes
 	int playerArmies; //represent the number of armies of the player
 	int playerID; //represents the player ID's
+	
 
 public:
 	//constructor(s) and destructor
@@ -31,6 +32,7 @@ public:
 	Hand* getPlayerCards(); //returns the cards owned by the player
 	OrderList* getPlayerOrders(); //returns the OrderList queued by the player
 	int getPlayerArmies(); //returns the armies of the player
+	int getPlayerID();
 
 	//mutators
 	void setPlayerTerritories(vector<Territory*> playerTerritories_);

@@ -147,6 +147,7 @@
     <ClCompile Include="MapDriver.cpp" />
     <ClCompile Include="MapLoader.cpp" />
     <ClCompile Include="MapLoaderDriver.cpp" />
+    <ClCompile Include="Orderexe.cpp" />
     <ClCompile Include="Orders.cpp" />
     <ClCompile Include="OrdersDriver.cpp" />
     <ClCompile Include="Player.cpp" />

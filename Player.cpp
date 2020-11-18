@@ -48,6 +48,12 @@ int Player::getPlayerArmies() {
 	return playerArmies;
 }
 
+int Player::getPlayerID()
+{
+	return playerID;
+}
+
+
 //mutators
 void Player::setPlayerTerritories(vector<Territory*> playerTerritories_) {
 	for (Territory* t : playerTerritories_) {
@@ -127,6 +133,7 @@ istream& operator>>(istream& in, Player& p) {
 //required methods
 void Player::issueOrder(Orders* order) {
 	this->setPlayerOrders(order);
+	
 }
 
 vector<Territory*> Player::toDefend() {
