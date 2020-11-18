@@ -75,7 +75,7 @@ void GameEngine::initGame() {
 				break;
 			}
 		}*/
-		map = maploaders.loadmap(listOfFile[userFileInput - 1]);
+		map = &maploaders.loadmap(listOfFile[userFileInput - 1]);
 		break;
 	}
 
@@ -130,7 +130,7 @@ void GameEngine::initGame() {
 			break;
 		}
 
-		if (observerOption != (1 || 2)) {
+		if (observerOption != 1 || observerOption != 2) { //observerOption != (1 || 2)
 			std::cin.clear();
 			std::cin.ignore(1000, '\n');
 			printf("Please enter the number 1 or 2\n");

@@ -24,7 +24,6 @@ class GameEngine {
 		vector<Player*> getPlayers();
 		int getNumPlayers();
 		Map* getMap();
-		vector<Territory*> getTerritories();
 };
 
 class StartUp {
