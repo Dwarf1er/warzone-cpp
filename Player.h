@@ -18,6 +18,8 @@ private:
 	//helper attributes
 	int playerArmies; //represent the number of armies of the player
 	int playerID; //represents the player ID's
+	std::vector<Territory*> toAttackVec;
+	std::vector<Territory*> toDefendVec;
 
 public:
 	//constructor(s) and destructor
@@ -38,6 +40,8 @@ public:
 	void setPlayerOrders(Orders* playerOrderList_);
 	void setPlayerArmies(int playerArmies_);
 	void setPlayerID(int playerID_);
+	void setToAttack(Territory t);
+	void setToDefend(Territory t);
 
 	//operator overloading
 		//assignment operator overloading

@@ -15,6 +15,8 @@ GameEngine::GameEngine() {
 GameEngine::~GameEngine() {}
 
 MapLoader maploaders;
+Continent continent;
+Map* map;
 
 //Get List of maps in directory
 void GameEngine::getListOfMap() {
@@ -28,6 +30,7 @@ void GameEngine::getListOfMap() {
 		}
 	}
 }
+
 
 //Initialize the game 
 void GameEngine::initGame() {
@@ -53,7 +56,8 @@ void GameEngine::initGame() {
 				printf("Please choose another file. \n");
 			}
 		}
-		maploaders.loadmap(listOfFile[userFileInput - 1]);
+		//maploaders.loadmap(listOfFile[userFileInput - 1]);
+		map = new Map(maploaders.loadmap(listOfFile[userFileInput - 1]));
 		break;
 	}
 
@@ -131,16 +135,43 @@ void GameEngine::initGame() {
 	cards.push_back(Card(CardType::DIPLOMACY));
 	Deck* deck = new Deck(cards);
 	std::cout << *deck << std::endl;
+
+	issueOrderPhase();
 }
 
-MainGameLoop::MainGameLoop()
+std::vector<Player*> GameEngine::getPlayersVec()
 {
+	return playersVec;
 }
 
-MainGameLoop::~MainGameLoop()
+void GameEngine::reinforcementPhase()
 {
+	// Setting players armie based on territories
+	for (int i = 0; i < playersVec.size(); i++) {
+		playersVec[i]->setPlayerArmies(playersVec[i]->getPlayerTerritories().size() / 3);
+	}
+
+	// Setting minimum armies to 3 
+	for (int i = 0; i < playersVec.size(); i++) {
+		if (playersVec[i]->getPlayerTerritories().size()/3  < 9) {
+			playersVec[i]->setPlayerArmies(playersVec[i]->getPlayerTerritories().size() + 3);
+		}
+	}
 }
 
-void MainGameLoop::reinforcementPhase()
+void GameEngine::issueOrderPhase()
 {
+	for(int i = 0; i < playersVec.size(); i++){
+		for (int j = 0; j < playersVec[i]->getPlayerTerritories().size(); j++) {
+
+		}
+		printf("Please choose a territory ID");
+		map->listOfNeightbors;
+	}
+	//std::cout << map->listOfContinent.size() << std::endl;
+	/*std::cout << map-> << std::endl;*/
+	//map->listOfNeightbors[1][i]->getID()
+	/*for (int i = 0; i < map->listOfNeightbors->size(); i++) {
+		std::cout << map->listOfContinent[2]->territories.size() << std::endl;
+	}*/
 }

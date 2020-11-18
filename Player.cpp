@@ -74,6 +74,16 @@ void Player::setPlayerID(int playerID_) {
 	playerID = playerID_;
 }
 
+//void Player::setToAttack(Territory t)
+//{
+//	
+//}
+//
+//void Player::setToDefend(Territory t)
+//{
+//
+//}
+
 //operator overloading
 	//assignment operator overloading
 void Player::operator=(const Player& p) {
@@ -135,6 +145,6 @@ vector<Territory*> Player::toDefend() {
 }
 
 vector<Territory*> Player::toAttack() {
-	vector<Territory*> toDefend{ new Territory(), new Territory() };
-	return toDefend;
+	vector<Territory*> toAttack{ new Territory(), new Territory() };
+	return toAttack;
 }

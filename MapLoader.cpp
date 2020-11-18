@@ -14,7 +14,7 @@ MapLoader::~MapLoader() {
 }
 
 //Method to load map from a .map file
-void MapLoader::loadmap(string file) {
+Map MapLoader::loadmap(string file) {
 
 	//Get the file name with extension 
 	fstream infile;
@@ -203,6 +203,7 @@ void MapLoader::loadmap(string file) {
 		graph.validate();
 		printf("\n");
 		graph.printBoard();
+		return graph;
 	}
 	infile.close();
 }
