@@ -52,7 +52,7 @@ void GameEngine::initGame() {
 			}
 
 			if (userFileInput > 1 && userFileInput < 5) {
-				maploaders.loadmap(listOfFile[userFileInput - 1]);
+				map = new Map(maploaders.loadmap(listOfFile[userFileInput - 1]));
 				printf("Please choose another file. \n");
 			}
 		}
@@ -161,17 +161,41 @@ void GameEngine::reinforcementPhase()
 
 void GameEngine::issueOrderPhase()
 {
-	for(int i = 0; i < playersVec.size(); i++){
+	int userInputTerritory;
+	/*for(int i = 0; i < playersVec.size(); i++){
 		for (int j = 0; j < playersVec[i]->getPlayerTerritories().size(); j++) {
-
+			map->listOfContinent[0]->territories[]
 		}
 		printf("Please choose a territory ID");
 		map->listOfNeightbors;
+	}*/
+
+	// Display for loop
+	for (int i = 0; i < map->listOfContinent.size(); i++) {
+		for (int j = 0; j < map->listOfContinent[i]->territories.size(); j++) {
+			std::cout<< "Territories: " << map->listOfContinent[i]->territories[j]->getID() << std::endl;
+		}
 	}
-	//std::cout << map->listOfContinent.size() << std::endl;
-	/*std::cout << map-> << std::endl;*/
-	//map->listOfNeightbors[1][i]->getID()
-	/*for (int i = 0; i < map->listOfNeightbors->size(); i++) {
-		std::cout << map->listOfContinent[2]->territories.size() << std::endl;
+
+	
+	/*std::cout << map->listOfContinent[0]->territories[1]->getID() << std::endl;*/
+	playersVec[0]->getToAttackVec().push_back(map->listOfContinent[0]->territories[3]->getID());
+	//std::cout << playersVec[0]->getToAttackVec().size() << std::endl;
+	//std::cout << playersVec[0]->toAttack()[0]->getID() << std::endl;
+	for (int i = 0; i < playersVec.size(); i++) {
+		playersVec[0]->getToAttackVec().push_back(map->listOfContinent[0]->territories[3]->getID());
+		std::cout << playersVec[i]->getToAttackVec().size() << std::endl;
+	}
+
+	/*for (int i = 0; i < playersVec.size(); i++) {
+		while (true)
+		{
+			printf("Please choose an territory\n");
+			cin >> userInputTerritory;
+			playersVec[i]->toAttack().push_back(map->listOfContinent[i]->territories[userInputTerritory]);
+			for (int j = 0; j < playersVec[i]->toAttack().size(); j++) {
+				std::cout << playersVec[i]->toAttack()[j]->getID() << std::endl;
+			}
+		}
 	}*/
 }

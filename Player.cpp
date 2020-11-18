@@ -48,6 +48,8 @@ int Player::getPlayerArmies() {
 	return playerArmies;
 }
 
+
+
 //mutators
 void Player::setPlayerTerritories(vector<Territory*> playerTerritories_) {
 	for (Territory* t : playerTerritories_) {
@@ -73,16 +75,6 @@ void Player::setPlayerArmies(int playerArmies_) {
 void Player::setPlayerID(int playerID_) {
 	playerID = playerID_;
 }
-
-//void Player::setToAttack(Territory t)
-//{
-//	
-//}
-//
-//void Player::setToDefend(Territory t)
-//{
-//
-//}
 
 //operator overloading
 	//assignment operator overloading
@@ -145,6 +137,11 @@ vector<Territory*> Player::toDefend() {
 }
 
 vector<Territory*> Player::toAttack() {
-	vector<Territory*> toAttack{ new Territory(), new Territory() };
+	vector<Territory*> toAttack;
 	return toAttack;
+}
+
+std::vector<int> Player::getToAttackVec()
+{
+	return toAttackVec;
 }
