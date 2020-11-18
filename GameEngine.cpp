@@ -37,25 +37,22 @@ void GameEngine::initGame() {
 	getListOfMap();
 	printf("\n");
 
+	// Loop to get userinput to load correct files
 	while (true) {
 		std::cout << "Which file would you like to load ? " << std::endl;
-
 		//Verify that user inputs a number
-		while (!(std::cin >> userFileInput) || userFileInput > listOfFile.size() || userFileInput < 1) {
+		while (!(std::cin >> userFileInput) || userFileInput > listOfFile.size() || userFileInput < 1 || (userFileInput > 1 && userFileInput < 5)) {
 			std::cin.clear();
 			std::cin.ignore(1000, '\n');
-			std::cout << "Incorrect input. Please select among the selection number" << std::endl;
-		}
-		/*while (true) {
-			if (maploaders.getContinentCheck() == false) {
-				printf("Please change choice \n");
-				break;
+			if (!isdigit(userFileInput)) {
+				std::cout << "Incorrect input. Please select among the selection number" << std::endl;
 			}
-			else {
+
+			if (userFileInput > 1 && userFileInput < 5) {
 				maploaders.loadmap(listOfFile[userFileInput - 1]);
-				break;
+				printf("Please choose another file. \n");
 			}
-		}*/
+		}
 		maploaders.loadmap(listOfFile[userFileInput - 1]);
 		break;
 	}
@@ -93,7 +90,12 @@ void GameEngine::initGame() {
 		p->setPlayerOrders(playerOrder);
 		std::cout << *p << "Number Of Armies: " << p->getPlayerArmies() << std::endl;
 		std::cout << "Player Cards: " << *p->getPlayerCards() << std::endl;
+		playersVec.push_back(p);
 	}
+
+	/*for (int i = 0; i < playersVec.size(); i++) {
+		std::cout << (playersVec[i]->getPlayerArmies()) << std::endl;
+	}*/
 
 	//Options for observer 
 	printf("\n");
@@ -129,6 +131,16 @@ void GameEngine::initGame() {
 	cards.push_back(Card(CardType::DIPLOMACY));
 	Deck* deck = new Deck(cards);
 	std::cout << *deck << std::endl;
-
 }
 
+MainGameLoop::MainGameLoop()
+{
+}
+
+MainGameLoop::~MainGameLoop()
+{
+}
+
+void MainGameLoop::reinforcementPhase()
+{
+}

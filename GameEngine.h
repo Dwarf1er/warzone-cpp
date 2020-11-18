@@ -22,4 +22,14 @@ class GameEngine {
 		std::vector<std::string> listOfFile;
 };
 
+class MainGameLoop {
+	public:
+		MainGameLoop();
+		~MainGameLoop();
+		void reinforcementPhase();
+		void issueOrdersPhase();
+		void executeOrdersPhase();
+
+	private:
+};
 #endif
