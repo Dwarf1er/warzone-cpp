@@ -18,7 +18,8 @@ private:
 	//helper attributes
 	int playerArmies; //represent the number of armies of the player
 	int playerID; //represents the player ID's
-	
+	bool pacifism;
+	bool cardCheck;
 
 public:
 	//constructor(s) and destructor
@@ -33,6 +34,8 @@ public:
 	OrderList* getPlayerOrders(); //returns the OrderList queued by the player
 	int getPlayerArmies(); //returns the armies of the player
 	int getPlayerID();
+	bool getPacifism();
+	bool getCardCheck();
 
 	//mutators
 	void setPlayerTerritories(vector<Territory*> playerTerritories_);
@@ -40,6 +43,8 @@ public:
 	void setPlayerOrders(Orders* playerOrderList_);
 	void setPlayerArmies(int playerArmies_);
 	void setPlayerID(int playerID_);
+	void setPacifism(bool check);
+	void setCardCheck(bool check);
 
 	//operator overloading
 		//assignment operator overloading

@@ -4,7 +4,7 @@ using namespace std;
 
 //constructors
 	//default constructor
-Player::Player() : playerTerritories(), playerCards(), playerOrderList(), playerArmies(0), playerID(0) {
+Player::Player() : playerTerritories(), playerCards(), playerOrderList(), playerArmies(0), playerID(0), pacifism(false) {
 }
 
 //parametrized constructor
@@ -29,6 +29,7 @@ Player::~Player() {
 
 	playerArmies = 0;
 	playerID = 0;
+	pacifism = false;
 }
 
 //accessors
@@ -51,6 +52,16 @@ int Player::getPlayerArmies() {
 int Player::getPlayerID()
 {
 	return playerID;
+}
+
+bool Player::getPacifism() 
+{
+	return pacifism;
+}
+
+bool Player::getCardCheck()
+{
+	return cardCheck;
 }
 
 
@@ -78,6 +89,15 @@ void Player::setPlayerArmies(int playerArmies_) {
 
 void Player::setPlayerID(int playerID_) {
 	playerID = playerID_;
+}
+
+void Player::setPacifism(bool check) {
+	pacifism = check;
+}
+
+void Player::setCardCheck(bool check)
+{
+	cardCheck = check;
 }
 
 //operator overloading

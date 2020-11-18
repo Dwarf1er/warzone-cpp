@@ -18,6 +18,7 @@ PlayerDriver::PlayerDriver()
     Deck* deck = new Deck();
     deck->push_card(CardType::SPY);
     Hand* h = new Hand(deck);
+    
 
     //1) Verifying that players have a collection of territories
 

@@ -61,11 +61,11 @@ private:
 
 public:
 	Advance();
-	Advance(Player* p, Territory* t1, Territory* t2, int army, Map* m, vector<Territory*> t);
+	Advance(Player* p, Player* p2, Territory* t1, Territory* t2, int army, Map* m);
 
 	//string orderName();
 	void validate(Player* p, Territory* t1, Territory* t2, Map* m);
-	void execute(Player* p, Territory* t1, Territory* t2, int army, vector<Territory*> t);
+	void execute(Player* p1, Player* p2, Territory* t1, Territory* t2, int army);
 	//void orderProcedure();
 
 	//getters & setters
@@ -132,11 +132,11 @@ private:
 
 public:
 	Airlift();
-	Airlift(Player* p, Territory* t, Territory* t2, int army);
+	Airlift(Player* p1, Player* p2, Territory* t, Territory* t2, int army);
 
 	//void orderProcedure();
 	void validate(Player* p, Territory* t1, Territory* t2);
-	void execute(Player* p, Territory* t1, Territory* t2, int army);
+	void execute(Player* p1, Player* p2, Territory* t1, Territory* t2, int army);
 
 	//getters & setters
 	int getAirArmy();
