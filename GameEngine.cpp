@@ -40,7 +40,6 @@ void GameEngine::initGame() {
 	// Loop to get userinput to load correct files
 	while (true) {
 		std::cout << "Which file would you like to load ? " << std::endl;
-
 		//Verify that user inputs a number
 		while (!(std::cin >> userFileInput) || userFileInput > listOfFile.size() || userFileInput < 1 || (userFileInput > 1 && userFileInput < 5)) {
 			std::cin.clear();
@@ -91,7 +90,12 @@ void GameEngine::initGame() {
 		p->setPlayerOrders(playerOrder);
 		std::cout << *p << "Number Of Armies: " << p->getPlayerArmies() << std::endl;
 		std::cout << "Player Cards: " << *p->getPlayerCards() << std::endl;
+		playersVec.push_back(p);
 	}
+
+	/*for (int i = 0; i < playersVec.size(); i++) {
+		std::cout << (playersVec[i]->getPlayerArmies()) << std::endl;
+	}*/
 
 	//Options for observer 
 	printf("\n");
@@ -129,3 +133,14 @@ void GameEngine::initGame() {
 	std::cout << *deck << std::endl;
 }
 
+MainGameLoop::MainGameLoop()
+{
+}
+
+MainGameLoop::~MainGameLoop()
+{
+}
+
+void MainGameLoop::reinforcementPhase()
+{
+}
