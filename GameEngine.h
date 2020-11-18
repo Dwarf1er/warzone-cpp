@@ -28,7 +28,7 @@ class GameEngine {
 
 class StartUp {
 	private:
-		GameEngine* engine; //assignment + insertion + copy const.
+		GameEngine* engine;
 	public:
 		//Constructor(s) and destructor
 		StartUp();
@@ -37,6 +37,7 @@ class StartUp {
 
 		//required methods
 		void startupPhase();
+		void setGameEngine(GameEngine* engine_);
 		void operator=(const StartUp& s); //assignment operator
 		friend ostream& operator<<(ostream& out, const StartUp& s); //ostream operator
 		friend istream& operator>>(istream& in, const StartUp& s); //istream operator

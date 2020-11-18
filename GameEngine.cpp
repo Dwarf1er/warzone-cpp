@@ -14,6 +14,8 @@ namespace fs = std::filesystem;
 GameEngine::GameEngine() {
 	currentPlayer = NULL;
 	numOfPlayer = 0;
+	map = NULL;
+	observerOption = 1;
 }
 
 GameEngine::~GameEngine() {}
@@ -56,26 +58,24 @@ void GameEngine::initGame() {
 	getListOfMap();
 	printf("\n");
 
+	// Loop to get userinput to load correct files
 	while (true) {
 		std::cout << "Which file would you like to load ? " << std::endl;
-
 		//Verify that user inputs a number
-		while (!(std::cin >> userFileInput) || userFileInput > listOfFile.size() || userFileInput < 1) {
+		while (!(std::cin >> userFileInput) || userFileInput > listOfFile.size() || userFileInput < 1 || (userFileInput > 1 && userFileInput < 5)) {
 			std::cin.clear();
 			std::cin.ignore(1000, '\n');
-			std::cout << "Incorrect input. Please select among the selection number" << std::endl;
-		}
-		/*while (true) {
-			if (maploaders.getContinentCheck() == false) {
-				printf("Please change choice \n");
-				break;
+			if (!isdigit(userFileInput)) {
+				std::cout << "Incorrect input. Please select among the selection number" << std::endl;
 			}
-			else {
+
+			if (userFileInput > 1 && userFileInput < 5) {
 				maploaders.loadmap(listOfFile[userFileInput - 1]);
-				break;
+				printf("Please choose another file. \n");
 			}
-		}*/
-		map = &maploaders.loadmap(listOfFile[userFileInput - 1]);
+		}
+		maploaders.loadmap(listOfFile[userFileInput - 1]);
+		map = maploaders.loadmap(listOfFile[userFileInput - 1]);
 		break;
 	}
 
@@ -112,7 +112,12 @@ void GameEngine::initGame() {
 		p->setPlayerOrders(playerOrder);
 		std::cout << *p << "Number Of Armies: " << p->getPlayerArmies() << std::endl;
 		std::cout << "Player Cards: " << *p->getPlayerCards() << std::endl;
+		playersVec.push_back(p);
 	}
+
+	/*for (int i = 0; i < playersVec.size(); i++) {
+		std::cout << (playersVec[i]->getPlayerArmies()) << std::endl;
+	}*/
 
 	//Options for observer 
 	printf("\n");
@@ -130,7 +135,7 @@ void GameEngine::initGame() {
 			break;
 		}
 
-		if (observerOption != 1 || observerOption != 2) { //observerOption != (1 || 2)
+		if (observerOption != (1 || 2)) {
 			std::cin.clear();
 			std::cin.ignore(1000, '\n');
 			printf("Please enter the number 1 or 2\n");
@@ -148,9 +153,7 @@ void GameEngine::initGame() {
 	cards.push_back(Card(CardType::DIPLOMACY));
 	Deck* deck = new Deck(cards);
 	std::cout << *deck << std::endl;
-
 }
-
 //===StartUp Class (Part 2)===//
 
 //constructors
@@ -174,6 +177,7 @@ void StartUp::operator=(const StartUp& s) {
 
 ostream& operator<<(ostream& out, const StartUp& s) {
 	out << "\nGame Engine: " << s.engine << endl;
+	return out;
 }
 
 istream& operator>>(istream& in, const StartUp& s) {
@@ -184,8 +188,7 @@ istream& operator>>(istream& in, const StartUp& s) {
 //Start up phase, choosing the game parameters
 void StartUp::startupPhase() {
 	int A = 0;
-	engine->initGame();
-
+	/*
 	//1 - randomize player order
 	cout << "Randomizing the order of the players..." << endl;
 	if (!engine->getPlayers().empty()) //randomizing the order of the players inside the vector of players
@@ -196,26 +199,27 @@ void StartUp::startupPhase() {
 	cout << "Player order for this game" << endl;
 	for (Player* p : engine->getPlayers()) {
 		cout << "Player" + p->getPlayerID() << endl;
-	}
-
+	}*/
+	
 	//2 - assign territories to players one by one in a round-robin fashion
 	cout << "Assigning the territories randomly to all players..." << endl;
 	if (!engine->getMap()->nodeList.empty()) {
 		std::shuffle(std::begin(engine->getMap()->nodeList), std::end(engine->getMap()->nodeList), std::default_random_engine());
 		while (!engine->getMap()->nodeList.empty()) {
 			for (Player* p : engine->getPlayers()) {
-				p->getPlayerTerritories().push_back(engine->getMap()->nodeList.back());
+				//p->getPlayerTerritories().push_back(engine->getMap()->nodeList.back());
+				p->setPlayerTerritories(engine->getMap()->nodeList.pop_back());
 				engine->getMap()->nodeList.pop_back();
 			}
 		}
 
 		for (Player* p : engine->getPlayers()) {
-			cout << p << endl; //ostream overlaod for Territory does not work and it is not Antoine's fault, he asked his team to add their own ostream overloads for their classes
+			cout << *p << endl; //ostream overlaod for Territory does not work and it is not Antoine's fault, he asked his team to add their own ostream overloads for their classes
 		}
 	}
 	else
 		cout << "The map has loading problems, it is not Antoine's fault, he has been asking his team to communicate since the beginning of the semester" << endl;
-
+	
 	//3 - giving players an initial number of armies
 	cout << "Giving players their initial amount of armies..." << endl;
 	switch (engine->getNumPlayers()) {
@@ -243,5 +247,9 @@ void StartUp::startupPhase() {
 	for (Player* p : engine->getPlayers()) {
 		cout << "Armies: " + p->getPlayerArmies() << endl;
 	}
+}
+
+void StartUp::setGameEngine(GameEngine* engine_) {
+	engine = engine_;
 }
 

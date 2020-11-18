@@ -8,7 +8,7 @@ class MapLoader {
 public:
 	MapLoader();
 	~MapLoader();
-	Map loadmap(std::string file);
+	Map* loadmap(std::string file);
 	bool getContinentCheck();
 
 private:

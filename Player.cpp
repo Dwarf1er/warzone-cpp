@@ -138,6 +138,6 @@ vector<Territory*> Player::toDefend() {
 }
 
 vector<Territory*> Player::toAttack() {
-	vector<Territory*> toDefend{ new Territory(), new Territory() };
-	return toDefend;
+	vector<Territory*> toAttack{ new Territory(), new Territory() };
+	return toAttack;
 }

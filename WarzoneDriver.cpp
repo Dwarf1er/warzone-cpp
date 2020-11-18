@@ -44,10 +44,11 @@ int main()
 	GameEngine games;
 	games.initGame();
 	printf("======================================= Part 1 end =======================================\n");
-
+	
 	//Part 2 - StartUp Phase
 	cout << "======================================= Part 2  =======================================" << endl;
 	StartUp startup;
+	startup.setGameEngine(&games);
 	startup.startupPhase();
 	cout << "======================================= Part 2 end =======================================" << endl;
 
