@@ -18,7 +18,12 @@ GameEngine::GameEngine() {
 	observerOption = 1;
 }
 
-GameEngine::~GameEngine() {}
+GameEngine::~GameEngine() {
+	delete map;
+	map = nullptr;
+	delete currentPlayer;
+	currentPlayer = nullptr;
+}
 
 MapLoader maploaders;
 
@@ -185,6 +190,10 @@ istream& operator>>(istream& in, const StartUp& s) {
 	return in;
 }
 
+void StartUp::setGameEngine(GameEngine* engine_) {
+	engine = engine_;
+}
+
 //Start up phase, choosing the game parameters
 void StartUp::startupPhase() {
 	int A = 0;
@@ -209,8 +218,12 @@ void StartUp::startupPhase() {
 			for (Player* p : engine->getPlayers()) {
 				//p->getPlayerTerritories().push_back(engine->getMap()->nodeList.back());
 				//p->setPlayerTerritories(engine->getMap()->nodeList);
-				vector<Territory*> territories = p->getPlayerTerritories();
+				//vector<Territory*> territories = p->getPlayerTerritories();
+				//territories.push_back(engine->getMap()->nodeList.back());
+				//engine->getMap()->nodeList.pop_back();
+				vector<Territory*> territories;
 				territories.push_back(engine->getMap()->nodeList.back());
+				p->setPlayerTerritories(territories);
 				engine->getMap()->nodeList.pop_back();
 			}
 		}
@@ -254,8 +267,3 @@ void StartUp::startupPhase() {
 		cout << *p << endl;
 	}
 }
-
-void StartUp::setGameEngine(GameEngine* engine_) {
-	engine = engine_;
-}
-

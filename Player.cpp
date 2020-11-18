@@ -91,6 +91,8 @@ void Player::operator=(const Player& p) {
 ostream& operator<<(ostream& out, const Player& p) {
 	out << "\nPlayer ID: " << p.playerID << endl;
 
+	out << "Player Armies: " << p.playerArmies << endl;
+
 	for (Territory* t : p.playerTerritories) {
 		out << "Territories: " << *t << endl;
 	}
