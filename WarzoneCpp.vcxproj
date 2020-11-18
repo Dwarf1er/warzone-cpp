@@ -167,7 +167,6 @@
     <ClInclude Include="PlayerDriver.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="artic.map" />
     <None Include="austria-hungary.map" />
     <None Include="bad map1.map" />
     <None Include="bad map2.map" />
