@@ -40,6 +40,11 @@ void GameEngine::getListOfMap() {
 	}
 }
 
+void GameEngine::shufflePlayersVec(vector<Player*> playersVec_) {
+	std::default_random_engine rng = std::default_random_engine{};
+	shuffle(begin(playersVec), end(playersVec), rng);
+}
+
 //Return the playersVec
 vector<Player*> GameEngine::getPlayers() {
 	return playersVec;
@@ -197,16 +202,11 @@ void StartUp::setGameEngine(GameEngine* engine_) {
 //Start up phase, choosing the game parameters
 void StartUp::startupPhase() {
 	int A = 0;
+	vector<Player*> a = engine->getPlayers();
 	
 	//1 - randomize player order
 	cout << "Randomizing the order of the players..." << endl;
-	if (!engine->getPlayers().empty()) { //randomizing the order of the players inside the vector of players
-		auto rng = std::default_random_engine{};
-		vector<Player*> a = engine->getPlayers();
-		shuffle(begin(a), end(a), rng);
-	}
-	else
-		cout << "No players are currently in the game, the initialization failed, it is not Antoine's fault, he has been asking his team to communicate since the beginning of the semester" << endl;
+	engine->shufflePlayersVec(engine->getPlayers());
 
 	cout << "Player order for this game: " << endl;
 	for (Player* p : engine->getPlayers()) {
