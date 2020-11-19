@@ -81,6 +81,11 @@ void Player::setToAttack(vector<int> t)
 	toAttackVec = t;
 }
 
+void Player::setToDefend(vector<int> t)
+{
+	toDefendVec = t;
+}
+
 //operator overloading
 	//assignment operator overloading
 void Player::operator=(const Player& p) {
@@ -145,4 +150,9 @@ vector<Territory*> Player::toDefend() {
 std::vector<int> Player::getToAttackVec()
 {
 	return toAttackVec;
+}
+
+std::vector<int> Player::getToDefendVec()
+{
+	return toDefendVec;
 }

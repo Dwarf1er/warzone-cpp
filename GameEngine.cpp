@@ -154,7 +154,7 @@ void GameEngine::reinforcementPhase()
 
 	// Setting minimum armies to 3 
 	for (int i = 0; i < playersVec.size(); i++) {
-		if (playersVec[i]->getPlayerTerritories().size()/3  < 9) {
+		if (playersVec[i]->getPlayerTerritories().size() / 3 < 9) {
 			playersVec[i]->setPlayerArmies(playersVec[i]->getPlayerTerritories().size() + 3);
 		}
 	}
@@ -162,48 +162,60 @@ void GameEngine::reinforcementPhase()
 
 void GameEngine::issueOrderPhase()
 {
-	int userInputTerritory;
-	/*for(int i = 0; i < playersVec.size(); i++){
-		for (int j = 0; j < playersVec[i]->getPlayerTerritories().size(); j++) {
-			map->listOfContinent[0]->territories[]
-		}
-		printf("Please choose a territory ID");
-		map->listOfNeightbors;
-	}*/
+	int userAttackTerritory = 0;
+	int userDefendTerritory = 0;
 
 	// Display for loop
 	for (int i = 0; i < map->listOfContinent.size(); i++) {
 		for (int j = 0; j < map->listOfContinent[i]->territories.size(); j++) {
-			std::cout<< "Territories: " << map->listOfContinent[i]->territories[j]->getID() << std::endl;
+			std::cout << "Territories: " << map->listOfContinent[i]->territories[j]->getID() << std::endl;
 		}
 	}
 
-	
-	/*std::cout << map->listOfContinent[0]->territories[1]->getID() << std::endl;*/
-	//playersVec[0]->getToAttackVec().push_back(map->listOfContinent[0]->territories[3]->getID());
-	//std::cout << playersVec[0]->getToAttackVec().size() << std::endl;
-	//std::cout << playersVec[0]->toAttack()[0]->getID() << std::endl;
 	vector<int> myvector;
-	
-	for (int i = 0; i < playersVec.size(); i++) {
-		cout << map->listOfContinent[0]->territories[3]->getID() << "TEST" << endl;
-		std::cout << "myvector stores " << int(myvector.size()) << " numbers.\n";
+	vector<int> myvector2;
+	bool playerBool = false;
 
-		myvector = playersVec[0]->getToAttackVec();
-		myvector.push_back(map->listOfContinent[0]->territories[3]->getID());
-		playersVec[0]->setToAttack(myvector);
-		std::cout << playersVec[0]->getToAttackVec().size() << std::endl;
+
+	// To Attack
+	for (int i = 0; i < playersVec.size(); i++) {
+		for (int j = 0; j < playersVec[i]->getPlayerTerritories().size(); j++) {
+			while (!playerBool) {
+				printf("Choose to attack: \n");
+				cin >> userAttackTerritory;
+				if (userAttackTerritory < map->listOfContinent[i]->territories.size() && userAttackTerritory > 0) {
+					playerBool = true;
+				}
+			}
+			if (userAttackTerritory != playersVec[i]->getPlayerTerritories()[j]->getID()) {
+				cout << map->listOfContinent[i]->territories[userAttackTerritory]->getID() << "TEST" << endl;
+				myvector = playersVec[i]->getToAttackVec();
+				myvector.push_back(map->listOfContinent[i]->territories[userAttackTerritory]->getID());
+				playersVec[i]->setToAttack(myvector);
+				std::cout << playersVec[i]->getToAttackVec().size() << std::endl;
+			}
+			playerBool = false;
+		}
 	}
 
-	/*for (int i = 0; i < playersVec.size(); i++) {
-		while (true)
-		{
-			printf("Please choose an territory\n");
-			cin >> userInputTerritory;
-			playersVec[i]->toAttack().push_back(map->listOfContinent[i]->territories[userInputTerritory]);
-			for (int j = 0; j < playersVec[i]->toAttack().size(); j++) {
-				std::cout << playersVec[i]->toAttack()[j]->getID() << std::endl;
+	// To Defend
+	for (int i = 0; i < playersVec.size(); i++) {
+		for (int j = 0; j < playersVec[i]->getPlayerTerritories().size(); j++) {
+			while (!playerBool) {
+				printf("Choose to defend: \n");
+				cin >> userDefendTerritory;
+				if (userDefendTerritory < playersVec[i]->getPlayerTerritories().size() && userDefendTerritory > 0) {
+					playerBool = true;
+				}
 			}
+			if (userDefendTerritory == playersVec[i]->getPlayerTerritories()[j]->getID()) {
+				cout << map->listOfContinent[i]->territories[userDefendTerritory]->getID() << "TEST" << endl;
+				myvector = playersVec[0]->getToDefendVec();
+				myvector.push_back(map->listOfContinent[i]->territories[userDefendTerritory]->getID());
+				playersVec[0]->setToDefend(myvector);
+				std::cout << playersVec[i]->getToDefendVec().size() << std::endl;
+			}
+			playerBool = false;
 		}
-	}*/
+	}
 }

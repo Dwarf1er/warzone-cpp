@@ -18,7 +18,7 @@ private:
 	int playerArmies; //represent the number of armies of the player
 	int playerID; //represents the player ID's
 	std::vector<int> toAttackVec;
-	std::vector<Territory*> toDefendVec;
+	std::vector<int> toDefendVec;
 
 public:
 	//constructor(s) and destructor
@@ -33,6 +33,7 @@ public:
 	OrderList* getPlayerOrders(); //returns the OrderList queued by the player
 	int getPlayerArmies(); //returns the armies of the player
 	std::vector<int> getToAttackVec();
+	std::vector<int> getToDefendVec();
 
 	//mutators
 	void setPlayerTerritories(vector<Territory*> playerTerritories_);
@@ -41,7 +42,7 @@ public:
 	void setPlayerArmies(int playerArmies_);
 	void setPlayerID(int playerID_);
 	void setToAttack(vector<int> t);
-	void setToDefend(Territory t);
+	void setToDefend(vector<int> t);
 
 	//operator overloading
 		//assignment operator overloading
