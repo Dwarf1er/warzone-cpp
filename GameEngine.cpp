@@ -166,6 +166,8 @@ void GameEngine::issueOrderPhase()
 	int userAttackTerritory = 0;
 	int userDefendTerritory = 0;
 	int deployNumber = 0;
+	int usersChoice = 0;
+	int id = 0;
 
 	// Display for loop
 	for (int i = 0; i < map->listOfContinent.size(); i++) {
@@ -213,20 +215,20 @@ void GameEngine::issueOrderPhase()
 			}
 			if (userDefendTerritory == playersVec[i]->getPlayerTerritories()[j]->getID()) {
 				cout << map->listOfContinent[i]->territories[userDefendTerritory]->getID() << "TEST" << endl;
-				myvector = playersVec[0]->getToDefendVec();
+				myvector = playersVec[i]->getToDefendVec();
 				myvector.push_back(map->listOfContinent[i]->territories[userDefendTerritory]->getID());
 				playersVec[0]->setToDefend(myvector);
 				std::cout << playersVec[i]->getToDefendVec().size() << std::endl;
 			}
 
 			// Get number to deploy 
-			for (int i = 0; i < playersVec.size(); i++) {
+			for (int k = 0; k < playersVec.size(); k++) {
 				while (!playerBool) {
 					printf("Choose how much unit to deploy \n");
 					cin >> deployNumber;
-					if (deployNumber > 0 && deployNumber < playersVec[i]->getPlayerArmies()) {
-						playersVec[i]->setPlayerArmies(playersVec[i]->getPlayerArmies() - deployNumber);
-						if (playersVec[i]->getPlayerArmies() <= 0) {
+					if (deployNumber > 0 && deployNumber < playersVec[k]->getPlayerArmies()) {
+						playersVec[k]->setPlayerArmies(playersVec[k]->getPlayerArmies() - deployNumber);
+						if (playersVec[k]->getPlayerArmies() <= 0) {
 							playerBool = true;
 						}
 					}
@@ -238,4 +240,23 @@ void GameEngine::issueOrderPhase()
 	}
 	std::cout << playersVec.size() << std::endl;
 	std::cout << playersVec[0]->getPlayerArmies() << std::endl;
+
+	// Advance Orders
+	for (int i = 0; i < playersVec.size(); i++) {
+		while (!playerBool) {
+			printf("Which territory do you want to move from? ");
+			for (int j = 0; j < playersVec[i]->getPlayerTerritories().size(); j++) {
+				std::cout<< j << ": " << playersVec[i]->getPlayerTerritories()[j] << std::endl;
+			}
+			cin >> usersChoice;
+			for (int j = 0; j < playersVec[i]->getPlayerTerritories().size(); j++) {
+				if (usersChoice == playersVec[i]->getPlayerTerritories()[j]->getID()) {
+					id = usersChoice;
+				}
+			}
+			if (usersChoice > 0 || usersChoice < playersVec[i]->getPlayerTerritories().size()) {
+				
+			}
+		}
+	}
 }
