@@ -2,6 +2,7 @@
 #include "MapLoader.h"
 #include "Player.h"
 #include "Cards.h"
+#include "Orders.h"
 #include <vector>
 
 //Test To check file in directory 
@@ -98,10 +99,6 @@ void GameEngine::initGame() {
 		playersVec.push_back(p);
 	}
 
-	/*for (int i = 0; i < playersVec.size(); i++) {
-		std::cout << (playersVec[i]->getPlayerArmies()) << std::endl;
-	}*/
-
 	//Options for observer 
 	printf("\n");
 	printf("Observer Options: \n");
@@ -137,7 +134,10 @@ void GameEngine::initGame() {
 	Deck* deck = new Deck(cards);
 	std::cout << *deck << std::endl;
 
+	printf("======================================= Part 3  =======================================\n");
+	reinforcementPhase();
 	issueOrderPhase();
+	printf("======================================= Part 3 end =======================================\n");
 }
 
 std::vector<Player*> GameEngine::getPlayersVec()
@@ -283,5 +283,6 @@ void GameEngine::issueOrderPhase()
 			break;
 		}
 		Advance(playersVec[i], armyNum, sourceID, targetID);
+		printf("\n");
 	}
 }

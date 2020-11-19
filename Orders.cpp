@@ -1,6 +1,7 @@
 ﻿#include "Orders.h"
 #include "Player.h"
 #include "Map.h"
+#include <time.h>
 
 Orders::Orders() {
 	description = "Default";

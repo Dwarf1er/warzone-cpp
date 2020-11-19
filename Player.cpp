@@ -99,6 +99,7 @@ void Player::setToAttack(vector<int> t)
 void Player::setToDefend(vector<int> t)
 {
 	toDefendVec = t;
+}
 void Player::setPacifism(bool check) {
 	pacifism = check;
 }

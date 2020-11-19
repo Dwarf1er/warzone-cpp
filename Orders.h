@@ -65,6 +65,7 @@ private:
 
 public:
 	Advance();
+	Advance(Player* p1, Player* p2, Territory* t1, Territory* t2, int army, Map* m);
 	Advance(int army, string tr1, string tr2);
 	Advance(Player* p1, int army, int source, int target);
 
