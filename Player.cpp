@@ -92,9 +92,10 @@ ostream& operator<<(ostream& out, const Player& p) {
 	out << "\nPlayer ID: " << p.playerID << endl;
 
 	out << "Player Armies: " << p.playerArmies << endl;
-
+	
+	out << "Territories: " << endl;
 	for (Territory* t : p.playerTerritories) {
-		out << "Territories: " << *t << endl;
+		out << *t << endl;
 	}
 	
 	if (p.playerOrderList != nullptr) {

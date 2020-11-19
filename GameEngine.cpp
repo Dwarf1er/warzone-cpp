@@ -125,25 +125,25 @@ void GameEngine::initGame() {
 	}*/
 
 	//Options for observer 
-	printf("\n");
-	printf("Observer Options: \n");
-	printf("Press 1 to open or Press 2 to close it \n");
+	cout << "\n" << endl;
+	cout << "Observer Options: \n" << endl;
+	cout << "Press 1 to open or Press 2 to close it \n" << endl;
 
 	while (true) {
 		cin >> observerOption;
 		if (observerOption == 1) {
-			printf("Observer turned on!\n");
+			cout << "Observer turned on!\n" << endl;
 			break;
 		}
 		if (observerOption == 2) {
-			printf("Observer turned off!\n");
+			cout << "Observer turned off!\n" << endl;
 			break;
 		}
 
 		if (observerOption != (1 || 2)) {
 			std::cin.clear();
 			std::cin.ignore(1000, '\n');
-			printf("Please enter the number 1 or 2\n");
+			cout << "Please enter the number 1 or 2\n" << endl;
 		}
 	}
 
@@ -216,11 +216,6 @@ void StartUp::startupPhase() {
 		std::shuffle(std::begin(engine->getMap()->nodeList), std::end(engine->getMap()->nodeList), std::default_random_engine());
 		while (!engine->getMap()->nodeList.empty()) {
 			for (Player* p : engine->getPlayers()) {
-				//p->getPlayerTerritories().push_back(engine->getMap()->nodeList.back());
-				//p->setPlayerTerritories(engine->getMap()->nodeList);
-				//vector<Territory*> territories = p->getPlayerTerritories();
-				//territories.push_back(engine->getMap()->nodeList.back());
-				//engine->getMap()->nodeList.pop_back();
 				vector<Territory*> territories;
 				territories.push_back(engine->getMap()->nodeList.back());
 				p->setPlayerTerritories(territories);
@@ -264,6 +259,6 @@ void StartUp::startupPhase() {
 	}
 
 	for (Player* p : engine->getPlayers()) {
-		cout << *p << endl;
+		cout << "Player" << p->getPlayerID() << ": " << p->getPlayerArmies() << endl;
 	}
 }
