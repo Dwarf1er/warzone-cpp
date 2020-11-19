@@ -197,18 +197,21 @@ void StartUp::setGameEngine(GameEngine* engine_) {
 //Start up phase, choosing the game parameters
 void StartUp::startupPhase() {
 	int A = 0;
-	/*
+	
 	//1 - randomize player order
 	cout << "Randomizing the order of the players..." << endl;
-	if (!engine->getPlayers().empty()) //randomizing the order of the players inside the vector of players
-		std::shuffle(std::begin(engine->getPlayers()), std::end(engine->getPlayers()), std::default_random_engine());
+	if (!engine->getPlayers().empty()) { //randomizing the order of the players inside the vector of players
+		auto rng = std::default_random_engine{};
+		vector<Player*> a = engine->getPlayers();
+		shuffle(begin(a), end(a), rng);
+	}
 	else
 		cout << "No players are currently in the game, the initialization failed, it is not Antoine's fault, he has been asking his team to communicate since the beginning of the semester" << endl;
 
-	cout << "Player order for this game" << endl;
+	cout << "Player order for this game: " << endl;
 	for (Player* p : engine->getPlayers()) {
-		cout << "Player" + p->getPlayerID() << endl;
-	}*/
+		cout << *p << endl;
+	}
 	
 	//2 - assign territories to players one by one in a round-robin fashion
 	cout << "Assigning the territories randomly to all players..." << endl;
@@ -224,7 +227,7 @@ void StartUp::startupPhase() {
 		}
 
 		for (Player* p : engine->getPlayers()) {
-			cout << *p << endl; //ostream overlaod for Territory does not work and it is not Antoine's fault, he asked his team to add their own ostream overloads for their classes
+			cout << *p << endl;
 		}
 	}
 	else
