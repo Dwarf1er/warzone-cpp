@@ -59,7 +59,7 @@ void PhaseObserver::display()
 	if (!_subject->enableObserver) 
 		return;
 
-	std::cout << "\n" << "======================================= OBSERVER =======================================" << "\n";
+	std::cout << "\n" << "======================================= PART 5 - OBSERVER =======================================" << "\n";
 	
 	std::map<Player*, int> armiesCountsBasedOnTerritories = _subject->armiesCountsBasedOnTerritories;
 	std::map<Player*, int> armiesCountsMinimums = _subject->armiesCountsMinimums;
