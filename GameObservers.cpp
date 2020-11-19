@@ -69,6 +69,7 @@ void PhaseObserver::display()
 	//Reinforcement Phase
 	if (phaseIndex == 0)
 	{
+		std::cout << "Reinforcement Phase" << "\n";
 		for (std::map<Player*, int>::value_type& t : armiesCountsBasedOnTerritories)
 			std::cout << "Player " << t.first->getPlayerID() << ": " << t.second << " armies based on territory added" << "\n";
 		for (std::map<Player*, int>::value_type& t : armiesCountsMinimums)
@@ -78,6 +79,7 @@ void PhaseObserver::display()
 	//Issue Order Phase
 	if (phaseIndex == 1)
 	{
+		std::cout << "Issue Order Phase" << "\n";
 		for (std::map<Player*, OrderData>::value_type& t : issueOrderDetails)
 			std::cout << "Player " << t.first->getPlayerID() << ": "
 			<< t.second.armyNum << " armies"
