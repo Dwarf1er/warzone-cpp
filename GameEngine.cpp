@@ -1,13 +1,5 @@
 #include "GameEngine.h"
-#include "MapLoader.h"
-#include "Map.h"
-#include "Player.h"
-#include "Cards.h"
-#include "Orders.h"
-#include <vector>
-#include <iostream>
-#include <algorithm>
-#include "GameObservers.h"
+
 
 //===GameEngine Class (Part 1)===//
 
@@ -192,7 +184,7 @@ StartUp::StartUp(const StartUp& s) : engine(s.engine) {
 
 //destructor
 StartUp::~StartUp() {
-	
+
 }
 
 //operator overloading
@@ -212,22 +204,30 @@ std::vector<Player*> GameEngine::getPlayersVec()
 
 void GameEngine::reinforcementPhase()
 {
+	phaseIndex = 0;
 	// Setting players armie based on territories
 	for (int i = 0; i < playersVec.size(); i++) {
-		playersVec[i]->setPlayerArmies(playersVec[i]->getPlayerTerritories().size() / 3);
+		int armies = playersVec[i]->getPlayerTerritories().size() / 3;
+		armiesCountsBasedOnTerritories.insert(std::pair<Player*, int>(playersVec[i], armies));
+		playersVec[i]->setPlayerArmies(armies);
 	}
 
 	// Setting minimum armies to 3 
 	for (int i = 0; i < playersVec.size(); i++) {
 		if (playersVec[i]->getPlayerTerritories().size() / 3 < 9) {
-			playersVec[i]->setPlayerArmies(playersVec[i]->getPlayerTerritories().size() + 3);
+			int armies = playersVec[i]->getPlayerTerritories().size() + 3;
+			armiesCountsMinimums.insert(std::pair<Player*, int>(playersVec[i], armies));
+			playersVec[i]->setPlayerArmies(armies);
 		}
 	}
+
+	Notify();
 }
 
 // TO GIVE TERRITORY
 void GameEngine::issueOrderPhase()
 {
+	phaseIndex = 1;
 	int userAttackTerritory = 0;
 	int userDefendTerritory = 0;
 	int deployNumber = 0;
@@ -308,6 +308,8 @@ void GameEngine::issueOrderPhase()
 	std::cout << playersVec.size() << std::endl;
 	std::cout << playersVec[0]->getPlayerArmies() << std::endl;
 
+
+
 	// Advance Orders
 	for (int i = 0; i < playersVec.size(); i++) {
 		while (!playerBool) {
@@ -323,6 +325,7 @@ void GameEngine::issueOrderPhase()
 					}
 				}
 			}
+
 			std::cout << ("Which territory do you want to move to ?");
 			cin >> usersChoice;
 			for (int j = 0; j < playersVec[i]->getPlayerTerritories().size(); j++) {
@@ -345,12 +348,19 @@ void GameEngine::issueOrderPhase()
 				}*/
 				armyNum = usersChoice;
 			}
+
+			OrderData orderData = OrderData{ sourceID, targetID, armyNum };
+
+			issueOrderDetails.insert(std::pair<Player*, OrderData>(playersVec[i], orderData));
+
 			break;
 		}
 		Advance(playersVec[i], armyNum, sourceID, targetID);
 		std::cout << "" << std::endl;
 	}
+	Notify();
 }
+
 istream& operator>>(istream& in, const StartUp& s) {
 	//in >> s.engine;
 	return in;

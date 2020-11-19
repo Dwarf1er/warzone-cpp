@@ -1,6 +1,7 @@
 #pragma once
 #include <list>
 using namespace std;
+class GameEngine;
 
 // Observer Class 
 class Observer
@@ -20,7 +21,7 @@ public:
 	virtual void Detach(Observer* o);
 	virtual void Notify();
 	Subject();
-	~Subject();
+	virtual ~Subject();
 private:
 	list<Observer*>* _observers;
 };
@@ -29,12 +30,12 @@ class PhaseObserver : public Observer
 {
 public:
 	PhaseObserver();
-	PhaseObserver(Subject* s); //parameter: Model Pointer
+	PhaseObserver(GameEngine* s); //parameter: Model Pointer
 	~PhaseObserver();
-	void Update() override;
+	void Update();
 	void display();
 private:
-	Subject* _subject; //Model Pointer
+	GameEngine* _subject; //Model Pointer
 };
 
 class StatisticsObserver : public Observer

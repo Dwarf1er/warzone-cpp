@@ -7,6 +7,7 @@
 #include "CardsDriver.h"
 #include "GameEngine.h"
 #include "Orders.h"
+#include "GameObservers.h"
 
 //Main method that contains all part to run at once
 int main()
@@ -42,19 +43,22 @@ int main()
 	//Assignment 2
 	//Part 1 - Game Start 
 	cout << "======================================= Part 1  =======================================\n" << endl;
-	GameEngine games;
-	games.initGame();
+	GameEngine* game = new GameEngine;
+
+	PhaseObserver* p = new PhaseObserver(game);
+
+	game->initGame();
 	cout << "======================================= Part 1 end =======================================\n" << endl;
-	
+
 	//Part 2 - StartUp Phase
 	cout << "======================================= Part 2  =======================================" << endl;
 	StartUp startup;
-	startup.setGameEngine(&games);
+	startup.setGameEngine(game);
 	startup.startupPhase();
 	cout << "======================================= Part 2 end =======================================" << endl;
 
 	printf("======================================= Part 4  =======================================\n");
-	Map* game = new Map();
+	Map* map = new Map();
 	Territory* t1 = new Territory(1);
 	Territory* t2 = new Territory(2);
 	Territory* t3 = new Territory(3);
@@ -76,15 +80,15 @@ int main()
 	Player* p2 = new Player();
 	p1->setPlayerID(1);
 	p2->setPlayerID(2);
-	game->createContinent("America", 6);
-	game->addToContinent(0, t1);
-	game->addToContinent(0, t2);
-	game->addEdge(t1, t2);
-	game->addEdge(t2, t1);
-	game->addEdge(t1, t3);
-	game->addEdge(t3, t1);
-	game->addEdge(t1, t4);
-	game->addEdge(t4, t1);
+	map->createContinent("America", 6);
+	map->addToContinent(0, t1);
+	map->addToContinent(0, t2);
+	map->addEdge(t1, t2);
+	map->addEdge(t2, t1);
+	map->addEdge(t1, t3);
+	map->addEdge(t3, t1);
+	map->addEdge(t1, t4);
+	map->addEdge(t4, t1);
 	Deck* deck = new Deck();
 	deck->push_card(CardType::SPY);
 	Hand* h = new Hand(deck);
@@ -113,16 +117,16 @@ int main()
 	Blockade(p1, t3);
 
 	//TEST ADVANCE VALID
-	Advance(p1, p2, t1, t2, 40, game); //moving army
-	Advance(p1, p2, t1, t3, 40, game);//attacking player
+	Advance(p1, p2, t1, t2, 40, map); //moving army
+	Advance(p1, p2, t1, t3, 40, map);//attacking player
 
 	//decisive victory
 	t3->setNumberOfArmies(0);
-	Advance(p1, p2, t1, t4, 40, game);//attacking player
+	Advance(p1, p2, t1, t4, 40, map);//attacking player
 
 	//TEST ADVANCE INVALID
-	Advance(p1, p0, t3, t2, 40, game);
-	Advance(p1, p0, t2, t3, 40, game);
+	Advance(p1, p0, t3, t2, 40, map);
+	Advance(p1, p0, t2, t3, 40, map);
 
 	//TEST AIRLIFT VALID
 	Airlift(p1, p2, t1, t2, 30); //moving troops between freindly
@@ -134,7 +138,7 @@ int main()
 	//TEST ACQUIRE CARD
 	t3->setNumberOfArmies(0);
 	Airlift(p1, p2, t1, t3, 30);
-	Advance(p1, p2, t1, t4, 40, game);
+	Advance(p1, p2, t1, t4, 40, map);
 
 
 	////TEST NEGOTIATE VALID
@@ -144,7 +148,7 @@ int main()
 
 	////TEST NEGOTIATE INVALID
 	//Negotiate(p1, p1);
-	games.~GameEngine();
+	game->~GameEngine();
 
 	auto result = _getch();
 	return 0;
