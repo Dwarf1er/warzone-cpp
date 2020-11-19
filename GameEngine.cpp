@@ -167,7 +167,9 @@ void GameEngine::issueOrderPhase()
 	int userDefendTerritory = 0;
 	int deployNumber = 0;
 	int usersChoice = 0;
-	int id = 0;
+	int sourceID = 0;
+	int targetID = 0;
+	int armyNum = 0;
 
 	// Display for loop
 	for (int i = 0; i < map->listOfContinent.size(); i++) {
@@ -232,7 +234,7 @@ void GameEngine::issueOrderPhase()
 							playerBool = true;
 						}
 					}
-				}			
+				}
 				playerBool = false;
 			}
 			playerBool = false;
@@ -246,17 +248,40 @@ void GameEngine::issueOrderPhase()
 		while (!playerBool) {
 			printf("Which territory do you want to move from? ");
 			for (int j = 0; j < playersVec[i]->getPlayerTerritories().size(); j++) {
-				std::cout<< j << ": " << playersVec[i]->getPlayerTerritories()[j] << std::endl;
+				std::cout << j << ": " << playersVec[i]->getPlayerTerritories()[j] << std::endl;
 			}
 			cin >> usersChoice;
-			for (int j = 0; j < playersVec[i]->getPlayerTerritories().size(); j++) {
-				if (usersChoice == playersVec[i]->getPlayerTerritories()[j]->getID()) {
-					id = usersChoice;
+			if (usersChoice > 0 || usersChoice < playersVec[i]->getPlayerTerritories().size()) {
+				for (int j = 0; j < playersVec[i]->getPlayerTerritories().size(); j++) {
+					if (usersChoice == playersVec[i]->getPlayerTerritories()[j]->getID()) {
+						sourceID = usersChoice;
+					}
 				}
 			}
-			if (usersChoice > 0 || usersChoice < playersVec[i]->getPlayerTerritories().size()) {
-				
+			printf("Which territory do you want to move to ?");
+			cin >> usersChoice;
+			for (int j = 0; j < playersVec[i]->getPlayerTerritories().size(); j++) {
+				std::cout << j << ": " << playersVec[i]->getPlayerTerritories()[j] << std::endl;
 			}
+
+			if (usersChoice > 0 || usersChoice < playersVec[i]->getPlayerTerritories().size()) {
+				for (int j = 0; j < playersVec[i]->getPlayerTerritories().size(); j++) {
+					if (usersChoice != playersVec[i]->getPlayerTerritories()[j]->getID()) {
+						targetID = usersChoice;
+					}
+				}
+			}
+
+			printf("How many units are you moving ?");
+			cin >> usersChoice;
+			if (usersChoice > 0 || usersChoice < playersVec[i]->getPlayerTerritories().size()) {
+				/*if (armyNum <= playersVec[i]->getPlayerTerritories()[sourceID]->getNumberOfArmies()) {
+					armyNum = usersChoice;
+				}*/
+				armyNum = usersChoice;
+			}
+			break;
 		}
+		Advance(playersVec[i], armyNum, sourceID, targetID);
 	}
 }

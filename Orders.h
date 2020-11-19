@@ -57,10 +57,15 @@ private:
 	string territory1, territory2;
 	int armyMen;
 	bool checkValid{ false };
+	Player* p1;
+	int army;
+	int source;
+	int target;
 
 public:
 	Advance();
 	Advance(int army, string tr1, string tr2);
+	Advance(Player* p1, int army, int source, int target);
 
 	//string orderName();
 	bool validate();
@@ -156,7 +161,7 @@ class Negotiate : public Orders {
 private:
 	bool checkValid{ false };
 	Player* negotiatePlayer;
-	
+
 
 public:
 	Negotiate();

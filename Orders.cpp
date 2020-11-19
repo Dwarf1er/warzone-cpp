@@ -76,6 +76,14 @@ Advance::Advance(int army, string tr1, string tr2) {
 	territory1 = tr1;
 	territory1 = tr2;
 }
+
+Advance::Advance(Player* p1, int army, int source, int target) {
+	this->p1 = p1;
+	this->army = army; 
+	this->source = source;
+	this->target = target;
+	printf("Advance order has been initiated");
+}
 /*
 string Advance::orderName() {
 	return "Advance: ";
