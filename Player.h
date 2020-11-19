@@ -19,6 +19,8 @@ private:
 	int playerID; //represents the player ID's
 	std::vector<int> toAttackVec;
 	std::vector<int> toDefendVec;
+	bool pacifism;
+	bool cardCheck;
 
 public:
 	//constructor(s) and destructor
@@ -34,6 +36,9 @@ public:
 	int getPlayerArmies(); //returns the armies of the player
 	std::vector<int> getToAttackVec();
 	std::vector<int> getToDefendVec();
+	int getPlayerID();
+	bool getPacifism();
+	bool getCardCheck();
 
 	//mutators
 	void setPlayerTerritories(vector<Territory*> playerTerritories_);
@@ -43,6 +48,8 @@ public:
 	void setPlayerID(int playerID_);
 	void setToAttack(vector<int> t);
 	void setToDefend(vector<int> t);
+	void setPacifism(bool check);
+	void setCardCheck(bool check);
 
 	//operator overloading
 		//assignment operator overloading

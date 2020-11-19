@@ -4,7 +4,7 @@ using namespace std;
 
 //constructors
 	//default constructor
-Player::Player() : playerTerritories(), playerCards(), playerOrderList(), playerArmies(0), playerID(0) {
+Player::Player() : playerTerritories(), playerCards(), playerOrderList(), playerArmies(0), playerID(0), pacifism(false) {
 }
 
 //parametrized constructor
@@ -29,6 +29,7 @@ Player::~Player() {
 
 	playerArmies = 0;
 	playerID = 0;
+	pacifism = false;
 }
 
 //accessors
@@ -48,6 +49,20 @@ int Player::getPlayerArmies() {
 	return playerArmies;
 }
 
+int Player::getPlayerID()
+{
+	return playerID;
+}
+
+bool Player::getPacifism() 
+{
+	return pacifism;
+}
+
+bool Player::getCardCheck()
+{
+	return cardCheck;
+}
 
 
 //mutators
@@ -84,6 +99,13 @@ void Player::setToAttack(vector<int> t)
 void Player::setToDefend(vector<int> t)
 {
 	toDefendVec = t;
+void Player::setPacifism(bool check) {
+	pacifism = check;
+}
+
+void Player::setCardCheck(bool check)
+{
+	cardCheck = check;
 }
 
 //operator overloading
@@ -139,6 +161,7 @@ istream& operator>>(istream& in, Player& p) {
 //required methods
 void Player::issueOrder(Orders* order) {
 	this->setPlayerOrders(order);
+	
 }
 
 vector<Territory*> Player::toDefend() {

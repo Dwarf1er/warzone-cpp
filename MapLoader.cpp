@@ -13,6 +13,33 @@ MapLoader::MapLoader() {
 MapLoader::~MapLoader() {
 }
 
+//copy constructor
+MapLoader::MapLoader(const MapLoader& ml1)
+{
+	cout << "Copy constructor called" << endl;
+	ID = ml1.ID;
+}
+
+//operator overload
+void MapLoader::operator=(const MapLoader& ml)
+{
+	std::cout << "Assignment operator called" << std::endl;
+	ID = ml.ID;
+}
+
+ostream& operator<<(ostream& out, const MapLoader& ml)
+{
+	out << endl << "\tMapLoader ID: " << ml.ID << endl;
+	return out;
+}
+
+istream& operator>>(std::istream& in, MapLoader& ml) {
+	std::cout << "Enter MapLoader ID: ";
+	in >> ml.ID;
+	return in;
+}
+
+
 //Method to load map from a .map file
 Map MapLoader::loadmap(string file) {
 

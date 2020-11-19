@@ -13,8 +13,12 @@ public:
 	Territory(int _ID);
 	~Territory();
 	int getID() { return ID; }
+	int getpID() { return pID; }
 	int getNumberOfArmies() { return numberOfArmies; }
+	int getneighbors() { return neighbors; }
 	void setNumberOfArmies(int num) { numberOfArmies = num; }
+	void setpID(int num) { pID = num; }
+	void setneighbors(int num) { neighbors = num; }
 	//Copy Constructor 
 	Territory(const Territory& t1);
 	//Assignment operator
@@ -25,7 +29,9 @@ public:
 
 private:
 	int ID;
+	int pID=0;
 	int numberOfArmies=0;
+	int neighbors = 0;
 };
 
 struct Continent {

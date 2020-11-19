@@ -2,6 +2,7 @@
 #include <iostream>
 #include<string>
 #include<vector>
+#include "Map.h"
 class Player;
 
 using namespace std;
@@ -36,10 +37,10 @@ private:
 public:
 	//constructor
 	Deploy();
-	Deploy(int rMy, string tt);
+	Deploy(Player* p, int army, Territory* t);
 
-	bool validate();
-	void execute();
+	bool validate(Player*p, Territory* t);
+	void execute(Player* p, int army, Territory* t);
 
 	//getters & setters
 
@@ -68,20 +69,18 @@ public:
 	Advance(Player* p1, int army, int source, int target);
 
 	//string orderName();
-	bool validate();
-	void execute();
+	void validate(Player* p, Territory* t1, Territory* t2, Map* m);
+	void execute(Player* p1, Player* p2, Territory* t1, Territory* t2, int army);
 	//void orderProcedure();
 
 	//getters & setters
 	bool getCheckValid();
 	int getArmyMen();
-	string getTerritory1();
-	string getTerritory2();
+	
 
 	void setCheckValid(bool check);
 	void setArmyMen(int army);
-	void setTerritory1(string tr1);
-	void setTerritory2(string tr2);
+	
 };
 
 //-------------------BOMB----------------//
@@ -91,11 +90,11 @@ private:
 	bool checkValid{ false };
 public:
 	Bomb();
-	Bomb(string target);
+	Bomb(Player* p, Territory* t);
 
 	//string  orderName();
-	bool validate();
-	void execute();
+	void validate(Player* p, Territory* t);
+	void execute(Territory* t);
 	//void orderProcedure();
 
 	//getters & setters
@@ -111,13 +110,14 @@ class Blockade : public Orders {
 	//to increase army 3x on current territory and make it neutral
 private:
 	string blockTerritory;
+	bool checkValid{ false };
 public:
 	Blockade();
-	Blockade(string btt);
+	Blockade(Player* p, Territory* t);
 
 	//string orderName();
-	bool validate();
-	void execute();
+	void validate(Player* p, Territory* t);
+	void execute(Territory* t);
 
 	string getBlockedTerritory();
 	void setBlockedTerritory(string btt);
@@ -137,11 +137,11 @@ private:
 
 public:
 	Airlift();
-	Airlift(int army, string tt1, string tt2);
+	Airlift(Player* p1, Player* p2, Territory* t, Territory* t2, int army);
 
 	//void orderProcedure();
-	bool validate();
-	void execute();
+	void validate(Player* p, Territory* t1, Territory* t2);
+	void execute(Player* p1, Player* p2, Territory* t1, Territory* t2, int army);
 
 	//getters & setters
 	int getAirArmy();
@@ -165,11 +165,11 @@ private:
 
 public:
 	Negotiate();
-	Negotiate(Player* p1);
+	Negotiate(Player* p1, Player* p2);
 
 	void orderProcedure();
-	bool validate();
-	void execute();
+	void validate(Player* p1, Player* p2);
+	void execute(Player* p1, Player* p2);
 
 	bool getCheckValid();
 	void setCheckValid(bool valid);
