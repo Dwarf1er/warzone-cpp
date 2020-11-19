@@ -144,6 +144,7 @@ int main()
 
 	////TEST NEGOTIATE INVALID
 	//Negotiate(p1, p1);
+	games.~GameEngine();
 
 	auto result = _getch();
 	return 0;
