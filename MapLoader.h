@@ -8,7 +8,8 @@ class MapLoader {
 public:
 	MapLoader();
 	~MapLoader();
-	Map loadmap(std::string file);
+	// Previous Map loadmap(std::string file);
+	Map* loadmap(std::string file);
 	bool getContinentCheck();
 	//copy constructor
 	MapLoader(const MapLoader& ml1);

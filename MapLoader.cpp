@@ -41,7 +41,8 @@ istream& operator>>(std::istream& in, MapLoader& ml) {
 
 
 //Method to load map from a .map file
-Map MapLoader::loadmap(string file) {
+//Previous Map MapLoader::loadmap(string file)
+Map* MapLoader::loadmap(string file) {
 
 	//Get the file name with extension 
 	fstream infile;
@@ -60,13 +61,13 @@ Map MapLoader::loadmap(string file) {
 	bool check = true;
 	int x;
 
-	Map graph;
+	Map* graph = new Map();
 	continentCheck = false;
 	countryCheck = false;
 	borderCheck = false;
 	mapCheck = false;
 
-	graph.initList();
+	graph->initList();
 
 	// Extracting words from the file 
 	int error = 0;
@@ -93,7 +94,7 @@ Map MapLoader::loadmap(string file) {
 				//num
 				infile >> x;
 				int num = x;
-				graph.createContinent(name, more);
+				graph->createContinent(name, more);
 				more++;
 				infile >> s;  //color ignorer
 			}
@@ -134,7 +135,7 @@ Map MapLoader::loadmap(string file) {
 					int num2 = x;
 
 					try {
-						graph.addToContinent(num2 - 1, graph.nodeList[add]);
+						graph->addToContinent(num2 - 1, graph->nodeList[add]);
 					}
 
 					catch (...) {
@@ -194,7 +195,7 @@ Map MapLoader::loadmap(string file) {
 					neighbor = strtok_s(NULL, delim, &context);
 					do
 					{
-						graph.addEdge(graph.nodeList[atoi(index) - 1], graph.nodeList[atoi(neighbor) - 1]);
+						graph->addEdge(graph->nodeList[atoi(index) - 1], graph->nodeList[atoi(neighbor) - 1]);
 						neighbor = strtok_s(NULL, delim, &context);
 					} while (neighbor);
 				}
@@ -227,12 +228,15 @@ Map MapLoader::loadmap(string file) {
 	}
 	if (continentCheck == true && countryCheck == true && borderCheck == true) {
 		//Call method to check for duplicate territories 
-		graph.validate();
+		graph->validate();
 		printf("\n");
-		graph.printBoard();
-		return graph;
+		//graph.printBoard();
+		//return graph;
+		graph->printBoard();
 	}
 	infile.close();
+
+	return graph;
 }
 
 bool MapLoader::getContinentCheck()

@@ -64,6 +64,7 @@ public:
 	bool isIn(Territory* currentNode, std::vector<Territory*>* nodeVec);
 	int territorySizeCheck();
 	int subgraphCheck(int continentIndex, std::vector<Territory*>* vec);
+	std::vector<Territory*> getTerritories();
 
 private:
 	int counter;

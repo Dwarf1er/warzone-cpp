@@ -9,7 +9,6 @@ Player::Player() : playerTerritories(), playerCards(), playerOrderList(), player
 
 //parametrized constructor
 Player::Player(vector<Territory*> playerTerritories_, Hand* playerCards_, OrderList* playerOrders_, int playerArmies_, int playerID_) : playerTerritories(playerTerritories_), playerCards(playerCards_), playerOrderList(playerOrders_), playerArmies(playerArmies_), playerID(playerID_) {
-	//remove territories from the global list!!!!
 }
 //copy constructor
 Player::Player(const Player& p) : playerTerritories(p.playerTerritories), playerCards(new Hand(*(p.playerCards))), playerOrderList(new OrderList(*(p.playerOrderList))), playerArmies(p.playerArmies), playerID(p.playerID) {
@@ -123,8 +122,11 @@ void Player::operator=(const Player& p) {
 ostream& operator<<(ostream& out, const Player& p) {
 	out << "\nPlayer ID: " << p.playerID << endl;
 
+	out << "Player Armies: " << p.playerArmies << endl;
+	
+	out << "Territories: " << endl;
 	for (Territory* t : p.playerTerritories) {
-		out << "Territories: " << *t << endl;
+		out << *t << endl;
 	}
 	
 	if (p.playerOrderList != nullptr) {

@@ -294,6 +294,10 @@ int Map::subgraphCheck(int continentIndex, std::vector<Territory*>* vec) {
 	return 0;
 }
 
+std::vector<Territory*> Map::getTerritories() {
+	return nodeList;
+}
+
 Continent::Continent() {
 	name = "";
 	numberOfTerritories = 0;
