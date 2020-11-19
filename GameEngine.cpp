@@ -1,5 +1,6 @@
 #include "GameEngine.h"
 #include "MapLoader.h"
+#include "Map.h"
 #include "Player.h"
 #include "Cards.h"
 #include "Orders.h"
@@ -85,12 +86,12 @@ void GameEngine::initGame() {
 			}
 
 			if (userFileInput > 1 && userFileInput < 5) {
-				map = new Map(maploaders.loadmap(listOfFile[userFileInput - 1]));
+				map = new Map(*maploaders.loadmap(listOfFile[userFileInput - 1]));
 				std::cout << ("Please choose another file. \n");
 			}
 		}
 		//maploaders.loadmap(listOfFile[userFileInput - 1]);
-		map = new Map(maploaders.loadmap(listOfFile[userFileInput - 1]));
+		map = new Map(*maploaders.loadmap(listOfFile[userFileInput - 1]));
 		break;
 	}
 
@@ -168,6 +169,13 @@ void GameEngine::initGame() {
 	cards.push_back(Card(CardType::DIPLOMACY));
 	Deck* deck = new Deck(cards);
 	std::cout << *deck << endl;
+
+	std::cout << "======================================= Part 3  ======================================= " << std::endl;
+
+	reinforcementPhase();
+	issueOrderPhase();
+
+	std::cout << "======================================= Part 3 end =======================================\n" << std::endl;
 }
 //===StartUp Class (Part 2)===//
 
@@ -194,14 +202,6 @@ ostream& operator<<(ostream& out, const StartUp& s) {
 	out << "\nGame Engine: " << s.engine << endl;
 	return out;
 }
-
- std::cout << "======================================= Part 3  ======================================= " << std::endl;
-
-//reinforcementPhase();
-//issueOrderPhase();
-
-std::cout << "======================================= Part 3 end =======================================\n" << std::endl;
-
 
 std::vector<Player*> GameEngine::getPlayersVec()
 {
