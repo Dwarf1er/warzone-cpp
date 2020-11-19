@@ -15,6 +15,10 @@ class GameEngine {
 		std::vector<Player*> getPlayersVec();
 		void reinforcementPhase();
 		void issueOrderPhase();
+		void shufflePlayersVec();
+		int getNumPlayers();
+		Map* getMap();
+		vector<Player*> getPlayers();
 
 	private:
 		Player* currentPlayer;
@@ -24,16 +28,6 @@ class GameEngine {
 		std::vector<Player*> playersVec;
 		std::vector<Player*> playerOrder;
 		std::vector<std::string> listOfFile;
-
-	public:
-		GameEngine();
-		~GameEngine();
-		void initGame();
-		void getListOfMap();
-		void shufflePlayersVec();
-		vector<Player*> getPlayers();
-		int getNumPlayers();
-		Map* getMap();
 };
 
 class StartUp {

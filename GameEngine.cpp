@@ -4,6 +4,7 @@
 #include "Cards.h"
 #include "Orders.h"
 #include <vector>
+#include <iostream>
 #include <algorithm>
 
 //===GameEngine Class (Part 1)===//
@@ -12,6 +13,7 @@
 #include <filesystem>
 #include <random>
 namespace fs = filesystem;
+using namespace std;
 
 GameEngine::GameEngine() {
 	currentPlayer = NULL;
@@ -37,7 +39,7 @@ void GameEngine::getListOfMap() {
 	string path = "../WarzoneCpp";
 	for (const auto& entry : fs::directory_iterator(path)) {
 		if (entry.path().extension() == ".map") {
-			cout << i + 1 << ": " << entry.path().filename() << endl;
+			std::cout << i + 1 << ": " << entry.path().filename() << endl;
 			listOfFile.push_back(entry.path().filename().string());
 			i++;
 		}
@@ -67,9 +69,9 @@ Map* GameEngine::getMap() {
 void GameEngine::initGame() {
 	//Get userinput for the file chosen 
 	int userFileInput;
-	cout << "List of file found: " << endl;
+	std::cout << "List of file found: " << endl;
 	getListOfMap();
-	printf("\n");
+	std::cout << ("") << std::endl;
 
 	// Loop to get userinput to load correct files
 	while (true) {
@@ -84,7 +86,7 @@ void GameEngine::initGame() {
 
 			if (userFileInput > 1 && userFileInput < 5) {
 				map = new Map(maploaders.loadmap(listOfFile[userFileInput - 1]));
-				printf("Please choose another file. \n");
+				std::cout << ("Please choose another file. \n");
 			}
 		}
 		//maploaders.loadmap(listOfFile[userFileInput - 1]);
@@ -94,15 +96,15 @@ void GameEngine::initGame() {
 
 	//Ask the user for the number of player to play	
 	while (true) {
-		cout << "Please enter the number of player (2-5)" << endl;
-		cin >> numOfPlayer;
-		printf("Creating Players.....");
-		printf("\n");
+		std::cout << "Please enter the number of player (2-5)" << endl;
+		std::cin >> numOfPlayer;
+		std::cout << ("Creating Players.....") << std::endl;
+		std::cout << "" << std::endl;
 
 		if (numOfPlayer < 2 || numOfPlayer > 5) {
 			cin.clear();
 			cin.ignore(1000, '\n');
-			cout << "Invalid number of players. Please enter between 2-5 players." << endl;
+			std::cout << "Invalid number of players. Please enter between 2-5 players." << endl;
 		}
 		else {
 			break;
@@ -133,30 +135,30 @@ void GameEngine::initGame() {
 	}*/
 
 	//Options for observer 
-	cout << "\n" << endl;
-	cout << "Observer Options: \n" << endl;
-	cout << "Press 1 to open or Press 2 to close it \n" << endl;
+	std::cout << "\n" << endl;
+	std::cout << "Observer Options: \n" << endl;
+	std::cout << "Press 1 to open or Press 2 to close it \n" << endl;
 
 	while (true) {
 		cin >> observerOption;
 		if (observerOption == 1) {
-			cout << "Observer turned on!\n" << endl;
+			std::cout << "Observer turned on!\n" << endl;
 			break;
 		}
 		if (observerOption == 2) {
-			cout << "Observer turned off!\n" << endl;
+			std::cout << "Observer turned off!\n" << endl;
 			break;
 		}
 
 		if (observerOption != (1 || 2)) {
 			cin.clear();
 			cin.ignore(1000, '\n');
-			cout << "Please enter the number 1 or 2\n" << endl;
+			std::cout << "Please enter the number 1 or 2\n" << endl;
 		}
 	}
 
 	//Creating the cards and its deck 
-	printf("\n");
+	std::cout << ("\n");
 	vector<Card> cards;
 	cards.push_back(Card(CardType::SPY));
 	cards.push_back(Card(CardType::BOMB));
@@ -165,16 +167,16 @@ void GameEngine::initGame() {
 	cards.push_back(Card(CardType::AIRLIFT));
 	cards.push_back(Card(CardType::DIPLOMACY));
 	Deck* deck = new Deck(cards);
-	cout << *deck << endl;
+	std::cout << *deck << endl;
 }
 //===StartUp Class (Part 2)===//
 
 //constructors
 	//default constructor
-StartUp::StartUp(): engine() {
+StartUp::StartUp() : engine() {
 }
-	//copy constructor
-StartUp::StartUp(const StartUp& s): engine(s.engine) {
+//copy constructor
+StartUp::StartUp(const StartUp& s) : engine(s.engine) {
 }
 
 //destructor
@@ -193,11 +195,13 @@ ostream& operator<<(ostream& out, const StartUp& s) {
 	return out;
 }
 
-	printf("======================================= Part 3  =======================================\n");
-	reinforcementPhase();
-	issueOrderPhase();
-	printf("======================================= Part 3 end =======================================\n");
-}
+ std::cout << "======================================= Part 3  ======================================= " << std::endl;
+
+//reinforcementPhase();
+//issueOrderPhase();
+
+std::cout << "======================================= Part 3 end =======================================\n" << std::endl;
+
 
 std::vector<Player*> GameEngine::getPlayersVec()
 {
@@ -247,7 +251,7 @@ void GameEngine::issueOrderPhase()
 	for (int i = 0; i < playersVec.size(); i++) {
 		for (int j = 0; j < playersVec[i]->getPlayerTerritories().size(); j++) {
 			while (!playerBool) {
-				printf("Choose to attack: \n");
+				std::cout << ("Choose to attack: \n");
 				cin >> userAttackTerritory;
 				if (userAttackTerritory < map->listOfContinent[i]->territories.size() && userAttackTerritory > 0) {
 					playerBool = true;
@@ -268,7 +272,7 @@ void GameEngine::issueOrderPhase()
 	for (int i = 0; i < playersVec.size(); i++) {
 		for (int j = 0; j < playersVec[i]->getPlayerTerritories().size(); j++) {
 			while (!playerBool) {
-				printf("Choose to defend: \n");
+				std::cout << ("Choose to defend: \n");
 				cin >> userDefendTerritory;
 				if (userDefendTerritory < playersVec[i]->getPlayerTerritories().size() && userDefendTerritory > 0) {
 					playerBool = true;
@@ -285,7 +289,7 @@ void GameEngine::issueOrderPhase()
 			// Get number to deploy 
 			for (int k = 0; k < playersVec.size(); k++) {
 				while (!playerBool) {
-					printf("Choose how much unit to deploy \n");
+					std::cout << ("Choose how much unit to deploy \n");
 					cin >> deployNumber;
 					if (deployNumber > 0 && deployNumber < playersVec[k]->getPlayerArmies()) {
 						playersVec[k]->setPlayerArmies(playersVec[k]->getPlayerArmies() - deployNumber);
@@ -305,7 +309,7 @@ void GameEngine::issueOrderPhase()
 	// Advance Orders
 	for (int i = 0; i < playersVec.size(); i++) {
 		while (!playerBool) {
-			printf("Which territory do you want to move from? ");
+			std::cout << ("Which territory do you want to move from? ");
 			for (int j = 0; j < playersVec[i]->getPlayerTerritories().size(); j++) {
 				std::cout << j << ": " << playersVec[i]->getPlayerTerritories()[j] << std::endl;
 			}
@@ -317,7 +321,7 @@ void GameEngine::issueOrderPhase()
 					}
 				}
 			}
-			printf("Which territory do you want to move to ?");
+			std::cout << ("Which territory do you want to move to ?");
 			cin >> usersChoice;
 			for (int j = 0; j < playersVec[i]->getPlayerTerritories().size(); j++) {
 				std::cout << j << ": " << playersVec[i]->getPlayerTerritories()[j] << std::endl;
@@ -331,8 +335,8 @@ void GameEngine::issueOrderPhase()
 				}
 			}
 
-			printf("How many units are you moving ?");
-			cin >> usersChoice;
+			std::cout << ("How many units are you moving ?");
+			std::cin >> usersChoice;
 			if (usersChoice > 0 || usersChoice < playersVec[i]->getPlayerTerritories().size()) {
 				/*if (armyNum <= playersVec[i]->getPlayerTerritories()[sourceID]->getNumberOfArmies()) {
 					armyNum = usersChoice;
@@ -342,7 +346,9 @@ void GameEngine::issueOrderPhase()
 			break;
 		}
 		Advance(playersVec[i], armyNum, sourceID, targetID);
-		printf("\n");
+		std::cout << "" << std::endl;
+	}
+}
 istream& operator>>(istream& in, const StartUp& s) {
 	//in >> s.engine;
 	return in;
@@ -356,18 +362,18 @@ void StartUp::setGameEngine(GameEngine* engine_) {
 void StartUp::startupPhase() {
 	int A = 0;
 	vector<Player*> a = engine->getPlayers();
-	
+
 	//1 - randomize player order
-	cout << "Randomizing the order of the players..." << endl;
+	std::cout << "Randomizing the order of the players..." << endl;
 	engine->shufflePlayersVec();
 
 	cout << "Player order for this game: " << endl;
 	for (Player* p : engine->getPlayers()) {
 		cout << *p << endl;
 	}
-	
+
 	//2 - assign territories to players one by one in a round-robin fashion
-	cout << "Assigning the territories randomly to all players..." << endl;
+	std::cout << "Assigning the territories randomly to all players..." << endl;
 	if (!engine->getMap()->nodeList.empty()) {
 		shuffle(begin(engine->getMap()->nodeList), end(engine->getMap()->nodeList), default_random_engine());
 		while (!engine->getMap()->nodeList.empty()) {
@@ -385,7 +391,7 @@ void StartUp::startupPhase() {
 	}
 	else
 		cout << "The map has loading problems, it is not Antoine's fault, he has been asking his team to communicate since the beginning of the semester" << endl;
-	
+
 	//3 - giving players an initial number of armies
 	cout << "Giving players their initial amount of armies..." << endl;
 	switch (engine->getNumPlayers()) {
