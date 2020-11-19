@@ -4,7 +4,6 @@
 #include "Map.h"
 #include "Cards.h"
 #include "Orders.h"
-
 using namespace std;
 using std::vector;
 
@@ -41,7 +40,7 @@ public:
 	void setPlayerOrders(Orders* playerOrderList_);
 	void setPlayerArmies(int playerArmies_);
 	void setPlayerID(int playerID_);
-	void setToAttack(Territory t);
+	void setToAttack(vector<int> t);
 	void setToDefend(Territory t);
 
 	//operator overloading

@@ -2,6 +2,7 @@
 #include "MapLoader.h"
 #include "Player.h"
 #include "Cards.h"
+#include <vector>
 
 //Test To check file in directory 
 #include <filesystem>
@@ -179,12 +180,19 @@ void GameEngine::issueOrderPhase()
 
 	
 	/*std::cout << map->listOfContinent[0]->territories[1]->getID() << std::endl;*/
-	playersVec[0]->getToAttackVec().push_back(map->listOfContinent[0]->territories[3]->getID());
+	//playersVec[0]->getToAttackVec().push_back(map->listOfContinent[0]->territories[3]->getID());
 	//std::cout << playersVec[0]->getToAttackVec().size() << std::endl;
 	//std::cout << playersVec[0]->toAttack()[0]->getID() << std::endl;
+	vector<int> myvector;
+	
 	for (int i = 0; i < playersVec.size(); i++) {
-		playersVec[0]->getToAttackVec().push_back(map->listOfContinent[0]->territories[3]->getID());
-		std::cout << playersVec[i]->getToAttackVec().size() << std::endl;
+		cout << map->listOfContinent[0]->territories[3]->getID() << "TEST" << endl;
+		std::cout << "myvector stores " << int(myvector.size()) << " numbers.\n";
+
+		myvector = playersVec[0]->getToAttackVec();
+		myvector.push_back(map->listOfContinent[0]->territories[3]->getID());
+		playersVec[0]->setToAttack(myvector);
+		std::cout << playersVec[0]->getToAttackVec().size() << std::endl;
 	}
 
 	/*for (int i = 0; i < playersVec.size(); i++) {
