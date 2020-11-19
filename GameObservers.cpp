@@ -56,7 +56,11 @@ void PhaseObserver::Update()
 
 void PhaseObserver::display()
 {
+	if (!_subject->enableObserver) 
+		return;
 
+	std::cout << "\n" << "======================================= OBSERVER =======================================" << "\n";
+	
 	std::map<Player*, int> armiesCountsBasedOnTerritories = _subject->armiesCountsBasedOnTerritories;
 	std::map<Player*, int> armiesCountsMinimums = _subject->armiesCountsMinimums;
 	std::map<Player*, OrderData> issueOrderDetails = _subject->issueOrderDetails;
@@ -79,11 +83,10 @@ void PhaseObserver::display()
 			<< t.second.armyNum << " armies"
 			<< " from " << t.second.sourceID
 			<< " to " << t.second.targetID
-			<< " minimum added" << "\n";
+			<< "\n";
 	}
 
-	//get variables from model
-	cout << endl; //add variables
+	cout << "========================================================================================" << "\n\n";
 }
 
 StatisticsObserver::StatisticsObserver() {}

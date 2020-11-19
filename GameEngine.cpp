@@ -138,10 +138,12 @@ void GameEngine::initGame() {
 	while (true) {
 		cin >> observerOption;
 		if (observerOption == 1) {
+			enableObserver = true;
 			std::cout << "Observer turned on!\n" << endl;
 			break;
 		}
 		if (observerOption == 2) {
+			enableObserver = false;
 			std::cout << "Observer turned off!\n" << endl;
 			break;
 		}
