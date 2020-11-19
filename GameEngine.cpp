@@ -9,7 +9,7 @@
 //Test To check file in directory 
 #include <filesystem>
 #include <random>
-namespace fs = std::filesystem;
+namespace fs = filesystem;
 
 GameEngine::GameEngine() {
 	currentPlayer = NULL;
@@ -30,19 +30,18 @@ MapLoader maploaders;
 //Get List of maps in directory
 void GameEngine::getListOfMap() {
 	int i = 0;
-	std::string path = "../WarzoneCpp";
+	string path = "../WarzoneCpp";
 	for (const auto& entry : fs::directory_iterator(path)) {
 		if (entry.path().extension() == ".map") {
-			std::cout << i + 1 << ": " << entry.path().filename() << std::endl;
+			cout << i + 1 << ": " << entry.path().filename() << endl;
 			listOfFile.push_back(entry.path().filename().string());
 			i++;
 		}
 	}
 }
 
-void GameEngine::shufflePlayersVec(vector<Player*> playersVec_) {
-	std::default_random_engine rng = std::default_random_engine{};
-	shuffle(begin(playersVec), end(playersVec), rng);
+void GameEngine::shufflePlayersVec() {
+	shuffle(begin(playersVec), end(playersVec), default_random_engine{});
 }
 
 //Return the playersVec
@@ -64,19 +63,19 @@ Map* GameEngine::getMap() {
 void GameEngine::initGame() {
 	//Get userinput for the file chosen 
 	int userFileInput;
-	std::cout << "List of file found: " << std::endl;
+	cout << "List of file found: " << endl;
 	getListOfMap();
 	printf("\n");
 
 	// Loop to get userinput to load correct files
 	while (true) {
-		std::cout << "Which file would you like to load ? " << std::endl;
+		cout << "Which file would you like to load ? " << endl;
 		//Verify that user inputs a number
-		while (!(std::cin >> userFileInput) || userFileInput > listOfFile.size() || userFileInput < 1 || (userFileInput > 1 && userFileInput < 5)) {
-			std::cin.clear();
-			std::cin.ignore(1000, '\n');
+		while (!(cin >> userFileInput) || userFileInput > listOfFile.size() || userFileInput < 1 || (userFileInput > 1 && userFileInput < 5)) {
+			cin.clear();
+			cin.ignore(1000, '\n');
 			if (!isdigit(userFileInput)) {
-				std::cout << "Incorrect input. Please select among the selection number" << std::endl;
+				cout << "Incorrect input. Please select among the selection number" << endl;
 			}
 
 			if (userFileInput > 1 && userFileInput < 5) {
@@ -91,15 +90,15 @@ void GameEngine::initGame() {
 
 	//Ask the user for the number of player to play	
 	while (true) {
-		std::cout << "Please enter the number of player (2-5)" << std::endl;
-		std::cin >> numOfPlayer;
+		cout << "Please enter the number of player (2-5)" << endl;
+		cin >> numOfPlayer;
 		printf("Creating Players.....");
 		printf("\n");
 
 		if (numOfPlayer < 2 || numOfPlayer > 5) {
-			std::cin.clear();
-			std::cin.ignore(1000, '\n');
-			std::cout << "Invalid number of players. Please enter between 2-5 players." << std::endl;
+			cin.clear();
+			cin.ignore(1000, '\n');
+			cout << "Invalid number of players. Please enter between 2-5 players." << endl;
 		}
 		else {
 			break;
@@ -120,13 +119,13 @@ void GameEngine::initGame() {
 		p->setPlayerTerritories(playerTerritories);
 		p->setPlayerCards(playerCard);
 		p->setPlayerOrders(playerOrder);
-		std::cout << *p << "Number Of Armies: " << p->getPlayerArmies() << std::endl;
-		std::cout << "Player Cards: " << *p->getPlayerCards() << std::endl;
+		cout << *p << "Number Of Armies: " << p->getPlayerArmies() << endl;
+		cout << "Player Cards: " << *p->getPlayerCards() << endl;
 		playersVec.push_back(p);
 	}
 
 	/*for (int i = 0; i < playersVec.size(); i++) {
-		std::cout << (playersVec[i]->getPlayerArmies()) << std::endl;
+		cout << (playersVec[i]->getPlayerArmies()) << endl;
 	}*/
 
 	//Options for observer 
@@ -146,8 +145,8 @@ void GameEngine::initGame() {
 		}
 
 		if (observerOption != (1 || 2)) {
-			std::cin.clear();
-			std::cin.ignore(1000, '\n');
+			cin.clear();
+			cin.ignore(1000, '\n');
 			cout << "Please enter the number 1 or 2\n" << endl;
 		}
 	}
@@ -162,7 +161,7 @@ void GameEngine::initGame() {
 	cards.push_back(Card(CardType::AIRLIFT));
 	cards.push_back(Card(CardType::DIPLOMACY));
 	Deck* deck = new Deck(cards);
-	std::cout << *deck << std::endl;
+	cout << *deck << endl;
 }
 //===StartUp Class (Part 2)===//
 
@@ -206,7 +205,7 @@ void StartUp::startupPhase() {
 	
 	//1 - randomize player order
 	cout << "Randomizing the order of the players..." << endl;
-	engine->shufflePlayersVec(engine->getPlayers());
+	engine->shufflePlayersVec();
 
 	cout << "Player order for this game: " << endl;
 	for (Player* p : engine->getPlayers()) {
@@ -216,7 +215,7 @@ void StartUp::startupPhase() {
 	//2 - assign territories to players one by one in a round-robin fashion
 	cout << "Assigning the territories randomly to all players..." << endl;
 	if (!engine->getMap()->nodeList.empty()) {
-		std::shuffle(std::begin(engine->getMap()->nodeList), std::end(engine->getMap()->nodeList), std::default_random_engine());
+		shuffle(begin(engine->getMap()->nodeList), end(engine->getMap()->nodeList), default_random_engine());
 		while (!engine->getMap()->nodeList.empty()) {
 			for (Player* p : engine->getPlayers()) {
 				vector<Territory*> territories;

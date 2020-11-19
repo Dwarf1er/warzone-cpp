@@ -21,7 +21,7 @@ class GameEngine {
 		~GameEngine();
 		void initGame();
 		void getListOfMap();
-		void shufflePlayersVec(vector<Player*> playersVec_);
+		void shufflePlayersVec();
 		vector<Player*> getPlayers();
 		int getNumPlayers();
 		Map* getMap();
