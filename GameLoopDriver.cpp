@@ -12,5 +12,8 @@ All of this except the issueOrder() method must be implemented in a single .cpp/
 #include "GameLoop.h"
 
 int main(){
+    Player* p1;
+    GameLoop g1;
+    g1.reinforcementPhase(p1);
     return 0;
 }

@@ -21,8 +21,11 @@ void GameLoop::mainGameLoop(){
 	*/
 
     GameLoop::playerTurn=1;
-
-	//reinforcementPhase();
+	for(Player* p1: GameLoop::pl1){
+		cout <<"Reiforcement phase"<<endl;
+		reinforcementPhase(p1);
+	}
+	
 
 	//issueOrdersPhase();
 
