@@ -7,12 +7,15 @@
 #include <vector>
 #include <iostream>
 #include <algorithm>
+#include "GameObservers.h"
 
 //===GameEngine Class (Part 1)===//
 
 //Test To check file in directory 
 #include <filesystem>
 #include <random>
+
+
 namespace fs = filesystem;
 using namespace std;
 
@@ -189,8 +192,7 @@ StartUp::StartUp(const StartUp& s) : engine(s.engine) {
 
 //destructor
 StartUp::~StartUp() {
-	delete engine;
-	engine = nullptr;
+	
 }
 
 //operator overloading

@@ -6,7 +6,7 @@
 
 #include <iostream>
 
-class GameEngine {
+class GameEngine{
 	public:
 		GameEngine();
 		~GameEngine();

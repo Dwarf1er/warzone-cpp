@@ -2,17 +2,19 @@
 #include <list>
 using namespace std;
 
+// Observer Class 
 class Observer
 {
 public:
 	~Observer();
 	virtual void Update() = 0;
-	virtual void setSwitch(bool);
-	static bool _isEnabled;
+	virtual void setSwitch(bool) = 0;
+	bool _isEnabled;
 protected:
 	Observer();
 };
 
+//Subject Class 
 class Subject
 {
 public:
