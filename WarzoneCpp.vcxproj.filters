@@ -93,7 +93,6 @@
   <ItemGroup>
     <None Include="europe.map" />
     <None Include="austria-hungary.map" />
-    <None Include="artic.map" />
     <None Include="bad map1.map" />
     <None Include="bad map2.map" />
     <None Include="bad map3.map" />

@@ -7,10 +7,10 @@
 
 using namespace std;
 
-MapLoader::MapLoader(){
+MapLoader::MapLoader() {
 }
 
-MapLoader::~MapLoader(){
+MapLoader::~MapLoader() {
 }
 
 //copy constructor
@@ -45,13 +45,13 @@ void MapLoader::loadmap(string file) {
 
 	//Get the file name with extension 
 	fstream infile;
-	
+
 	string map;
 	map = file;
 	//cout << "Enter map name with extension: ";
 	cout << "Loading map..... " << map << endl;
 	printf("\n");
-	
+
 	infile.open(map);
 
 	string s;
@@ -112,7 +112,7 @@ void MapLoader::loadmap(string file) {
 					}
 
 					//Gets Country number
-					infile >> s;   
+					infile >> s;
 					if (!s.compare("[borders]")) {
 						break;
 					}
@@ -130,7 +130,7 @@ void MapLoader::loadmap(string file) {
 					}
 
 					//Gets the continent it belongs to
-					infile >> x;   
+					infile >> x;
 					int num2 = x;
 
 					try {
@@ -214,21 +214,16 @@ void MapLoader::loadmap(string file) {
 	}
 
 	//Different section of errors
-	for (int i = 0; i < 1; i++) {
-		if (continentCheck == false) {
-			cout << "Error 1: continent section invalid" << endl;
-			break;
-		}
+	if (continentCheck == false) {
+		cout << "Error 1: continent section invalid" << endl;
+	}
 
-		if (countryCheck == false) {
-			cout << "Error 2: country section invalid" << endl;
-			break;
-		}
+	if (countryCheck == false) {
+		cout << "Error 2: country section invalid" << endl;
+	}
 
-		if (borderCheck == false) {
-			cout << "Error 3: border section invalid" << endl;
-			break;
-		}
+	if (borderCheck == false) {
+		cout << "Error 3: border section invalid" << endl;
 	}
 	if (continentCheck == true && countryCheck == true && borderCheck == true) {
 		//Call method to check for duplicate territories 
