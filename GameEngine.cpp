@@ -160,10 +160,12 @@ void GameEngine::reinforcementPhase()
 	}
 }
 
+// TO GIVE TERRITORY
 void GameEngine::issueOrderPhase()
 {
 	int userAttackTerritory = 0;
 	int userDefendTerritory = 0;
+	int deployNumber = 0;
 
 	// Display for loop
 	for (int i = 0; i < map->listOfContinent.size(); i++) {
@@ -175,6 +177,7 @@ void GameEngine::issueOrderPhase()
 	vector<int> myvector;
 	vector<int> myvector2;
 	bool playerBool = false;
+	Orders order;
 
 
 	// To Attack
@@ -215,7 +218,24 @@ void GameEngine::issueOrderPhase()
 				playersVec[0]->setToDefend(myvector);
 				std::cout << playersVec[i]->getToDefendVec().size() << std::endl;
 			}
+
+			// Get number to deploy 
+			for (int i = 0; i < playersVec.size(); i++) {
+				while (!playerBool) {
+					printf("Choose how much unit to deploy \n");
+					cin >> deployNumber;
+					if (deployNumber > 0 && deployNumber < playersVec[i]->getPlayerArmies()) {
+						playersVec[i]->setPlayerArmies(playersVec[i]->getPlayerArmies() - deployNumber);
+						if (playersVec[i]->getPlayerArmies() <= 0) {
+							playerBool = true;
+						}
+					}
+				}			
+				playerBool = false;
+			}
 			playerBool = false;
 		}
 	}
+	std::cout << playersVec.size() << std::endl;
+	std::cout << playersVec[0]->getPlayerArmies() << std::endl;
 }
