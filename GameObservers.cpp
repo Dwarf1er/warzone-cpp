@@ -50,18 +50,13 @@ PhaseObserver::~PhaseObserver()
 
 void PhaseObserver::Update()
 {
-	if(_isEnabled) { display(); }
+	display();
 }
 
 void PhaseObserver::display()
 {
 	//get variables from model
 	cout << endl; //add variables
-}
-
-void PhaseObserver::setSwitch(bool b)
-{
-	_isEnabled = b;
 }
 
 StatisticsObserver::StatisticsObserver() {}
@@ -79,7 +74,7 @@ StatisticsObserver::~StatisticsObserver()
 
 void StatisticsObserver::Update()
 {
-	if (_isEnabled) { display(); }
+	display();
 }
 
 void StatisticsObserver::display()
@@ -88,7 +83,3 @@ void StatisticsObserver::display()
 	cout << endl; //add variables
 }
 
-void StatisticsObserver::setSwitch(bool b)
-{
-	_isEnabled = b;
-}
