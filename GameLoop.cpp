@@ -1,11 +1,11 @@
 #include "GameLoop.h"
 #include "Player.h"
 #include "Map.h"
+#include "GameEngine.h"
 
 vector<Player*> GameLoop::pl1 = vector<Player*>();
 int GameLoop::playerTurn = 0;
-int GameLoop::remainingDeployOrders=0; 
-vector <Territory*> Map::listOfContinent;
+int GameLoop::remainingDeployOrders=0;
 
 GameLoop::GameLoop(){}
 GameLoop::~GameLoop(){}
@@ -22,9 +22,10 @@ void GameLoop::mainGameLoop(){
 
     GameLoop::playerTurn=1;
 
-	reinforcementPhase();
+	//reinforcementPhase();
 
-	issueOrdersPhase();
+	//issueOrdersPhase();
+
 	//executeOrdersPhase();
 }
 
@@ -41,21 +42,32 @@ void GameLoop::reinforcementPhase(Player* p1){
 		These armies are  placed in  the  player’s  reinforcement  pool.
 		*/
         int bonusArmy=0;
-		
-		Continent c;
-        
+		int assignedArmyCount;
+        double playerTerritoryCount;
         if(playerTurn==1){
             return;
         }
 		//checks the player's number of territories in possession and assign army accordingly
-		double playerTerritoryCount= p1->getPlayerTerritories().size();
-		int assignedArmyCount= floor(playerTerritoryCount/3);
-       
-		p1->setPlayerArmies(assignedArmyCount);
-
-		for(int i=0; i< listOfContinent[i]->territories.size(); i++){
-
+		
+		/**
+		 *  double playerTerritoryCount= p1->getPlayerTerritories().size();
+			int assignedArmyCount= floor(playerTerritoryCount/3);
+			p1->setPlayerArmies(assignedArmyCount);
+		*/
+		
+		for(int i=0; i< pl1.size(); i++){ //loops through the player vector
+			
+			playerTerritoryCount= pl1[i]->getPlayerTerritories().size();
+			assignedArmyCount= floor(playerTerritoryCount/3);//counts army amount to assign by dividing number of player owned territory by 3
+			pl1[i]->setPlayerArmies(assignedArmyCount);		
 		}
+		for(int i=0; i< pl1.size(); i++){
+				if((pl1[i]->getPlayerTerritories().size()/3) < 9){ //to set minimum army amount to 3
+					assignedArmyCount= pl1[i]->getPlayerTerritories().size()+3;
+					pl1[i]->setPlayerArmies(assignedArmyCount);
+				}
+		}
+
 	
 	}
 	void GameLoop::issueOrdersPhase(){
