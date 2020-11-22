@@ -17,6 +17,18 @@ void Orders::setDescription(string orderName) {
 	description = orderName;
 }
 
+Orders::Orders(const Orders& o)
+{
+	std::cout << "Copy constructor called" << std::endl;
+	description = o.description;
+}
+
+void Orders::operator=(const Orders& o)
+{
+	std::cout << "Assignment operator called" << std::endl;
+	description = o.description;
+}
+
 //------------Deploy----------------//
 Deploy::Deploy() {
 	armyMen = 0;

@@ -20,11 +20,17 @@ private:
 	*/
 public:
 	Orders();
-	virtual void execute();
+	virtual void execute() = 0; //pure virtual execute
 	friend ostream& operator<<(ostream& out, const Orders& o);
 	friend istream& operator>>(istream& in, Orders& o);
 	string getDescription();
 	void setDescription(string orderName);
+	//Copy Constructor 
+	Orders(const Orders& o);
+	//Assignment operator
+	void operator=(const Orders& o);
+	friend std::ostream& operator<<(std::ostream& out, const Orders& o);
+	friend std::istream& operator>>(std::istream& in, Orders& o);
 };
 //Derived classes for orders
 
