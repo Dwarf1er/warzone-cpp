@@ -42,8 +42,12 @@ public:
 	//constructor
 	Deploy();
 	Deploy(Player* p, int army, Territory* t);
+
 	// Copy Constructor 
 	Deploy(const Deploy& d2);
+
+	// Assignment Operator 
+	void operator=(const Deploy& d2);
 
 	bool validate(Player* p, Territory* t);
 	void execute(Player* p, int army, Territory* t);
@@ -78,6 +82,9 @@ public:
 	// Copy Constructor 
 	Advance(const Advance& a2);
 
+	// Assignment Operator 
+	void operator=(const Advance& a2);
+
 	void validate(Player* p, Territory* t1, Territory* t2, Map* m);
 	void execute(Player* p1, Player* p2, Territory* t1, Territory* t2, int army);
 
@@ -103,6 +110,9 @@ public:
 	// Copy Constructor 
 	Bomb(const Bomb& b2);
 
+	// Assignment Operator
+	void operator=(const Bomb& b2);
+
 	//string  orderName();
 	void validate(Player* p, Territory* t);
 	void execute(Territory* t);
@@ -127,7 +137,10 @@ public:
 	Blockade(Player* p, Territory* t);
 
 	// Copy Constructor 
-	Blockade(const Blockade& b2);
+	Blockade(const Blockade& bl2);
+
+	// Assignment Operator
+	void operator=(const Blockade& bl2);
 
 	//string orderName();
 	void validate(Player* p, Territory* t);
@@ -155,6 +168,9 @@ public:
 
 	// Copy Constructor 
 	Airlift(const Airlift& al2);
+
+	// Assignment Constructor
+	void operator=(const Airlift& al2);
 
 	//void orderProcedure();
 	void validate(Player* p, Territory* t1, Territory* t2);
@@ -186,6 +202,9 @@ public:
 
 	// Copy constructor
 	Negotiate(const Negotiate& n2);
+
+	// Assignment Operator 
+	void operator=(const Negotiate& n2);
 
 	void orderProcedure();
 	void validate(Player* p1, Player* p2);

@@ -48,6 +48,12 @@ Deploy::Deploy(const Deploy& d2) {
 	territory = d2.territory;
 }
 
+// Assignment Operator
+void Deploy::operator=(const Deploy& d2){
+	armyMen = d2.armyMen;
+	territory = d2.territory;
+}
+
 // Execute Method 
 void Deploy::execute(Player* p, int army, Territory* t) { //moves armies to territory
 
@@ -63,6 +69,7 @@ void Deploy::execute(Player* p, int army, Territory* t) { //moves armies to terr
 		cout << "The order is invalid: territory does not belong to player" << endl;
 	}
 }
+
 bool Deploy::validate(Player* p, Territory* t) {
 
 	if (p->getPlayerID() == t->getpID()) { //checks if territory belongs to player
@@ -99,6 +106,14 @@ Advance::Advance(Player* p1, Player* p2, Territory* t1, Territory* t2, int army,
 	execute(p1, p2, t1, t2, army);
 }
 
+Advance::Advance(Player* p1, int army, int source, int target) {
+	this->p1 = p1;
+	this->army = army;
+	this->source = source;
+	this->target = target;
+	printf("Advance order has been initiated");
+}
+
 // Copy Constructor 
 Advance::Advance(const Advance& a2) {
 	p1 = a2.p1;
@@ -107,13 +122,14 @@ Advance::Advance(const Advance& a2) {
 	source = a2.source;
 }
 
-Advance::Advance(Player* p1, int army, int source, int target) {
-	this->p1 = p1;
-	this->army = army;
-	this->source = source;
-	this->target = target;
-	printf("Advance order has been initiated");
+// Assignment Operator
+void Advance::operator=(const Advance& a2){
+	p1 = a2.p1;
+	army = a2.army;
+	target = a2.target;
+	source = a2.source;
 }
+
 /*
 string Advance::orderName() {
 	return "Advance: ";
@@ -198,9 +214,7 @@ void Advance::execute(Player* p1, Player* p2, Territory* t1, Territory* t2, int 
 						Hand* h = new Hand(deck);
 						p1->setPlayerCards(h);
 					}
-
 				}
-
 			}
 			else {
 				cout << "attack cannot proceed since a negotiation has occured" << endl;
@@ -208,8 +222,6 @@ void Advance::execute(Player* p1, Player* p2, Territory* t1, Territory* t2, int 
 		}
 
 	}
-
-
 }
 /*
 void Advance::orderProcedure() {
@@ -248,6 +260,11 @@ Bomb::Bomb(Player* p, Territory* t) {
 
 // Copy Constructor 
 Bomb::Bomb(const Bomb& b2) {
+	bombTargetTerritory = b2.bombTargetTerritory;
+}
+
+// Assignment Constructor
+void Bomb::operator=(const Bomb& b2){
 	bombTargetTerritory = b2.bombTargetTerritory;
 }
 
@@ -307,7 +324,13 @@ Blockade::Blockade(Player* p, Territory* t) {
 	execute(t);
 }
 
+// Copy Constructor 
 Blockade::Blockade(const Blockade& bl2) {
+	blockTerritory = bl2.blockTerritory;
+}
+
+// Assignment Operator
+void Blockade::operator=(const Blockade& bl2){
 	blockTerritory = bl2.blockTerritory;
 }
 
@@ -358,7 +381,15 @@ Airlift::Airlift(Player* p1, Player* p2, Territory* t1, Territory* t2, int army)
 
 }
 
+// Copy constructor
 Airlift::Airlift(const Airlift& al2) {
+	airArmy = al2.airArmy;
+	initTerritory = al2.initTerritory;
+	targetTerritory = al2.targetTerritory;
+}
+
+// Assignment Operator
+void Airlift::operator=(const Airlift& al2){
 	airArmy = al2.airArmy;
 	initTerritory = al2.initTerritory;
 	targetTerritory = al2.targetTerritory;
@@ -481,6 +512,11 @@ Negotiate::Negotiate(Player* p1, Player* p2) {
 
 // Copy Constructor 
 Negotiate::Negotiate(const Negotiate& n2) {
+	negotiatePlayer = n2.negotiatePlayer;
+}
+
+// Assignment operator
+void Negotiate::operator=(const Negotiate& n2){
 	negotiatePlayer = n2.negotiatePlayer;
 }
 
