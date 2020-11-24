@@ -54,6 +54,21 @@ void Deploy::operator=(const Deploy& d2){
 	territory = d2.territory;
 }
 
+// Stream Insertion Operator 
+ostream& operator<<(ostream& out, const Deploy& d){
+	out << "Number of army:" << d.armyMen << endl;
+	return out; 
+}
+
+istream& operator>>(istream& in, Deploy& d){
+	cout << "Number of army chosen:" << endl;
+	in >> d.armyMen;
+	cout << "Chosen territory: " << endl;
+	in >> d.territory;
+	return in;
+}
+
+
 // Execute Method 
 void Deploy::execute(Player* p, int army, Territory* t) { //moves armies to territory
 
@@ -129,6 +144,27 @@ void Advance::operator=(const Advance& a2){
 	target = a2.target;
 	source = a2.source;
 }
+
+// Stream insertion operator
+ostream& operator<<(ostream& out, const Advance& a){
+	out << "Player: " << a.p1 << endl;
+	out << "Number of army: " << a.army << endl;
+	out << "Target destination: " << a.target << endl;
+	out << "Source :" << a.source << endl;
+	return out;
+}
+
+istream& operator>>(istream& in, Advance& a){
+	cout << "Current Player: " << a.p1 << endl;
+	cout << "Choose number of army : " << a.army << endl;
+	in >> a.army;
+	cout << "Choose Target destination: " << a.target << endl;
+	in >> a.target;
+	cout << "Choose source: " << endl;
+	in >> a.source;
+	return in;
+}
+
 
 /*
 string Advance::orderName() {
@@ -268,6 +304,18 @@ void Bomb::operator=(const Bomb& b2){
 	bombTargetTerritory = b2.bombTargetTerritory;
 }
 
+// Stream insertion operator
+ostream& operator<<(ostream& out, const Bomb& b) {
+	out << "Bomb target: " << b.bombTargetTerritory << endl;
+	return out;
+}
+
+istream& operator>>(istream& in, Bomb& b) {
+	cout << "Choose bomb target territory" << endl;
+	in >> b.bombTargetTerritory;
+	return in;
+}
+
 /*
 string Bomb::orderName() {
 	return "Bomb: ";
@@ -334,6 +382,18 @@ void Blockade::operator=(const Blockade& bl2){
 	blockTerritory = bl2.blockTerritory;
 }
 
+// Stream insertion operator
+ostream& operator<<(ostream& out, const Blockade& b) {
+	out << "Blockade Territory: " << b.blockTerritory << endl;
+	return out;
+}
+
+istream& operator>>(istream& in, Blockade& b) {
+	cout << "Choose territory to blockade" << endl;
+	in >> b.blockTerritory;
+	return in;
+}
+
 /*
  string Blockade::orderName() {
 	return "BLOCKADE: ";
@@ -393,6 +453,24 @@ void Airlift::operator=(const Airlift& al2){
 	airArmy = al2.airArmy;
 	initTerritory = al2.initTerritory;
 	targetTerritory = al2.targetTerritory;
+}
+
+// Stream insertion operator
+ostream& operator<<(ostream& out, const Airlift& a) {
+	out << "Number of Armies: " << a.airArmy << endl;
+	out << "Source Territory: " << a.initTerritory << endl;
+	out << "Target Territory: " << a.targetTerritory << endl;
+	return out;
+}
+
+istream& operator>>(istream& in, Airlift& a) {
+	cout << "Choose number of armies: " << endl;
+	in >> a.initTerritory;
+	cout << "Choose Source territory: " << endl;
+	in >> a.initTerritory;
+	cout << "Choose Target territory: " << endl;
+	in >> a.targetTerritory;
+	return in;
 }
 
 void Airlift::validate(Player* p, Territory* t1, Territory* t2)
@@ -518,6 +596,18 @@ Negotiate::Negotiate(const Negotiate& n2) {
 // Assignment operator
 void Negotiate::operator=(const Negotiate& n2){
 	negotiatePlayer = n2.negotiatePlayer;
+}
+
+// Stream insertion operator
+ostream& operator<<(ostream& out, const Negotiate& n) {
+	out << "Negotiated Player :" << n.negotiatePlayer << endl;
+	return out;
+}
+
+istream& operator>>(istream& in, Negotiate& n) {
+	cout << "Choose player to negotiate" << endl;
+	in >> *n.negotiatePlayer;
+	return in;
 }
 
 void Negotiate::validate(Player* p1, Player* p2) {

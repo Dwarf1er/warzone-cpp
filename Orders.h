@@ -23,10 +23,14 @@ public:
 	virtual void execute();
 	string getDescription();
 	void setDescription(string orderName);
+
 	//Copy Constructor 
 	Orders(const Orders& o);
+
 	//Assignment operator
 	void operator=(const Orders& o);
+
+	// Stream Insertion Operator 
 	friend ostream& operator<<(ostream& out, const Orders& o);
 	friend istream& operator>>(istream& in, Orders& o);
 };
@@ -48,6 +52,10 @@ public:
 
 	// Assignment Operator 
 	void operator=(const Deploy& d2);
+
+	// Stream Insertion Operator 
+	friend ostream& operator<<(ostream& out, const Deploy &d);
+	friend istream& operator>>(istream& in, Deploy &d);
 
 	bool validate(Player* p, Territory* t);
 	void execute(Player* p, int army, Territory* t);
@@ -85,6 +93,10 @@ public:
 	// Assignment Operator 
 	void operator=(const Advance& a2);
 
+	// Stream Insertion Operator 
+	friend ostream& operator<<(ostream& out, const Advance &a);
+	friend istream& operator>>(istream& in, Advance &a);
+
 	void validate(Player* p, Territory* t1, Territory* t2, Map* m);
 	void execute(Player* p1, Player* p2, Territory* t1, Territory* t2, int army);
 
@@ -112,6 +124,10 @@ public:
 
 	// Assignment Operator
 	void operator=(const Bomb& b2);
+
+	// Stream Insertion Operator 
+	friend ostream& operator<<(ostream& out, const Bomb &b);
+	friend istream& operator>>(istream& in, Bomb &d);
 
 	//string  orderName();
 	void validate(Player* p, Territory* t);
@@ -142,6 +158,10 @@ public:
 	// Assignment Operator
 	void operator=(const Blockade& bl2);
 
+	// Stream Insertion Operator 
+	friend ostream& operator<<(ostream& out, const Blockade &b);
+	friend istream& operator>>(istream& in, Blockade &b);
+
 	//string orderName();
 	void validate(Player* p, Territory* t);
 	void execute(Territory* t);
@@ -171,6 +191,10 @@ public:
 
 	// Assignment Constructor
 	void operator=(const Airlift& al2);
+
+	// Stream Insertion Operator 
+	friend ostream& operator<<(ostream& out, const Airlift &a);
+	friend istream& operator>>(istream& in, Airlift &a);
 
 	//void orderProcedure();
 	void validate(Player* p, Territory* t1, Territory* t2);
@@ -205,6 +229,10 @@ public:
 
 	// Assignment Operator 
 	void operator=(const Negotiate& n2);
+
+	// Stream Insertion Operator 
+	friend ostream& operator<<(ostream& out, const Negotiate &n);
+	friend istream& operator>>(istream& in, Negotiate &n);
 
 	void orderProcedure();
 	void validate(Player* p1, Player* p2);
