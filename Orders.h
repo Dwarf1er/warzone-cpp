@@ -39,7 +39,7 @@ public:
 	Deploy();
 	Deploy(Player* p, int army, Territory* t);
 
-	bool validate(Player*p, Territory* t);
+	void validate(Player*p, Territory* t);
 	void execute(Player* p, int army, Territory* t);
 
 	//getters & setters
@@ -114,11 +114,11 @@ private:
 	bool checkValid{ false };
 public:
 	Blockade();
-	Blockade(Player* p, Territory* t);
+	Blockade(Player* p, Player* n, Territory* t);
 
 	//string orderName();
 	void validate(Player* p, Territory* t);
-	void execute(Territory* t);
+	void execute(Player* p, Player* n, Territory* t);
 
 	string getBlockedTerritory();
 	void setBlockedTerritory(string btt);
