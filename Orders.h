@@ -42,8 +42,10 @@ public:
 	//constructor
 	Deploy();
 	Deploy(Player* p, int army, Territory* t);
+	// Copy Constructor 
+	Deploy(const Deploy& d2);
 
-	bool validate(Player*p, Territory* t);
+	bool validate(Player* p, Territory* t);
 	void execute(Player* p, int army, Territory* t);
 
 	//getters & setters
@@ -73,19 +75,20 @@ public:
 	Advance(int army, string tr1, string tr2);
 	Advance(Player* p1, int army, int source, int target);
 
-	//string orderName();
+	// Copy Constructor 
+	Advance(const Advance& a2);
+
 	void validate(Player* p, Territory* t1, Territory* t2, Map* m);
 	void execute(Player* p1, Player* p2, Territory* t1, Territory* t2, int army);
-	//void orderProcedure();
 
 	//getters & setters
 	bool getCheckValid();
 	int getArmyMen();
-	
+
 
 	void setCheckValid(bool check);
 	void setArmyMen(int army);
-	
+
 };
 
 //-------------------BOMB----------------//
@@ -96,6 +99,9 @@ private:
 public:
 	Bomb();
 	Bomb(Player* p, Territory* t);
+
+	// Copy Constructor 
+	Bomb(const Bomb& b2);
 
 	//string  orderName();
 	void validate(Player* p, Territory* t);
@@ -120,6 +126,9 @@ public:
 	Blockade();
 	Blockade(Player* p, Territory* t);
 
+	// Copy Constructor 
+	Blockade(const Blockade& b2);
+
 	//string orderName();
 	void validate(Player* p, Territory* t);
 	void execute(Territory* t);
@@ -143,6 +152,9 @@ private:
 public:
 	Airlift();
 	Airlift(Player* p1, Player* p2, Territory* t, Territory* t2, int army);
+
+	// Copy Constructor 
+	Airlift(const Airlift& al2);
 
 	//void orderProcedure();
 	void validate(Player* p, Territory* t1, Territory* t2);
@@ -171,6 +183,9 @@ private:
 public:
 	Negotiate();
 	Negotiate(Player* p1, Player* p2);
+
+	// Copy constructor
+	Negotiate(const Negotiate& n2);
 
 	void orderProcedure();
 	void validate(Player* p1, Player* p2);
