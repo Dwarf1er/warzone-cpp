@@ -7,24 +7,52 @@
 
 using namespace std;
 
-MapLoader::MapLoader(){
+MapLoader::MapLoader() {
 }
 
-MapLoader::~MapLoader(){
+MapLoader::~MapLoader() {
 }
+
+//copy constructor
+MapLoader::MapLoader(const MapLoader& ml1)
+{
+	cout << "Copy constructor called" << endl;
+	ID = ml1.ID;
+}
+
+//operator overload
+void MapLoader::operator=(const MapLoader& ml)
+{
+	std::cout << "Assignment operator called" << std::endl;
+	ID = ml.ID;
+}
+
+ostream& operator<<(ostream& out, const MapLoader& ml)
+{
+	out << endl << "\tMapLoader ID: " << ml.ID << endl;
+	return out;
+}
+
+istream& operator>>(std::istream& in, MapLoader& ml) {
+	std::cout << "Enter MapLoader ID: ";
+	in >> ml.ID;
+	return in;
+}
+
 
 //Method to load map from a .map file
-void MapLoader::loadmap(string file) {
+//Previous Map MapLoader::loadmap(string file)
+Map* MapLoader::loadmap(string file) {
 
 	//Get the file name with extension 
 	fstream infile;
-	
+
 	string map;
 	map = file;
 	//cout << "Enter map name with extension: ";
 	cout << "Loading map..... " << map << endl;
 	printf("\n");
-	
+
 	infile.open(map);
 
 	string s;
@@ -33,13 +61,13 @@ void MapLoader::loadmap(string file) {
 	bool check = true;
 	int x;
 
-	Map graph;
+	Map* graph = new Map();
 	continentCheck = false;
 	countryCheck = false;
 	borderCheck = false;
 	mapCheck = false;
 
-	graph.initList();
+	graph->initList();
 
 	// Extracting words from the file 
 	int error = 0;
@@ -66,7 +94,7 @@ void MapLoader::loadmap(string file) {
 				//num
 				infile >> x;
 				int num = x;
-				graph.createContinent(name, more);
+				graph->createContinent(name, more);
 				more++;
 				infile >> s;  //color ignorer
 			}
@@ -85,7 +113,7 @@ void MapLoader::loadmap(string file) {
 					}
 
 					//Gets Country number
-					infile >> s;   
+					infile >> s;
 					if (!s.compare("[borders]")) {
 						break;
 					}
@@ -103,11 +131,11 @@ void MapLoader::loadmap(string file) {
 					}
 
 					//Gets the continent it belongs to
-					infile >> x;   
+					infile >> x;
 					int num2 = x;
 
 					try {
-						graph.addToContinent(num2 - 1, graph.nodeList[add]);
+						graph->addToContinent(num2 - 1, graph->nodeList[add]);
 					}
 
 					catch (...) {
@@ -167,7 +195,7 @@ void MapLoader::loadmap(string file) {
 					neighbor = strtok_s(NULL, delim, &context);
 					do
 					{
-						graph.addEdge(graph.nodeList[atoi(index) - 1], graph.nodeList[atoi(neighbor) - 1]);
+						graph->addEdge(graph->nodeList[atoi(index) - 1], graph->nodeList[atoi(neighbor) - 1]);
 						neighbor = strtok_s(NULL, delim, &context);
 					} while (neighbor);
 				}
@@ -187,29 +215,28 @@ void MapLoader::loadmap(string file) {
 	}
 
 	//Different section of errors
-	for (int i = 0; i < 1; i++) {
-		if (continentCheck == false) {
-			cout << "Error 1: continent section invalid" << endl;
-			break;
-		}
+	if (continentCheck == false) {
+		cout << "Error 1: continent section invalid" << endl;
+	}
 
-		if (countryCheck == false) {
-			cout << "Error 2: country section invalid" << endl;
-			break;
-		}
+	if (countryCheck == false) {
+		cout << "Error 2: country section invalid" << endl;
+	}
 
-		if (borderCheck == false) {
-			cout << "Error 3: border section invalid" << endl;
-			break;
-		}
+	if (borderCheck == false) {
+		cout << "Error 3: border section invalid" << endl;
 	}
 	if (continentCheck == true && countryCheck == true && borderCheck == true) {
 		//Call method to check for duplicate territories 
-		graph.validate();
+		graph->validate();
 		printf("\n");
-		graph.printBoard();
+		//graph.printBoard();
+		//return graph;
+		graph->printBoard();
 	}
 	infile.close();
+
+	return graph;
 }
 
 bool MapLoader::getContinentCheck()

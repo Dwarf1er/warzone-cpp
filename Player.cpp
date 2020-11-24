@@ -4,12 +4,11 @@ using namespace std;
 
 //constructors
 	//default constructor
-Player::Player() : playerTerritories(), playerCards(), playerOrderList(), playerArmies(0), playerID(0) {
+Player::Player() : playerTerritories(), playerCards(), playerOrderList(), playerArmies(0), playerID(0), pacifism(false) {
 }
 
 //parametrized constructor
 Player::Player(vector<Territory*> playerTerritories_, Hand* playerCards_, OrderList* playerOrders_, int playerArmies_, int playerID_) : playerTerritories(playerTerritories_), playerCards(playerCards_), playerOrderList(playerOrders_), playerArmies(playerArmies_), playerID(playerID_) {
-	//remove territories from the global list!!!!
 }
 //copy constructor
 Player::Player(const Player& p) : playerTerritories(p.playerTerritories), playerCards(new Hand(*(p.playerCards))), playerOrderList(new OrderList(*(p.playerOrderList))), playerArmies(p.playerArmies), playerID(p.playerID) {
@@ -29,6 +28,7 @@ Player::~Player() {
 
 	playerArmies = 0;
 	playerID = 0;
+	pacifism = false;
 }
 
 //accessors
@@ -47,6 +47,22 @@ OrderList* Player::getPlayerOrders() {
 int Player::getPlayerArmies() {
 	return playerArmies;
 }
+
+int Player::getPlayerID()
+{
+	return playerID;
+}
+
+bool Player::getPacifism() 
+{
+	return pacifism;
+}
+
+bool Player::getCardCheck()
+{
+	return cardCheck;
+}
+
 
 //mutators
 void Player::setPlayerTerritories(vector<Territory*> playerTerritories_) {
@@ -74,6 +90,24 @@ void Player::setPlayerID(int playerID_) {
 	playerID = playerID_;
 }
 
+void Player::setToAttack(vector<int> t)
+{
+	toAttackVec = t;
+}
+
+void Player::setToDefend(vector<int> t)
+{
+	toDefendVec = t;
+}
+void Player::setPacifism(bool check) {
+	pacifism = check;
+}
+
+void Player::setCardCheck(bool check)
+{
+	cardCheck = check;
+}
+
 //operator overloading
 	//assignment operator overloading
 void Player::operator=(const Player& p) {
@@ -88,8 +122,11 @@ void Player::operator=(const Player& p) {
 ostream& operator<<(ostream& out, const Player& p) {
 	out << "\nPlayer ID: " << p.playerID << endl;
 
+	out << "Player Armies: " << p.playerArmies << endl;
+	
+	out << "Territories: " << endl;
 	for (Territory* t : p.playerTerritories) {
-		out << "Territories: " << *t << endl;
+		out << *t << endl;
 	}
 	
 	if (p.playerOrderList != nullptr) {
@@ -127,6 +164,7 @@ istream& operator>>(istream& in, Player& p) {
 //required methods
 void Player::issueOrder(Orders* order) {
 	this->setPlayerOrders(order);
+	
 }
 
 vector<Territory*> Player::toDefend() {
@@ -134,7 +172,13 @@ vector<Territory*> Player::toDefend() {
 	return toDefend;
 }
 
-vector<Territory*> Player::toAttack() {
-	vector<Territory*> toDefend{ new Territory(), new Territory() };
-	return toDefend;
+
+std::vector<int> Player::getToAttackVec()
+{
+	return toAttackVec;
+}
+
+std::vector<int> Player::getToDefendVec()
+{
+	return toDefendVec;
 }

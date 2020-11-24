@@ -5,12 +5,16 @@
 
 Territory::Territory() {
 	ID = 0;
+	pID = 0;
 	numberOfArmies = 0;
+	neighbors = 0;
 }
 
 Territory::Territory(int _ID) {
 	ID = _ID;
+	pID = 0;
 	numberOfArmies = 0;
+	neighbors = 0;
 }
 
 Territory::~Territory() {}
@@ -25,6 +29,7 @@ Territory::Territory(const Territory& t1) {
 void Territory::operator=(const Territory& t) {
 	std::cout << "Assignment operator called" << std::endl;
 	ID = t.ID;
+	pID = t.pID;
 	numberOfArmies = t.numberOfArmies;
 }
 
@@ -33,6 +38,7 @@ void Territory::operator=(const Territory& t) {
 std::ostream& operator<<(std::ostream& out, const Territory& t) {
 	out << std::endl << "\tTerritory ID: " << t.ID << std::endl;
 	out << "\tTerritory Number of Armies: " << t.numberOfArmies;
+	out << "\tOwner: " << t.pID;
 	return out;
 }
 
@@ -53,7 +59,7 @@ Map::~Map() {}
 
 //Create Nodes
 Territory* Map::createNode() {
-	Territory* temp = new Territory(counter);
+	Territory* temp = new Territory(counter); 
 	counter++;
 	return temp;
 }
@@ -286,6 +292,10 @@ int Map::subgraphCheck(int continentIndex, std::vector<Territory*>* vec) {
 		std::cout << "\n" << listOfContinent[continentIndex]->name << ": is a connected subgraph" << std::endl;
 	}
 	return 0;
+}
+
+std::vector<Territory*> Map::getTerritories() {
+	return nodeList;
 }
 
 Continent::Continent() {

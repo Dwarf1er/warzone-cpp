@@ -121,6 +121,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>shell32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -143,10 +144,12 @@
     <ClCompile Include="Cards.cpp" />
     <ClCompile Include="CardsDriver.cpp" />
     <ClCompile Include="GameEngine.cpp" />
+    <ClCompile Include="GameObservers.cpp" />
     <ClCompile Include="Map.cpp" />
     <ClCompile Include="MapDriver.cpp" />
     <ClCompile Include="MapLoader.cpp" />
     <ClCompile Include="MapLoaderDriver.cpp" />
+    <ClCompile Include="Orderexe.cpp" />
     <ClCompile Include="Orders.cpp" />
     <ClCompile Include="OrdersDriver.cpp" />
     <ClCompile Include="Player.cpp" />
@@ -157,6 +160,7 @@
     <ClInclude Include="Cards.h" />
     <ClInclude Include="CardsDriver.h" />
     <ClInclude Include="GameEngine.h" />
+    <ClInclude Include="GameObservers.h" />
     <ClInclude Include="MapDriver.h" />
     <ClInclude Include="MapLoader.h" />
     <ClInclude Include="Map.h" />
@@ -167,7 +171,6 @@
     <ClInclude Include="PlayerDriver.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="artic.map" />
     <None Include="austria-hungary.map" />
     <None Include="bad map1.map" />
     <None Include="bad map2.map" />
