@@ -150,7 +150,7 @@ private:
 	bool checkValid{ false };
 public:
 	Blockade();
-	Blockade(Player* p, Territory* t);
+	Blockade(Player* p, Player* n, Territory* t);
 
 	// Copy Constructor 
 	Blockade(const Blockade& bl2);
@@ -164,7 +164,7 @@ public:
 
 	//string orderName();
 	void validate(Player* p, Territory* t);
-	void execute(Territory* t);
+	void execute(Player* p, Player* n, Territory* t);
 
 	string getBlockedTerritory();
 	void setBlockedTerritory(string btt);
