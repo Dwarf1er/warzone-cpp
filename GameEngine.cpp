@@ -357,7 +357,9 @@ void GameEngine::issueOrderPhase()
 
 			break;
 		}
-		Advance(playersVec[i], armyNum, sourceID, targetID);
+		
+		
+		//Advance(playersVec[i], , sourceID, targetID, armyNum, map,  );
 		std::cout << "" << std::endl;
 	}
 	Notify();

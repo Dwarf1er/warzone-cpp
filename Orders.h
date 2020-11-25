@@ -3,6 +3,7 @@
 #include<string>
 #include<vector>
 #include "Map.h"
+#include "Cards.h"
 class Player;
 
 using namespace std;
@@ -83,9 +84,9 @@ private:
 
 public:
 	Advance();
-	Advance(Player* p1, Player* p2, Territory* t1, Territory* t2, int army, Map* m);
-	Advance(int army, string tr1, string tr2);
-	Advance(Player* p1, int army, int source, int target);
+	Advance(Player* p1, Player* p2, Territory* t1, Territory* t2, int army, Map* m, Deck* d);
+	//Advance(int army, string tr1, string tr2);
+	//Advance(Player* p1, int army, int source, int target);
 
 	// Copy Constructor 
 	Advance(const Advance& a2);
@@ -98,7 +99,7 @@ public:
 	friend istream& operator>>(istream& in, Advance &a);
 
 	void validate(Player* p, Territory* t1, Territory* t2, Map* m);
-	void execute(Player* p1, Player* p2, Territory* t1, Territory* t2, int army);
+	void execute(Player* p1, Player* p2, Territory* t1, Territory* t2, int army, Deck* d);
 
 	//getters & setters
 	bool getCheckValid();
@@ -184,7 +185,7 @@ private:
 
 public:
 	Airlift();
-	Airlift(Player* p1, Player* p2, Territory* t, Territory* t2, int army);
+	Airlift(Player* p1, Player* p2, Territory* t, Territory* t2, int army, Deck* d);
 
 	// Copy Constructor 
 	Airlift(const Airlift& al2);
@@ -198,7 +199,7 @@ public:
 
 	//void orderProcedure();
 	void validate(Player* p, Territory* t1, Territory* t2);
-	void execute(Player* p1, Player* p2, Territory* t1, Territory* t2, int army);
+	void execute(Player* p1, Player* p2, Territory* t1, Territory* t2, int army, Deck* d);
 
 	//getters & setters
 	int getAirArmy();
