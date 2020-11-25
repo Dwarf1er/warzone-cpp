@@ -20,10 +20,6 @@ int main()
 	t2->setNumberOfArmies(26);
 	t3->setNumberOfArmies(40);
 	t4->setNumberOfArmies(0);
-	t1->setpID(1); 
-	t2->setpID(1);
-	t3->setpID(2);
-	t4->setpID(2);
 	t1->setneighbors(3);
 	t2->setneighbors(1);
 	t3->setneighbors(1);

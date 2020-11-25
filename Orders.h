@@ -57,7 +57,7 @@ public:
 	friend ostream& operator<<(ostream& out, const Deploy &d);
 	friend istream& operator>>(istream& in, Deploy &d);
 
-	bool validate(Player* p, Territory* t);
+	void validate(Player* p, Territory* t);
 	void execute(Player* p, int army, Territory* t);
 
 	//getters & setters
