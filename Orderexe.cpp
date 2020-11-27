@@ -74,7 +74,8 @@ int main()
 
 	    //Airlift* aL = new Airlift();
 	    //Negotiate* nT = new Negotiate();
-	    //Blockade* bD = new Blockade();
+	  //  Blockade* bD = new Blockade();
+
 	    //Advance* aV = new Advance(); 
 
 
@@ -93,7 +94,7 @@ int main()
 
 	
 	//TEST BLOCKADE VALID
-	//Blockade(p1, p0, t2);
+	Blockade(p1, p0, t2);
 
 	//TEST BLOCKADE INVALID
 	//Blockade(p1, t3);
@@ -107,8 +108,8 @@ int main()
 	//Advance(p1, p2, t1, t3, 40, game, deck);//attacking player
 	
 	//decisive victory
-	t4->setNumberOfArmies(0);
-	Advance(p1, p2, t1, t4, 40, game, deck);//attacking player
+	//t4->setNumberOfArmies(0);
+	//Advance(p1, p2, t1, t4, 40, game, deck);//attacking player
 
 	//TEST ADVANCE INVALID
 		//Advance(p1, p0, t3, t2, 40, game, deck);

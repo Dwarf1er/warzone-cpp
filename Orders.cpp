@@ -7,10 +7,7 @@
 Orders::Orders() {
 	description = "Default";
 }
-void Orders::execute() {
 
-	cout << "This is an order: " << endl;
-}
 string Orders::getDescription()
 {
 	return description;
@@ -84,6 +81,9 @@ void Deploy::execute(Player* p, int army, Territory* t) { //moves armies to terr
 	else {
 		cout << "The order is invalid: territory does not belong to player" << endl;
 	}
+}
+void Deploy::execute()
+{
 }
 void Deploy::validate(Player* p, Territory* t) {
 	for (int i = 0; i < p->getPlayerTerritories().size(); i++) {
@@ -164,6 +164,10 @@ istream& operator>>(istream& in, Advance& a){
 	cout << "Choose source: " << endl;
 	in >> a.source;
 	return in;
+}
+
+void Advance::execute()
+{
 }
 
 void Advance::validate(Player* p, Territory* t1, Territory* t2, Map* m) {
@@ -334,6 +338,10 @@ istream& operator>>(istream& in, Bomb& b) {
 	return in;
 }
 
+void Bomb::execute()
+{
+}
+
 /*
 string Bomb::orderName() {
 	return "Bomb: ";
@@ -414,6 +422,11 @@ istream& operator>>(istream& in, Blockade& b) {
 	cout << "Choose territory to blockade" << endl;
 	in >> b.blockTerritory;
 	return in;
+}
+
+void Blockade::execute()
+{
+	
 }
 
 /*
@@ -511,6 +524,10 @@ istream& operator>>(istream& in, Airlift& a) {
 	cout << "Choose Target territory: " << endl;
 	in >> a.targetTerritory;
 	return in;
+}
+
+void Airlift::execute()
+{
 }
 
 void Airlift::validate(Player* p, Territory* t1, Territory* t2)
@@ -683,6 +700,10 @@ istream& operator>>(istream& in, Negotiate& n) {
 	cout << "Choose player to negotiate" << endl;
 	in >> *n.negotiatePlayer;
 	return in;
+}
+
+void Negotiate::execute()
+{
 }
 
 void Negotiate::validate(Player* p1, Player* p2) {

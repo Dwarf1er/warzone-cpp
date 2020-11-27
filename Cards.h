@@ -41,6 +41,7 @@ public:
 	vector<Card*> get_deck();
 	void push_card(CardType);
 	void draw();
+	Deck getdeckobj();
 	~Deck();
 };
 

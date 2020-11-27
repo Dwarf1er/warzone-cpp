@@ -21,7 +21,7 @@ private:
 	*/
 public:
 	Orders();
-	virtual void execute();
+	virtual void execute()=0; //PURE VIRTUAL
 	string getDescription();
 	void setDescription(string orderName);
 
@@ -58,6 +58,7 @@ public:
 	friend ostream& operator<<(ostream& out, const Deploy &d);
 	friend istream& operator>>(istream& in, Deploy &d);
 
+	void execute();
 	void validate(Player* p, Territory* t);
 	void execute(Player* p, int army, Territory* t);
 
@@ -98,6 +99,7 @@ public:
 	friend ostream& operator<<(ostream& out, const Advance &a);
 	friend istream& operator>>(istream& in, Advance &a);
 
+	void execute();
 	void validate(Player* p, Territory* t1, Territory* t2, Map* m);
 	void execute(Player* p1, Player* p2, Territory* t1, Territory* t2, int army, Deck* d);
 
@@ -131,6 +133,7 @@ public:
 	friend istream& operator>>(istream& in, Bomb &d);
 
 	//string  orderName();
+	void execute();
 	void validate(Player* p, Territory* t);
 	void execute(Territory* t);
 	//void orderProcedure();
@@ -164,6 +167,7 @@ public:
 	friend istream& operator>>(istream& in, Blockade &b);
 
 	//string orderName();
+	void execute();
 	void validate(Player* p, Territory* t);
 	void execute(Player* p, Player* n, Territory* t);
 
@@ -198,6 +202,7 @@ public:
 	friend istream& operator>>(istream& in, Airlift &a);
 
 	//void orderProcedure();
+	void execute();
 	void validate(Player* p, Territory* t1, Territory* t2);
 	void execute(Player* p1, Player* p2, Territory* t1, Territory* t2, int army, Deck* d);
 
@@ -235,6 +240,7 @@ public:
 	friend ostream& operator<<(ostream& out, const Negotiate &n);
 	friend istream& operator>>(istream& in, Negotiate &n);
 
+	void execute();
 	void orderProcedure();
 	void validate(Player* p1, Player* p2);
 	void execute(Player* p1, Player* p2);
