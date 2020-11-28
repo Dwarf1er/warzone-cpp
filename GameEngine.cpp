@@ -348,7 +348,7 @@ void GameEngine::issueOrderPhase()
 
 		// Play card or not 
 		if (playerOrderChoice == "n") {
-			//continue;
+			std::cout << " Not Playing a Card" << std::endl;
 		}
 		else {
 			std::cin >> cardChoice;
@@ -381,9 +381,6 @@ void GameEngine::issueOrderPhase()
 
 	/*	}
 		break;*/
-
-
-
 
 		//// Advance Orders
 		//for (int i = 0; i < playersVec.size(); i++) {
