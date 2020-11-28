@@ -344,7 +344,14 @@ void GameEngine::issueOrderPhase()
 		if (playerOrderChoice == "n") {
 			std::cout << " Not Playing a Card" << std::endl;
 		}
-		else {
+		if (playerOrderChoice == "y") {
+			std::cout << "Enter a choice" << std::endl;
+			
+			for (int j = 0; j < playersVec[j]->getPlayerCards()->get_cards_in_hand().size(); j++) {
+				std::cout << "Player " << i + 1 << std::endl;
+				std::cout << *playersVec[i]->getPlayerCards()->get_cards_in_hand()[j] << std::endl;
+				std::cout << "Player " << i + 1 << " Card in hand: " << std::endl << playersVec[i]->getPlayerCards()->get_cards_in_hand()[j]->get_card_type() << ":" << playersVec[i]->getPlayerCards()->get_cards_in_hand()[j]->get_card_type_name() << std::endl << std::endl;
+			}
 			std::cin >> cardChoice;
 
 			switch (cardChoice) {
