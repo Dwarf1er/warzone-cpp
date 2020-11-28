@@ -5,14 +5,12 @@
 
 Territory::Territory() {
 	ID = 0;
-	pID = 0;
 	numberOfArmies = 0;
 	neighbors = 0;
 }
 
 Territory::Territory(int _ID) {
 	ID = _ID;
-	pID = 0;
 	numberOfArmies = 0;
 	neighbors = 0;
 }
@@ -29,7 +27,6 @@ Territory::Territory(const Territory& t1) {
 void Territory::operator=(const Territory& t) {
 	std::cout << "Assignment operator called" << std::endl;
 	ID = t.ID;
-	pID = t.pID;
 	numberOfArmies = t.numberOfArmies;
 }
 
@@ -38,7 +35,6 @@ void Territory::operator=(const Territory& t) {
 std::ostream& operator<<(std::ostream& out, const Territory& t) {
 	out << std::endl << "\tTerritory ID: " << t.ID << std::endl;
 	out << "\tTerritory Number of Armies: " << t.numberOfArmies;
-	out << "\tOwner: " << t.pID;
 	return out;
 }
 

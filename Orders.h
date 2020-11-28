@@ -3,6 +3,7 @@
 #include<string>
 #include<vector>
 #include "Map.h"
+#include "Cards.h"
 class Player;
 
 using namespace std;
@@ -20,7 +21,7 @@ private:
 	*/
 public:
 	Orders();
-	virtual void execute();
+	virtual void execute()=0; //PURE VIRTUAL
 	string getDescription();
 	void setDescription(string orderName);
 
@@ -57,7 +58,8 @@ public:
 	friend ostream& operator<<(ostream& out, const Deploy &d);
 	friend istream& operator>>(istream& in, Deploy &d);
 
-	bool validate(Player* p, Territory* t);
+	void execute();
+	void validate(Player* p, Territory* t);
 	void execute(Player* p, int army, Territory* t);
 
 	//getters & setters
@@ -83,9 +85,9 @@ private:
 
 public:
 	Advance();
-	Advance(Player* p1, Player* p2, Territory* t1, Territory* t2, int army, Map* m);
-	Advance(int army, string tr1, string tr2);
-	Advance(Player* p1, int army, int source, int target);
+	Advance(Player* p1, Player* p2, Territory* t1, Territory* t2, int army, Map* m, Deck* d);
+	//Advance(int army, string tr1, string tr2);
+	//Advance(Player* p1, int army, int source, int target);
 
 	// Copy Constructor 
 	Advance(const Advance& a2);
@@ -97,8 +99,9 @@ public:
 	friend ostream& operator<<(ostream& out, const Advance &a);
 	friend istream& operator>>(istream& in, Advance &a);
 
+	void execute();
 	void validate(Player* p, Territory* t1, Territory* t2, Map* m);
-	void execute(Player* p1, Player* p2, Territory* t1, Territory* t2, int army);
+	void execute(Player* p1, Player* p2, Territory* t1, Territory* t2, int army, Deck* d);
 
 	//getters & setters
 	bool getCheckValid();
@@ -130,6 +133,7 @@ public:
 	friend istream& operator>>(istream& in, Bomb &d);
 
 	//string  orderName();
+	void execute();
 	void validate(Player* p, Territory* t);
 	void execute(Territory* t);
 	//void orderProcedure();
@@ -150,7 +154,7 @@ private:
 	bool checkValid{ false };
 public:
 	Blockade();
-	Blockade(Player* p, Territory* t);
+	Blockade(Player* p, Player* n, Territory* t);
 
 	// Copy Constructor 
 	Blockade(const Blockade& bl2);
@@ -163,8 +167,9 @@ public:
 	friend istream& operator>>(istream& in, Blockade &b);
 
 	//string orderName();
+	void execute();
 	void validate(Player* p, Territory* t);
-	void execute(Territory* t);
+	void execute(Player* p, Player* n, Territory* t);
 
 	string getBlockedTerritory();
 	void setBlockedTerritory(string btt);
@@ -184,7 +189,7 @@ private:
 
 public:
 	Airlift();
-	Airlift(Player* p1, Player* p2, Territory* t, Territory* t2, int army);
+	Airlift(Player* p1, Player* p2, Territory* t, Territory* t2, int army, Deck* d);
 
 	// Copy Constructor 
 	Airlift(const Airlift& al2);
@@ -197,8 +202,9 @@ public:
 	friend istream& operator>>(istream& in, Airlift &a);
 
 	//void orderProcedure();
+	void execute();
 	void validate(Player* p, Territory* t1, Territory* t2);
-	void execute(Player* p1, Player* p2, Territory* t1, Territory* t2, int army);
+	void execute(Player* p1, Player* p2, Territory* t1, Territory* t2, int army, Deck* d);
 
 	//getters & setters
 	int getAirArmy();
@@ -234,6 +240,7 @@ public:
 	friend ostream& operator<<(ostream& out, const Negotiate &n);
 	friend istream& operator>>(istream& in, Negotiate &n);
 
+	void execute();
 	void orderProcedure();
 	void validate(Player* p1, Player* p2);
 	void execute(Player* p1, Player* p2);

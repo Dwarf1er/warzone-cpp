@@ -22,18 +22,18 @@ string Card::get_card_type_name()
 {
 	switch (card_type)
 	{
-	case SPY:
-		return "SPY";
 	case BOMB:
 		return "BOMB";
-	case REINFORCEMENT:
-		return "REINFORCEMENT";
+	case DEPLOY:
+		return "DEPLOY";
 	case BLOCKADE:
 		return "BLOCKADE";
 	case AIRLIFT:
 		return "AIRLIFT";
-	case DIPLOMACY:
-		return "DIPLOMACY";
+	case NEGOTIATE:
+		return "NEGOTIATE";
+	case ADVANCE:
+		return "ADVANCE";
 	}
 }
 
@@ -51,14 +51,11 @@ void Card::play() {
 	//create special orders
 	switch (card_type)
 	{
-	case SPY:
-		std::cout << "special SPY order created\n";
-		break;
 	case BOMB:
 		std::cout << "special BOMB order created\n";
 		break;
-	case REINFORCEMENT:
-		std::cout << "special REINFORCEMENT order created\n";
+	case DEPLOY:
+		std::cout << "special DEPLOY order created\n";
 		break;
 	case BLOCKADE:
 		std::cout << "special BLOCKADE order created\n";
@@ -66,8 +63,11 @@ void Card::play() {
 	case AIRLIFT:
 		std::cout << "special AIRLIFT order created\n";
 		break;
-	case DIPLOMACY:
-		std::cout << "special DIPLOMACY order created\n";
+	case NEGOTIATE:
+		std::cout << "special NEGOTIATE order created\n";
+		break;
+	case ADVANCE:
+		std::cout << "special ADVANCE order created\n";
 		break;
 	}
 
@@ -76,6 +76,7 @@ void Card::play() {
 
 Deck::Deck() {
 	cards = vector<Card*>();
+	srand(time(0));
 }
 
 Deck::Deck(const Deck& other) : cards(other.cards) {}
@@ -124,7 +125,7 @@ void Deck::draw()
 
 	if (deck.empty()) { return; };
 
-	srand(time(0));
+	
 	int random = (1 + rand()) % deck.size();
 
 	deck.at(random)->set_drawn(true);

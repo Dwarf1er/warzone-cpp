@@ -107,28 +107,23 @@ void GameEngine::initGame() {
 		}
 	}
 
+
 	//Creating the players based on the number of player from user
 	for (int i = 0; i < numOfPlayer; i++) {
 		vector<Territory*> playerTerritories;
 		Territory* t = new Territory();
-		Orders* playerOrder = new Orders();
 		Deck* deck = new Deck();
-		deck->push_card(CardType::SPY);
 		Hand* playerCard = new Hand(deck);
+		//deck->push_card(CardType::SPY);
 		Player* p = new Player();
 		p->setPlayerID(i + 1);
 		p->setPlayerArmies(5);
 		p->setPlayerTerritories(playerTerritories);
 		p->setPlayerCards(playerCard);
-		p->setPlayerOrders(playerOrder);
 		std::cout << *p << "Number Of Armies: " << p->getPlayerArmies() << std::endl;
 		std::cout << "Player Cards: " << *p->getPlayerCards() << std::endl;
 		playersVec.push_back(p);
 	}
-
-	/*for (int i = 0; i < playersVec.size(); i++) {
-		cout << (playersVec[i]->getPlayerArmies()) << endl;
-	}*/
 
 	//Options for observer 
 	std::cout << "\n" << endl;
@@ -154,18 +149,6 @@ void GameEngine::initGame() {
 			std::cout << "Please enter the number 1 or 2\n" << endl;
 		}
 	}
-
-	//Creating the cards and its deck 
-	std::cout << ("\n");
-	vector<Card> cards;
-	cards.push_back(Card(CardType::SPY));
-	cards.push_back(Card(CardType::BOMB));
-	cards.push_back(Card(CardType::REINFORCEMENT));
-	cards.push_back(Card(CardType::BLOCKADE));
-	cards.push_back(Card(CardType::AIRLIFT));
-	cards.push_back(Card(CardType::DIPLOMACY));
-	Deck* deck = new Deck(cards);
-	std::cout << *deck << endl;
 
 	std::cout << "======================================= Part 3  ======================================= " << std::endl;
 
@@ -237,6 +220,23 @@ void GameEngine::issueOrderPhase()
 	int sourceID = 0;
 	int targetID = 0;
 	int armyNum = 0;
+	string playerOrderChoice;
+	int cardChoice = 0;
+
+	// Order list for players
+	// Different order required 
+	/*Bomb* bB = new Bomb();
+	Airlift* aL = new Airlift();
+	Negotiate* nT = new Negotiate();
+	Blockade* bD = new Blockade();*/
+	Advance* aV = new Advance();
+	Deploy* dP = new Deploy();
+
+	// Add deploy and Advance for the players 
+	for (int i = 0; i < playersVec.size(); i++) {
+		playersVec[i]->setPlayerOrders(dP);
+		playersVec[i]->setPlayerOrders(aV);
+	}
 
 	// Display for loop
 	for (int i = 0; i < map->listOfContinent.size(); i++) {
@@ -248,7 +248,6 @@ void GameEngine::issueOrderPhase()
 	vector<int> myvector;
 	vector<int> myvector2;
 	bool playerBool = false;
-	Orders order;
 
 
 	// To Attack
@@ -307,59 +306,126 @@ void GameEngine::issueOrderPhase()
 			playerBool = false;
 		}
 	}
-	std::cout << playersVec.size() << std::endl;
-	std::cout << playersVec[0]->getPlayerArmies() << std::endl;
+	printf("\n");
+	// Add type of cards
+	vector<Card> cards;
+	cards.push_back(Card(CardType::BOMB));
+	cards.push_back(Card(CardType::DEPLOY));
+	cards.push_back(Card(CardType::BLOCKADE));
+	cards.push_back(Card(CardType::AIRLIFT));
+	cards.push_back(Card(CardType::NEGOTIATE));
+	cards.push_back(Card(CardType::ADVANCE));
 
-
-
-	// Advance Orders
+	// Each player Draw card
 	for (int i = 0; i < playersVec.size(); i++) {
-		while (!playerBool) {
-			std::cout << ("Which territory do you want to move from? ");
-			for (int j = 0; j < playersVec[i]->getPlayerTerritories().size(); j++) {
-				std::cout << j << ": " << playersVec[i]->getPlayerTerritories()[j] << std::endl;
-			}
-			cin >> usersChoice;
-			if (usersChoice > 0 || usersChoice < playersVec[i]->getPlayerTerritories().size()) {
-				for (int j = 0; j < playersVec[i]->getPlayerTerritories().size(); j++) {
-					if (usersChoice == playersVec[i]->getPlayerTerritories()[j]->getID()) {
-						sourceID = usersChoice;
-					}
-				}
-			}
-
-			std::cout << ("Which territory do you want to move to ?");
-			cin >> usersChoice;
-			for (int j = 0; j < playersVec[i]->getPlayerTerritories().size(); j++) {
-				std::cout << j << ": " << playersVec[i]->getPlayerTerritories()[j] << std::endl;
-			}
-
-			if (usersChoice > 0 || usersChoice < playersVec[i]->getPlayerTerritories().size()) {
-				for (int j = 0; j < playersVec[i]->getPlayerTerritories().size(); j++) {
-					if (usersChoice != playersVec[i]->getPlayerTerritories()[j]->getID()) {
-						targetID = usersChoice;
-					}
-				}
-			}
-
-			std::cout << ("How many units are you moving ?");
-			std::cin >> usersChoice;
-			if (usersChoice > 0 || usersChoice < playersVec[i]->getPlayerTerritories().size()) {
-				/*if (armyNum <= playersVec[i]->getPlayerTerritories()[sourceID]->getNumberOfArmies()) {
-					armyNum = usersChoice;
-				}*/
-				armyNum = usersChoice;
-			}
-
-			OrderData orderData = OrderData{ sourceID, targetID, armyNum };
-
-			issueOrderDetails.insert(std::pair<Player*, OrderData>(playersVec[i], orderData));
-
-			break;
-		}
-		Advance(playersVec[i], armyNum, sourceID, targetID);
-		std::cout << "" << std::endl;
+		Deck* deck = new Deck(cards);
+		Hand* hand = new Hand(deck);
+		playersVec[i]->setPlayerCards(hand);
+		std::cout << "Player " << i + 1 << ":" << std::endl;
+		deck->draw();
+		printf("\n");
 	}
+
+	// Display players hands
+	for (int i = 0; i < playersVec.size(); i++) {
+		for (int j = 0; j < playersVec[j]->getPlayerCards()->get_cards_in_hand().size(); j++) {
+			std::cout << "Player " << i + 1 << std::endl;
+			std::cout << *playersVec[i]->getPlayerCards()->get_cards_in_hand()[j] << std::endl;
+			std::cout << "Player " << i + 1 << " Card in hand: " << std::endl << playersVec[i]->getPlayerCards()->get_cards_in_hand()[j]->get_card_type() << ":" << playersVec[i]->getPlayerCards()->get_cards_in_hand()[j]->get_card_type_name() << std::endl << std::endl;
+		}
+	}
+
+	for (int i = 0; i < playersVec.size(); i++) {
+		std::cout << "Do you want to play a card ? (y/n)" << std::endl;
+		std::cout << "\nPlayer " << i + 1 << " choice: " << std::endl;
+		std::cin >> playerOrderChoice;
+
+		// Play card or not 
+		if (playerOrderChoice == "n") {
+			std::cout << " Not Playing a Card" << std::endl;
+		}
+		else {
+			std::cin >> cardChoice;
+
+			switch (cardChoice) {
+			case 0:
+				oList->addOrders(new Bomb());
+				break;
+			case 1:
+				oList->addOrders(new Deploy());
+				break;
+			case 2:
+				oList->addOrders(new Blockade());
+				break;
+			case 3:
+				oList->addOrders(new Airlift());
+				break;
+			case 4:
+				oList->addOrders(new Negotiate());
+				break;
+			case 5:
+				oList->addOrders(new Advance());
+				break;
+			default:
+				break;
+			}
+		}
+		std::cout << std::endl;
+	}
+
+	/*	}
+		break;*/
+
+		//// Advance Orders
+		//for (int i = 0; i < playersVec.size(); i++) {
+		//	while (!playerBool) {
+		//		std::cout << ("Which territory do you want to move from? ");
+		//		for (int j = 0; j < playersVec[i]->getPlayerTerritories().size(); j++) {
+		//			std::cout << j << ": " << playersVec[i]->getPlayerTerritories()[j] << std::endl;
+		//		}
+		//		cin >> usersChoice;
+		//		if (usersChoice > 0 || usersChoice < playersVec[i]->getPlayerTerritories().size()) {
+		//			for (int j = 0; j < playersVec[i]->getPlayerTerritories().size(); j++) {
+		//				if (usersChoice == playersVec[i]->getPlayerTerritories()[j]->getID()) {
+		//					sourceID = usersChoice;
+		//				}
+		//			}
+		//		}
+
+		//		std::cout << ("Which territory do you want to move to ?");
+		//		cin >> usersChoice;
+		//		for (int j = 0; j < playersVec[i]->getPlayerTerritories().size(); j++) {
+		//			std::cout << j << ": " << playersVec[i]->getPlayerTerritories()[j] << std::endl;
+		//		}
+
+		//		if (usersChoice > 0 || usersChoice < playersVec[i]->getPlayerTerritories().size()) {
+		//			for (int j = 0; j < playersVec[i]->getPlayerTerritories().size(); j++) {
+		//				if (usersChoice != playersVec[i]->getPlayerTerritories()[j]->getID()) {
+		//					targetID = usersChoice;
+		//				}
+		//			}
+		//		}
+
+		//		std::cout << ("How many units are you moving ?");
+		//		std::cin >> usersChoice;
+		//		if (usersChoice > 0 || usersChoice < playersVec[i]->getPlayerTerritories().size()) {
+		//			/*if (armyNum <= playersVec[i]->getPlayerTerritories()[sourceID]->getNumberOfArmies()) {
+		//				armyNum = usersChoice;
+		//			}*/
+		//			armyNum = usersChoice;
+		//		}
+
+		//		OrderData orderData = OrderData{ sourceID, targetID, armyNum };
+
+		//		issueOrderDetails.insert(std::pair<Player*, OrderData>(playersVec[i], orderData));
+
+		//		break;
+		//	}
+
+
+		//	//Advance(playersVec[i], , sourceID, targetID, armyNum, map,  );
+		//	std::cout << "" << std::endl;
+		//}
 	Notify();
 }
 
