@@ -306,22 +306,15 @@ void GameEngine::issueOrderPhase()
 			playerBool = false;
 		}
 	}
-	std::cout << playersVec.size() << std::endl;
-	std::cout << playersVec[0]->getPlayerArmies() << std::endl;
-
+	printf("\n");
+	// Add type of cards
 	vector<Card> cards;
-	//cards.push_back(Card(CardType::SPY));
 	cards.push_back(Card(CardType::BOMB));
 	cards.push_back(Card(CardType::DEPLOY));
 	cards.push_back(Card(CardType::BLOCKADE));
 	cards.push_back(Card(CardType::AIRLIFT));
 	cards.push_back(Card(CardType::NEGOTIATE));
 	cards.push_back(Card(CardType::ADVANCE));
-
-	//while (true) {
-	//	std::cout << "What card do you want to use? " << std::endl;
-	//	std::cin.clear();
-	//	std::cin.ignore(1000, '\n');
 
 	// Each player Draw card
 	for (int i = 0; i < playersVec.size(); i++) {
@@ -333,6 +326,7 @@ void GameEngine::issueOrderPhase()
 		printf("\n");
 	}
 
+	// Display players hands
 	for (int i = 0; i < playersVec.size(); i++) {
 		for (int j = 0; j < playersVec[j]->getPlayerCards()->get_cards_in_hand().size(); j++) {
 			std::cout << "Player " << i + 1 << std::endl;
