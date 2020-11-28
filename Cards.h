@@ -6,7 +6,7 @@ using std::ostream;
 using std::istream;
 
 enum /*class*/ CardType {
-	SPY, BOMB, REINFORCEMENT, BLOCKADE, AIRLIFT, DIPLOMACY
+	BOMB, DEPLOY, BLOCKADE, AIRLIFT, NEGOTIATE, ADVANCE
 };
 
 class Card {
@@ -41,7 +41,6 @@ public:
 	vector<Card*> get_deck();
 	void push_card(CardType);
 	void draw();
-	Deck getdeckobj();
 	~Deck();
 };
 

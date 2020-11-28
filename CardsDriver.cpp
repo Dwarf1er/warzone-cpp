@@ -8,12 +8,12 @@ CardsDriver::CardsDriver()
     //PART 5 - Cards tests
    //1) Create a deck of cards containing all types of cards
     vector<Card> cards;
-    cards.push_back(Card(CardType::SPY));
     cards.push_back(Card(CardType::BOMB));
-    cards.push_back(Card(CardType::REINFORCEMENT));
+    cards.push_back(Card(CardType::DEPLOY));
     cards.push_back(Card(CardType::BLOCKADE));
     cards.push_back(Card(CardType::AIRLIFT));
-    cards.push_back(Card(CardType::DIPLOMACY));
+    cards.push_back(Card(CardType::NEGOTIATE));
+    cards.push_back(Card(CardType::ADVANCE));
     Deck* deck = new Deck(cards);
     std::cout << *deck << std::endl;
 

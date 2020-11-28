@@ -95,9 +95,6 @@ void Deploy::validate(Player* p, Territory* t) {
 
 }
 
-//string Deploy::orderName() {
-//	return "Deploy";
-//};
 int Deploy::getArmyMen() {
 	return armyMen;
 }

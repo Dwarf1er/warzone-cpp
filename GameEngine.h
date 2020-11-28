@@ -48,8 +48,8 @@ private:
 	int numOfPlayer;
 	int observerOption;
 	Map* map;
+	OrderList* oList;
 	std::vector<Player*> playersVec;
-	std::vector<Player*> playerOrder;
 	std::vector<std::string> listOfFile;
 };
 

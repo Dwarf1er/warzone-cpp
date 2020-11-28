@@ -1,16 +1,16 @@
 //// WarzoneCpp.cpp : This file contains the 'main' function. Program execution begins and ends there.
-//#include <conio.h>
-//#include "MapDriver.h"
-//#include "MapLoaderDriver.h"
-//#include "PlayerDriver.h"
-//#include "OrdersDriver.h"
-//#include "CardsDriver.h"
-//#include "GameEngine.h"
-//#include "Orders.h"
+#include <conio.h>
+#include "MapDriver.h"
+#include "MapLoaderDriver.h"
+#include "PlayerDriver.h"
+#include "OrdersDriver.h"
+#include "CardsDriver.h"
+#include "GameEngine.h"
+#include "Orders.h"
 //
 ////Main method that contains all part to run at once
-//int main()
-//{
+int main()
+{
 //	/*
 //	// Part 1 - Map
 //	printf("======================================= Part 1 =======================================\n");
@@ -42,8 +42,8 @@
 //	//Assignment 2
 //	//Part 1 - Game Start 
 //	cout << "======================================= Part 1  =======================================\n" << endl;
-//	GameEngine games;
-//	games.initGame();
+	GameEngine games;
+	games.initGame();
 //	cout << "======================================= Part 1 end =======================================\n" << endl;
 //	
 //	//Part 2 - StartUp Phase
@@ -146,6 +146,6 @@
 //	//Negotiate(p1, p1);
 //	games.~GameEngine();
 //
-//	auto result = _getch();
-//	return 0;
-//}
+	auto result = _getch();
+	return 0;
+}
