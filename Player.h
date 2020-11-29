@@ -4,6 +4,7 @@
 #include "Map.h"
 #include "Cards.h"
 #include "Orders.h"
+#include "PlayerStrategies.h"
 using namespace std;
 using std::vector;
 
@@ -15,7 +16,7 @@ private:
 	OrderList* playerOrderList; //represents the OrderList queued by the player
 
 	// Strategy for player
-	PlayerStrategy* pStrats;
+	//PlayerStrategy* pStrats;
 
 	//helper attributes
 	int playerArmies; //represent the number of armies of the player

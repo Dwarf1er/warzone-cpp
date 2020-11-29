@@ -356,22 +356,22 @@ void GameEngine::issueOrderPhase()
 
 			switch (cardChoice) {
 			case 0:
-				oList->addOrders(new Bomb());
+				oList.addOrders(new Bomb());
 				break;
 			case 1:
-				oList->addOrders(new Deploy());
+				oList.addOrders(new Deploy());
 				break;
 			case 2:
-				oList->addOrders(new Blockade());
+				oList.addOrders(new Blockade());
 				break;
 			case 3:
-				oList->addOrders(new Airlift());
+				oList.addOrders(new Airlift());
 				break;
 			case 4:
-				oList->addOrders(new Negotiate());
+				oList.addOrders(new Negotiate());
 				break;
 			case 5:
-				oList->addOrders(new Advance());
+				oList.addOrders(new Advance());
 				break;
 			default:
 				break;

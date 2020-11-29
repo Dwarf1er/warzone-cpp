@@ -154,6 +154,7 @@
     <ClCompile Include="OrdersDriver.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayerDriver.cpp" />
+    <ClCompile Include="PlayerStrategies.cpp" />
     <ClCompile Include="WarzoneDriver.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -169,6 +170,7 @@
     <ClInclude Include="OrdersDriver.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayerDriver.h" />
+    <ClInclude Include="PlayerStrategies.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="austria-hungary.map" />
