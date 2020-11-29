@@ -167,10 +167,10 @@ void Player::issueOrder(Orders* order) {
 	
 }
 
-vector<Territory*> Player::toDefend() {
-	vector<Territory*> toDefend{ new Territory(), new Territory() };
-	return toDefend;
-}
+//vector<Territory*> Player::toDefend() {
+//	vector<Territory*> toDefend{ new Territory(), new Territory() };
+//	return toDefend;
+//}
 
 
 std::vector<int> Player::getToAttackVec()
