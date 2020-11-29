@@ -14,6 +14,8 @@ private:
 	Hand* playerCards; //represents the collection of cards of the player
 	OrderList* playerOrderList; //represents the OrderList queued by the player
 
+	// Strategy for player
+	PlayerStrategy* pStrats;
 
 	//helper attributes
 	int playerArmies; //represent the number of armies of the player
