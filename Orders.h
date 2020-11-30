@@ -59,7 +59,7 @@ public:
 	friend istream& operator>>(istream& in, Deploy &d);
 
 	void execute();
-	void validate(Player* p, Territory* t);
+	bool validate(Player* p, Territory* t);
 	void execute(Player* p, int army, Territory* t);
 
 	//getters & setters
@@ -100,7 +100,7 @@ public:
 	friend istream& operator>>(istream& in, Advance &a);
 
 	void execute();
-	void validate(Player* p, Territory* t1, Territory* t2, Map* m);
+	bool validate(Player* p, Territory* t1, Territory* t2, Map* m);
 	void execute(Player* p1, Player* p2, Territory* t1, Territory* t2, int army, Deck* d);
 
 	//getters & setters
@@ -134,7 +134,7 @@ public:
 
 	//string  orderName();
 	void execute();
-	void validate(Player* p, Territory* t);
+	bool validate(Player* p, Territory* t);
 	void execute(Territory* t);
 	//void orderProcedure();
 
@@ -168,7 +168,7 @@ public:
 
 	//string orderName();
 	void execute();
-	void validate(Player* p, Territory* t);
+	bool validate(Player* p, Territory* t);
 	void execute(Player* p, Player* n, Territory* t);
 
 	string getBlockedTerritory();
@@ -203,7 +203,7 @@ public:
 
 	//void orderProcedure();
 	void execute();
-	void validate(Player* p, Territory* t1, Territory* t2);
+	bool validate(Player* p, Territory* t1, Territory* t2);
 	void execute(Player* p1, Player* p2, Territory* t1, Territory* t2, int army, Deck* d);
 
 	//getters & setters
@@ -242,7 +242,7 @@ public:
 
 	void execute();
 	void orderProcedure();
-	void validate(Player* p1, Player* p2);
+	bool validate(Player* p1, Player* p2);
 	void execute(Player* p1, Player* p2);
 
 	bool getCheckValid();

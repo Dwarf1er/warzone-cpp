@@ -444,6 +444,12 @@ void GameEngine::issueOrderPhase()
 }
 
 void GameEngine::executeOrdersPhase() {
+
+	int army;
+	Territory* tempTerritory1, tempTerritory2;
+	int playerID;
+
+
 	// Prints out the order list 
 	printf("Order List\n");
 	for (int i = 0; i < playersVec.size(); i++) {
@@ -453,7 +459,44 @@ void GameEngine::executeOrdersPhase() {
 		}
 	}
 
+	// Re-order the list 
+	/*std::string temp;
+	std::string temp1;
+	std::string temp2;
+	std::vector<string> stringVec;
 
+	for (int i = 0; i < playersVec.size(); i++) {
+		for (int j = 0; j < playersVec[i]->getPlayerOrders()->getOList().size(); j++) {
+			stringVec.push_back(playersVec[i]->getPlayerOrders()->getOList()[j]->getDescription());
+
+			if (playersVec[i]->getPlayerOrders()->getOList()[j]->getDescription() == "Deploy") {
+				if (playersVec[i]->getPlayerOrders()->getOList()[0]->getDescription() == "Deploy") {
+
+				}
+				continue;
+			}
+		}
+	}*/
+
+	for (int i = 0; i < playersVec.size(); i++) {
+		for (int j = 0; j < playersVec[i]->getPlayerOrders()->getOList().size(); j++) {
+			if (playersVec[i]->getPlayerOrders()->getOList()[j]->getDescription() == "Deploy") {
+				while (true) {
+					std::cout << "Which territory to deploy to ?" << std::endl;
+					std::cin >> *tempTerritory1;
+					std::cout << "How many armies to deploy ? " << std::endl;
+					std::cin >> army;
+					if (Deploy().validate(playersVec[i], tempTerritory1)) {
+						Deploy().execute(playersVec[i], army, tempTerritory1);
+						break;
+					}
+					else {
+						std::cout << "Invalid statement" << std::endl;
+					}
+				}
+			}
+		}
+	}
 }
 
 
