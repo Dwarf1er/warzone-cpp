@@ -154,6 +154,7 @@ void GameEngine::initGame() {
 
 	reinforcementPhase();
 	issueOrderPhase();
+	executeOrdersPhase();
 
 	std::cout << "======================================= Part 3 end =======================================\n" << std::endl;
 }
@@ -346,7 +347,7 @@ void GameEngine::issueOrderPhase()
 		}
 		if (playerOrderChoice == "y") {
 			std::cout << "Enter a choice" << std::endl;
-			
+
 			for (int j = 0; j < playersVec[j]->getPlayerCards()->get_cards_in_hand().size(); j++) {
 				std::cout << "Player " << i + 1 << std::endl;
 				std::cout << *playersVec[i]->getPlayerCards()->get_cards_in_hand()[j] << std::endl;
@@ -378,12 +379,6 @@ void GameEngine::issueOrderPhase()
 			}
 		}
 		std::cout << std::endl;
-	}
-
-	// Prints out the order list 
-	printf("Order List\n");
-	for (int i = 0; i < oList.getOList().size(); i++) {
-		std::cout << i + 1 << ": " << *oList.getOList()[i] << std::endl;
 	}
 
 	/*	}
@@ -441,6 +436,16 @@ void GameEngine::issueOrderPhase()
 		//}
 	Notify();
 }
+
+void GameEngine::executeOrdersPhase(){
+	// Prints out the order list 
+	printf("Order List\n");
+	for (int i = 0; i < oList.getOList().size(); i++) {
+		std::cout << i + 1 << ": " << *oList.getOList()[i] << std::endl;
+	}
+}
+
+
 
 istream& operator>>(istream& in, const StartUp& s) {
 	//in >> s.engine;
