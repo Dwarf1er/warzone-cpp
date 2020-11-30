@@ -24,5 +24,17 @@ private:
 	bool mapCheck;
 	int ID;
 };
+
+class ConquestFileReader {
+public:
+	Map* loadConquestMap(std::string file);
+};
+
+class ConquestFileReaderAdapter : MapLoader {
+private:
+	ConquestFileReader fileReader;
+public:
+	Map* loadmap(std::string file);
+};
 #endif //!map
 
