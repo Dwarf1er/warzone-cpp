@@ -497,7 +497,12 @@ void GameEngine::executeOrdersPhase() {
 			}
 		}
 	}
+	for (int i = 0; i < playersVec.size(); i++) {
+		playersVec[i]->setPacifism(false);
+	}
 }
+
+
 
 
 
