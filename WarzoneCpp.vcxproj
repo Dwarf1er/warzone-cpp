@@ -173,6 +173,7 @@
     <ClInclude Include="PlayerStrategies.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\..\..\Downloads\conquest.map" />
     <None Include="austria-hungary.map" />
     <None Include="bad map1.map" />
     <None Include="bad map2.map" />

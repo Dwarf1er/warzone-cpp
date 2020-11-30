@@ -108,5 +108,6 @@
     <None Include="bad map1.map" />
     <None Include="bad map2.map" />
     <None Include="bad map3.map" />
+    <None Include="..\..\..\Downloads\conquest.map" />
   </ItemGroup>
 </Project>
