@@ -380,6 +380,12 @@ void GameEngine::issueOrderPhase()
 		std::cout << std::endl;
 	}
 
+	// Prints out the order list 
+	printf("Order List\n");
+	for (int i = 0; i < oList.getOList().size(); i++) {
+		std::cout << i + 1 << ": " << *oList.getOList()[i] << std::endl;
+	}
+
 	/*	}
 		break;*/
 
