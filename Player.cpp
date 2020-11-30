@@ -79,7 +79,7 @@ void Player::setPlayerOrders(Orders* playerOrders_) {
 	if (playerOrderList == nullptr) {
 		playerOrderList = new OrderList();
 	}
-	playerOrderList->getOList().push_back(playerOrders_);
+	playerOrderList->addOrders(playerOrders_);
 }
 
 void Player::setPlayerArmies(int playerArmies_) {

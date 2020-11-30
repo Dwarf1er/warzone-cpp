@@ -31,7 +31,7 @@ void Orders::operator=(const Orders& o)
 //------------Deploy----------------//
 Deploy::Deploy() {
 	armyMen = 0;
-	setDescription("This is a deploy command");//replaces orderName command previously
+	setDescription("Deploy");//replaces orderName command previously
 }
 
 Deploy::Deploy(Player* p, int army, Territory* t) {
@@ -47,18 +47,18 @@ Deploy::Deploy(const Deploy& d2) {
 }
 
 // Assignment Operator
-void Deploy::operator=(const Deploy& d2){
+void Deploy::operator=(const Deploy& d2) {
 	armyMen = d2.armyMen;
 	territory = d2.territory;
 }
 
 // Stream Insertion Operator 
-ostream& operator<<(ostream& out, const Deploy& d){
+ostream& operator<<(ostream& out, const Deploy& d) {
 	out << "Number of army:" << d.armyMen << endl;
-	return out; 
+	return out;
 }
 
-istream& operator>>(istream& in, Deploy& d){
+istream& operator>>(istream& in, Deploy& d) {
 	cout << "Number of army chosen:" << endl;
 	in >> d.armyMen;
 	cout << "Chosen territory: " << endl;
@@ -70,29 +70,26 @@ istream& operator>>(istream& in, Deploy& d){
 // Execute Method 
 void Deploy::execute(Player* p, int army, Territory* t) { //moves armies to territory
 
-	if (checkValid) {
+	
 		cout << "Deploying " << army << " army(s), in the territory: " << t->getID() << endl;
 		cout << "Deployment order has been validated, proceeding to execution: " << endl;
 		cout << "The Deployment has been made. Proceeding to next order.\n";
 		t->setNumberOfArmies(t->getNumberOfArmies() + army);//adds deployed armies to territory
 		p->setPlayerArmies(p->getPlayerArmies() - army);//removes deployed armies from player
 
-	}
-	else {
-		cout << "The order is invalid: territory does not belong to player" << endl;
-	}
+	
+	
 }
 void Deploy::execute()
 {
 }
-void Deploy::validate(Player* p, Territory* t) {
+bool Deploy::validate(Player* p, Territory* t) {
 	for (int i = 0; i < p->getPlayerTerritories().size(); i++) {
 		if (p->getPlayerTerritories()[i]->getID() == t->getID()) { //checks if territory belongs to player
 			cout << "validation succesful" << endl;
-			checkValid = true;
+			return true;
 		}
 	}
-
 }
 
 int Deploy::getArmyMen() {
@@ -110,7 +107,7 @@ void Deploy::setTerritory(string tt) {
 
 //------------Advance--------------//
 Advance::Advance() {
-	setDescription("This is an Advance command");
+	setDescription("Advance");
 	armyMen = 0;
 }
 Advance::Advance(Player* p1, Player* p2, Territory* t1, Territory* t2, int army, Map* m, Deck* d) {
@@ -136,7 +133,7 @@ Advance::Advance(const Advance& a2) {
 }
 
 // Assignment Operator
-void Advance::operator=(const Advance& a2){
+void Advance::operator=(const Advance& a2) {
 	p1 = a2.p1;
 	army = a2.army;
 	target = a2.target;
@@ -144,7 +141,7 @@ void Advance::operator=(const Advance& a2){
 }
 
 // Stream insertion operator
-ostream& operator<<(ostream& out, const Advance& a){
+ostream& operator<<(ostream& out, const Advance& a) {
 	out << "Player: " << a.p1 << endl;
 	out << "Number of army: " << a.army << endl;
 	out << "Target destination: " << a.target << endl;
@@ -152,7 +149,7 @@ ostream& operator<<(ostream& out, const Advance& a){
 	return out;
 }
 
-istream& operator>>(istream& in, Advance& a){
+istream& operator>>(istream& in, Advance& a) {
 	cout << "Current Player: " << a.p1 << endl;
 	cout << "Choose number of army : " << a.army << endl;
 	in >> a.army;
@@ -163,31 +160,26 @@ istream& operator>>(istream& in, Advance& a){
 	return in;
 }
 
+
 void Advance::execute()
 {
 }
 
-void Advance::validate(Player* p, Territory* t1, Territory* t2, Map* m) {
+bool Advance::validate(Player* p, Territory* t1, Territory* t2, Map* m) {
 	for (int i = 0; i < p->getPlayerTerritories().size(); i++) {
 		if (p->getPlayerTerritories()[i]->getID() == t1->getID()) { //checks if territory belongs to player
-			
-				for (int j = 0; j < t1->getneighbors();j++) {
-					if (m->listOfNeightbors[t1->getID()][j]->getID() == t2->getID()) {  //checks if territories are adjacent
-						cout << "validation succesful" << endl;
-						checkValid = true;
-						break;
-					}
-				}
-				if (checkValid == false) {
-					cout << "invalid order: territories are not adjacent" << endl;
+			for (int j = 0; j < t1->getneighbors();j++) {
+				if (m->listOfNeightbors[t1->getID()][j]->getID() == t2->getID()) {  //checks if territories are adjacent
+					cout << "validation succesful" << endl;
+					return true;
 					break;
 				}
+			}
 		}
-		//cout << "invalid order: source does not belong to player" << endl;
 	}
 }
 void Advance::execute(Player* p1, Player* p2, Territory* t1, Territory* t2, int army, Deck* d) {
-	if (checkValid) {
+	
 		bool attack = true;
 
 		for (int i = 0; i < p1->getPlayerTerritories().size(); i++) {
@@ -202,85 +194,83 @@ void Advance::execute(Player* p1, Player* p2, Territory* t1, Territory* t2, int 
 				}
 			}
 		}
-		
-		 
-		if (!(p1->getPacifism() == true && p2->getPacifism() == true) && attack==true) {
-
-				cout << "The advancement order has been validated, proceeding to execute: ..." << endl;
-
-				printf("Advance ok\n");
-				printf("Attack occuring\n");
-				//attack and def mechanism
-				int defdeath = 0;
-				int atkdeath = 0;
-				srand((int)time(0));
-
-				for (int i = 0;i < t1->getNumberOfArmies(); i++) { //attackers killing defenders
-					int r = (rand() % 100) + 1;
-
-					if (r <= 60) {
-						defdeath++;
-					}
-				}
 
 
-				for (int i = 0;i < t2->getNumberOfArmies(); i++) { //defenders killing attackers
-					int r = (rand() % 100) + 1;
+		if (!(p1->getPacifism() == true && p2->getPacifism() == true) && attack == true) {
 
-					if (r <= 70) {
-						atkdeath++;
-					}
-				}
+			cout << "The advancement order has been validated, proceeding to execute: ..." << endl;
 
-				if (atkdeath > t1->getNumberOfArmies()) {
-					atkdeath = t1->getNumberOfArmies();
-				}
-				if (defdeath > t2->getNumberOfArmies()) {
-					defdeath = t2->getNumberOfArmies();
-				}
+			printf("Advance ok\n");
+			printf("Attack occuring\n");
+			//attack and def mechanism
+			int defdeath = 0;
+			int atkdeath = 0;
+			srand((int)time(0));
 
-				cout << "defender deaths: " << defdeath << endl;
-				cout << "attacker deaths: " << atkdeath << endl;
+			for (int i = 0;i < t1->getNumberOfArmies(); i++) { //attackers killing defenders
+				int r = (rand() % 100) + 1;
 
-				t2->setNumberOfArmies(t2->getNumberOfArmies() - defdeath);  //subtracts the deaths from armies totals
-				t1->setNumberOfArmies(t1->getNumberOfArmies() - atkdeath);
-
-				if (t2->getNumberOfArmies() <= 0 && t1->getNumberOfArmies() >= 0) {  //transfers ownership if territory has no defenders and there are more than 0 attackers
-					cout << "this territory has been conquered " << endl;
-					vector<Territory*> temp;
-					temp = p2->getPlayerTerritories();	//player loses territory
-					for (int i = 0; i < p2->getPlayerTerritories().size();i++) {
-						if (p2->getPlayerTerritories()[i]->getID() == t2->getID()) {
-							temp.erase(temp.begin() + i);
-							break;
-						}
-					}
-
-					p2->setPlayerTerritories(temp);
-
-
-					temp = p1->getPlayerTerritories();//transfers to neutral player
-					temp.push_back(t2);
-					p1->setPlayerTerritories(temp);
-
-					if (!(p1->getCardCheck())) {  //LOL CARDS DONT WORK
-						cout << "the victorious player has received a card" << endl;
-						Hand* temph = new Hand(d);
-						temph = p1->getPlayerCards();
-						d->draw();
-						p1->setPlayerCards(temph);
-						temph->get_cards_in_hand().at(0)->play();
-					}
+				if (r <= 60) {
+					defdeath++;
 				}
 			}
-			else if(p1->getPacifism() == true && p2->getPacifism() == true) {
-				cout << "attack cannot proceed since a negotiation has occured" << endl;
-			} 
-	}
+
+
+			for (int i = 0;i < t2->getNumberOfArmies(); i++) { //defenders killing attackers
+				int r = (rand() % 100) + 1;
+
+				if (r <= 70) {
+					atkdeath++;
+				}
+			}
+
+			if (atkdeath > t1->getNumberOfArmies()) {
+				atkdeath = t1->getNumberOfArmies();
+			}
+			if (defdeath > t2->getNumberOfArmies()) {
+				defdeath = t2->getNumberOfArmies();
+			}
+
+			cout << "defender deaths: " << defdeath << endl;
+			cout << "attacker deaths: " << atkdeath << endl;
+
+			t2->setNumberOfArmies(t2->getNumberOfArmies() - defdeath);  //subtracts the deaths from armies totals
+			t1->setNumberOfArmies(t1->getNumberOfArmies() - atkdeath);
+
+			if (t2->getNumberOfArmies() <= 0 && t1->getNumberOfArmies() >= 0) {  //transfers ownership if territory has no defenders and there are more than 0 attackers
+				cout << "this territory has been conquered " << endl;
+				vector<Territory*> temp;
+				temp = p2->getPlayerTerritories();	//player loses territory
+				for (int i = 0; i < p2->getPlayerTerritories().size();i++) {
+					if (p2->getPlayerTerritories()[i]->getID() == t2->getID()) {
+						temp.erase(temp.begin() + i);
+						break;
+					}
+				}
+
+				p2->setPlayerTerritories(temp);
+
+
+				temp = p1->getPlayerTerritories();//transfers to neutral player
+				temp.push_back(t2);
+				p1->setPlayerTerritories(temp);
+
+				if (!(p1->getCardCheck())) {  //LOL CARDS DONT WORK
+					cout << "the victorious player has received a card" << endl;
+					Hand* temph = new Hand(d);
+					temph = p1->getPlayerCards();
+					d->draw();
+					p1->setPlayerCards(temph);
+					temph->get_cards_in_hand().at(0)->play();
+				}
+			}
+		}
+		else if (p1->getPacifism() == true && p2->getPacifism() == true) {
+			cout << "attack cannot proceed since a negotiation has occured" << endl;
+		}
+	
 }
-/*
-void Advance::orderProcedure() {
-};*/
+
 
 //getters & setters
 bool Advance::getCheckValid() {
@@ -305,7 +295,7 @@ void Advance::setArmyMen(int army) {
 */
 
 Bomb::Bomb() {
-	setDescription("This is a Bomb command");
+	setDescription("Bomb");
 }
 Bomb::Bomb(Player* p, Territory* t) {
 	setDescription("This is a Bomb command");
@@ -319,7 +309,7 @@ Bomb::Bomb(const Bomb& b2) {
 }
 
 // Assignment Constructor
-void Bomb::operator=(const Bomb& b2){
+void Bomb::operator=(const Bomb& b2) {
 	bombTargetTerritory = b2.bombTargetTerritory;
 }
 
@@ -344,32 +334,30 @@ string Bomb::orderName() {
 	return "Bomb: ";
 };
 */
-void Bomb::validate(Player* p, Territory* t) {  //check if territory does not belong to player
-	checkValid = true;
+bool Bomb::validate(Player* p, Territory* t) {  //check if territory does not belong to player
+	bool valid = true;
 	for (int i = 0; i < p->getPlayerTerritories().size(); i++) {
-		if (p->getPlayerTerritories()[i]->getID() == t->getID()) { 
-			checkValid = false;
+		if (p->getPlayerTerritories()[i]->getID() == t->getID()) {
+			valid = false;
 		}
+	}
+	if (valid == true) {
+		return true;
 	}
 }
 
 void Bomb::execute(Territory* t) {
 	printf("Bomb: ");
 
-	if (checkValid) {
+	
 		cout << "\nThe bomb will be launched on the the following territory: " << t->getID() << endl;
 		cout << "The bomb has been Launched. Half enemy forces have been wiped out\n";
 		t->setNumberOfArmies(t->getNumberOfArmies() / 2); //kills half the army
 		cout << "There are " << t->getNumberOfArmies() << " remaining" << endl;
-	}
-	else {
-		cout << "The order is invalid" << endl;
-	}
+	
+	
 }
-/*
-void Bomb::orderProcedure() {
-};
-*/
+
 //getters & setters
 string Bomb::getBombTargetTerritory() {
 	return bombTargetTerritory;
@@ -391,7 +379,7 @@ triple the number of armies on one of the current player�s
 territories and make it a neutral territory.
 */
 Blockade::Blockade() {
-	setDescription("This is a Blockade command");
+	setDescription("Blockade");
 }
 Blockade::Blockade(Player* p, Player* n, Territory* t) {
 	setDescription("This is a Blockade command");
@@ -405,7 +393,7 @@ Blockade::Blockade(const Blockade& bl2) {
 }
 
 // Assignment Operator
-void Blockade::operator=(const Blockade& bl2){
+void Blockade::operator=(const Blockade& bl2) {
 	blockTerritory = bl2.blockTerritory;
 }
 
@@ -423,27 +411,22 @@ istream& operator>>(istream& in, Blockade& b) {
 
 void Blockade::execute()
 {
-	
+
 }
 
-/*
- string Blockade::orderName() {
-	return "BLOCKADE: ";
-};*/
-// TODO 
-void  Blockade::validate(Player* p, Territory* t) {
+bool  Blockade::validate(Player* p, Territory* t) {
 	for (int i = 0; i < p->getPlayerTerritories().size(); i++) {
 		if (p->getPlayerTerritories()[i]->getID() == t->getID()) { //checks if territory belongs to player
 			cout << "validation succesful" << endl;
-			checkValid = true;
+			return true;
 		}
 	}
 }
 void Blockade::execute(Player* p, Player* n, Territory* t) {
 	vector<Territory*> temp;
-	if (checkValid) {
+	
 		t->setNumberOfArmies(t->getNumberOfArmies() * 2); //doubles army
-		
+
 		temp = p->getPlayerTerritories();	//player loses territory
 		for (int i = 0; i < p->getPlayerTerritories().size();i++) {
 			if (p->getPlayerTerritories()[i]->getID() == t->getID()) {
@@ -451,21 +434,18 @@ void Blockade::execute(Player* p, Player* n, Territory* t) {
 				break;
 			}
 		}
-		
-		p->setPlayerTerritories(temp);
-		
 
-		temp=n->getPlayerTerritories();//transfers to winning player
+		p->setPlayerTerritories(temp);
+
+
+		temp = n->getPlayerTerritories();//transfers to winning player
 		temp.push_back(t);
 		n->setPlayerTerritories(temp);
 
 		cout << "\nThe blockade will be imposed on the following territory: " << t->getID() << endl;
 		cout << "Players army has been doubled " << "current armies:" << t->getNumberOfArmies() << " and the current territory is now neutral\n";
 
-	}
-	else {
-		cout << "The order is invalid: territory belongs to enemy player " << endl;
-	}
+	
 }
 /*
 void Blockade::orderProcedure() {
@@ -481,7 +461,7 @@ void Blockade::setBlockedTerritory(string btt) {
 
 //-------------Airlift--------------//
 Airlift::Airlift() {
-	setDescription("This is an Airlift command");
+	setDescription("Airlift");
 }
 
 Airlift::Airlift(Player* p1, Player* p2, Territory* t1, Territory* t2, int army, Deck* d) {
@@ -499,7 +479,7 @@ Airlift::Airlift(const Airlift& al2) {
 }
 
 // Assignment Operator
-void Airlift::operator=(const Airlift& al2){
+void Airlift::operator=(const Airlift& al2) {
 	airArmy = al2.airArmy;
 	initTerritory = al2.initTerritory;
 	targetTerritory = al2.targetTerritory;
@@ -527,15 +507,15 @@ void Airlift::execute()
 {
 }
 
-void Airlift::validate(Player* p, Territory* t1, Territory* t2)
+bool Airlift::validate(Player* p, Territory* t1, Territory* t2)
 {
 	for (int i = 0; i < p->getPlayerTerritories().size(); i++) {
 		if (p->getPlayerTerritories()[i]->getID() == t1->getID()) { //checks if territory 1 belongs to player
-			
+
 			for (int j = 0; j < p->getPlayerTerritories().size(); j++) {
 				if (p->getPlayerTerritories()[j]->getID() == t2->getID()) { //checks if territory 2 belongs to player
 					cout << "validation succesful" << endl;
-					checkValid = true;
+					return true;
 				}
 			}
 		}
@@ -546,28 +526,28 @@ void Airlift::validate(Player* p, Territory* t1, Territory* t2)
 void Airlift::execute(Player* p1, Player* p2, Territory* t1, Territory* t2, int army, Deck* d) {
 	printf("Airlift: \n");
 
-	if (checkValid) {
+	
 		bool attacks = true;
 		for (int i = 0; i < p1->getPlayerTerritories().size(); i++) {
 			if (p1->getPlayerTerritories()[i]->getID() == t1->getID()) { //checks if both territories belong to player
 				for (int j = 0; j < p1->getPlayerTerritories().size(); j++) {
 					if (p1->getPlayerTerritories()[j]->getID() == t2->getID()) {
-				cout << "The airlift order has been validated, proceeding to execute: ..." << endl;
-				printf("Airlift ok\n");
-				cout << "\nThe army of " << army << " will be airlifted from: " << t1->getID() << " to " << t2->getID() << endl;
-				t1->setNumberOfArmies(t1->getNumberOfArmies() - army);  //moving units from source to target
-				t2->setNumberOfArmies(t2->getNumberOfArmies() + army);
+						cout << "The airlift order has been validated, proceeding to execute: ..." << endl;
+						printf("Airlift ok\n");
+						cout << "\nThe army of " << army << " will be airlifted from: " << t1->getID() << " to " << t2->getID() << endl;
+						t1->setNumberOfArmies(t1->getNumberOfArmies() - army);  //moving units from source to target
+						t2->setNumberOfArmies(t2->getNumberOfArmies() + army);
 
-				cout << "Your army has been airlifted successfully\n";
-				cout << "Territory :" << t2->getID() << " now has a total of " << t2->getNumberOfArmies() << " armies." << endl;
-				attacks = false;
+						cout << "Your army has been airlifted successfully\n";
+						cout << "Territory :" << t2->getID() << " now has a total of " << t2->getNumberOfArmies() << " armies." << endl;
+						attacks = false;
+					}
+				}
 			}
 		}
-	}
-}
 
-		
-		 if (!(p1->getPacifism() == true && p2->getPacifism() == true )&& attacks==true) {
+
+		if (!(p1->getPacifism() == true && p2->getPacifism() == true) && attacks == true) {
 			cout << "The airlift order has been validated, proceeding to execute: ..." << endl;
 			printf("Airlift ok\n");
 			cout << "\nThe army of " << army << " will be airlifted from: " << t1->getID() << " to " << t2->getID() << endl;
@@ -629,15 +609,15 @@ void Airlift::execute(Player* p1, Player* p2, Territory* t1, Territory* t2, int 
 					temph = p1->getPlayerCards();
 					d->draw();
 					p1->setPlayerCards(temph);
-					
+
 				}
 
 			}
-			else if(p1->getPacifism() == true && p2->getPacifism() == true){
+			else if (p1->getPacifism() == true && p2->getPacifism() == true) {
 				cout << "attack cannot proceed since a negotiation has occured" << endl;
 			}
 		}
-	}
+	
 }
 
 //getters & setters
@@ -668,7 +648,7 @@ prevent attacks between the current player
 and another player until the end of the turn.
 */
 Negotiate::Negotiate() {
-	setDescription("This is a Negotiate command");
+	setDescription("Negotiate");
 }
 Negotiate::Negotiate(Player* p1, Player* p2) {
 
@@ -683,7 +663,7 @@ Negotiate::Negotiate(const Negotiate& n2) {
 }
 
 // Assignment operator
-void Negotiate::operator=(const Negotiate& n2){
+void Negotiate::operator=(const Negotiate& n2) {
 	negotiatePlayer = n2.negotiatePlayer;
 }
 
@@ -703,24 +683,22 @@ void Negotiate::execute()
 {
 }
 
-void Negotiate::validate(Player* p1, Player* p2) {
+bool Negotiate::validate(Player* p1, Player* p2) {
 	if (p1->getPlayerID() != p2->getPlayerID()) { //checks if source player is diffrent from the target player
-		checkValid = true;
+		return true;
 	}
 }
 void Negotiate::execute(Player* p1, Player* p2) {
 	printf("Negotiate: \n");
 	//cout << "\n Negotiate prevents attacks from " << getNegotiatePlayer() << "until the end of turn" << endl;
 
-	if (checkValid) {
+	
 		cout << "\nNegotiate prevents attacks between " << p1->getPlayerID() << " and " << p2->getPlayerID() << endl;
 		p1->setPacifism(true);
 		p2->setPacifism(true);
 
-	}
-	else {
-		cout << "The order is invalid" << endl;
-	}
+	
+	
 }
 bool Negotiate::getCheckValid() {
 	return checkValid;

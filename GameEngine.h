@@ -31,6 +31,7 @@ public:
 	std::vector<Player*> getPlayersVec();
 	void reinforcementPhase();
 	void issueOrderPhase();
+	void executeOrdersPhase();
 	void shufflePlayersVec();
 	int getNumPlayers();
 	Map* getMap();

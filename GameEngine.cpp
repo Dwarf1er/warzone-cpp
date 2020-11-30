@@ -154,6 +154,7 @@ void GameEngine::initGame() {
 
 	reinforcementPhase();
 	issueOrderPhase();
+	executeOrdersPhase();
 
 	std::cout << "======================================= Part 3 end =======================================\n" << std::endl;
 }
@@ -346,7 +347,7 @@ void GameEngine::issueOrderPhase()
 		}
 		if (playerOrderChoice == "y") {
 			std::cout << "Enter a choice" << std::endl;
-			
+
 			for (int j = 0; j < playersVec[j]->getPlayerCards()->get_cards_in_hand().size(); j++) {
 				std::cout << "Player " << i + 1 << std::endl;
 				std::cout << *playersVec[i]->getPlayerCards()->get_cards_in_hand()[j] << std::endl;
@@ -356,22 +357,28 @@ void GameEngine::issueOrderPhase()
 
 			switch (cardChoice) {
 			case 0:
-				oList.addOrders(new Bomb());
+				//oList.addOrders(new Bomb());
+				playersVec[i]->setPlayerOrders(new Bomb());
 				break;
 			case 1:
-				oList.addOrders(new Deploy());
+				//oList.addOrders(new Deploy());
+				playersVec[i]->setPlayerOrders(new Deploy());
 				break;
 			case 2:
-				oList.addOrders(new Blockade());
+				//oList.addOrders(new Blockade());
+				playersVec[i]->setPlayerOrders(new Blockade());
 				break;
 			case 3:
-				oList.addOrders(new Airlift());
+				//oList.addOrders(new Airlift());
+				playersVec[i]->setPlayerOrders(new Airlift());
 				break;
 			case 4:
-				oList.addOrders(new Negotiate());
+				//oList.addOrders(new Negotiate());
+				playersVec[i]->setPlayerOrders(new Negotiate());
 				break;
 			case 5:
-				oList.addOrders(new Advance());
+				//oList.addOrders(new Advance());
+				playersVec[i]->setPlayerOrders(new Airlift());
 				break;
 			default:
 				break;
@@ -435,6 +442,158 @@ void GameEngine::issueOrderPhase()
 		//}
 	Notify();
 }
+
+void GameEngine::executeOrdersPhase() {
+
+	int army = 0;
+	Territory* tempTerritory1 = new Territory();
+	Territory* tempTerritory2 = new Territory();
+	int playerID = 0;
+	Player* neutralTempP;
+
+
+	// Prints out the order list 
+	printf("Order List\n");
+	for (int i = 0; i < playersVec.size(); i++) {
+		std::cout << "Players " << i + 1 << std::endl;
+		for (int j = 0; j < playersVec[i]->getPlayerOrders()->getOList().size(); j++) {
+			std::cout << playersVec[i]->getPlayerOrders()->getOList()[j]->getDescription() << std::endl;
+		}
+	}
+
+	// Re-order the list 
+	/*std::string temp;
+	std::string temp1;
+	std::string temp2;
+	std::vector<string> stringVec;
+
+	for (int i = 0; i < playersVec.size(); i++) {
+		for (int j = 0; j < playersVec[i]->getPlayerOrders()->getOList().size(); j++) {
+			stringVec.push_back(playersVec[i]->getPlayerOrders()->getOList()[j]->getDescription());
+
+			if (playersVec[i]->getPlayerOrders()->getOList()[j]->getDescription() == "Deploy") {
+				if (playersVec[i]->getPlayerOrders()->getOList()[0]->getDescription() == "Deploy") {
+
+				}
+				continue;
+			}
+		}
+	}*/
+
+
+	for (int i = 0; i < playersVec.size(); i++) {
+		for (int j = 0; j < playersVec[i]->getPlayerOrders()->getOList().size(); j++) {
+			// Deploy Section
+			if (playersVec[i]->getPlayerOrders()->getOList()[j]->getDescription() == "Deploy") {
+				while (true) {
+					std::cout << "Which territory to deploy to ?" << std::endl;
+					std::cin >> *tempTerritory1;
+					std::cout << "How many armies to deploy ? " << std::endl;
+					std::cin >> army;
+					if (Deploy().validate(playersVec[i], tempTerritory1)) {
+						Deploy().execute(playersVec[i], army, tempTerritory1);
+						break;
+					}
+					else {
+						std::cout << "Invalid statement" << std::endl;
+					}
+				}
+			}
+
+			// Bomb Section
+			if (playersVec[i]->getPlayerOrders()->getOList()[j]->getDescription() == "Bomb") {
+				while (true) {
+					std::cout << "Which territory to bomb ?" << std::endl;
+					std::cin >> *tempTerritory1;
+					std::cout << "How many armies to deploy ? " << std::endl;
+					std::cin >> army;
+					if (Bomb().validate(playersVec[i], tempTerritory1)) {
+						Bomb().execute(tempTerritory1);
+						break;
+					}
+					else {
+						std::cout << "Invalid statement" << std::endl;
+					}
+				}
+			}
+
+			// Blockade Section
+			if (playersVec[i]->getPlayerOrders()->getOList()[j]->getDescription() == "Blockade") {
+				while (true) {
+					std::cout << "Which territory to put a blockade ?" << std::endl;
+					std::cin >> *tempTerritory1;
+					if (Blockade().validate(playersVec[i], tempTerritory1)) {
+						Blockade().execute(playersVec[i], neutralTempP, tempTerritory1);
+						break;
+					}
+					else {
+						std::cout << "Invalid statement" << std::endl;
+					}
+				}
+			}
+
+			// Negotiate Section
+			if (playersVec[i]->getPlayerOrders()->getOList()[j]->getDescription() == "Negotiate") {
+				while (true) {
+					std::cout << "Which player would you like to negotiate with ?" << std::endl;
+					std::cin >> playerID;
+
+					// Change the neutraltemp
+					if (Negotiate().validate(playersVec[i], playersVec[playerID])) {
+						Negotiate().execute(playersVec[i], playersVec[playerID]);
+						break;
+					}
+					else {
+						std::cout << "Invalid statement" << std::endl;
+					}
+				}
+			}
+
+			// Advance section
+			if (playersVec[i]->getPlayerOrders()->getOList()[j]->getDescription() == "Advance") {
+				while (true) {
+					std::cout << "Which territory to deploy to ?" << std::endl;
+					std::cin >> *tempTerritory1;
+					std::cout << "How many armies to deploy ? " << std::endl;
+					std::cin >> army;
+					if (Deploy().validate(playersVec[i], tempTerritory1)) {
+						Deploy().execute(playersVec[i], army, tempTerritory1);
+						break;
+					}
+					else {
+						std::cout << "Invalid statement" << std::endl;
+					}
+				}
+			}
+
+			// Airlift section
+			if (playersVec[i]->getPlayerOrders()->getOList()[j]->getDescription() == "Airlift") {
+				while (true) {
+					std::cout << "Which territory to deploy to ?" << std::endl;
+					std::cin >> *tempTerritory1;
+					std::cout << "How many armies to deploy ? " << std::endl;
+					std::cin >> army;
+					if (Deploy().validate(playersVec[i], tempTerritory1)) {
+						Deploy().execute(playersVec[i], army, tempTerritory1);
+						break;
+					}
+					else {
+						std::cout << "Invalid statement" << std::endl;
+					}
+				}
+			}
+		}
+	}
+
+	// Set pacifism to false
+	for (int i = 0; i < playersVec.size(); i++) {
+		playersVec[i]->setPacifism(false);
+	}
+}
+
+
+
+
 
 istream& operator>>(istream& in, const StartUp& s) {
 	//in >> s.engine;
