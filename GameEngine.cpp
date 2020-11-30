@@ -357,22 +357,28 @@ void GameEngine::issueOrderPhase()
 
 			switch (cardChoice) {
 			case 0:
-				oList.addOrders(new Bomb());
+				//oList.addOrders(new Bomb());
+				playersVec[i]->setPlayerOrders(new Bomb());
 				break;
 			case 1:
-				oList.addOrders(new Deploy());
+				//oList.addOrders(new Deploy());
+				playersVec[i]->setPlayerOrders(new Deploy());
 				break;
 			case 2:
-				oList.addOrders(new Blockade());
+				//oList.addOrders(new Blockade());
+				playersVec[i]->setPlayerOrders(new Blockade());
 				break;
 			case 3:
-				oList.addOrders(new Airlift());
+				//oList.addOrders(new Airlift());
+				playersVec[i]->setPlayerOrders(new Airlift());
 				break;
 			case 4:
-				oList.addOrders(new Negotiate());
+				//oList.addOrders(new Negotiate());
+				playersVec[i]->setPlayerOrders(new Negotiate());
 				break;
 			case 5:
-				oList.addOrders(new Advance());
+				//oList.addOrders(new Advance());
+				playersVec[i]->setPlayerOrders(new Airlift());
 				break;
 			default:
 				break;
@@ -437,12 +443,17 @@ void GameEngine::issueOrderPhase()
 	Notify();
 }
 
-void GameEngine::executeOrdersPhase(){
+void GameEngine::executeOrdersPhase() {
 	// Prints out the order list 
 	printf("Order List\n");
-	for (int i = 0; i < oList.getOList().size(); i++) {
-		std::cout << i + 1 << ": " << *oList.getOList()[i] << std::endl;
+	for (int i = 0; i < playersVec.size(); i++) {
+		std::cout << "Players " << i + 1 << std::endl;
+		for (int j = 0; j < playersVec[i]->getPlayerOrders()->getOList().size(); j++) {
+			std::cout << playersVec[i]->getPlayerOrders()->getOList()[j]->getDescription() << std::endl;
+		}
 	}
+
+
 }
 
 

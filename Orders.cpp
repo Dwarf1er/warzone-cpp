@@ -31,7 +31,7 @@ void Orders::operator=(const Orders& o)
 //------------Deploy----------------//
 Deploy::Deploy() {
 	armyMen = 0;
-	setDescription("This is a deploy command");//replaces orderName command previously
+	setDescription("Deploy");//replaces orderName command previously
 }
 
 Deploy::Deploy(Player* p, int army, Territory* t) {
@@ -110,7 +110,7 @@ void Deploy::setTerritory(string tt) {
 
 //------------Advance--------------//
 Advance::Advance() {
-	setDescription("This is an Advance command");
+	setDescription("Advance");
 	armyMen = 0;
 }
 Advance::Advance(Player* p1, Player* p2, Territory* t1, Territory* t2, int army, Map* m, Deck* d) {
@@ -305,7 +305,7 @@ void Advance::setArmyMen(int army) {
 */
 
 Bomb::Bomb() {
-	setDescription("This is a Bomb command");
+	setDescription("Bomb");
 }
 Bomb::Bomb(Player* p, Territory* t) {
 	setDescription("This is a Bomb command");
@@ -391,7 +391,7 @@ triple the number of armies on one of the current player�s
 territories and make it a neutral territory.
 */
 Blockade::Blockade() {
-	setDescription("This is a Blockade command");
+	setDescription("Blockade");
 }
 Blockade::Blockade(Player* p, Player* n, Territory* t) {
 	setDescription("This is a Blockade command");
@@ -426,11 +426,6 @@ void Blockade::execute()
 	
 }
 
-/*
- string Blockade::orderName() {
-	return "BLOCKADE: ";
-};*/
-// TODO 
 void  Blockade::validate(Player* p, Territory* t) {
 	for (int i = 0; i < p->getPlayerTerritories().size(); i++) {
 		if (p->getPlayerTerritories()[i]->getID() == t->getID()) { //checks if territory belongs to player
@@ -481,7 +476,7 @@ void Blockade::setBlockedTerritory(string btt) {
 
 //-------------Airlift--------------//
 Airlift::Airlift() {
-	setDescription("This is an Airlift command");
+	setDescription("Airlift");
 }
 
 Airlift::Airlift(Player* p1, Player* p2, Territory* t1, Territory* t2, int army, Deck* d) {
@@ -668,7 +663,7 @@ prevent attacks between the current player
 and another player until the end of the turn.
 */
 Negotiate::Negotiate() {
-	setDescription("This is a Negotiate command");
+	setDescription("Negotiate");
 }
 Negotiate::Negotiate(Player* p1, Player* p2) {
 
