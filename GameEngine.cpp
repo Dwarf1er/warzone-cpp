@@ -445,9 +445,10 @@ void GameEngine::issueOrderPhase()
 
 void GameEngine::executeOrdersPhase() {
 
-	int army;
-	Territory* tempTerritory1, tempTerritory2;
-	int playerID;
+	int army = 0;
+	Territory* tempTerritory1 = new Territory();
+	Territory* tempTerritory2 = new Territory();
+	int playerID = 0;
 
 
 	// Prints out the order list 

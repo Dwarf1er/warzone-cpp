@@ -161,6 +161,10 @@ istream& operator>>(istream& in, Advance& a) {
 }
 
 
+void Advance::execute()
+{
+}
+
 bool Advance::validate(Player* p, Territory* t1, Territory* t2, Map* m) {
 	for (int i = 0; i < p->getPlayerTerritories().size(); i++) {
 		if (p->getPlayerTerritories()[i]->getID() == t1->getID()) { //checks if territory belongs to player
