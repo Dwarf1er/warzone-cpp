@@ -49,7 +49,7 @@ Map* MapLoader::loadmap(string file) {
 
 	string map;
 	map = file;
-	//cout << "Enter map name with extension: ";
+
 	cout << "Loading map..... " << map << endl;
 	printf("\n");
 
@@ -244,3 +244,23 @@ bool MapLoader::getContinentCheck()
 	return continentCheck;
 }
 
+Map* ConquestFileReaderAdapter::loadmap(std::string file) {
+	//1- Read continents
+	//2- Store the number of armies in a variable (num)
+	//3- Read territories and assign them their number of armies
+	fstream infile;
+	string map = file;
+
+	cout << "Loading map..... " << map << endl;
+	printf("\n");
+
+	infile.open(map);
+
+
+
+	return nullptr;
+}
+
+Map* ConquestFileReader::loadConquestMap(std::string file) {
+	return nullptr;
+}

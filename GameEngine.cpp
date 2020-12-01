@@ -449,7 +449,7 @@ void GameEngine::executeOrdersPhase() {
 	Territory* tempTerritory1 = new Territory();
 	Territory* tempTerritory2 = new Territory();
 	int playerID = 0;
-	Player* neutralTempP;
+	Player* neutralTempP = NULL;
 
 
 	// Prints out the order list 
