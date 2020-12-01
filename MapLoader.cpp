@@ -256,7 +256,15 @@ Map* ConquestFileReaderAdapter::loadmap(std::string file) {
 
 	infile.open(map);
 
+	Map* graph = new Map();
+	graph->initList();
+	string line;
 
+	while (getline(infile, line)) {
+		if (!line.compare("[Continents]")) {
+
+		}
+	}
 
 	return nullptr;
 }
