@@ -239,12 +239,15 @@ Map* MapLoader::loadmap(string file) {
 	return graph;
 }
 
-bool MapLoader::getContinentCheck()
-{
-	return continentCheck;
+Map* ConquestFileReaderAdapter::loadmap(std::string file) {
+	
+
+
+
+	return nullptr;
 }
 
-Map* ConquestFileReaderAdapter::loadmap(std::string file) {
+Map* ConquestFileReader::loadConquestMap(std::string file) {
 	//1- Read continents
 	//2- Store the number of armies in a variable (num)
 	//3- Read territories and assign them their number of armies
@@ -255,12 +258,5 @@ Map* ConquestFileReaderAdapter::loadmap(std::string file) {
 	printf("\n");
 
 	infile.open(map);
-
-
-
-	return nullptr;
-}
-
-Map* ConquestFileReader::loadConquestMap(std::string file) {
 	return nullptr;
 }

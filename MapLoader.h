@@ -10,7 +10,6 @@ public:
 	~MapLoader();
 	// Previous Map loadmap(std::string file);
 	Map* loadmap(std::string file);
-	bool getContinentCheck();
 	//copy constructor
 	MapLoader(const MapLoader& ml1);
 	//Assignment operator
