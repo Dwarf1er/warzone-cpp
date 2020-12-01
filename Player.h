@@ -16,7 +16,7 @@ private:
 	OrderList* playerOrderList; //represents the OrderList queued by the player
 
 	// Strategy for player
-	//PlayerStrategy* pStrats;
+	PlayerStrategy* playerStrategy_;
 
 	//helper attributes
 	int playerArmies; //represent the number of armies of the player
@@ -32,6 +32,11 @@ public:
 	Player(vector<Territory*> playerTerritories_, Hand* playerCards_, OrderList* playerOrderList_, int playerArmies_, int playerID_);
 	Player(const Player& p);
 	~Player();
+
+	/*void set_strategy(PlayerStrategy* playerStrategy) {
+		delete this->playerStrategy_;
+		this->playerStrategy_ = playerStrategy;
+	}*/
 
 	//accessors
 	vector<Territory*> getPlayerTerritories(); //returns the collection of territories of the player
