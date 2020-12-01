@@ -241,8 +241,9 @@ Map* MapLoader::loadmap(string file) {
 	return graph;
 }
 
-Map* ConquestFileReaderAdapter::loadmap(std::string file) {
-	return nullptr;
+Map* ConquestFileReaderAdapter::loadmap(std::string fileName) {
+	fileReader = ConquestFileReader();
+	return fileReader.loadConquestMap(fileName);
 }
 
 Map* ConquestFileReader::loadConquestMap(std::string fileName) {
