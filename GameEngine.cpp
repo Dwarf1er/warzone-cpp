@@ -456,54 +456,47 @@ void GameEngine::executeOrdersPhase() {
 	}
 
 	// Sort the list of orders
+	// Deploy
 	for (int i = 0; i < playersVec.size(); i++) {
 		for (int j = 0; j < playersVec[i]->getPlayerOrders()->getOList().size(); j++) {
-
-			// Deploy
 			if (playersVec[i]->getPlayerOrders()->getOList()[j]->getDescription() == "Deploy" && j != 0) {
-				playersVec[i]->getPlayerOrders()->getOList()[j - 1]->getDescription();
+				//playersVec[i]->getPlayerOrders()->getOList()[j - 1]->getDescription();
 				if (playersVec[i]->getPlayerOrders()->getOList()[j - 1]->getDescription() != "Deploy") {
 					playersVec[i]->getPlayerOrders()->move(j, j - 1);
 				}
 			}
-
-			//std::cout << "Player" << i + 1 << std::endl;
-			//std::cout << "" << std::endl;
-
-
-			//// Advance
-			//if (playersVec[i]->getPlayerOrders()->getOList()[j]->getDescription() == "Advance") {
-
-
-			//}
-
-			//// Negotiate
-			//if (playersVec[i]->getPlayerOrders()->getOList()[j]->getDescription() == "Negotiate") {
-
-
-			//}
-
-			//// Blockade 
-			//if (playersVec[i]->getPlayerOrders()->getOList()[j]->getDescription() == "Blockade") {
-
-
-			//}
-
-			//// Bomb 
-			//if (playersVec[i]->getPlayerOrders()->getOList()[j]->getDescription() == "Bomb") {
-
-
-			//}
-
-			//// Airlift
-			//if (playersVec[i]->getPlayerOrders()->getOList()[j]->getDescription() == "Airlift") {
-
-
-			//}
 		}
 	}
 
-	// Prints out ordered list 
+	// Airlift
+	for (int i = 0; i < playersVec.size(); i++) {
+		for (int j = 0; j < playersVec[i]->getPlayerOrders()->getOList().size(); j++) {
+			if (playersVec[i]->getPlayerOrders()->getOList()[j]->getDescription() == "Airlift" && j != 0) {
+				for (int k = j - 1; k >= 0; k--) {
+					if (playersVec[i]->getPlayerOrders()->getOList()[k]->getDescription() != "Deploy" && playersVec[i]->getPlayerOrders()->getOList()[k]->getDescription() != "Airlift") {
+						playersVec[i]->getPlayerOrders()->move(j, k);
+					}
+				}
+			}
+		}
+	}
+
+	// Blockade 
+	for (int i = 0; i < playersVec.size(); i++) {
+		for (int j = 0; j < playersVec[i]->getPlayerOrders()->getOList().size(); j++) {
+			if (playersVec[i]->getPlayerOrders()->getOList()[j]->getDescription() == "Blockade" && j != 0) {
+				for (int k = j - 1; k >= 0; k--) {
+					if (playersVec[i]->getPlayerOrders()->getOList()[k]->getDescription() != "Deploy" && 
+						playersVec[i]->getPlayerOrders()->getOList()[k]->getDescription() != "Airlift" &&
+						playersVec[i]->getPlayerOrders()->getOList()[k]->getDescription() != "Blockade") {
+						playersVec[i]->getPlayerOrders()->move(j, k);
+					}
+				}
+			}
+		}
+	}
+
+// Prints out ordered list 
 	for (int i = 0; i < playersVec.size(); i++) {
 		for (int j = 0; j < playersVec[i]->getPlayerOrders()->getOList().size(); j++) {
 			std::cout << playersVec[i]->getPlayerOrders()->getOList()[j]->getDescription() << std::endl;
