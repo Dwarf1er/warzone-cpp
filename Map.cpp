@@ -188,6 +188,20 @@ int Map::addToContinent(int index, Territory* u) {
 	return 0;
 }
 
+int Map::getContinentIndexByName(std::string name)
+{
+	for (int i = 0; i < listOfContinent.size(); i++)
+	{
+		std::string a = listOfContinent.at(i)->name;
+		if(!name.compare(a))
+		{
+			return i;
+		}
+	}
+
+	return -1;
+}
+
 //Check the size of territory of a continent
 int Map::territorySizeCheck() {
 	int nodeCounter = 0;

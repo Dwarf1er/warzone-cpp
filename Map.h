@@ -56,6 +56,7 @@ public:
 	int fillNodes();
 	int createContinent(std::string _name, int numOfCountries);
 	int addToContinent(int index, Territory* u);
+	int getContinentIndexByName(std::string name);
 	int validate();
 	int duplicateCheck();
 	int DFS(Territory* currentNode, std::vector<Territory*>* _nodeVec);

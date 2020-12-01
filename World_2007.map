@@ -1,0 +1,304 @@
+[Map]
+image=World 2007.bmp
+wrap=yes
+scroll=horizontal
+author=Don Morris
+warn=yes
+
+[Continents]
+Africa=37
+Antarctica=8
+Australia=7
+Balkans=3
+Caribbean=5
+Caucasus=3
+Central America=6
+Central Asia=9
+East Asia=16
+Eastern Europe=4
+Europe EFTA=4
+European Union=29
+Middle East=13
+North Africa=8
+North America=30
+Oceania=8
+Russia=14
+South America=23
+South Asia=12
+SouthEast Asia=16
+
+[Territories]
+Angola,938,512,Africa,Zambia & Malawi,Namibia,Congo-Kinshasa,Congo-Brazzaville,Congo-Katanga,Brazil-South East
+Benin & Togo,864,397,Africa,Ghana,Nigeria,Burkina Faso,Niger
+Botswana,968,565,Africa,Zambia & Malawi,Namibia,Zimbabwe,South Africa & Swaziland,South Africa-Cape Provinces
+Burkina Faso,845,383,Africa,Benin & Togo,Ghana,Niger,Mali,Cote d'Ivoire
+Cameroon,913,419,Africa,Central African Republic,Gabon & Equatorial Guinea,Nigeria,Chad,Congo-Brazzaville
+Cape Verde,745,363,Africa,Senegal & Gambia,Portugal,Portugal-Azores,Puerto Rico,French Guiana
+Central African Republic,953,412,Africa,Cameroon,Southern Sudan,Chad,Congo-Kinshasa,Sudan,Congo-Brazzaville
+Chad,941,363,Africa,Cameroon,Central African Republic,Nigeria,Niger,Sudan,Libya
+Congo-Brazzaville,928,451,Africa,Cameroon,Angola,Gabon & Equatorial Guinea,Central African Republic,Congo-Kinshasa
+Congo-Katanga,977,496,Africa,Congo-Kinshasa,Angola,Zambia & Malawi,Tanzania,Rwanda & Burundi
+Congo-Kinshasa,962,456,Africa,Congo-Katanga,Angola,Central African Republic,Congo-Brazzaville,Rwanda & Burundi,Southern Sudan,Uganda
+Cote d'Ivoire,827,408,Africa,Burkina Faso,Ghana,Liberia & Sierra Leone,Guinea & Guinea Bissau,Mali
+Eritrea & Djibouti,1040,370,Africa,Sudan,Ethiopia,Somalia,Yemen
+Ethiopia,1041,404,Africa,Eritrea & Djibouti,Somalia,Sudan,Kenya,Southern Sudan
+Gabon & Equatorial Guinea,907,452,Africa,Cameroon,Congo-Brazzaville
+Ghana,848,409,Africa,Benin & Togo,Burkina Faso,Cote d'Ivoire
+Guinea & Guinea Bissau,804,392,Africa,Cote d'Ivoire,Senegal & Gambia,Liberia & Sierra Leone,Mali
+Kenya,1032,445,Africa,Ethiopia,Somalia,Uganda,Tanzania,Madagascar,Southern Sudan
+Liberia & Sierra Leone,808,413,Africa,Cote d'Ivoire,Guinea & Guinea Bissau,Brazil-North East
+Madagascar,1074,549,Africa,Mozambique,Kenya,Mauritius
+Mali,844,357,Africa,Algeria-Sahara,Burkina Faso,Cote d'Ivoire,Guinea & Guinea Bissau,Senegal & Gambia,Mauritania,Niger
+Mauritania,805,341,Africa,Algeria-Sahara,Mali,Senegal & Gambia,Western Sahara
+Mauritius,1116,560,Africa,Madagascar,Maldives,Indonesia-Java & Bali
+Mozambique,1019,543,Africa,Tanzania,Zimbabwe,Madagascar,Zambia & Malawi,South Africa & Swaziland
+Namibia,933,565,Africa,Angola,Botswana,Zambia & Malawi,South Africa-Cape Provinces
+Niger,894,358,Africa,Algeria-Sahara,Benin & Togo,Burkina Faso,Chad,Libya,Mali,Nigeria
+Nigeria,890,399,Africa,Benin & Togo,Cameroon,Chad,Niger
+Rwanda & Burundi,996,463,Africa,Congo-Kinshasa,Uganda,Tanzania,Congo-Katanga
+Senegal & Gambia,784,370,Africa,Guinea & Guinea Bissau,Mali,Mauritania,Cape Verde
+Somalia,1082,414,Africa,Ethiopia,Eritrea & Djibouti,Kenya,Maldives
+South Africa & Swaziland,990,589,Africa,Botswana,Zimbabwe,South Africa-Cape Provinces,Mozambique,Western Australia
+South Africa-Cape Provinces,958,612,Africa,South Africa & Swaziland,Namibia,Botswana,Norwegian Claim,South Georgia
+Southern Sudan,998,411,Africa,Central African Republic,Congo-Kinshasa,Ethiopia,Kenya,Uganda,Sudan
+Tanzania,1017,478,Africa,Mozambique,Kenya,Rwanda & Burundi,Uganda,Zambia & Malawi,Congo-Katanga
+Uganda,1008,440,Africa,Congo-Kinshasa,Kenya,Rwanda & Burundi,Southern Sudan,Tanzania
+Zambia & Malawi,990,523,Africa,Angola,Botswana,Tanzania,Zimbabwe,Mozambique,Congo-Katanga,Namibia
+Zimbabwe,996,546,Africa,Botswana,Zambia & Malawi,Mozambique,South Africa & Swaziland
+
+Australian & French Claim,1542,862,Antarctica,Tasmania,Australian Claim,New Zealand Claim
+Australian Claim,1296,853,Antarctica,Australian & French Claim,Norwegian Claim,Western Australia
+New Zealand Claim,1664,899,Antarctica,Australian & French Claim,New Zealand-South Island,Unclaimed Antarctica
+Norwegian Claim,939,866,Antarctica,Australian Claim,UK & Argentina Claim,South Africa-Cape Provinces
+South Georgia,678,733,Antarctica,UK & Argentina Claim,Falkland Islands,Uruguay,South Africa-Cape Provinces
+UK & Argentina Claim,681,896,Antarctica,UK Chile & Argentina Claims,Norwegian Claim,South Georgia
+UK Chile & Argentina Claims,520,897,Antarctica,UK & Argentina Claim,Unclaimed Antarctica,Argentina-Patagonia,Chile-Southern
+Unclaimed Antarctica,258,887,Antarctica,UK Chile & Argentina Claims,New Zealand Claim,Chile-Easter Island
+
+New South Wales,1548,621,Australia,Queensland,Victoria,South Australia,New Zealand-North Island
+Northern Territory,1484,555,Australia,Western Australia,Queensland,South Australia,Indonesia-Papua
+Queensland,1536,571,Australia,New South Wales,Northern Territory,South Australia,Papua New Guinea,New Caledonia
+South Australia,1497,606,Australia,New South Wales,Northern Territory,Queensland,Western Australia,Victoria
+Tasmania,1549,672,Australia,Victoria,New Zealand-South Island,Australian & French Claim
+Victoria,1539,646,Australia,Tasmania,New South Wales,South Australia
+Western Australia,1431,586,Australia,Northern Territory,South Australia,Timor-Leste,Australian Claim,South Africa & Swaziland
+
+Albania & Macedonia,954,232,Balkans,Serbia & Montenegro,Greece,Bulgaria,Italy-Southern
+Croatia & Bosnia,935,215,Balkans,Serbia & Montenegro,Hungary,Austria & Slovenia
+Serbia & Montenegro,951,219,Balkans,Albania & Macedonia,Croatia & Bosnia,Bulgaria,Hungary,Romania
+
+Cuba,483,337,Caribbean,Jamaica,USA-South Atlantic,Mexico-South & South East,Haiti & Dominican Republic,USA-West South Central
+Haiti & Dominican Republic,516,350,Caribbean,Cuba,Jamaica,Puerto Rico,Colombia
+Jamaica,485,354,Caribbean,Cuba,Belize,Haiti & Dominican Republic,Panama
+Puerto Rico,541,354,Caribbean,Haiti & Dominican Republic,Trinidad & Tobago,USA-Middle Atlantic,Cape Verde
+Trinidad & Tobago,564,391,Caribbean,Puerto Rico,Venezuela,Guyana
+
+Armenia,1068,240,Caucasus,Iran,Turkey-Eastern Anatolia,Azerbaijan,Georgia
+Azerbaijan,1081,238,Caucasus,Iran,Armenia,Russia-Northern Caucasus,Georgia
+Georgia,1059,227,Caucasus,Armenia,Azerbaijan,Turkey-Eastern Anatolia,Turkey-Black Sea,Russia-Northern Caucasus
+
+Belize,433,358,Central America,Guatemala,Jamaica,Mexico-South & South East
+Costa Rica,456,399,Central America,Panama,Nicarauga,Ecuador-Galapagos Islands
+Guatemala,424,371,Central America,Belize,Honduras & El Salvador,Mexico-South & South East
+Honduras & El Salvador,442,371,Central America,Guatemala,Nicarauga
+Nicarauga,450,382,Central America,Costa Rica,Honduras & El Salvador
+Panama,478,401,Central America,Costa Rica,Colombia,Jamaica
+
+Afghanistan,1171,269,Central Asia,Pakistan,Uzbekistan,Tajikistan,Iran,Turkmenistan,China-Sinkiang
+Karakalpakstan,1132,221,Central Asia,Uzbekistan,Kazakhstan-Central,Kazakhstan-Caspian,Turkmenistan
+Kazakhstan-Caspian,1110,200,Central Asia,Kazakhstan-Central,Karakalpakstan,Turkmenistan,Russia-Urals,Russia-Povolzhsky
+Kazakhstan-Central,1185,209,Central Asia,Kazakhstan-Caspian,Kazakhstan-North,Uzbekistan,Karakalpakstan,Kyrgyzstan,Russia-Western Siberia,Russia-Urals,China-Sinkiang
+Kazakhstan-North,1190,177,Central Asia,Kazakhstan-Central,Russia-Western Siberia,Russia-Urals
+Kyrgyzstan,1208,231,Central Asia,China-Sinkiang,Kazakhstan-Central,Uzbekistan,Tajikistan
+Tajikistan,1197,247,Central Asia,Afghanistan,Kyrgyzstan,Uzbekistan,China-Sinkiang
+Turkmenistan,1134,241,Central Asia,Uzbekistan,Afghanistan,Iran,Kazakhstan-Caspian,Karakalpakstan
+Uzbekistan,1162,236,Central Asia,Karakalpakstan,Afghanistan,Kazakhstan-Central,Kyrgyzstan,Tajikistan,Turkmenistan
+
+China-Central & South,1383,304,East Asia,China-Hainan,China-North,China-North West,China-East,China-South West,Vietnam-Northern
+China-East,1416,291,East Asia,China-Central & South,China-North,Taiwan,North Korea
+China-Hainan,1374,350,East Asia,China-Central & South,Taiwan,Philippines-Luzon & Palawan,Vietnam-Northern,Vietnam-Southern
+China-Inner Mongolia,1395,225,East Asia,China-North,Russia-Eastern Siberia,China-North West,Mongolia,Russia-Far East,China-North East
+China-North,1396,254,East Asia,China-Central & South,China-East,China-Inner Mongolia,China-North West,China-North East
+China-North East,1455,214,East Asia,China-Inner Mongolia,China-North,North Korea,Russia-Far East
+China-North West,1321,264,East Asia,China-Tibet,China-Central & South,China-Inner Mongolia,China-North,China-South West,China-Sinkiang,Mongolia
+China-Sinkiang,1260,229,East Asia,China-Tibet,Kazakhstan-Central,Tajikistan,Kyrgyzstan,China-North West,Pakistan,Afghanistan,Russia-Western Siberia,Mongolia,India-Himalayan North
+China-South West,1340,307,East Asia,Burma,China-Tibet,China-Central & South,China-North West,Laos,Vietnam-Northern
+China-Tibet,1264,284,East Asia,Burma,Bhutan,China-North West,India-Eastern,China-South West,China-Sinkiang,India-North Eastern,India-Himalayan North,Nepal
+Japan,1512,258,East Asia,Japan-Hokkaido,South Korea,Taiwan,Hawaii
+Japan-Hokkaido,1534,221,East Asia,Japan,Russia-Sakhalin,Russia-Kamchatka,Russia-Far East
+Mongolia,1343,205,East Asia,China-Inner Mongolia,China-Sinkiang,China-North West,Russia-Eastern Siberia,Russia-Western Siberia
+North Korea,1455,239,East Asia,South Korea,China-North East,China-East,Russia-Far East
+South Korea,1463,255,East Asia,North Korea,Japan,Taiwan
+Taiwan,1427,324,East Asia,China-East,China-Hainan,South Korea,Japan,Philippines-Luzon & Palawan
+
+Belarus,988,168,Eastern Europe,Ukraine-Western & Central,Lithuania & Latvia,Poland,Russia-Central,Russia-North Western
+Moldova,989,200,Eastern Europe,Ukraine-Western & Central,Ukraine-Southern & Eastern,Romania
+Ukraine-Southern & Eastern,1017,199,Eastern Europe,Ukraine-Western & Central,Moldova,Romania,Russia-Northern Caucasus,Russia-Central Chernozemny,Turkey-Black Sea
+Ukraine-Western & Central,993,186,Eastern Europe,Ukraine-Southern & Eastern,Belarus,Moldova,Poland,Romania,Hungary,Czechia & Slovakia,Russia-Central,Russia-Central Chernozemny
+
+Iceland,768,107,Europe EFTA,Norway,Norway-Svalbard,Ireland,Greenland-Tunu,Greenland-Kitaa
+Norway,905,116,Europe EFTA,Norway-Svalbard,Denmark,Sweden,Iceland,Finland,Scotland & Northern Ireland,Russia-Northern
+Norway-Svalbard,937,36,Europe EFTA,Norway,Iceland,Greenland-Avannaa,Russia-Novaya Zemlya
+Switzerland,891,202,Europe EFTA,Austria & Slovenia,France,France-le Midi,Germany,Italy
+
+Austria & Slovenia,923,201,European Union,Hungary,Switzerland,Germany,Italy,Czechia & Slovakia,Croatia & Bosnia
+Benelux Countries,879,178,European Union,Germany,France,England & Wales
+Bulgaria,973,224,European Union,Serbia & Montenegro,Greece,Romania,Albania & Macedonia,Turkey-Central & Marmara
+Cyprus,1012,266,European Union,Turkey-Mediterranean & Aegean,Egypt,Greece-Crete,Syria & Lebanon
+Czechia & Slovakia,933,189,European Union,Hungary,Poland,Germany,Austria & Slovenia,Ukraine-Western & Central
+Denmark,897,155,European Union,Norway,Sweden,Germany
+England & Wales,847,172,European Union,Scotland & Northern Ireland,Ireland,France,Benelux Countries
+Estonia,976,139,European Union,Finland,Sweden,Lithuania & Latvia,Russia-North Western
+Finland,977,113,European Union,Sweden,Norway,Estonia,Russia-Northern,Russia-North Western
+France,866,197,European Union,France-le Midi,Benelux Countries,Ireland,England & Wales,Switzerland,Germany
+France-le Midi,867,219,European Union,France,Italy,Spain,Switzerland,Sardinia & Corsica
+Germany,901,180,European Union,Denmark,France,Austria & Slovenia,Czechia & Slovakia,Switzerland,Benelux Countries,Italy,Poland
+Greece,958,244,European Union,Greece-Crete,Albania & Macedonia,Bulgaria,Turkey-Central & Marmara,Turkey-Mediterranean & Aegean
+Greece-Crete,973,265,European Union,Greece,Cyprus,Italy-Southern,Libya,Turkey-Mediterranean & Aegean
+Hungary,947,200,European Union,Austria & Slovenia,Czechia & Slovakia,Serbia & Montenegro,Romania,Ukraine-Western & Central,Croatia & Bosnia
+Ireland,815,169,European Union,England & Wales,France,Iceland,Spain,Scotland & Northern Ireland,Canada-Newfoundland
+Italy,906,215,European Union,Germany,Switzerland,Italy-Southern,Sardinia & Corsica,France-le Midi,Austria & Slovenia
+Italy-Southern,931,237,European Union,Italy,Sardinia & Corsica,Tunisia,Greece-Crete,Albania & Macedonia
+Lithuania & Latvia,971,156,European Union,Estonia,Poland,Belarus,Russia-North Western
+Poland,945,173,European Union,Germany,Sweden,Lithuania & Latvia,Czechia & Slovakia,Belarus,Ukraine-Western & Central
+Portugal,814,239,European Union,Spain,Portugal-Azores,Cape Verde
+Portugal-Azores,730,248,European Union,Portugal,Cape Verde,USA-New England
+Romania,971,209,European Union,Bulgaria,Hungary,Moldova,Serbia & Montenegro,Ukraine-Southern & Eastern,Ukraine-Western & Central
+Sardinia & Corsica,897,238,European Union,Italy,Italy-Southern,Spain-Balearic Islands,France-le Midi
+Scotland & Northern Ireland,833,150,European Union,Ireland,England & Wales,Norway
+Spain,840,240,European Union,Spain-Balearic Islands,France-le Midi,Portugal,Ireland,Morocco,Canada-Maritimes
+Spain-Balearic Islands,868,240,European Union,Spain,Sardinia & Corsica,Algeria
+Sweden,925,127,European Union,Finland,Norway,Denmark,Estonia,Poland
+
+Iran,1111,278,Middle East,Afghanistan,Pakistan,Azerbaijan,United Arab Emirates & Qatar,Armenia,Iraq & Kuwait,Turkey-Eastern Anatolia,Turkmenistan
+Iraq & Kuwait,1061,274,Middle East,Iran,Saudi Arabia,Jordan,Syria & Lebanon,Turkey-Eastern Anatolia
+Israel & Palestine,1020,282,Middle East,Jordan,Syria & Lebanon,Egypt
+Jordan,1028,286,Middle East,Egypt,Iraq & Kuwait,Israel & Palestine,Saudi Arabia,Syria & Lebanon
+Oman,1123,340,Middle East,United Arab Emirates & Qatar,Saudi Arabia,Yemen,India-Western
+Saudi Arabia,1064,324,Middle East,Egypt,Iraq & Kuwait,Jordan,Oman,United Arab Emirates & Qatar,Yemen
+Syria & Lebanon,1036,263,Middle East,Cyprus,Iraq & Kuwait,Israel & Palestine,Jordan,Turkey-Eastern Anatolia,Turkey-Mediterranean & Aegean
+Turkey-Black Sea,1021,235,Middle East,Turkey-Eastern Anatolia,Turkey-Central & Marmara,Georgia,Ukraine-Southern & Eastern
+Turkey-Central & Marmara,1004,243,Middle East,Turkey-Mediterranean & Aegean,Turkey-Black Sea,Turkey-Eastern Anatolia,Bulgaria,Greece
+Turkey-Eastern Anatolia,1051,246,Middle East,Turkey-Black Sea,Turkey-Mediterranean & Aegean,Turkey-Central & Marmara,Iran,Iraq & Kuwait,Syria & Lebanon,Armenia,Georgia
+Turkey-Mediterranean & Aegean,1001,253,Middle East,Turkey-Eastern Anatolia,Turkey-Central & Marmara,Syria & Lebanon,Cyprus,Greece,Greece-Crete
+United Arab Emirates & Qatar,1111,326,Middle East,Iran,Oman,Saudi Arabia
+Yemen,1076,368,Middle East,Oman,Saudi Arabia,Eritrea & Djibouti,India-Southern
+
+Algeria,864,266,North Africa,Algeria-Sahara,Morocco,Tunisia,Spain-Balearic Islands
+Algeria-Sahara,865,307,North Africa,Algeria,Mauritania,Morocco,Niger,Libya,Mali,Tunisia,Western Sahara
+Egypt,994,306,North Africa,Saudi Arabia,Jordan,Sudan,Libya,Israel & Palestine,Cyprus
+Libya,937,304,North Africa,Algeria-Sahara,Chad,Egypt,Niger,Sudan,Tunisia,Greece-Crete
+Morocco,823,280,North Africa,Algeria,Algeria-Sahara,Western Sahara,Spain
+Sudan,993,361,North Africa,Central African Republic,Chad,Egypt,Eritrea & Djibouti,Ethiopia,Libya,Southern Sudan
+Tunisia,897,269,North Africa,Algeria,Algeria-Sahara,Libya,Italy-Southern
+Western Sahara,788,318,North Africa,Algeria-Sahara,Mauritania,Morocco
+
+Canada-Alberta,306,161,North America,Canada-British Columbia,Canada-Saskatchewan,Canada-NorthWest Territories,USA-Mountain NW
+Canada-British Columbia,261,160,North America,Canada-NorthWest Territories,Canada-Alberta,Canada-Yukon,USA-Mountain NW,USA-Pacific,USA-Alaska
+Canada-Manitoba,384,165,North America,Canada-Saskatchewan,Canada-Ontario,Nunavut,USA-Midwest West
+Canada-Maritimes,542,207,North America,Canada-Quebec,Canada-Newfoundland,USA-New England,Spain
+Canada-Newfoundland,580,172,North America,Canada-Quebec,Canada-Maritimes,Greenland-Kitaa,Ireland
+Canada-NorthWest Territories,282,113,North America,Canada-Alberta,Canada-Saskatchewan,Nunavut,Canada-Yukon,Canada-British Columbia
+Canada-Ontario,451,185,North America,USA-Midwest West,Canada-Manitoba,Canada-Quebec,USA-Middle Atlantic,USA-Midwest East
+Canada-Quebec,515,176,North America,Nunavut Islands,Canada-Maritimes,Canada-Newfoundland,Canada-Ontario,USA-Middle Atlantic,USA-New England
+Canada-Saskatchewan,343,162,North America,Canada-Alberta,Canada-NorthWest Territories,Canada-Manitoba,USA-Midwest West,USA-Mountain NW
+Canada-Yukon,204,115,North America,Canada-NorthWest Territories,Canada-British Columbia,USA-Alaska
+Greenland-Avannaa,652,25,North America,Greenland-Kitaa,Greenland-Tunu,Nunavut Islands,Norway-Svalbard
+Greenland-Kitaa,627,83,North America,Greenland-Avannaa,Iceland,Greenland-Tunu,Canada-Newfoundland,Nunavut Islands
+Greenland-Tunu,684,60,North America,Greenland-Avannaa,Iceland,Greenland-Kitaa
+Mexico-Central,378,334,North America,Mexico-West & North West,Mexico-South & South East,Mexico-North East
+Mexico-North East,360,308,North America,Mexico-Central,USA-West South Central,Mexico-West & North West,USA-Mountain SW,Mexico-South & South East
+Mexico-South & South East,402,358,North America,Belize,Guatemala,Mexico-Central,Mexico-North East,Mexico-West & North West,Cuba
+Mexico-West & North West,341,314,North America,Mexico-Central,Mexico-North East,USA-Mountain SW,USA-Pacific,Mexico-South & South East
+Nunavut,387,109,North America,Nunavut Islands,Canada-NorthWest Territories,Canada-Manitoba
+Nunavut Islands,488,76,North America,Nunavut,Canada-Quebec,Greenland-Avannaa,Greenland-Kitaa
+USA-Alaska,134,106,North America,Hawaii,Canada-Yukon,Canada-British Columbia,Russia-Chukotka,Russia-Kamchatka
+USA-East South Central,439,272,North America,USA-South Atlantic,USA-Midwest West,USA-West South Central,USA-Midwest East
+USA-Middle Atlantic,492,230,North America,USA-New England,Canada-Ontario,Canada-Quebec,USA-South Atlantic,USA-Midwest East,Puerto Rico
+USA-Midwest East,445,237,North America,USA-Midwest West,USA-Middle Atlantic,USA-East South Central,USA-South Atlantic,Canada-Ontario
+USA-Midwest West,391,227,North America,USA-Midwest East,USA-West South Central,USA-Mountain NW,USA-Mountain SW,USA-East South Central,Canada-Ontario,Canada-Saskatchewan,Canada-Manitoba
+USA-Mountain NW,326,209,North America,USA-Mountain SW,Canada-British Columbia,Canada-Saskatchewan,USA-Midwest West,USA-Pacific,Canada-Alberta
+USA-Mountain SW,326,257,North America,USA-Mountain NW,USA-West South Central,USA-Pacific,USA-Midwest West,Mexico-North East,Mexico-West & North West
+USA-New England,516,218,North America,USA-Middle Atlantic,Canada-Quebec,Canada-Maritimes,Portugal-Azores
+USA-Pacific,272,230,North America,USA-Mountain SW,Canada-British Columbia,Hawaii,USA-Mountain NW,Mexico-West & North West
+USA-South Atlantic,475,263,North America,USA-East South Central,USA-Middle Atlantic,USA-Midwest East,Cuba
+USA-West South Central,395,279,North America,USA-Mountain SW,Mexico-North East,USA-Midwest West,USA-East South Central,Cuba
+
+Chile-Easter Island,330,590,Oceania,French Polynesia,Chile-Northern,Peru,Ecuador-Galapagos Islands,Unclaimed Antarctica
+Fiji,1696,541,Oceania,Hawaii,New Caledonia,New Zealand-North Island,French Polynesia
+French Polynesia,160,531,Oceania,Fiji,Hawaii,New Zealand-North Island,Chile-Easter Island,Ecuador-Galapagos Islands,Chile-Northern
+Hawaii,115,346,Oceania,Fiji,French Polynesia,USA-Pacific,USA-Alaska,Ecuador-Galapagos Islands,Japan
+New Caledonia,1638,560,Oceania,Fiji,Queensland,Papua New Guinea
+New Zealand-North Island,1689,654,Oceania,New Zealand-South Island,Fiji,French Polynesia,New South Wales
+New Zealand-South Island,1665,679,Oceania,Tasmania,New Zealand-North Island,New Zealand Claim
+Papua New Guinea,1535,481,Oceania,Indonesia-Papua,Queensland,New Caledonia
+
+Russia-Central,1033,152,Russia,Belarus,Russia-Northern,Russia-Central Chernozemny,Russia-Povolzhsky,Russia-North Western,Ukraine-Western & Central
+Russia-Central Chernozemny,1044,174,Russia,Russia-Central,Russia-Northern Caucasus,Russia-Povolzhsky,Ukraine-Western & Central,Ukraine-Southern & Eastern
+Russia-Chukotka,17,99,Russia,Russia-Far East,Russia-Kamchatka,USA-Alaska
+Russia-Eastern Siberia,1326,122,Russia,China-Inner Mongolia,Mongolia,Russia-Western Siberia,Russia-Far East,Russia-Sakha
+Russia-Far East,1530,123,Russia,Russia-Eastern Siberia,Russia-Chukotka,Russia-Sakha,Russia-Sakhalin,Russia-Kamchatka,China-Inner Mongolia,China-North East,North Korea,Japan-Hokkaido
+Russia-Kamchatka,1626,136,Russia,Russia-Far East,Russia-Chukotka,Russia-Sakhalin,Japan-Hokkaido,USA-Alaska
+Russia-North Western,999,143,Russia,Estonia,Finland,Belarus,Russia-Northern,Russia-Central,Lithuania & Latvia
+Russia-Northern,1062,119,Russia,Finland,Norway,Russia-Central,Russia-Povolzhsky,Russia-Western Siberia,Russia-North Western,Russia-Urals,Russia-Novaya Zemlya
+Russia-Northern Caucasus,1058,210,Russia,Azerbaijan,Georgia,Russia-Central Chernozemny,Russia-Povolzhsky,Ukraine-Southern & Eastern
+Russia-Novaya Zemlya,1115,64,Russia,Russia-Northern,Russia-Western Siberia,Norway-Svalbard
+Russia-Povolzhsky,1081,170,Russia,Kazakhstan-Caspian,Russia-Central,Russia-Central Chernozemny,Russia-Northern,Russia-Northern Caucasus,Russia-Urals
+Russia-Sakha,1437,106,Russia,Russia-Far East,Russia-Eastern Siberia
+Russia-Sakhalin,1532,185,Russia,Russia-Far East,Russia-Kamchatka,Japan-Hokkaido
+Russia-Urals,1134,150,Russia,Russia-Northern,Russia-Povolzhsky,Russia-Western Siberia,Kazakhstan-Central,Kazakhstan-North,Kazakhstan-Caspian
+Russia-Western Siberia,1218,132,Russia,Mongolia,Russia-Eastern Siberia,Russia-Northern,Russia-Urals,Russia-Novaya Zemlya,Kazakhstan-Central,Kazakhstan-North,China-Sinkiang
+
+Argentina-Cuyo,533,625,South America,Argentina-Patagonia,Argentina-Pampas,Chile-Southern,Argentina-North,Chile-Northern
+Argentina-North,560,589,South America,Argentina-Cuyo,Argentina-Pampas,Bolivia,Paraguay,Chile-Northern,Uruguay,Brazil-South
+Argentina-Pampas,559,635,South America,Argentina-Patagonia,Argentina-Cuyo,Argentina-North,Uruguay,Falkland Islands
+Argentina-Patagonia,527,684,South America,Argentina-Pampas,Chile-Southern,Argentina-Cuyo,Falkland Islands,UK Chile & Argentina Claims
+Bolivia,547,539,South America,Argentina-North,Brazil-Central,Brazil-North,Peru,Paraguay,Chile-Northern
+Brazil-Central,597,531,South America,Bolivia,Brazil-South East,Brazil-South,Brazil-North,Paraguay,Brazil-North East
+Brazil-North,570,470,South America,Bolivia,Brazil-Central,Suriname,Venezuela,Peru,Guyana,French Guiana,Colombia,Brazil-North East
+Brazil-North East,657,491,South America,Brazil-Central,Brazil-North,Brazil-South East,Liberia & Sierra Leone
+Brazil-South,609,593,South America,Brazil-Central,Brazil-South East,Paraguay,Uruguay,Argentina-North
+Brazil-South East,638,553,South America,Brazil-Central,Brazil-North East,Brazil-South,Angola
+Chile-Northern,522,588,South America,Chile-Southern,Peru,Argentina-Cuyo,Argentina-North,Bolivia,Chile-Easter Island,French Polynesia
+Chile-Southern,508,680,South America,Chile-Northern,Argentina-Patagonia,Argentina-Cuyo,UK Chile & Argentina Claims
+Colombia,507,428,South America,Panama,Brazil-North,Venezuela,Ecuador,Peru,Haiti & Dominican Republic
+Ecuador,481,457,South America,Colombia,Peru,Ecuador-Galapagos Islands
+Ecuador-Galapagos Islands,423,453,South America,Ecuador,Costa Rica,Hawaii,French Polynesia,Chile-Easter Island
+Falkland Islands,574,721,South America,Argentina-Patagonia,Argentina-Pampas,South Georgia
+French Guiana,601,429,South America,Brazil-North,Suriname,Cape Verde
+Guyana,574,424,South America,Brazil-North,Suriname,Venezuela,Trinidad & Tobago
+Paraguay,579,570,South America,Argentina-North,Bolivia,Brazil-Central,Brazil-South
+Peru,496,500,South America,Bolivia,Brazil-North,Colombia,Ecuador,Chile-Northern,Chile-Easter Island
+Suriname,588,428,South America,Brazil-North,French Guiana,Guyana
+Uruguay,588,621,South America,Argentina-Pampas,Brazil-South,Argentina-North,South Georgia
+Venezuela,544,408,South America,Brazil-North,Colombia,Guyana,Trinidad & Tobago
+
+Bangladesh,1279,324,South Asia,India-Eastern,Burma,India-North Eastern
+Bhutan,1282,304,South Asia,India-Eastern,China-Tibet,India-North Eastern
+India-Eastern,1256,332,South Asia,Bangladesh,Bhutan,Nepal,China-Tibet,India-Plains,India-Western,India-Southern,India-North Eastern
+India-Himalayan North,1220,277,South Asia,China-Tibet,China-Sinkiang,India-Plains,Pakistan,Nepal
+India-North Eastern,1295,310,South Asia,Bangladesh,Bhutan,Burma,India-Eastern,China-Tibet
+India-Plains,1231,314,South Asia,Pakistan,Nepal,India-Eastern,India-Himalayan North,India-Western
+India-Southern,1221,373,South Asia,India-Eastern,India-Western,Maldives,Sri Lanka,Yemen
+India-Western,1200,332,South Asia,Pakistan,Oman,India-Eastern,India-Plains,India-Southern
+Maldives,1201,427,South Asia,India-Southern,Sri Lanka,Mauritius,Somalia
+Nepal,1251,301,South Asia,China-Tibet,India-Eastern,India-Himalayan North,India-Plains
+Pakistan,1185,292,South Asia,Afghanistan,Iran,India-Western,India-Himalayan North,India-Plains,China-Sinkiang
+Sri Lanka,1237,409,South Asia,India-Southern,Maldives,Indonesia-Sumatra
+
+Burma,1310,341,SouthEast Asia,Bangladesh,Thailand,Laos,China-Tibet,China-South West,India-North Eastern
+Cambodia,1351,381,SouthEast Asia,Laos,Thailand,Vietnam-Southern
+Indonesia-Java & Bali,1381,488,SouthEast Asia,Indonesia-Sumatra,Indonesia-Kalimantan,Indonesia-Sulawesi,Timor-Leste,Mauritius
+Indonesia-Kalimantan,1394,453,SouthEast Asia,Malaysian Borneo,Indonesia-Java & Bali,Indonesia-Sumatra,Indonesia-Sulawesi
+Indonesia-Papua,1512,470,SouthEast Asia,Papua New Guinea,Indonesia-Sulawesi,Timor-Leste,Philippines-Mindinao & Vizcayas,Northern Territory
+Indonesia-Sulawesi,1427,460,SouthEast Asia,Indonesia-Java & Bali,Indonesia-Kalimantan,Indonesia-Papua,Timor-Leste,Philippines-Mindinao & Vizcayas
+Indonesia-Sumatra,1340,458,SouthEast Asia,Malaysia Penninsular,Indonesia-Java & Bali,Indonesia-Kalimantan,Sri Lanka
+Laos,1344,349,SouthEast Asia,Cambodia,Burma,Thailand,Vietnam-Northern,Vietnam-Southern,China-South West
+Malaysia Penninsular,1339,428,SouthEast Asia,Malaysian Borneo,Thailand,Indonesia-Sumatra
+Malaysian Borneo,1396,432,SouthEast Asia,Malaysia Penninsular,Indonesia-Kalimantan,Philippines-Mindinao & Vizcayas,Philippines-Luzon & Palawan,Vietnam-Southern
+Philippines-Luzon & Palawan,1428,371,SouthEast Asia,Philippines-Mindinao & Vizcayas,Malaysian Borneo,China-Hainan,Taiwan
+Philippines-Mindinao & Vizcayas,1448,406,SouthEast Asia,Philippines-Luzon & Palawan,Indonesia-Sulawesi,Malaysian Borneo,Indonesia-Papua
+Thailand,1334,372,SouthEast Asia,Burma,Cambodia,Laos,Malaysia Penninsular
+Timor-Leste,1452,493,SouthEast Asia,Indonesia-Sulawesi,Indonesia-Papua,Indonesia-Java & Bali,Western Australia
+Vietnam-Northern,1356,342,SouthEast Asia,Vietnam-Southern,China-Hainan,China-Central & South,China-South West,Laos
+Vietnam-Southern,1369,382,SouthEast Asia,Vietnam-Northern,Laos,Cambodia,Malaysian Borneo,China-Hainan

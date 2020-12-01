@@ -3,6 +3,8 @@
 #include <fstream>
 #include <sstream>
 #include <direct.h>
+#include <map>
+
 #include "Map.h"
 
 using namespace std;
@@ -243,37 +245,92 @@ Map* ConquestFileReaderAdapter::loadmap(std::string file) {
 	return nullptr;
 }
 
-Map* ConquestFileReader::loadConquestMap(std::string file) {
+Map* ConquestFileReader::loadConquestMap(std::string fileName) {
 	//1- Read continents
 	//2- Store the number of armies in a variable (num)
 	//3- Read territories and assign them their number of armies
 	fstream infile;
-	string map = file;
 
-	cout << "Loading map..... " << map << endl;
+	cout << "Loading map..... " << fileName << endl;
 	printf("\n");
 
-	infile.open(map);
+	infile.open(fileName);
 	Map* graph = new Map();
 	graph->initList();
+
+	std::map<string, int> territoriesIndexes;
 	string line;
+	int ContinentIndex = 0;
+
+	//skip until [Continents]
+	while (infile >> line && line.compare("[Continents]")) {}
+
+	//while haven't reached [Territories]
+	while (getline(infile, line) && line.compare("[Territories]"))
+	{
+		if (line.empty()) { continue; } //skip empty lines
+
+		std::vector<std::string> lineVector = splitString(line, '=');
+
+		string continentName = lineVector.at(0);
+
+		//num TODO
+		//int num = stoi(lineVector.at(1)); 
+
+		graph->createContinent(continentName, ContinentIndex);
+		ContinentIndex++;
+	}
+
+	//assign an index to every territory name in territoriesIndexes
+	int index = 0;
+	while (getline(infile, line)) {
+		if (line.empty()) { continue; } //skip empty lines
+		std::vector<std::string> lineVector = splitString(line, ',');
+		territoriesIndexes.insert(std::pair<string, int>(lineVector.at(0), index++));
+	}
+
+	//go back to the beginning
+	infile.clear();
+	infile.seekg(0);
+
+	//go back down to [Territories]
+	while (getline(infile, line) && line.compare("[Territories]")){}
 
 	while (getline(infile, line)) {
-		int countries = 0;
-		//test if we reached the continents section
-		if (!line.compare("[Continents]")) {
-			
-			infile >> line; //test if we reached the countries section
-			if(!line.compare("[Territories]")) {
-				break;
-			}
+		//skip empty lines
+		if (line.empty()) { continue; }
 
-			string name = line;
-			int continentScore;
-			infile >> continentScore; //num TODO
-			graph->createContinent(name, countries);
-			countries++;
-		}
+		std::vector<std::string> lineVector = splitString(line, ',');
+
+		string territoryName = lineVector.at(0);
+		string continentName = lineVector.at(3);
+
+		//set continent
+		int continentIndex = graph->getContinentIndexByName(continentName);
+		graph->addToContinent(continentIndex, graph->nodeList[territoriesIndexes.at(territoryName)]);
+
+		//remove first 3 lines to only keep neighbors
+		lineVector.erase(lineVector.begin(), lineVector.begin() + 4);
+
+		//set borders
+		for (const string& neighbor : lineVector)
+			graph->addEdge(graph->nodeList[territoriesIndexes.at(territoryName)], graph->nodeList[territoriesIndexes.at(neighbor)]);
 	}
-	return nullptr;
+
+	infile.close();
+	return graph;
+}
+
+std::vector<std::string> ConquestFileReader::splitString(std::string str, const char separator)
+{
+	vector<string> parts;
+	stringstream lineStringStream(str);
+	string part;
+
+	while (getline(lineStringStream, part, separator)) 	//split line at the comma
+	{
+		parts.push_back(part); //add content to vector parts
+	}
+
+	return parts;
 }

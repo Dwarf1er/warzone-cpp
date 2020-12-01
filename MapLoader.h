@@ -27,6 +27,7 @@ private:
 class ConquestFileReader {
 public:
 	Map* loadConquestMap(std::string file);
+	std::vector<std::string> splitString(std::string str, const char separator);
 };
 
 class ConquestFileReaderAdapter : MapLoader {
