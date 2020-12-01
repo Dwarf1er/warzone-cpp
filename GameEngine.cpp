@@ -380,63 +380,10 @@ void GameEngine::issueOrderPhase()
 		}
 		std::cout << std::endl;
 	}
-
-	/*	}
-		break;*/
-
-		//// Advance Orders
-		//for (int i = 0; i < playersVec.size(); i++) {
-		//	while (!playerBool) {
-		//		std::cout << ("Which territory do you want to move from? ");
-		//		for (int j = 0; j < playersVec[i]->getPlayerTerritories().size(); j++) {
-		//			std::cout << j << ": " << playersVec[i]->getPlayerTerritories()[j] << std::endl;
-		//		}
-		//		cin >> usersChoice;
-		//		if (usersChoice > 0 || usersChoice < playersVec[i]->getPlayerTerritories().size()) {
-		//			for (int j = 0; j < playersVec[i]->getPlayerTerritories().size(); j++) {
-		//				if (usersChoice == playersVec[i]->getPlayerTerritories()[j]->getID()) {
-		//					sourceID = usersChoice;
-		//				}
-		//			}
-		//		}
-
-		//		std::cout << ("Which territory do you want to move to ?");
-		//		cin >> usersChoice;
-		//		for (int j = 0; j < playersVec[i]->getPlayerTerritories().size(); j++) {
-		//			std::cout << j << ": " << playersVec[i]->getPlayerTerritories()[j] << std::endl;
-		//		}
-
-		//		if (usersChoice > 0 || usersChoice < playersVec[i]->getPlayerTerritories().size()) {
-		//			for (int j = 0; j < playersVec[i]->getPlayerTerritories().size(); j++) {
-		//				if (usersChoice != playersVec[i]->getPlayerTerritories()[j]->getID()) {
-		//					targetID = usersChoice;
-		//				}
-		//			}
-		//		}
-
-		//		std::cout << ("How many units are you moving ?");
-		//		std::cin >> usersChoice;
-		//		if (usersChoice > 0 || usersChoice < playersVec[i]->getPlayerTerritories().size()) {
-		//			/*if (armyNum <= playersVec[i]->getPlayerTerritories()[sourceID]->getNumberOfArmies()) {
-		//				armyNum = usersChoice;
-		//			}*/
-		//			armyNum = usersChoice;
-		//		}
-
-		//		OrderData orderData = OrderData{ sourceID, targetID, armyNum };
-
-		//		issueOrderDetails.insert(std::pair<Player*, OrderData>(playersVec[i], orderData));
-
-		//		break;
-		//	}
-
-
-		//	//Advance(playersVec[i], , sourceID, targetID, armyNum, map,  );
-		//	std::cout << "" << std::endl;
-		//}
 	Notify();
 }
 
+// ExecuteOrdersPhase 
 void GameEngine::executeOrdersPhase() {
 
 	int army = 0;
@@ -460,7 +407,6 @@ void GameEngine::executeOrdersPhase() {
 	for (int i = 0; i < playersVec.size(); i++) {
 		for (int j = 0; j < playersVec[i]->getPlayerOrders()->getOList().size(); j++) {
 			if (playersVec[i]->getPlayerOrders()->getOList()[j]->getDescription() == "Deploy" && j != 0) {
-				//playersVec[i]->getPlayerOrders()->getOList()[j - 1]->getDescription();
 				if (playersVec[i]->getPlayerOrders()->getOList()[j - 1]->getDescription() != "Deploy") {
 					playersVec[i]->getPlayerOrders()->move(j, j - 1);
 				}
@@ -502,7 +448,6 @@ void GameEngine::executeOrdersPhase() {
 			std::cout << playersVec[i]->getPlayerOrders()->getOList()[j]->getDescription() << std::endl;
 		}
 	}
-
 
 	//Neutral player
 	Player* neutralP = new Player();
