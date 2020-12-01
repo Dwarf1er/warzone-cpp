@@ -16,7 +16,7 @@ private:
 	OrderList* playerOrderList; //represents the OrderList queued by the player
 
 	// Strategy for player
-	PlayerStrategy* playerStrategy_;
+	PlayerStrategy* playerStrategy_ = nullptr;
 
 	//helper attributes
 	int playerArmies; //represent the number of armies of the player
