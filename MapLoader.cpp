@@ -240,10 +240,6 @@ Map* MapLoader::loadmap(string file) {
 }
 
 Map* ConquestFileReaderAdapter::loadmap(std::string file) {
-	
-
-
-
 	return nullptr;
 }
 
@@ -258,5 +254,26 @@ Map* ConquestFileReader::loadConquestMap(std::string file) {
 	printf("\n");
 
 	infile.open(map);
+	Map* graph = new Map();
+	graph->initList();
+	string line;
+
+	while (getline(infile, line)) {
+		int countries = 0;
+		//test if we reached the continents section
+		if (!line.compare("[Continents]")) {
+			
+			infile >> line; //test if we reached the countries section
+			if(!line.compare("[Territories]")) {
+				break;
+			}
+
+			string name = line;
+			int continentScore;
+			infile >> continentScore; //num TODO
+			graph->createContinent(name, countries);
+			countries++;
+		}
+	}
 	return nullptr;
 }
