@@ -49,6 +49,7 @@ private:
 	int numOfPlayer;
 	int observerOption;
 	Map* map;
+	Deck* deck;
 	OrderList oList;
 	std::vector<Player*> playersVec;
 	std::vector<std::string> listOfFile;
