@@ -33,7 +33,6 @@ Player::~Player() {
 
 void Player::set_strategy(PlayerStrategy* playerStrategy)
 {
-	// delete this->playerStrategy_;
 	this->playerStrategy_ = playerStrategy;
 }
 

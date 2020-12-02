@@ -46,6 +46,11 @@ void GameEngine::shufflePlayersVec() {
 	shuffle(begin(playersVec), end(playersVec), default_random_engine{});
 }
 
+void GameEngine::mainGameLoop()
+{
+
+}
+
 //Return the playersVec
 vector<Player*> GameEngine::getPlayers() {
 	return playersVec;
@@ -248,62 +253,6 @@ void GameEngine::issueOrderPhase()
 	bool playerBool = false;
 
 
-	//// To Attack
-	//for (int i = 0; i < playersVec.size(); i++) {
-	//	for (int j = 0; j < playersVec[i]->getPlayerTerritories().size(); j++) {
-	//		while (!playerBool) {
-	//			std::cout << ("Choose to attack: \n");
-	//			cin >> userAttackTerritory;
-	//			if (userAttackTerritory < map->listOfContinent[i]->territories.size() && userAttackTerritory > 0) {
-	//				playerBool = true;
-	//			}
-	//		}
-	//		if (userAttackTerritory != playersVec[i]->getPlayerTerritories()[j]->getID()) {
-	//			cout << map->listOfContinent[i]->territories[userAttackTerritory]->getID() << "TEST" << endl;
-	//			myvector = playersVec[i]->getToAttackVec();
-	//			myvector.push_back(map->listOfContinent[i]->territories[userAttackTerritory]->getID());
-	//			playersVec[i]->setToAttack(myvector);
-	//			std::cout << playersVec[i]->getToAttackVec().size() << std::endl;
-	//		}
-	//		playerBool = false;
-	//	}
-	//}
-
-	// To Defend
-	//for (int i = 0; i < playersVec.size(); i++) {
-	//	for (int j = 0; j < playersVec[i]->getPlayerTerritories().size(); j++) {
-	//		while (!playerBool) {
-	//			std::cout << ("Choose to defend: \n");
-	//			cin >> userDefendTerritory;
-	//			if (userDefendTerritory < playersVec[i]->getPlayerTerritories().size() && userDefendTerritory > 0) {
-	//				playerBool = true;
-	//			}
-	//		}
-	//		if (userDefendTerritory == playersVec[i]->getPlayerTerritories()[j]->getID()) {
-	//			cout << map->listOfContinent[i]->territories[userDefendTerritory]->getID() << "TEST" << endl;
-	//			myvector = playersVec[i]->getToDefendVec();
-	//			myvector.push_back(map->listOfContinent[i]->territories[userDefendTerritory]->getID());
-	//			playersVec[0]->setToDefend(myvector);
-	//			std::cout << playersVec[i]->getToDefendVec().size() << std::endl;
-	//		}
-
-	//		// Get number to deploy 
-	//		for (int k = 0; k < playersVec.size(); k++) {
-	//			while (!playerBool) {
-	//				std::cout << ("Choose how much unit to deploy \n");
-	//				cin >> deployNumber;
-	//				if (deployNumber > 0 && deployNumber < playersVec[k]->getPlayerArmies()) {
-	//					playersVec[k]->setPlayerArmies(playersVec[k]->getPlayerArmies() - deployNumber);
-	//					if (playersVec[k]->getPlayerArmies() <= 0) {
-	//						playerBool = true;
-	//					}
-	//				}
-	//			}
-	//			playerBool = false;
-	//		}
-	//		playerBool = false;
-	//	}
-	//}
 	printf("\n");
 	// Add type of cards
 	vector<Card> cards;

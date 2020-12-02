@@ -48,9 +48,9 @@ int main()
 //	
 //	//Part 2 - StartUp Phase
 //	cout << "======================================= Part 2  =======================================" << endl;
-//	StartUp startup;
-//	startup.setGameEngine(&games);
-//	startup.startupPhase();
+	StartUp startup;
+	startup.setGameEngine(&games);
+	startup.startupPhase();
 //	cout << "======================================= Part 2 end =======================================" << endl;
 //
 //	printf("======================================= Part 4  =======================================\n");

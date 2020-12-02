@@ -34,6 +34,7 @@ public:
 	void issueOrderPhase();
 	void executeOrdersPhase();
 	void shufflePlayersVec();
+	void mainGameLoop();
 	int getNumPlayers();
 	Map* getMap();
 	vector<Player*> getPlayers();
