@@ -113,9 +113,23 @@ void StatisticsObserver::display()
 	if (!_subject->enableStatObserver) { return; }
 	std::cout << "\n" << "======================================= Stats Observer =======================================" << "\n";
 
+	vector<Player*> players = _subject->getPlayers();
 
-	//get variables from model
-	
+	float totalNbrOfTerritories = 0;
+	for (Player* player : players) { totalNbrOfTerritories += player->getPlayerTerritories().size(); }
+
+	for (Player* player : players)
+	{
+		float nbrOfTerritories = player->getPlayerTerritories().size();
+		if (nbrOfTerritories < 1) { continue; }
+
+		float percentageOfTheWorld = nbrOfTerritories / totalNbrOfTerritories * 100;
+
+		cout << "Player " << player->getPlayerID() << " | controls ";
+		printf("%.2f", percentageOfTheWorld);
+		cout << "% of the map" << "\n";
+	}
+
 	cout << "==============================================================================================" << "\n\n";
 }
 
