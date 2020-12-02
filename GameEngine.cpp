@@ -225,11 +225,6 @@ void GameEngine::issueOrderPhase()
 	int cardChoice = 0;
 
 	// Order list for players
-	// Different order required 
-	/*Bomb* bB = new Bomb();
-	Airlift* aL = new Airlift();
-	Negotiate* nT = new Negotiate();
-	Blockade* bD = new Blockade();*/
 	Advance* aV = new Advance();
 	Deploy* dP = new Deploy();
 
@@ -586,9 +581,7 @@ void GameEngine::executeOrdersPhase() {
 }
 
 
-
-
-
+// IStream operator 
 istream& operator>>(istream& in, const StartUp& s) {
 	//in >> s.engine;
 	return in;

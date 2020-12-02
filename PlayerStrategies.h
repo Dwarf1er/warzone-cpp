@@ -28,28 +28,28 @@ private:
 class AggressivePlayerStrategy : public PlayerStrategy {
 public:
 	void issueOrder();
-	std::vector<int> toAttack();
-	std::vector<int> toDefend();
+	std::vector<int> toAttack(Player* player);
+	std::vector<int> toDefend(Player* player);
 private:
-
+	Map* map;
 };
 
 class BenevolentPlayerStrategy : public PlayerStrategy {
 public:
 	void issueOrder();
-	std::vector<int> toAttack();
-	std::vector<int> toDefend();
+	std::vector<int> toAttack(Player* player);
+	std::vector<int> toDefend(Player* player);
 private:
-
+	Map* map;
 };
 
 class NeutralPlayerStrategy : public PlayerStrategy {
 public:
 	void issueOrder();
-	std::vector<int> toAttack();
-	std::vector<int> toDefend();
+	std::vector<int> toAttack(Player* player);
+	std::vector<int> toDefend(Player* player);
 private:
-
+	Map* map;
 };
 
 #endif // !PLAYERSTRATEGIES_H

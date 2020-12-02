@@ -1,6 +1,8 @@
 #include "PlayerStrategies.h"
 #include "Player.h"
+#include <algorithm>
 
+// Huamn Player Section
 void HumanPlayerStrategy::issueOrder()
 {
 
@@ -14,24 +16,25 @@ std::vector<int> HumanPlayerStrategy::toAttack(Player* player)
 	bool playerBool = false;
 
 	// Check the player territories
-	for (int i = 0; i < player->getPlayerTerritories().size(); i++) {
-		while (!playerBool) {
-			std::cout << ("Choose to attack: \n");
-			std::cin >> userAttackTerritory;
-			if (userAttackTerritory < map->listOfContinent[0]->territories.size() && userAttackTerritory > 0) {
-				playerBool = true;
+	for (int i = 0; i < map->listOfContinent.size(); i++) {
+		for (int j = 0; j < map->listOfContinent[i]->territories.size();j++) {
+			while (!playerBool) {
+				std::cout << ("Choose to attack: \n");
+				std::cin >> userAttackTerritory;
+				if (userAttackTerritory < map->listOfContinent[i]->territories.size() && userAttackTerritory > 0) {
+					playerBool = true;
+				}
 			}
+			// To not attack itself
+			if (userAttackTerritory != player->getPlayerTerritories()[j]->getID()) {
+				std::cout << map->listOfContinent[i]->territories[userAttackTerritory]->getID() << "TEST" << std::endl;
+				myvector = player->getToAttackVec();
+				myvector.push_back(map->listOfContinent[i]->territories[userAttackTerritory]->getID());
+				player->setToAttack(myvector);
+				std::cout << player->getToAttackVec().size() << std::endl;
+			}
+			playerBool = false;
 		}
-
-		// To not attack itself
-		if (userAttackTerritory != player->getPlayerTerritories()[i]->getID()) {
-			std::cout << map->listOfContinent[0]->territories[userAttackTerritory]->getID() << "TEST" << std::endl;
-			myvector = player->getToAttackVec();
-			myvector.push_back(map->listOfContinent[0]->territories[userAttackTerritory]->getID());
-			player->setToAttack(myvector);
-			std::cout << player->getToAttackVec().size() << std::endl;
-		}
-		playerBool = false;
 	}
 	return player->getToAttackVec();
 }
@@ -62,33 +65,38 @@ std::vector<int> HumanPlayerStrategy::toDefend(Player* player)
 			player->setToDefend(myvector);
 			std::cout << player->getToDefendVec().size() << std::endl;
 		}
-
-		// Get number to deploy 
-		while (!playerBool) {
-			std::cout << ("Choose how much unit to deploy \n");
-			std::cin >> deployNumber;
-			if (deployNumber > 0 && deployNumber < player->getPlayerArmies()) {
-				player->setPlayerArmies(player->getPlayerArmies() - deployNumber);
-				if (player->getPlayerArmies() <= 0) {
-					playerBool = true;
-				}
-			}
-		}
-		playerBool = false;
 	}
 	return player->getToDefendVec();
 }
 
+// Aggressive player section
 void AggressivePlayerStrategy::issueOrder()
 {
 }
 
-std::vector<int> AggressivePlayerStrategy::toAttack()
+std::vector<int> AggressivePlayerStrategy::toAttack(Player* player)
 {
-	return std::vector<int>();
+	std::vector<int> myvector;
+	std::vector<int> myvector2;
+	bool playerBool = false;
+
+	// Check the player territories
+	for (int i = 0; i < map->listOfContinent.size(); i++) {
+		std::cout << ("Choose to attack: \n");
+		for (int j = 0; j < map->listOfContinent[i]->territories.size();j++) {
+			// To not attack itself
+			if (map->listOfContinent[i]->territories[j]->getID() != player->getPlayerTerritories()[j]->getID()) {
+				myvector = player->getToAttackVec();
+				myvector.push_back(map->listOfContinent[i]->territories[j]->getID());
+				player->setToAttack(myvector);
+				std::cout << player->getToAttackVec().size() << std::endl;
+			}
+		}
+	}
+	return player->getToAttackVec();
 }
 
-std::vector<int> AggressivePlayerStrategy::toDefend()
+std::vector<int> AggressivePlayerStrategy::toDefend(Player* player)
 {
 	return std::vector<int>();
 }
@@ -97,26 +105,47 @@ void BenevolentPlayerStrategy::issueOrder()
 {
 }
 
-std::vector<int> BenevolentPlayerStrategy::toAttack()
+std::vector<int> BenevolentPlayerStrategy::toAttack(Player* player)
 {
 	return std::vector<int>();
 }
 
-std::vector<int> BenevolentPlayerStrategy::toDefend()
+std::vector<int> BenevolentPlayerStrategy::toDefend(Player* player)
 {
-	return std::vector<int>();
+	vector<int> myvector;
+	vector<int> myvector2;
+	int userDefendTerritory = 0;
+	int deployNumber = 0;
+	int min = player->getPlayerTerritories()[0]->getNumberOfArmies();
+	int tempID = 0;
+
+	// Check if player territories 
+	for (int i = 0; i < player->getPlayerTerritories().size(); i++) {
+		std::cout << ("Choose to defend: \n");
+		if (player->getPlayerTerritories()[i]->getNumberOfArmies() < min) {
+			min = player->getPlayerTerritories()[i]->getNumberOfArmies();
+			tempID = i;
+		}
+	}
+
+	myvector = player->getToDefendVec();
+	myvector.push_back(tempID);
+	player->setToDefend(myvector);
+	std::cout << player->getToDefendVec().size() << std::endl;
+
+	return player->getToDefendVec();
 }
 
 void NeutralPlayerStrategy::issueOrder()
 {
 }
 
-std::vector<int> NeutralPlayerStrategy::toAttack()
+std::vector<int> NeutralPlayerStrategy::toAttack(Player* player)
 {
 	return std::vector<int>();
 }
 
-std::vector<int> NeutralPlayerStrategy::toDefend()
+std::vector<int> NeutralPlayerStrategy::toDefend(Player* player)
 {
 	return std::vector<int>();
 }
