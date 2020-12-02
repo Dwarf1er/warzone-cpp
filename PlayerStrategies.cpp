@@ -21,7 +21,6 @@ void HumanPlayerStrategy::issueOrder(Player* player, std::vector<Player*> player
 	Territory* tempTerritory2 = new Territory();
 	int playerID = 0;
 
-
 	std::cout << "Do you want to play a card ? (y/n)" << std::endl;
 	std::cout << "\nPlayer " << " Human " << " choice: " << std::endl;
 	std::cin >> playerOrderChoice;
@@ -138,6 +137,12 @@ void HumanPlayerStrategy::issueOrder(Player* player, std::vector<Player*> player
 		if (player->getPlayerOrders()->getOList()[i]->getDescription() == "Advance") {
 			while (true) {
 				std::cout << "\n=====Advance Section=====" << std::endl;
+				std::cout << "Current player territories: " << std::endl;
+
+				for (int j = 0; j < player->getPlayerTerritories().size(); j++) {
+					std::cout << player->getPlayerTerritories()[j]->getID() << std::endl;
+				}
+
 				std::cout << "From which territory do you want to attack ?" << std::endl;
 				std::cin >> *tempTerritory1;
 				std::cout << "Which territory do you want to attack ?" << std::endl;
@@ -152,6 +157,7 @@ void HumanPlayerStrategy::issueOrder(Player* player, std::vector<Player*> player
 						}
 					}
 				}
+				//m->listOfNeightbors[t1->getID()][j]->getID() == t2->getID()
 
 				if (Advance().validate(player, tempTerritory1, tempTerritory2, map)) {
 					Advance().execute(player, playersVec[playerID], tempTerritory1, tempTerritory2, army, deck);

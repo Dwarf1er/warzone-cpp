@@ -156,11 +156,11 @@ istream& operator>>(istream& in, Advance& a) {
 	return in;
 }
 
-
 void Advance::execute()
 {
 }
 
+// Validate method for Advance
 bool Advance::validate(Player* p, Territory* t1, Territory* t2, Map* m) {
 	for (int i = 0; i < p->getPlayerTerritories().size(); i++) {
 		if (p->getPlayerTerritories()[i]->getID() == t1->getID()) { //checks if territory belongs to player
@@ -174,6 +174,8 @@ bool Advance::validate(Player* p, Territory* t1, Territory* t2, Map* m) {
 		}
 	}
 }
+
+// Execute Method for Advance 
 void Advance::execute(Player* p1, Player* p2, Territory* t1, Territory* t2, int army, Deck* d) {
 
 	bool attack = true;
@@ -191,11 +193,8 @@ void Advance::execute(Player* p1, Player* p2, Territory* t1, Territory* t2, int 
 		}
 	}
 
-
 	if (!(p1->getPacifism() == true && p2->getPacifism() == true) && attack == true) {
-
 		cout << "The advancement order has been validated, proceeding to execute: ..." << endl;
-
 		printf("Advance ok\n");
 		printf("Attack occuring\n");
 		//attack and def mechanism
@@ -205,16 +204,13 @@ void Advance::execute(Player* p1, Player* p2, Territory* t1, Territory* t2, int 
 
 		for (int i = 0;i < t1->getNumberOfArmies(); i++) { //attackers killing defenders
 			int r = (rand() % 100) + 1;
-
 			if (r <= 60) {
 				defdeath++;
 			}
 		}
 
-
 		for (int i = 0;i < t2->getNumberOfArmies(); i++) { //defenders killing attackers
 			int r = (rand() % 100) + 1;
-
 			if (r <= 70) {
 				atkdeath++;
 			}
@@ -246,7 +242,6 @@ void Advance::execute(Player* p1, Player* p2, Territory* t1, Territory* t2, int 
 
 			p2->setPlayerTerritories(temp);
 
-
 			temp = p1->getPlayerTerritories();//transfers to neutral player
 			temp.push_back(t2);
 			p1->setPlayerTerritories(temp);
@@ -264,9 +259,7 @@ void Advance::execute(Player* p1, Player* p2, Territory* t1, Territory* t2, int 
 	else if (p1->getPacifism() == true && p2->getPacifism() == true) {
 		cout << "attack cannot proceed since a negotiation has occured" << endl;
 	}
-
 }
-
 
 //getters & setters
 bool Advance::getCheckValid() {
