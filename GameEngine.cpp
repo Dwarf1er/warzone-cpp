@@ -56,6 +56,7 @@ void GameEngine::mainGameLoop()
 		std::cout << "Issue Order Phase" << std::endl;
 		issueOrderPhase();
 		std::cout << "Execute Order Phase" << std::endl;
+		executeOrdersPhase();
 	}
 }
 
@@ -148,7 +149,7 @@ void GameEngine::initGame() {
 			p->set_strategy(new BenevolentPlayerStrategy());
 			std::cout << "Benevolent Player Created " << std::endl;
 		}
-		if(i != 0 && i != 1 && i != 2 && i != 3){
+		if (i != 0 && i != 1 && i != 2 && i != 3) {
 			p->set_strategy(new AggressivePlayerStrategy());
 			std::cout << "Aggressive Player Created " << std::endl;
 		}
@@ -225,7 +226,7 @@ std::vector<Player*> GameEngine::getPlayersVec()
 void GameEngine::reinforcementPhase()
 {
 	phaseIndex = 0;
-	std::cout << "Reinforcement Phase Start" << std::endl;
+	std::cout << "================Reinforcement Phase================" << std::endl;
 	// Setting players armie based on territories
 	for (int i = 0; i < playersVec.size(); i++) {
 		int armies = playersVec[i]->getPlayerTerritories().size() / 3;
@@ -243,7 +244,6 @@ void GameEngine::reinforcementPhase()
 			playersVec[i]->setPlayerArmies(armies);
 		}
 	}
-
 	Notify();
 }
 
@@ -251,7 +251,6 @@ void GameEngine::reinforcementPhase()
 void GameEngine::issueOrderPhase()
 {
 	phaseIndex = 1;
-
 	// Order list for players
 	Advance* aV = new Advance();
 	Deploy* dP = new Deploy();
