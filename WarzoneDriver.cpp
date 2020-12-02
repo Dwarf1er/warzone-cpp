@@ -51,7 +51,8 @@ int main()
 	StartUp startup;
 	startup.setGameEngine(&games);
 	startup.startupPhase();
-
+	games.reinforcementPhase();
+	games.issueOrderPhase();
 	//games.reinforcementPhase();
 	//games.issueOrderPhase();
 	//games.executeOrdersPhase();

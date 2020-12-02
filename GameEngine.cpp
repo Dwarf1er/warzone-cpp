@@ -46,11 +46,16 @@ void GameEngine::shufflePlayersVec() {
 	shuffle(begin(playersVec), end(playersVec), default_random_engine{});
 }
 
+// Game loop
 void GameEngine::mainGameLoop()
 {
 	bool endgame = false;
 	while (false) {
-
+		std::cout << "Reinforcement Phase" << std::endl;
+		reinforcementPhase();
+		std::cout << "Issue Order Phase" << std::endl;
+		issueOrderPhase();
+		std::cout << "Execute Order Phase" << std::endl;
 	}
 }
 
@@ -126,23 +131,23 @@ void GameEngine::initGame() {
 		p->setPlayerArmies(5);
 		p->setPlayerTerritories(playerTerritories);
 		p->setPlayerCards(playerCard);
-		//for (int j = 0; j < numOfPlayer; i++) {
-		//	if (i == 0) {
-		//		p->set_strategy(new NeutralPlayerStrategy());
-		//	}
-		//	if (i == 1) {
-		//		p->set_strategy(new HumanPlayerStrategy());	
-		//	}
-		//	if (i == 2) {
-		//		p->set_strategy(new AggressivePlayerStrategy());
-		//	}
-		//	if (i == 3) {
-		//		p->set_strategy(new BenevolentPlayerStrategy());
-		//	}
-		//	else {
-		//		p->set_strategy(new AggressivePlayerStrategy());
-		//	}
-		//}
+
+		if (i == 0) {
+			p->set_strategy(new NeutralPlayerStrategy());
+		}
+		if (i == 1) {
+			p->set_strategy(new HumanPlayerStrategy());
+		}
+		if (i == 2) {
+			p->set_strategy(new AggressivePlayerStrategy());
+		}
+		if (i == 3) {
+			p->set_strategy(new BenevolentPlayerStrategy());
+		}
+		else {
+			p->set_strategy(new AggressivePlayerStrategy());
+		}
+
 		std::cout << *p << "Number Of Armies: " << p->getPlayerArmies() << std::endl;
 		std::cout << "Player Cards: " << *p->getPlayerCards() << std::endl;
 		playersVec.push_back(p);
@@ -175,9 +180,9 @@ void GameEngine::initGame() {
 
 	std::cout << "======================================= Part 3  ======================================= " << std::endl;
 
-	reinforcementPhase();
-	issueOrderPhase();
-	executeOrdersPhase();
+	//reinforcementPhase();
+	//issueOrderPhase();
+	//executeOrdersPhase();
 
 	std::cout << "======================================= Part 3 end =======================================\n" << std::endl;
 }
@@ -211,12 +216,15 @@ std::vector<Player*> GameEngine::getPlayersVec()
 	return playersVec;
 }
 
+// Reinforcement Phase
 void GameEngine::reinforcementPhase()
 {
 	phaseIndex = 0;
+	std::cout << "Reinforcement Phase Start" << std::endl;
 	// Setting players armie based on territories
 	for (int i = 0; i < playersVec.size(); i++) {
 		int armies = playersVec[i]->getPlayerTerritories().size() / 3;
+		std::cout << "Player " << i + 1 << ": Add " << armies << " to player" << std::endl;
 		armiesCountsBasedOnTerritories.insert(std::pair<Player*, int>(playersVec[i], armies));
 		playersVec[i]->setPlayerArmies(armies);
 	}
@@ -225,6 +233,7 @@ void GameEngine::reinforcementPhase()
 	for (int i = 0; i < playersVec.size(); i++) {
 		if (playersVec[i]->getPlayerTerritories().size() / 3 < 9) {
 			int armies = playersVec[i]->getPlayerTerritories().size() + 3;
+			std::cout << "Player " << i + 1 << ": Add " << armies << " to player" << std::endl;
 			armiesCountsMinimums.insert(std::pair<Player*, int>(playersVec[i], armies));
 			playersVec[i]->setPlayerArmies(armies);
 		}
@@ -288,6 +297,7 @@ void GameEngine::issueOrderPhase()
 	for (int i = 0; i < playersVec.size(); i++) {
 		playersVec[i]->issueOrder(playersVec[i], playersVec, playersVec[0]);
 	}
+
 	Notify();
 }
 
