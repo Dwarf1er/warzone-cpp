@@ -183,14 +183,6 @@ void GameEngine::initGame() {
 			std::cout << "Please enter the number 1 or 2\n" << endl;
 		}
 	}
-
-	std::cout << "======================================= Part 3  ======================================= " << std::endl;
-
-	//reinforcementPhase();
-	//issueOrderPhase();
-	//executeOrdersPhase();
-
-	std::cout << "======================================= Part 3 end =======================================\n" << std::endl;
 }
 //===StartUp Class (Part 2)===//
 
