@@ -400,13 +400,14 @@ void StartUp::startupPhase() {
 		shuffle(begin(engine->getMap()->nodeList), end(engine->getMap()->nodeList), default_random_engine());
 		while (!engine->getMap()->nodeList.empty()) {
 			for (Player* p : engine->getPlayers()) {
-				vector<Territory*> territories;
-				territories.push_back(engine->getMap()->nodeList.back());
-				p->setPlayerTerritories(territories);
-				engine->getMap()->nodeList.pop_back();
+				if (!engine->getMap()->nodeList.empty()) {
+					vector<Territory*> territories;
+					territories.push_back(engine->getMap()->nodeList.back());
+					p->setPlayerTerritories(territories);
+					engine->getMap()->nodeList.pop_back();
+				}
 			}
 		}
-
 		for (Player* p : engine->getPlayers()) {
 			cout << *p << endl;
 		}
