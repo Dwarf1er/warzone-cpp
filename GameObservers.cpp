@@ -56,8 +56,7 @@ void PhaseObserver::Update()
 
 void PhaseObserver::display()
 {
-	if (!_subject->enablePhaseObserver) 
-		return;
+	if (!_subject->enablePhaseObserver){ return; }
 
 	std::cout << "\n" << "======================================= Phase Observer =======================================" << "\n";
 	
@@ -93,7 +92,7 @@ void PhaseObserver::display()
 
 StatisticsObserver::StatisticsObserver() {}
 
-StatisticsObserver::StatisticsObserver(Subject* s)
+StatisticsObserver::StatisticsObserver(GameEngine* s)
 {
 	_subject = s;
 	_subject->Attach(this);
@@ -111,7 +110,12 @@ void StatisticsObserver::Update()
 
 void StatisticsObserver::display()
 {
+	if (!_subject->enableStatObserver) { return; }
+	std::cout << "\n" << "======================================= Stats Observer =======================================" << "\n";
+
+
 	//get variables from model
-	cout << endl; //add variables
+	
+	cout << "==============================================================================================" << "\n\n";
 }
 
