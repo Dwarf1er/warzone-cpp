@@ -21,50 +21,49 @@ void HumanPlayerStrategy::issueOrder(Player* player, std::vector<Player*> player
 	Territory* tempTerritory2 = new Territory();
 	int playerID = 0;
 
-	for (int i = 0; i < playersVec.size(); i++) {
-		std::cout << "Do you want to play a card ? (y/n)" << std::endl;
-		std::cout << "\nPlayer " << i + 1 << " choice: " << std::endl;
-		std::cin >> playerOrderChoice;
 
-		// Play card or not 
-		if (playerOrderChoice == "n") {
-			std::cout << " Not Playing a Card" << std::endl;
-		}
-		if (playerOrderChoice == "y") {
-			std::cout << "Enter a choice" << std::endl;
+	std::cout << "Do you want to play a card ? (y/n)" << std::endl;
+	std::cout << "\nPlayer " << " Human " << " choice: " << std::endl;
+	std::cin >> playerOrderChoice;
 
-			for (int j = 0; j < playersVec[j]->getPlayerCards()->get_cards_in_hand().size(); j++) {
-				std::cout << "Player " << i + 1 << std::endl;
-				std::cout << *playersVec[i]->getPlayerCards()->get_cards_in_hand()[j] << std::endl;
-				std::cout << "Player " << i + 1 << " Card in hand: " << std::endl << playersVec[i]->getPlayerCards()->get_cards_in_hand()[j]->get_card_type() << ":" << playersVec[i]->getPlayerCards()->get_cards_in_hand()[j]->get_card_type_name() << std::endl << std::endl;
-			}
-			std::cin >> cardChoice;
-
-			switch (cardChoice) {
-			case 0:
-				playersVec[i]->setPlayerOrders(new Bomb());
-				break;
-			case 1:
-				playersVec[i]->setPlayerOrders(new Deploy());
-				break;
-			case 2:
-				playersVec[i]->setPlayerOrders(new Blockade());
-				break;
-			case 3:
-				playersVec[i]->setPlayerOrders(new Airlift());
-				break;
-			case 4:
-				playersVec[i]->setPlayerOrders(new Negotiate());
-				break;
-			case 5:
-				playersVec[i]->setPlayerOrders(new Advance());
-				break;
-			default:
-				break;
-			}
-		}
-		std::cout << std::endl;
+	// Play card or not 
+	if (playerOrderChoice == "n") {
+		std::cout << " Not Playing a Card" << std::endl;
 	}
+	if (playerOrderChoice == "y") {
+		std::cout << "Enter a choice" << std::endl;
+
+		for (int j = 0; j < player->getPlayerCards()->get_cards_in_hand().size(); j++) {
+			std::cout << "Player " << " Human " << std::endl;
+			std::cout << *player->getPlayerCards()->get_cards_in_hand()[j] << std::endl;
+			std::cout << "Player " << " human " << " Card in hand: " << std::endl << playersVec[i]->getPlayerCards()->get_cards_in_hand()[j]->get_card_type() << ":" << playersVec[i]->getPlayerCards()->get_cards_in_hand()[j]->get_card_type_name() << std::endl << std::endl;
+		}
+		std::cin >> cardChoice;
+
+		switch (cardChoice) {
+		case 0:
+			player->setPlayerOrders(new Bomb());
+			break;
+		case 1:
+			player->setPlayerOrders(new Deploy());
+			break;
+		case 2:
+			player->setPlayerOrders(new Blockade());
+			break;
+		case 3:
+			player->setPlayerOrders(new Airlift());
+			break;
+		case 4:
+			player->setPlayerOrders(new Negotiate());
+			break;
+		case 5:
+			player->setPlayerOrders(new Advance());
+			break;
+		default:
+			break;
+		}
+	}
+	std::cout << std::endl;
 
 	// Deploy Section
 	for (int i = 0; i < player->getPlayerOrders()->getOList().size(); i++) {
@@ -272,7 +271,7 @@ void AggressivePlayerStrategy::issueOrder(Player* player, std::vector<Player*> p
 	int playerID = 0;
 
 	// Get Player card in hand
-	for (int i = 0; i < playersVec[i]->getPlayerCards()->get_cards_in_hand().size(); i++) {
+	for (int i = 0; i < player->getPlayerCards()->get_cards_in_hand().size(); i++) {
 		std::cout << "Player " << player->getPlayerID() << std::endl;
 		std::cout << *player->getPlayerCards()->get_cards_in_hand()[i] << std::endl;
 		std::cout << "Player " << player->getPlayerID() << " Card in hand: " << std::endl << player->getPlayerCards()->get_cards_in_hand()[i]->get_card_type() << ":" << player->getPlayerCards()->get_cards_in_hand()[i]->get_card_type_name() << std::endl << std::endl;
@@ -288,7 +287,7 @@ void AggressivePlayerStrategy::issueOrder(Player* player, std::vector<Player*> p
 	if (cardChoice == "BOMB") {
 		player->setPlayerOrders(new Bomb());
 	}
-	
+
 	if (cardChoice == "DEPLOY") {
 		player->setPlayerOrders(new Deploy());
 	}
@@ -443,7 +442,7 @@ void BenevolentPlayerStrategy::issueOrder(Player* player, std::vector<Player*> p
 	int playerID = 0;
 
 	// Get Player card in hand
-	for (int i = 0; i < playersVec[i]->getPlayerCards()->get_cards_in_hand().size(); i++) {
+	for (int i = 0; i < player->getPlayerCards()->get_cards_in_hand().size(); i++) {
 		std::cout << "Player " << player->getPlayerID() << std::endl;
 		std::cout << *player->getPlayerCards()->get_cards_in_hand()[i] << std::endl;
 		std::cout << "Player " << player->getPlayerID() << " Card in hand: " << std::endl << player->getPlayerCards()->get_cards_in_hand()[i]->get_card_type() << ":" << player->getPlayerCards()->get_cards_in_hand()[i]->get_card_type_name() << std::endl << std::endl;
