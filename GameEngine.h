@@ -42,8 +42,8 @@ public:
 	std::map<Player*, int> armiesCountsMinimums;
 	std::map<Player*, OrderData> issueOrderDetails;
 	int phaseIndex;
-	bool enableObserver = false;
-
+	bool enablePhaseObserver = false;
+	bool enableStatObserver = false;
 
 
 private:

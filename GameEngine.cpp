@@ -159,30 +159,57 @@ void GameEngine::initGame() {
 		playersVec.push_back(p);
 	}
 
-	//Options for observer 
+	//Options Phase observer
 	std::cout << "\n" << endl;
-	std::cout << "Observer Options: \n" << endl;
-	std::cout << "Press 1 to open or Press 2 to close it \n" << endl;
+	std::cout << "Phase observer Options:" << endl;
+	std::cout << "Press 1 to enable or Press 2 to disable it" << endl;
 
 	while (true) {
 		cin >> observerOption;
 		if (observerOption == 1) {
-			enableObserver = true;
-			std::cout << "Observer turned on!\n" << endl;
+			enablePhaseObserver = true;
+			std::cout << "Phase observer turned on!\n" << endl;
 			break;
 		}
 		if (observerOption == 2) {
-			enableObserver = false;
-			std::cout << "Observer turned off!\n" << endl;
+			enablePhaseObserver = false;
+			std::cout << "Phase observer turned off!\n" << endl;
 			break;
 		}
 
 		if (observerOption != (1 || 2)) {
 			cin.clear();
 			cin.ignore(1000, '\n');
-			std::cout << "Please enter the number 1 or 2\n" << endl;
+			std::cout << "Please enter the number 1 or 2" << endl;
 		}
 	}
+
+
+	//Options Statistics observer
+	std::cout << "\n" << endl;
+	std::cout << "Statistics observer Options:" << endl;
+	std::cout << "Press 1 to enable or Press 2 to disable it" << endl;
+
+	while (true) {
+		cin >> observerOption;
+		if (observerOption == 1) {
+			enableStatObserver = true;
+			std::cout << "Statistics observer turned on!\n" << endl;
+			break;
+		}
+		if (observerOption == 2) {
+			enableStatObserver = false;
+			std::cout << "Statistics observer turned off!\n" << endl;
+			break;
+		}
+
+		if (observerOption != (1 || 2)) {
+			cin.clear();
+			cin.ignore(1000, '\n');
+			std::cout << "Please enter the number 1 or 2" << endl;
+		}
+	}
+	
 }
 //===StartUp Class (Part 2)===//
 

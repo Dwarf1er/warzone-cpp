@@ -56,7 +56,7 @@ void PhaseObserver::Update()
 
 void PhaseObserver::display()
 {
-	if (!_subject->enableObserver) 
+	if (!_subject->enablePhaseObserver) 
 		return;
 
 	std::cout << "\n" << "======================================= PART 5 - OBSERVER =======================================" << "\n";
