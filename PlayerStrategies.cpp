@@ -33,10 +33,11 @@ void HumanPlayerStrategy::issueOrder(Player* player, std::vector<Player*> player
 	if (playerOrderChoice == "y") {
 		std::cout << "Enter a choice" << std::endl;
 
-		for (int j = 0; j < player->getPlayerCards()->get_cards_in_hand().size(); j++) {
+		// Get player card in hand 
+		for (int i = 0; i < player->getPlayerCards()->get_cards_in_hand().size(); i++) {
 			std::cout << "Player " << " Human " << std::endl;
-			std::cout << *player->getPlayerCards()->get_cards_in_hand()[j] << std::endl;
-			std::cout << "Player " << " human " << " Card in hand: " << std::endl << playersVec[i]->getPlayerCards()->get_cards_in_hand()[j]->get_card_type() << ":" << playersVec[i]->getPlayerCards()->get_cards_in_hand()[j]->get_card_type_name() << std::endl << std::endl;
+			std::cout << *player->getPlayerCards()->get_cards_in_hand()[i] << std::endl;
+			std::cout << "Player " << " human " << " Card in hand: " << std::endl << player->getPlayerCards()->get_cards_in_hand()[i]->get_card_type() << ":" << player->getPlayerCards()->get_cards_in_hand()[i]->get_card_type_name() << std::endl;
 		}
 		std::cin >> cardChoice;
 
@@ -69,6 +70,7 @@ void HumanPlayerStrategy::issueOrder(Player* player, std::vector<Player*> player
 	for (int i = 0; i < player->getPlayerOrders()->getOList().size(); i++) {
 		if (player->getPlayerOrders()->getOList()[i]->getDescription() == "Deploy") {
 			while (true) {
+				std::cout << "\n=====Deploy Section=====" << std::endl;
 				std::cout << "Which territory to deploy to ?" << std::endl;
 				std::cin >> *tempTerritory1;
 				std::cout << "How many armies to deploy ? " << std::endl;
@@ -77,15 +79,13 @@ void HumanPlayerStrategy::issueOrder(Player* player, std::vector<Player*> player
 					Deploy().execute(player, army, tempTerritory1);
 					break;
 				}
-				else {
-					std::cout << "Invalid statement" << std::endl;
-				}
 			}
 		}
 
 		// Bomb Section
 		if (player->getPlayerOrders()->getOList()[i]->getDescription() == "Bomb") {
 			while (true) {
+				std::cout << "\n=====Bomb Section=====" << std::endl;
 				std::cout << "Which territory to bomb ?" << std::endl;
 				std::cin >> *tempTerritory1;
 				std::cout << "How many armies to deploy ? " << std::endl;
@@ -103,6 +103,7 @@ void HumanPlayerStrategy::issueOrder(Player* player, std::vector<Player*> player
 		// Blockade Section
 		if (player->getPlayerOrders()->getOList()[i]->getDescription() == "Blockade") {
 			while (true) {
+				std::cout << "\n=====Blockade Section=====" << std::endl;
 				std::cout << "Which territory to put a blockade ?" << std::endl;
 				std::cin >> *tempTerritory1;
 				if (Blockade().validate(player, tempTerritory1)) {
@@ -118,6 +119,7 @@ void HumanPlayerStrategy::issueOrder(Player* player, std::vector<Player*> player
 		// Negotiate Section
 		if (player->getPlayerOrders()->getOList()[i]->getDescription() == "Negotiate") {
 			while (true) {
+				std::cout << "\n=====Negotiate Section=====" << std::endl;
 				std::cout << "Which player would you like to negotiate with ?" << std::endl;
 				std::cin >> playerID;
 
@@ -135,6 +137,7 @@ void HumanPlayerStrategy::issueOrder(Player* player, std::vector<Player*> player
 		// Advance section
 		if (player->getPlayerOrders()->getOList()[i]->getDescription() == "Advance") {
 			while (true) {
+				std::cout << "\n=====Advance Section=====" << std::endl;
 				std::cout << "From which territory do you want to attack ?" << std::endl;
 				std::cin >> *tempTerritory1;
 				std::cout << "Which territory do you want to attack ?" << std::endl;
@@ -163,6 +166,7 @@ void HumanPlayerStrategy::issueOrder(Player* player, std::vector<Player*> player
 		// Airlift section
 		if (player->getPlayerOrders()->getOList()[i]->getDescription() == "Airlift") {
 			while (true) {
+				std::cout << "\n=====Airlift Section=====" << std::endl;
 				std::cout << "From which territory do you want to use airlift attack ?" << std::endl;
 				std::cin >> *tempTerritory1;
 				std::cout << "Which territory do you want to attack ?" << std::endl;
@@ -307,6 +311,7 @@ void AggressivePlayerStrategy::issueOrder(Player* player, std::vector<Player*> p
 	for (int i = 0; i < player->getPlayerOrders()->getOList().size(); i++) {
 		if (player->getPlayerOrders()->getOList()[i]->getDescription() == "Deploy") {
 			while (true) {
+				std::cout << "\n=====Deploy Section=====" << std::endl;
 				std::cout << "Which territory to deploy to ?" << std::endl;
 				std::cin >> *tempTerritory1;
 				std::cout << "How many armies to deploy ? " << std::endl;
@@ -324,6 +329,7 @@ void AggressivePlayerStrategy::issueOrder(Player* player, std::vector<Player*> p
 		// Bomb Section
 		if (player->getPlayerOrders()->getOList()[i]->getDescription() == "Bomb") {
 			while (true) {
+				std::cout << "\n=====Bomb Section=====" << std::endl;
 				std::cout << "Which territory to bomb ?" << std::endl;
 				std::cin >> *tempTerritory1;
 				std::cout << "How many armies to deploy ? " << std::endl;
@@ -341,6 +347,7 @@ void AggressivePlayerStrategy::issueOrder(Player* player, std::vector<Player*> p
 		// Advance section
 		if (player->getPlayerOrders()->getOList()[i]->getDescription() == "Advance") {
 			while (true) {
+				std::cout << "\n=====Advance Section=====" << std::endl;
 				std::cout << "From which territory do you want to attack ?" << std::endl;
 				std::cin >> *tempTerritory1;
 				std::cout << "Which territory do you want to attack ?" << std::endl;
@@ -369,6 +376,7 @@ void AggressivePlayerStrategy::issueOrder(Player* player, std::vector<Player*> p
 		// Airlift section
 		if (player->getPlayerOrders()->getOList()[i]->getDescription() == "Airlift") {
 			while (true) {
+				std::cout << "\n=====Airlift Section=====" << std::endl;
 				std::cout << "From which territory do you want to use airlift attack ?" << std::endl;
 				std::cin >> *tempTerritory1;
 				std::cout << "Which territory do you want to attack ?" << std::endl;
@@ -473,6 +481,7 @@ void BenevolentPlayerStrategy::issueOrder(Player* player, std::vector<Player*> p
 	for (int i = 0; i < player->getPlayerOrders()->getOList().size(); i++) {
 		if (player->getPlayerOrders()->getOList()[i]->getDescription() == "Deploy") {
 			while (true) {
+				std::cout << "\n=====Deploy Section=====" << std::endl;
 				std::cout << "Which territory to deploy to ?" << std::endl;
 				std::cin >> *tempTerritory1;
 				std::cout << "How many armies to deploy ? " << std::endl;
@@ -490,6 +499,7 @@ void BenevolentPlayerStrategy::issueOrder(Player* player, std::vector<Player*> p
 		// Bomb Section
 		if (player->getPlayerOrders()->getOList()[i]->getDescription() == "Bomb") {
 			while (true) {
+				std::cout << "\n=====Bomb Section=====" << std::endl;
 				std::cout << "Which territory to bomb ?" << std::endl;
 				std::cin >> *tempTerritory1;
 				std::cout << "How many armies to deploy ? " << std::endl;
@@ -507,6 +517,7 @@ void BenevolentPlayerStrategy::issueOrder(Player* player, std::vector<Player*> p
 		// Blockade Section
 		if (player->getPlayerOrders()->getOList()[i]->getDescription() == "Blockade") {
 			while (true) {
+				std::cout << "\n=====Blockade Section=====" << std::endl;
 				std::cout << "Which territory to put a blockade ?" << std::endl;
 				std::cin >> *tempTerritory1;
 				if (Blockade().validate(player, tempTerritory1)) {
@@ -522,6 +533,7 @@ void BenevolentPlayerStrategy::issueOrder(Player* player, std::vector<Player*> p
 		// Negotiate Section
 		if (player->getPlayerOrders()->getOList()[i]->getDescription() == "Negotiate") {
 			while (true) {
+				std::cout << "\n=====Negotiate Section=====" << std::endl;
 				std::cout << "Which player would you like to negotiate with ?" << std::endl;
 				std::cin >> playerID;
 
@@ -539,6 +551,7 @@ void BenevolentPlayerStrategy::issueOrder(Player* player, std::vector<Player*> p
 		// Advance section
 		if (player->getPlayerOrders()->getOList()[i]->getDescription() == "Advance") {
 			while (true) {
+				std::cout << "\n=====Advance Section=====" << std::endl;
 				std::cout << "From which territory do you want to attack ?" << std::endl;
 				std::cin >> *tempTerritory1;
 				std::cout << "Which territory do you want to attack ?" << std::endl;
@@ -567,6 +580,7 @@ void BenevolentPlayerStrategy::issueOrder(Player* player, std::vector<Player*> p
 		// Airlift section
 		if (player->getPlayerOrders()->getOList()[i]->getDescription() == "Airlift") {
 			while (true) {
+				std::cout << "\n=====Airlift Section=====" << std::endl;
 				std::cout << "From which territory do you want to use airlift attack ?" << std::endl;
 				std::cin >> *tempTerritory1;
 				std::cout << "Which territory do you want to attack ?" << std::endl;
