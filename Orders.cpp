@@ -78,6 +78,7 @@ void Deploy::execute(Player* p, int army, Territory* t) { //moves armies to terr
 void Deploy::execute()
 {
 }
+
 bool Deploy::validate(Player* p, Territory* t) {
 	for (int i = 0; i < p->getPlayerTerritories().size(); i++) {
 		if (p->getPlayerTerritories()[i]->getID() == t->getID()) { //checks if territory belongs to player

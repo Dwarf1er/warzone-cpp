@@ -4,6 +4,7 @@
 #include <vector>
 #include "Map.h"
 class Player;
+class Deck;
 
 class PlayerStrategy {
 public:
@@ -14,42 +15,47 @@ public:
 
 private:
 	Map* map;
+	Deck* deck;
 };
 
 class HumanPlayerStrategy : public PlayerStrategy {
 public:
-	void issueOrder();
+	void issueOrder(Player* player, std::vector<Player*> playersVec, Player* neutralP);
 	std::vector<int> toAttack(Player* player);
 	std::vector<int> toDefend(Player* player);
 private:
 	Map* map;
+	Deck* deck;
 };
 
 class AggressivePlayerStrategy : public PlayerStrategy {
 public:
-	void issueOrder();
+	void issueOrder(Player* player, std::vector<Player*> playersVec, Player* neutralP);
 	std::vector<int> toAttack(Player* player);
 	std::vector<int> toDefend(Player* player);
 private:
 	Map* map;
+	Deck* deck;
 };
 
 class BenevolentPlayerStrategy : public PlayerStrategy {
 public:
-	void issueOrder();
+	void issueOrder(Player* player, std::vector<Player*> playersVec, Player* neutralP);
 	std::vector<int> toAttack(Player* player);
 	std::vector<int> toDefend(Player* player);
 private:
 	Map* map;
+	Deck* deck;
 };
 
 class NeutralPlayerStrategy : public PlayerStrategy {
 public:
-	void issueOrder();
+	void issueOrder(Player* player, std::vector<Player*> playersVec, Player* neutralP);
 	std::vector<int> toAttack(Player* player);
 	std::vector<int> toDefend(Player* player);
 private:
 	Map* map;
+	Deck* deck;
 };
 
 #endif // !PLAYERSTRATEGIES_H

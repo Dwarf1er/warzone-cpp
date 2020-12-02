@@ -3,9 +3,136 @@
 #include <algorithm>
 
 // Huamn Player Section
-void HumanPlayerStrategy::issueOrder()
+void HumanPlayerStrategy::issueOrder(Player* player, std::vector<Player*> playersVec, Player* neutralP)
 {
+	int army = 0;
+	Territory* tempTerritory1 = new Territory();
+	Territory* tempTerritory2 = new Territory();
+	int playerID = 0;
 
+	// Deploy Section
+	for (int i = 0; i < player->getPlayerOrders()->getOList().size(); i++) {
+		if (player->getPlayerOrders()->getOList()[i]->getDescription() == "Deploy") {
+			while (true) {
+				std::cout << "Which territory to deploy to ?" << std::endl;
+				std::cin >> *tempTerritory1;
+				std::cout << "How many armies to deploy ? " << std::endl;
+				std::cin >> army;
+				if (Deploy().validate(player, tempTerritory1)) {
+					Deploy().execute(player, army, tempTerritory1);
+					break;
+				}
+				else {
+					std::cout << "Invalid statement" << std::endl;
+				}
+			}
+		}
+
+		// Bomb Section
+		if (player->getPlayerOrders()->getOList()[i]->getDescription() == "Bomb") {
+			while (true) {
+				std::cout << "Which territory to bomb ?" << std::endl;
+				std::cin >> *tempTerritory1;
+				std::cout << "How many armies to deploy ? " << std::endl;
+				std::cin >> army;
+				if (Bomb().validate(player, tempTerritory1)) {
+					Bomb().execute(tempTerritory1);
+					break;
+				}
+				else {
+					std::cout << "Invalid statement" << std::endl;
+				}
+			}
+		}
+
+		// Blockade Section
+		if (player->getPlayerOrders()->getOList()[i]->getDescription() == "Blockade") {
+			while (true) {
+				std::cout << "Which territory to put a blockade ?" << std::endl;
+				std::cin >> *tempTerritory1;
+				if (Blockade().validate(player, tempTerritory1)) {
+					Blockade().execute(player, neutralP, tempTerritory1); //Temp 
+					break;
+				}
+				else {
+					std::cout << "Invalid statement" << std::endl;
+				}
+			}
+		}
+
+		// Negotiate Section
+		if (player->getPlayerOrders()->getOList()[i]->getDescription() == "Negotiate") {
+			while (true) {
+				std::cout << "Which player would you like to negotiate with ?" << std::endl;
+				std::cin >> playerID;
+
+				// Change the neutraltemp
+				if (Negotiate().validate(player, playersVec[playerID])) {
+					Negotiate().execute(player, playersVec[playerID]);
+					break;
+				}
+				else {
+					std::cout << "Invalid statement" << std::endl;
+				}
+			}
+		}
+
+		// Advance section
+		if (player->getPlayerOrders()->getOList()[i]->getDescription() == "Advance") {
+			while (true) {
+				std::cout << "From which territory do you want to attack ?" << std::endl;
+				std::cin >> *tempTerritory1;
+				std::cout << "Which territory do you want to attack ?" << std::endl;
+				std::cin >> *tempTerritory2;
+				std::cout << "How many armies to deploy ? " << std::endl;
+				std::cin >> army;
+
+				for (int j = 0; j < playersVec.size(); j++) {
+					for (int k = 0; k < playersVec[j]->getPlayerTerritories().size(); k++) {
+						if (playersVec[j]->getPlayerTerritories()[k]->getID() == tempTerritory2->getID()) {
+							playerID = playersVec[j]->getPlayerID();
+						}
+					}
+				}
+
+				if (Advance().validate(player, tempTerritory1, tempTerritory2, map)) {
+					Advance().execute(player, playersVec[playerID], tempTerritory1, tempTerritory2, army, deck);
+					break;
+				}
+				else {
+					std::cout << "Invalid statement" << std::endl;
+				}
+			}
+		}
+
+		// Airlift section
+		if (player->getPlayerOrders()->getOList()[i]->getDescription() == "Airlift") {
+			while (true) {
+				std::cout << "From which territory do you want to use airlift attack ?" << std::endl;
+				std::cin >> *tempTerritory1;
+				std::cout << "Which territory do you want to attack ?" << std::endl;
+				std::cin >> *tempTerritory2;
+				std::cout << "How many armies to deploy ? " << std::endl;
+				std::cin >> army;
+
+				for (int j = 0; j < playersVec.size(); j++) {
+					for (int k = 0; k < playersVec[j]->getPlayerTerritories().size(); k++) {
+						if (player->getPlayerTerritories()[k]->getID() == tempTerritory2->getID()) {
+							playerID = playersVec[j]->getPlayerID();
+						}
+					}
+				}
+
+				if (Airlift().validate(player, tempTerritory1, tempTerritory2)) {
+					Airlift().execute(player, playersVec[playerID], tempTerritory1, tempTerritory2, army, deck);
+					break;
+				}
+				else {
+					std::cout << "Invalid statement" << std::endl;
+				}
+			}
+		}
+	}
 }
 
 std::vector<int> HumanPlayerStrategy::toAttack(Player* player)
@@ -70,8 +197,104 @@ std::vector<int> HumanPlayerStrategy::toDefend(Player* player)
 }
 
 // Aggressive player section
-void AggressivePlayerStrategy::issueOrder()
+void AggressivePlayerStrategy::issueOrder(Player* player, std::vector<Player*> playersVec, Player* neutralP)
 {
+	int army = 0;
+	Territory* tempTerritory1 = new Territory();
+	Territory* tempTerritory2 = new Territory();
+	int playerID = 0;
+
+	// Deploy Section
+	for (int i = 0; i < player->getPlayerOrders()->getOList().size(); i++) {
+		if (player->getPlayerOrders()->getOList()[i]->getDescription() == "Deploy") {
+			while (true) {
+				std::cout << "Which territory to deploy to ?" << std::endl;
+				std::cin >> *tempTerritory1;
+				std::cout << "How many armies to deploy ? " << std::endl;
+				std::cin >> army;
+				if (Deploy().validate(player, tempTerritory1)) {
+					Deploy().execute(player, army, tempTerritory1);
+					break;
+				}
+				else {
+					std::cout << "Invalid statement" << std::endl;
+				}
+			}
+		}
+
+		// Bomb Section
+		if (player->getPlayerOrders()->getOList()[i]->getDescription() == "Bomb") {
+			while (true) {
+				std::cout << "Which territory to bomb ?" << std::endl;
+				std::cin >> *tempTerritory1;
+				std::cout << "How many armies to deploy ? " << std::endl;
+				std::cin >> army;
+				if (Bomb().validate(player, tempTerritory1)) {
+					Bomb().execute(tempTerritory1);
+					break;
+				}
+				else {
+					std::cout << "Invalid statement" << std::endl;
+				}
+			}
+		}
+
+		// Advance section
+		if (player->getPlayerOrders()->getOList()[i]->getDescription() == "Advance") {
+			while (true) {
+				std::cout << "From which territory do you want to attack ?" << std::endl;
+				std::cin >> *tempTerritory1;
+				std::cout << "Which territory do you want to attack ?" << std::endl;
+				std::cin >> *tempTerritory2;
+				std::cout << "How many armies to deploy ? " << std::endl;
+				std::cin >> army;
+
+				for (int j = 0; j < playersVec.size(); j++) {
+					for (int k = 0; k < playersVec[j]->getPlayerTerritories().size(); k++) {
+						if (playersVec[j]->getPlayerTerritories()[k]->getID() == tempTerritory2->getID()) {
+							playerID = playersVec[j]->getPlayerID();
+						}
+					}
+				}
+
+				if (Advance().validate(player, tempTerritory1, tempTerritory2, map)) {
+					Advance().execute(player, playersVec[playerID], tempTerritory1, tempTerritory2, army, deck);
+					break;
+				}
+				else {
+					std::cout << "Invalid statement" << std::endl;
+				}
+			}
+		}
+
+		// Airlift section
+		if (player->getPlayerOrders()->getOList()[i]->getDescription() == "Airlift") {
+			while (true) {
+				std::cout << "From which territory do you want to use airlift attack ?" << std::endl;
+				std::cin >> *tempTerritory1;
+				std::cout << "Which territory do you want to attack ?" << std::endl;
+				std::cin >> *tempTerritory2;
+				std::cout << "How many armies to deploy ? " << std::endl;
+				std::cin >> army;
+
+				for (int j = 0; j < playersVec.size(); j++) {
+					for (int k = 0; k < playersVec[j]->getPlayerTerritories().size(); k++) {
+						if (player->getPlayerTerritories()[k]->getID() == tempTerritory2->getID()) {
+							playerID = playersVec[j]->getPlayerID();
+						}
+					}
+				}
+
+				if (Airlift().validate(player, tempTerritory1, tempTerritory2)) {
+					Airlift().execute(player, playersVec[playerID], tempTerritory1, tempTerritory2, army, deck);
+					break;
+				}
+				else {
+					std::cout << "Invalid statement" << std::endl;
+				}
+			}
+		}
+	}
 }
 
 std::vector<int> AggressivePlayerStrategy::toAttack(Player* player)
@@ -101,8 +324,136 @@ std::vector<int> AggressivePlayerStrategy::toDefend(Player* player)
 	return std::vector<int>();
 }
 
-void BenevolentPlayerStrategy::issueOrder()
+void BenevolentPlayerStrategy::issueOrder(Player* player, std::vector<Player*> playersVec, Player* neutralP)
 {
+	int army = 0;
+	Territory* tempTerritory1 = new Territory();
+	Territory* tempTerritory2 = new Territory();
+	int playerID = 0;
+
+	// Deploy Section
+	for (int i = 0; i < player->getPlayerOrders()->getOList().size(); i++) {
+		if (player->getPlayerOrders()->getOList()[i]->getDescription() == "Deploy") {
+			while (true) {
+				std::cout << "Which territory to deploy to ?" << std::endl;
+				std::cin >> *tempTerritory1;
+				std::cout << "How many armies to deploy ? " << std::endl;
+				std::cin >> army;
+				if (Deploy().validate(player, tempTerritory1)) {
+					Deploy().execute(player, army, tempTerritory1);
+					break;
+				}
+				else {
+					std::cout << "Invalid statement" << std::endl;
+				}
+			}
+		}
+
+		// Bomb Section
+		if (player->getPlayerOrders()->getOList()[i]->getDescription() == "Bomb") {
+			while (true) {
+				std::cout << "Which territory to bomb ?" << std::endl;
+				std::cin >> *tempTerritory1;
+				std::cout << "How many armies to deploy ? " << std::endl;
+				std::cin >> army;
+				if (Bomb().validate(player, tempTerritory1)) {
+					Bomb().execute(tempTerritory1);
+					break;
+				}
+				else {
+					std::cout << "Invalid statement" << std::endl;
+				}
+			}
+		}
+
+		// Blockade Section
+		if (player->getPlayerOrders()->getOList()[i]->getDescription() == "Blockade") {
+			while (true) {
+				std::cout << "Which territory to put a blockade ?" << std::endl;
+				std::cin >> *tempTerritory1;
+				if (Blockade().validate(player, tempTerritory1)) {
+					Blockade().execute(player, neutralP, tempTerritory1); //Temp 
+					break;
+				}
+				else {
+					std::cout << "Invalid statement" << std::endl;
+				}
+			}
+		}
+
+		// Negotiate Section
+		if (player->getPlayerOrders()->getOList()[i]->getDescription() == "Negotiate") {
+			while (true) {
+				std::cout << "Which player would you like to negotiate with ?" << std::endl;
+				std::cin >> playerID;
+
+				// Change the neutraltemp
+				if (Negotiate().validate(player, playersVec[playerID])) {
+					Negotiate().execute(player, playersVec[playerID]);
+					break;
+				}
+				else {
+					std::cout << "Invalid statement" << std::endl;
+				}
+			}
+		}
+
+		// Advance section
+		if (player->getPlayerOrders()->getOList()[i]->getDescription() == "Advance") {
+			while (true) {
+				std::cout << "From which territory do you want to attack ?" << std::endl;
+				std::cin >> *tempTerritory1;
+				std::cout << "Which territory do you want to attack ?" << std::endl;
+				std::cin >> *tempTerritory2;
+				std::cout << "How many armies to deploy ? " << std::endl;
+				std::cin >> army;
+
+				for (int j = 0; j < playersVec.size(); j++) {
+					for (int k = 0; k < playersVec[j]->getPlayerTerritories().size(); k++) {
+						if (playersVec[j]->getPlayerTerritories()[k]->getID() == tempTerritory2->getID()) {
+							playerID = playersVec[j]->getPlayerID();
+						}
+					}
+				}
+
+				if (Advance().validate(player, tempTerritory1, tempTerritory2, map)) {
+					Advance().execute(player, playersVec[playerID], tempTerritory1, tempTerritory2, army, deck);
+					break;
+				}
+				else {
+					std::cout << "Invalid statement" << std::endl;
+				}
+			}
+		}
+
+		// Airlift section
+		if (player->getPlayerOrders()->getOList()[i]->getDescription() == "Airlift") {
+			while (true) {
+				std::cout << "From which territory do you want to use airlift attack ?" << std::endl;
+				std::cin >> *tempTerritory1;
+				std::cout << "Which territory do you want to attack ?" << std::endl;
+				std::cin >> *tempTerritory2;
+				std::cout << "How many armies to deploy ? " << std::endl;
+				std::cin >> army;
+
+				for (int j = 0; j < playersVec.size(); j++) {
+					for (int k = 0; k < playersVec[j]->getPlayerTerritories().size(); k++) {
+						if (player->getPlayerTerritories()[k]->getID() == tempTerritory2->getID()) {
+							playerID = playersVec[j]->getPlayerID();
+						}
+					}
+				}
+
+				if (Airlift().validate(player, tempTerritory1, tempTerritory2)) {
+					Airlift().execute(player, playersVec[playerID], tempTerritory1, tempTerritory2, army, deck);
+					break;
+				}
+				else {
+					std::cout << "Invalid statement" << std::endl;
+				}
+			}
+		}
+	}
 }
 
 std::vector<int> BenevolentPlayerStrategy::toAttack(Player* player)
@@ -136,8 +487,9 @@ std::vector<int> BenevolentPlayerStrategy::toDefend(Player* player)
 	return player->getToDefendVec();
 }
 
-void NeutralPlayerStrategy::issueOrder()
+void NeutralPlayerStrategy::issueOrder(Player* player, std::vector<Player*> playersVec, Player* neutralP)
 {
+	std::cout << " This Player Does not issue any orders (Neutral Player)" << std::endl;
 }
 
 std::vector<int> NeutralPlayerStrategy::toAttack(Player* player)
