@@ -14,18 +14,21 @@ int main()
 //	//Assignment 2
 //	//Part 1 - Game Start 
 //	cout << "======================================= Part 1  =======================================\n" << endl;
-	GameEngine games;
-	games.initGame();
+	GameEngine* games = new GameEngine;
+	games->initGame();
+	PhaseObserver* phaseObserver = new PhaseObserver(games);
+	StatisticsObserver* statObserver = new StatisticsObserver(games);
+
 //	cout << "======================================= Part 1 end =======================================\n" << endl;
 //	
 //	//Part 2 - StartUp Phase
 //	cout << "======================================= Part 2  =======================================" << endl;
 	StartUp startup;
-	startup.setGameEngine(&games);
+	startup.setGameEngine(games);
 	startup.startupPhase();
-	games.reinforcementPhase();
-	games.issueOrderPhase();
-	//games.executeOrdersPhase();
+	games->reinforcementPhase();
+	games->issueOrderPhase();
+	//games->executeOrdersPhase();
 
 	auto result = _getch();
 	return 0;
