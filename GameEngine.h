@@ -15,6 +15,7 @@
 #include <map>
 
 #include "GameObservers.h"
+#include "PlayerStrategies.h"
 
 struct OrderData {
 	int sourceID;
@@ -33,6 +34,7 @@ public:
 	void issueOrderPhase();
 	void executeOrdersPhase();
 	void shufflePlayersVec();
+	void mainGameLoop();
 	int getNumPlayers();
 	Map* getMap();
 	vector<Player*> getPlayers();
@@ -49,6 +51,7 @@ private:
 	int numOfPlayer;
 	int observerOption;
 	Map* map;
+	Deck* deck;
 	OrderList oList;
 	std::vector<Player*> playersVec;
 	std::vector<std::string> listOfFile;
