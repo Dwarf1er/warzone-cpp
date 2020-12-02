@@ -48,7 +48,10 @@ void GameEngine::shufflePlayersVec() {
 
 void GameEngine::mainGameLoop()
 {
+	bool endgame = false;
+	while (false) {
 
+	}
 }
 
 //Return the playersVec
@@ -112,24 +115,37 @@ void GameEngine::initGame() {
 		}
 	}
 
-
 	//Creating the players based on the number of player from user
 	for (int i = 0; i < numOfPlayer; i++) {
 		vector<Territory*> playerTerritories;
 		Territory* t = new Territory();
 		deck = new Deck();
 		Hand* playerCard = new Hand(deck);
-		//deck->push_card(CardType::SPY);
 		Player* p = new Player();
 		p->setPlayerID(i + 1);
 		p->setPlayerArmies(5);
 		p->setPlayerTerritories(playerTerritories);
 		p->setPlayerCards(playerCard);
+		//for (int j = 0; j < numOfPlayer; i++) {
+		//	if (i == 0) {
+		//		p->set_strategy(new NeutralPlayerStrategy());
+		//	}
+		//	if (i == 1) {
+		//		p->set_strategy(new HumanPlayerStrategy());	
+		//	}
+		//	if (i == 2) {
+		//		p->set_strategy(new AggressivePlayerStrategy());
+		//	}
+		//	if (i == 3) {
+		//		p->set_strategy(new BenevolentPlayerStrategy());
+		//	}
+		//	else {
+		//		p->set_strategy(new AggressivePlayerStrategy());
+		//	}
+		//}
 		std::cout << *p << "Number Of Armies: " << p->getPlayerArmies() << std::endl;
 		std::cout << "Player Cards: " << *p->getPlayerCards() << std::endl;
 		playersVec.push_back(p);
-
-		//p->set_strategy(new AggressivePlayerStrategy());
 	}
 
 	//Options for observer 
@@ -221,15 +237,6 @@ void GameEngine::reinforcementPhase()
 void GameEngine::issueOrderPhase()
 {
 	phaseIndex = 1;
-	int userAttackTerritory = 0;
-	int userDefendTerritory = 0;
-	int deployNumber = 0;
-	int usersChoice = 0;
-	int sourceID = 0;
-	int targetID = 0;
-	int armyNum = 0;
-	string playerOrderChoice;
-	int cardChoice = 0;
 
 	// Order list for players
 	Advance* aV = new Advance();
@@ -247,11 +254,6 @@ void GameEngine::issueOrderPhase()
 			std::cout << "Territories: " << map->listOfContinent[i]->territories[j]->getID() << std::endl;
 		}
 	}
-
-	vector<int> myvector;
-	vector<int> myvector2;
-	bool playerBool = false;
-
 
 	printf("\n");
 	// Add type of cards
@@ -282,62 +284,15 @@ void GameEngine::issueOrderPhase()
 		}
 	}
 
+	// Going over each players issueOrder
 	for (int i = 0; i < playersVec.size(); i++) {
-		std::cout << "Do you want to play a card ? (y/n)" << std::endl;
-		std::cout << "\nPlayer " << i + 1 << " choice: " << std::endl;
-		std::cin >> playerOrderChoice;
-
-		// Play card or not 
-		if (playerOrderChoice == "n") {
-			std::cout << " Not Playing a Card" << std::endl;
-		}
-		if (playerOrderChoice == "y") {
-			std::cout << "Enter a choice" << std::endl;
-
-			for (int j = 0; j < playersVec[j]->getPlayerCards()->get_cards_in_hand().size(); j++) {
-				std::cout << "Player " << i + 1 << std::endl;
-				std::cout << *playersVec[i]->getPlayerCards()->get_cards_in_hand()[j] << std::endl;
-				std::cout << "Player " << i + 1 << " Card in hand: " << std::endl << playersVec[i]->getPlayerCards()->get_cards_in_hand()[j]->get_card_type() << ":" << playersVec[i]->getPlayerCards()->get_cards_in_hand()[j]->get_card_type_name() << std::endl << std::endl;
-			}
-			std::cin >> cardChoice;
-
-			switch (cardChoice) {
-			case 0:
-				playersVec[i]->setPlayerOrders(new Bomb());
-				break;
-			case 1:
-				playersVec[i]->setPlayerOrders(new Deploy());
-				break;
-			case 2:
-				playersVec[i]->setPlayerOrders(new Blockade());
-				break;
-			case 3:
-				playersVec[i]->setPlayerOrders(new Airlift());
-				break;
-			case 4:
-				playersVec[i]->setPlayerOrders(new Negotiate());
-				break;
-			case 5:
-				playersVec[i]->setPlayerOrders(new Airlift());
-				break;
-			default:
-				break;
-			}
-		}
-		std::cout << std::endl;
+		playersVec[i]->issueOrder(playersVec[i], playersVec, playersVec[0]);
 	}
 	Notify();
 }
 
 // ExecuteOrdersPhase 
 void GameEngine::executeOrdersPhase() {
-
-	int army = 0;
-	Territory* tempTerritory1 = new Territory();
-	Territory* tempTerritory2 = new Territory();
-	int playerID = 0;
-	Player* neutralTempP;
-
 
 	// Prints out the order list 
 	printf("Order List\n");
@@ -378,7 +333,7 @@ void GameEngine::executeOrdersPhase() {
 		for (int j = 0; j < playersVec[i]->getPlayerOrders()->getOList().size(); j++) {
 			if (playersVec[i]->getPlayerOrders()->getOList()[j]->getDescription() == "Blockade" && j != 0) {
 				for (int k = j - 1; k >= 0; k--) {
-					if (playersVec[i]->getPlayerOrders()->getOList()[k]->getDescription() != "Deploy" && 
+					if (playersVec[i]->getPlayerOrders()->getOList()[k]->getDescription() != "Deploy" &&
 						playersVec[i]->getPlayerOrders()->getOList()[k]->getDescription() != "Airlift" &&
 						playersVec[i]->getPlayerOrders()->getOList()[k]->getDescription() != "Blockade") {
 						playersVec[i]->getPlayerOrders()->move(j, k);
@@ -388,140 +343,10 @@ void GameEngine::executeOrdersPhase() {
 		}
 	}
 
-// Prints out ordered list 
+	// Prints out ordered list 
 	for (int i = 0; i < playersVec.size(); i++) {
 		for (int j = 0; j < playersVec[i]->getPlayerOrders()->getOList().size(); j++) {
 			std::cout << playersVec[i]->getPlayerOrders()->getOList()[j]->getDescription() << std::endl;
-		}
-	}
-
-	//Neutral player
-	Player* neutralP = new Player();
-	neutralP->setPlayerID(0);
-
-	for (int i = 0; i < playersVec.size(); i++) {
-		for (int j = 0; j < playersVec[i]->getPlayerOrders()->getOList().size(); j++) {
-			// Deploy Section
-			if (playersVec[i]->getPlayerOrders()->getOList()[j]->getDescription() == "Deploy") {
-				while (true) {
-					std::cout << "Which territory to deploy to ?" << std::endl;
-					std::cin >> *tempTerritory1;
-					std::cout << "How many armies to deploy ? " << std::endl;
-					std::cin >> army;
-					if (Deploy().validate(playersVec[i], tempTerritory1)) {
-						Deploy().execute(playersVec[i], army, tempTerritory1);
-						break;
-					}
-					else {
-						std::cout << "Invalid statement" << std::endl;
-					}
-				}
-			}
-
-			// Bomb Section
-			if (playersVec[i]->getPlayerOrders()->getOList()[j]->getDescription() == "Bomb") {
-				while (true) {
-					std::cout << "Which territory to bomb ?" << std::endl;
-					std::cin >> *tempTerritory1;
-					std::cout << "How many armies to deploy ? " << std::endl;
-					std::cin >> army;
-					if (Bomb().validate(playersVec[i], tempTerritory1)) {
-						Bomb().execute(tempTerritory1);
-						break;
-					}
-					else {
-						std::cout << "Invalid statement" << std::endl;
-					}
-				}
-			}
-
-			// Blockade Section
-			if (playersVec[i]->getPlayerOrders()->getOList()[j]->getDescription() == "Blockade") {
-				while (true) {
-					std::cout << "Which territory to put a blockade ?" << std::endl;
-					std::cin >> *tempTerritory1;
-					if (Blockade().validate(playersVec[i], tempTerritory1)) {
-						Blockade().execute(playersVec[i], neutralP, tempTerritory1); //Temp 
-						break;
-					}
-					else {
-						std::cout << "Invalid statement" << std::endl;
-					}
-				}
-			}
-
-			// Negotiate Section
-			if (playersVec[i]->getPlayerOrders()->getOList()[j]->getDescription() == "Negotiate") {
-				while (true) {
-					std::cout << "Which player would you like to negotiate with ?" << std::endl;
-					std::cin >> playerID;
-
-					// Change the neutraltemp
-					if (Negotiate().validate(playersVec[i], playersVec[playerID])) {
-						Negotiate().execute(playersVec[i], playersVec[playerID]);
-						break;
-					}
-					else {
-						std::cout << "Invalid statement" << std::endl;
-					}
-				}
-			}
-
-			// Advance section
-			if (playersVec[i]->getPlayerOrders()->getOList()[j]->getDescription() == "Advance") {
-				while (true) {
-					std::cout << "From which territory do you want to attack ?" << std::endl;
-					std::cin >> *tempTerritory1;
-					std::cout << "Which territory do you want to attack ?" << std::endl;
-					std::cin >> *tempTerritory2;
-					std::cout << "How many armies to deploy ? " << std::endl;
-					std::cin >> army;
-
-					for (int i = 0; i < playersVec.size(); i++) {
-						for (int j = 0; j < playersVec[i]->getPlayerTerritories().size(); j++) {
-							if (playersVec[i]->getPlayerTerritories()[j]->getID() == tempTerritory2->getID()) {
-								playerID = playersVec[i]->getPlayerID();
-							}
-						}
-					}
-
-					if (Advance().validate(playersVec[i], tempTerritory1, tempTerritory2, map)) {
-						Advance().execute(playersVec[i], playersVec[playerID], tempTerritory1, tempTerritory2, army, deck);
-						break;
-					}
-					else {
-						std::cout << "Invalid statement" << std::endl;
-					}
-				}
-			}
-
-			// Airlift section
-			if (playersVec[i]->getPlayerOrders()->getOList()[j]->getDescription() == "Airlift") {
-				while (true) {
-					std::cout << "From which territory do you want to use airlift attack ?" << std::endl;
-					std::cin >> *tempTerritory1;
-					std::cout << "Which territory do you want to attack ?" << std::endl;
-					std::cin >> *tempTerritory2;
-					std::cout << "How many armies to deploy ? " << std::endl;
-					std::cin >> army;
-
-					for (int i = 0; i < playersVec.size(); i++) {
-						for (int j = 0; j < playersVec[i]->getPlayerTerritories().size(); j++) {
-							if (playersVec[i]->getPlayerTerritories()[j]->getID() == tempTerritory2->getID()) {
-								playerID = playersVec[i]->getPlayerID();
-							}
-						}
-					}
-
-					if (Airlift().validate(playersVec[i], tempTerritory1, tempTerritory2)) {
-						Airlift().execute(playersVec[i], playersVec[playerID], tempTerritory1, tempTerritory2, army, deck);
-						break;
-					}
-					else {
-						std::cout << "Invalid statement" << std::endl;
-					}
-				}
-			}
 		}
 	}
 
@@ -530,7 +355,6 @@ void GameEngine::executeOrdersPhase() {
 		playersVec[i]->setPacifism(false);
 	}
 }
-
 
 // IStream operator 
 istream& operator>>(istream& in, const StartUp& s) {

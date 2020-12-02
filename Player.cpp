@@ -33,6 +33,7 @@ Player::~Player() {
 
 void Player::set_strategy(PlayerStrategy* playerStrategy)
 {
+	delete playerStrategy;
 	this->playerStrategy_ = playerStrategy;
 }
 
@@ -167,16 +168,20 @@ istream& operator>>(istream& in, Player& p) {
 }
 
 //required methods
-void Player::issueOrder(Orders* order) {
-	this->setPlayerOrders(order);
-
+void Player::issueOrder(Player* player, std::vector<Player*> playersVec, Player* neutralP) {
+	this->playerStrategy_->issueOrder(player, playersVec, neutralP);
 }
 
-//vector<Territory*> Player::toDefend() {
-//	vector<Territory*> toDefend{ new Territory(), new Territory() };
-//	return toDefend;
+// Error here return value 
+//vector<Territory*> Player::toDefend(Player* player)
+//{
+//	playerStrategy_->toDefend(player);
 //}
 
+//vector<Territory*> Player::toAttack(Player* player)
+//{
+//	playerStrategy_->toAttack(player);
+//}
 
 std::vector<int> Player::getToAttackVec()
 {

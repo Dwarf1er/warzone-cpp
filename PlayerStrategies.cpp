@@ -5,10 +5,64 @@
 // Huamn Player Section
 void HumanPlayerStrategy::issueOrder(Player* player, std::vector<Player*> playersVec, Player* neutralP)
 {
+	int userAttackTerritory = 0;
+	int userDefendTerritory = 0;
+	int deployNumber = 0;
+	int usersChoice = 0;
+	int sourceID = 0;
+	int targetID = 0;
+	int armyNum = 0;
+	string playerOrderChoice;
+	int cardChoice = 0;
 	int army = 0;
 	Territory* tempTerritory1 = new Territory();
 	Territory* tempTerritory2 = new Territory();
 	int playerID = 0;
+
+	for (int i = 0; i < playersVec.size(); i++) {
+		std::cout << "Do you want to play a card ? (y/n)" << std::endl;
+		std::cout << "\nPlayer " << i + 1 << " choice: " << std::endl;
+		std::cin >> playerOrderChoice;
+
+		// Play card or not 
+		if (playerOrderChoice == "n") {
+			std::cout << " Not Playing a Card" << std::endl;
+		}
+		if (playerOrderChoice == "y") {
+			std::cout << "Enter a choice" << std::endl;
+
+			for (int j = 0; j < playersVec[j]->getPlayerCards()->get_cards_in_hand().size(); j++) {
+				std::cout << "Player " << i + 1 << std::endl;
+				std::cout << *playersVec[i]->getPlayerCards()->get_cards_in_hand()[j] << std::endl;
+				std::cout << "Player " << i + 1 << " Card in hand: " << std::endl << playersVec[i]->getPlayerCards()->get_cards_in_hand()[j]->get_card_type() << ":" << playersVec[i]->getPlayerCards()->get_cards_in_hand()[j]->get_card_type_name() << std::endl << std::endl;
+			}
+			std::cin >> cardChoice;
+
+			switch (cardChoice) {
+			case 0:
+				playersVec[i]->setPlayerOrders(new Bomb());
+				break;
+			case 1:
+				playersVec[i]->setPlayerOrders(new Deploy());
+				break;
+			case 2:
+				playersVec[i]->setPlayerOrders(new Blockade());
+				break;
+			case 3:
+				playersVec[i]->setPlayerOrders(new Airlift());
+				break;
+			case 4:
+				playersVec[i]->setPlayerOrders(new Negotiate());
+				break;
+			case 5:
+				playersVec[i]->setPlayerOrders(new Advance());
+				break;
+			default:
+				break;
+			}
+		}
+		std::cout << std::endl;
+	}
 
 	// Deploy Section
 	for (int i = 0; i < player->getPlayerOrders()->getOList().size(); i++) {
@@ -199,10 +253,53 @@ std::vector<int> HumanPlayerStrategy::toDefend(Player* player)
 // Aggressive player section
 void AggressivePlayerStrategy::issueOrder(Player* player, std::vector<Player*> playersVec, Player* neutralP)
 {
+	int userAttackTerritory = 0;
+	int userDefendTerritory = 0;
+	int deployNumber = 0;
+	int usersChoice = 0;
+	int sourceID = 0;
+	int targetID = 0;
+	int armyNum = 0;
+	string playerOrderChoice;
+	string cardChoice;
+
 	int army = 0;
 	Territory* tempTerritory1 = new Territory();
 	Territory* tempTerritory2 = new Territory();
 	int playerID = 0;
+
+	// Get Player card in hand
+	for (int i = 0; i < playersVec[i]->getPlayerCards()->get_cards_in_hand().size(); i++) {
+		std::cout << "Player " << player->getPlayerID() << std::endl;
+		std::cout << *player->getPlayerCards()->get_cards_in_hand()[i] << std::endl;
+		std::cout << "Player " << player->getPlayerID() << " Card in hand: " << std::endl << player->getPlayerCards()->get_cards_in_hand()[i]->get_card_type() << ":" << player->getPlayerCards()->get_cards_in_hand()[i]->get_card_type_name() << std::endl << std::endl;
+
+		// Avoid cards that does not match strategy 
+		if (player->getPlayerCards()->get_cards_in_hand()[i]->get_card_type_name() != "BLOCKADE" || "NEGOTIATE") {
+			cardChoice = player->getPlayerCards()->get_cards_in_hand()[i]->get_card_type_name();
+			break;
+		}
+	}
+
+	// Base on choice select and add to player order
+	if (cardChoice == "BOMB") {
+		player->setPlayerOrders(new Bomb());
+	}
+	
+	if (cardChoice == "DEPLOY") {
+		player->setPlayerOrders(new Deploy());
+	}
+
+	if (cardChoice == "AIRLIFT") {
+		player->setPlayerOrders(new Airlift());
+	}
+	if (cardChoice == "NEGOTIATE") {
+		player->setPlayerOrders(new Negotiate());
+	}
+	if (cardChoice == "ADVANCE") {
+		player->setPlayerOrders(new Advance());
+	}
+	std::cout << std::endl;
 
 	// Deploy Section
 	for (int i = 0; i < player->getPlayerOrders()->getOList().size(); i++) {
@@ -326,10 +423,48 @@ std::vector<int> AggressivePlayerStrategy::toDefend(Player* player)
 
 void BenevolentPlayerStrategy::issueOrder(Player* player, std::vector<Player*> playersVec, Player* neutralP)
 {
+	int userAttackTerritory = 0;
+	int userDefendTerritory = 0;
+	int deployNumber = 0;
+	int usersChoice = 0;
+	int sourceID = 0;
+	int targetID = 0;
+	int armyNum = 0;
+	string playerOrderChoice;
+	string cardChoice;
+
 	int army = 0;
 	Territory* tempTerritory1 = new Territory();
 	Territory* tempTerritory2 = new Territory();
 	int playerID = 0;
+
+	// Get Player card in hand
+	for (int i = 0; i < playersVec[i]->getPlayerCards()->get_cards_in_hand().size(); i++) {
+		std::cout << "Player " << player->getPlayerID() << std::endl;
+		std::cout << *player->getPlayerCards()->get_cards_in_hand()[i] << std::endl;
+		std::cout << "Player " << player->getPlayerID() << " Card in hand: " << std::endl << player->getPlayerCards()->get_cards_in_hand()[i]->get_card_type() << ":" << player->getPlayerCards()->get_cards_in_hand()[i]->get_card_type_name() << std::endl << std::endl;
+
+		// Avoid cards that does not match strategy 
+		if (player->getPlayerCards()->get_cards_in_hand()[i]->get_card_type_name() != "BOMB" || "BLOCKADE") {
+			cardChoice = player->getPlayerCards()->get_cards_in_hand()[i]->get_card_type_name();
+			break;
+		}
+	}
+
+	// Base on choice select and add to player order
+	if (cardChoice == "DEPLOY") {
+		player->setPlayerOrders(new Deploy());
+	}
+	if (cardChoice == "AIRLIFT") {
+		player->setPlayerOrders(new Airlift());
+	}
+	if (cardChoice == "NEGOTIATE") {
+		player->setPlayerOrders(new Negotiate());
+	}
+	if (cardChoice == "ADVANCE") {
+		player->setPlayerOrders(new Advance());
+	}
+	std::cout << std::endl;
 
 	// Deploy Section
 	for (int i = 0; i < player->getPlayerOrders()->getOList().size(); i++) {
