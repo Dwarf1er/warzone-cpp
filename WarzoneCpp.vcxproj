@@ -167,12 +167,12 @@
     <ClInclude Include="PlayerStrategies.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\..\..\Downloads\conquest.map" />
     <None Include="austria-hungary.map" />
     <None Include="bad map1.map" />
     <None Include="bad map2.map" />
     <None Include="bad map3.map" />
     <None Include="europe.map" />
+    <None Include="World_2007.map" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

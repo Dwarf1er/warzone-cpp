@@ -25,7 +25,7 @@ GameEngine::~GameEngine() {
 	currentPlayer = nullptr;
 }
 
-MapLoader maploaders;
+ConquestFileReaderAdapter maploaders;
 Continent continent;
 Map* map;
 

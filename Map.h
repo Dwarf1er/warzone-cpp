@@ -68,4 +68,4 @@ public:
 private:
 	int counter;
 };
-#endif //!map
+#endif
