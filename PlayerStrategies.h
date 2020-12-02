@@ -9,9 +9,9 @@ class Deck;
 class PlayerStrategy {
 public:
 	virtual ~PlayerStrategy();
-	virtual void issueOrder() = 0;
-	virtual std::vector<int> toAttack() = 0;
-	virtual std::vector<int> toDefend() = 0;
+	virtual void issueOrder(Player* player, std::vector<Player*> playersVec, Player* neutralP) = 0;
+	virtual std::vector<int> toAttack(Player* player) = 0;
+	virtual std::vector<int> toDefend(Player* player) = 0;
 
 private:
 	Map* map;
