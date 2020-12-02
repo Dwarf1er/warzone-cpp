@@ -31,6 +31,12 @@ Player::~Player() {
 	pacifism = false;
 }
 
+void Player::set_strategy(PlayerStrategy* playerStrategy)
+{
+	// delete this->playerStrategy_;
+	this->playerStrategy_ = playerStrategy;
+}
+
 //accessors
 vector<Territory*> Player::getPlayerTerritories() {
 	return playerTerritories;
@@ -53,7 +59,7 @@ int Player::getPlayerID()
 	return playerID;
 }
 
-bool Player::getPacifism() 
+bool Player::getPacifism()
 {
 	return pacifism;
 }
@@ -123,12 +129,12 @@ ostream& operator<<(ostream& out, const Player& p) {
 	out << "\nPlayer ID: " << p.playerID << endl;
 
 	out << "Player Armies: " << p.playerArmies << endl;
-	
+
 	out << "Territories: " << endl;
 	for (Territory* t : p.playerTerritories) {
 		out << *t << endl;
 	}
-	
+
 	if (p.playerOrderList != nullptr) {
 		for (Orders* o : p.playerOrderList->getOList()) {
 			out << "Orders: " << *o << endl;
@@ -164,7 +170,7 @@ istream& operator>>(istream& in, Player& p) {
 //required methods
 void Player::issueOrder(Orders* order) {
 	this->setPlayerOrders(order);
-	
+
 }
 
 //vector<Territory*> Player::toDefend() {

@@ -33,10 +33,7 @@ public:
 	Player(const Player& p);
 	~Player();
 
-	/*void set_strategy(PlayerStrategy* playerStrategy) {
-		delete this->playerStrategy_;
-		this->playerStrategy_ = playerStrategy;
-	}*/
+	void set_strategy(PlayerStrategy* playerStrategy);
 
 	//accessors
 	vector<Territory*> getPlayerTerritories(); //returns the collection of territories of the player

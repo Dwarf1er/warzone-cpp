@@ -10,8 +10,8 @@ class PlayerStrategy {
 public:
 	virtual ~PlayerStrategy();
 	virtual void issueOrder() = 0;
-	virtual std::vector<int> getToAttack() = 0;
-	virtual std::vector<int> getToDefend() = 0;
+	virtual std::vector<int> toAttack() = 0;
+	virtual std::vector<int> toDefend() = 0;
 
 private:
 	Map* map;

@@ -15,6 +15,7 @@
 #include <map>
 
 #include "GameObservers.h"
+#include "PlayerStrategies.h"
 
 struct OrderData {
 	int sourceID;

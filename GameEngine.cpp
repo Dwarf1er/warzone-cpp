@@ -123,6 +123,8 @@ void GameEngine::initGame() {
 		std::cout << *p << "Number Of Armies: " << p->getPlayerArmies() << std::endl;
 		std::cout << "Player Cards: " << *p->getPlayerCards() << std::endl;
 		playersVec.push_back(p);
+
+		//p->set_strategy(new AggressivePlayerStrategy());
 	}
 
 	//Options for observer 
