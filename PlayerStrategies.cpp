@@ -5,6 +5,8 @@
 // Huamn Player Section
 void HumanPlayerStrategy::issueOrder(Player* player, std::vector<Player*> playersVec, Player* neutralP)
 {
+	std::cout << "This is human player strategy" << std::endl;
+
 	int userAttackTerritory = 0;
 	int userDefendTerritory = 0;
 	int deployNumber = 0;
@@ -253,6 +255,7 @@ std::vector<int> HumanPlayerStrategy::toDefend(Player* player)
 // Aggressive player section
 void AggressivePlayerStrategy::issueOrder(Player* player, std::vector<Player*> playersVec, Player* neutralP)
 {
+	std::cout << "This is AggressivePlayerStrategy" << std::endl;
 	int userAttackTerritory = 0;
 	int userDefendTerritory = 0;
 	int deployNumber = 0;
@@ -423,6 +426,7 @@ std::vector<int> AggressivePlayerStrategy::toDefend(Player* player)
 
 void BenevolentPlayerStrategy::issueOrder(Player* player, std::vector<Player*> playersVec, Player* neutralP)
 {
+	std::cout << "This is Benevolent Player Strategy" << std::endl;
 	int userAttackTerritory = 0;
 	int userDefendTerritory = 0;
 	int deployNumber = 0;
@@ -624,6 +628,7 @@ std::vector<int> BenevolentPlayerStrategy::toDefend(Player* player)
 
 void NeutralPlayerStrategy::issueOrder(Player* player, std::vector<Player*> playersVec, Player* neutralP)
 {
+	std::cout << "This is Neutral Player Strategy" << std::endl;
 	std::cout << " This Player Does not issue any orders (Neutral Player)" << std::endl;
 }
 

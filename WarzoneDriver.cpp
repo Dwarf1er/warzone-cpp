@@ -52,8 +52,6 @@ int main()
 	startup.setGameEngine(&games);
 	startup.startupPhase();
 	games.reinforcementPhase();
-	games.issueOrderPhase();
-	//games.reinforcementPhase();
 	//games.issueOrderPhase();
 	//games.executeOrdersPhase();
 //	cout << "======================================= Part 2 end =======================================" << endl;

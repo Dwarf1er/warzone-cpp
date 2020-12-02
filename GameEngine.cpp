@@ -134,18 +134,23 @@ void GameEngine::initGame() {
 
 		if (i == 0) {
 			p->set_strategy(new NeutralPlayerStrategy());
+			std::cout << "Neutral Player Created " << std::endl;
 		}
 		if (i == 1) {
 			p->set_strategy(new HumanPlayerStrategy());
+			std::cout << "Human Player Created " << std::endl;
 		}
 		if (i == 2) {
 			p->set_strategy(new AggressivePlayerStrategy());
+			std::cout << "Aggressive Player Created " << std::endl;
 		}
 		if (i == 3) {
 			p->set_strategy(new BenevolentPlayerStrategy());
+			std::cout << "Benevolent Player Created " << std::endl;
 		}
-		else {
+		if(i != 0 && i != 1 && i != 2 && i != 3){
 			p->set_strategy(new AggressivePlayerStrategy());
+			std::cout << "Aggressive Player Created " << std::endl;
 		}
 
 		std::cout << *p << "Number Of Armies: " << p->getPlayerArmies() << std::endl;
