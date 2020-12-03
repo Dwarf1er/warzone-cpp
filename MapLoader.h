@@ -16,18 +16,22 @@ public:
 	void operator=(const MapLoader& ml);
 	friend std::ostream& operator<<(std::ostream& out, const MapLoader& ml);
 	friend std::istream& operator>>(std::istream& in, MapLoader& ml);
-private:
 	bool continentCheck;
 	bool countryCheck;
 	bool borderCheck;
 	bool mapCheck;
 	int ID;
+private:
+	
 };
 
 class ConquestFileReader {
+	bool mapStatus = true;
+
 public:
 	Map* loadConquestMap(std::string file);
 	std::vector<std::string> splitString(std::string str, const char separator);
+	bool getMapStatus();
 };
 
 class ConquestFileReaderAdapter : MapLoader {
@@ -36,6 +40,7 @@ private:
 public:
 	ConquestFileReaderAdapter(ConquestFileReader reader);
 	Map* loadmap(std::string fileName);
+	bool getMapStatus();
 };
 #endif //!map
 

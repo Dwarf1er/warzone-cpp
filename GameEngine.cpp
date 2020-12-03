@@ -87,24 +87,38 @@ void GameEngine::initGame() {
 
 	// Loop to get userinput to load correct files
 	while (true) {
-		std::cout << "Which file would you like to load ? " << std::endl;
-		//Verify that user inputs a number
-		while (!(std::cin >> userFileInput) || userFileInput > listOfFile.size() || userFileInput < 1 || (userFileInput > 1 && userFileInput < 5)) {
-			std::cin.clear();
-			std::cin.ignore(1000, '\n');
-			if (!isdigit(userFileInput)) {
-				std::cout << "Incorrect input. Please select among the selection number" << std::endl;
+		
+			std::cout << "Which file would you like to load ? " << std::endl;
+			//Verify that user inputs a number
+			while (!(std::cin >> userFileInput) || userFileInput > listOfFile.size()) {
+				std::cin.clear();
+				std::cin.ignore(1000, '\n');
+				if (!isdigit(userFileInput)) {
+					std::cout << "Incorrect input. Please select among the selection number" << std::endl;
+					continue;
+				}
 			}
+			Map x = *maploader.loadmap(listOfFile[userFileInput - 1]);
+			map = new Map(x);
 
-			if (userFileInput > 1 && userFileInput < 5) {
-				map = new Map(*maploaders.loadmap(listOfFile[userFileInput - 1]));
-				std::cout << ("Please choose another file. \n");
+		if(!maploader.continentCheck || !maploader.countryCheck || !maploader.borderCheck)
+		{
+				ConquestFileReader reader;
+				ConquestFileReaderAdapter mapAdapter = ConquestFileReader(reader);
+				Map x = *mapAdapter.loadmap(listOfFile[userFileInput - 1]);
+				map = new Map(x);
+			
+			if(!mapAdapter.getMapStatus())
+			{
+				std::cout << "Incorrect input. Please select among the selection number" << std::endl;
+				continue;
 			}
 		}
-		map = new Map(*maploaders.loadmap(listOfFile[userFileInput - 1]));
 		break;
 	}
-
+	
+	map = new Map(*maploader.loadmap(listOfFile[userFileInput - 1]));
+	
 	map->printBoard();
 
 	//Ask the user for the number of player to play	

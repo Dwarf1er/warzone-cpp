@@ -49,7 +49,7 @@ Map* MapLoader::loadmap(string file) {
 	string map;
 	map = file;
 
-	cout << "Loading map..... " << map << endl;
+	cout << "Loading map domination..... " << map << endl;
 	printf("\n");
 
 	infile.open(map);
@@ -246,13 +246,18 @@ Map* ConquestFileReaderAdapter::loadmap(std::string fileName) {
 	return fileReader.loadConquestMap(fileName);
 }
 
+bool ConquestFileReaderAdapter::getMapStatus()
+{
+	return fileReader.getMapStatus();
+}
+
 Map* ConquestFileReader::loadConquestMap(std::string fileName) {
 	//1- Read continents
 	//2- Store the number of armies in a variable (num)
 	//3- Read territories and assign them their number of armies
 	fstream infile;
 
-	cout << "Loading map..... " << fileName << endl;
+	cout << "Loading map conquest..... " << fileName << endl;
 	printf("\n");
 
 	infile.open(fileName);
@@ -262,6 +267,15 @@ Map* ConquestFileReader::loadConquestMap(std::string fileName) {
 	std::map<string, int> territoriesIndexes;
 	string line;
 	int ContinentIndex = 0;
+
+	while (infile >> line && line.compare("[files]")) {}
+	if (!line.compare("[files]"))
+	{
+		mapStatus = false;
+	};
+
+	infile.clear();
+	infile.seekg(0);
 
 	//skip until [Continents]
 	while (infile >> line && line.compare("[Continents]")) {}
@@ -334,4 +348,9 @@ std::vector<std::string> ConquestFileReader::splitString(std::string str, const 
 	}
 
 	return parts;
+}
+
+bool ConquestFileReader::getMapStatus()
+{
+	return mapStatus;
 }
