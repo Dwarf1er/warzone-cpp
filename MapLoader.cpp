@@ -49,8 +49,8 @@ Map* MapLoader::loadmap(string file) {
 
 	string map;
 	map = file;
-	//cout << "Enter map name with extension: ";
-	cout << "Loading map..... " << map << endl;
+
+	cout << "Loading map domination..... " << map << endl;
 	printf("\n");
 
 	infile.open(map);
@@ -217,15 +217,19 @@ Map* MapLoader::loadmap(string file) {
 	//Different section of errors
 	if (continentCheck == false) {
 		cout << "Error 1: continent section invalid" << endl;
+		throw new exception;
 	}
 
 	if (countryCheck == false) {
 		cout << "Error 2: country section invalid" << endl;
+		throw new exception;
 	}
 
 	if (borderCheck == false) {
 		cout << "Error 3: border section invalid" << endl;
+		throw new exception;
 	}
+	
 	if (continentCheck == true && countryCheck == true && borderCheck == true) {
 		//Call method to check for duplicate territories 
 		graph->validate();
@@ -242,5 +246,112 @@ Map* MapLoader::loadmap(string file) {
 bool MapLoader::getContinentCheck()
 {
 	return continentCheck;
+}
+
+Map* ConquestFileReaderAdapter::loadmap(std::string fileName) {
+	return fileReader.loadConquestMap(fileName);
+}
+
+Map* ConquestFileReader::loadConquestMap(std::string fileName) {
+	//1- Read continents
+	//2- Store the number of armies in a variable (num)
+	//3- Read territories and assign them their number of armies
+	fstream infile;
+
+	cout << "Loading map conquest..... " << fileName << endl;
+	printf("\n");
+
+	infile.open(fileName);
+	Map* graph = new Map();
+	graph->initList();
+
+	std::map<string, int> territoriesIndexes;
+	string line;
+	int ContinentIndex = 0;
+
+	while (infile >> line && line.compare("[files]"))
+	{
+		int a = 0;
+	}
+
+	if (!line.compare("[files]"))
+	{
+		throw new exception;
+	};
+
+	infile.clear();
+	infile.seekg(0);
+	
+	//skip until [Continents]
+	while (infile >> line && line.compare("[Continents]")) {}
+
+	//while haven't reached [Territories]
+	while (getline(infile, line) && line.compare("[Territories]"))
+	{
+		if (line.empty()) { continue; } //skip empty lines
+
+		std::vector<std::string> lineVector = splitString(line, '=');
+
+		string continentName = lineVector.at(0);
+
+		//num TODO
+		//int num = stoi(lineVector.at(1)); 
+
+		graph->createContinent(continentName, ContinentIndex);
+		ContinentIndex++;
+	}
+
+	//assign an index to every territory name in territoriesIndexes
+	int index = 0;
+	while (getline(infile, line)) {
+		if (line.empty()) { continue; } //skip empty lines
+		std::vector<std::string> lineVector = splitString(line, ',');
+		territoriesIndexes.insert(std::pair<string, int>(lineVector.at(0), index++));
+	}
+
+	//go back to the beginning
+	infile.clear();
+	infile.seekg(0);
+
+	//go back down to [Territories]
+	while (getline(infile, line) && line.compare("[Territories]")){}
+
+	while (getline(infile, line)) {
+		//skip empty lines
+		if (line.empty()) { continue; }
+
+		std::vector<std::string> lineVector = splitString(line, ',');
+
+		string territoryName = lineVector.at(0);
+		string continentName = lineVector.at(3);
+
+		//set continent
+		int continentIndex = graph->getContinentIndexByName(continentName);
+		graph->addToContinent(continentIndex, graph->nodeList[territoriesIndexes.at(territoryName)]);
+
+		//remove first 3 lines to only keep neighbors
+		lineVector.erase(lineVector.begin(), lineVector.begin() + 4);
+
+		//set borders
+		for (const string& neighbor : lineVector)
+			graph->addEdge(graph->nodeList[territoriesIndexes.at(territoryName)], graph->nodeList[territoriesIndexes.at(neighbor)]);
+	}
+
+	infile.close();
+	return graph;
+}
+
+std::vector<std::string> ConquestFileReader::splitString(std::string str, const char separator)
+{
+	vector<string> parts;
+	stringstream lineStringStream(str);
+	string part;
+
+	while (getline(lineStringStream, part, separator)) //split line at the comma
+	{
+		parts.push_back(part); //add content to vector parts
+	}
+
+	return parts;
 }
 

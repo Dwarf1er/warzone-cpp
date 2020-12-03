@@ -71,21 +71,37 @@ void GameEngine::initGame() {
 
 	// Loop to get userinput to load correct files
 	while (true) {
-		std::cout << "Which file would you like to load ? " << std::endl;
-		//Verify that user inputs a number
-		while (!(std::cin >> userFileInput) || userFileInput > listOfFile.size() || userFileInput < 1 || (userFileInput > 1 && userFileInput < 5)) {
-			std::cin.clear();
-			std::cin.ignore(1000, '\n');
-			if (!isdigit(userFileInput)) {
-				std::cout << "Incorrect input. Please select among the selection number" << std::endl;
+		try
+		{
+			std::cout << "Which file would you like to load ? " << std::endl;
+			//Verify that user inputs a number
+			while (!(std::cin >> userFileInput) || userFileInput > listOfFile.size()) {
+				std::cin.clear();
+				std::cin.ignore(1000, '\n');
+				if (!isdigit(userFileInput)) {
+					std::cout << "Incorrect input. Please select among the selection number" << std::endl;
+					continue;
+				}
 			}
-
-			if (userFileInput > 1 && userFileInput < 5) {
-				map = new Map(*maploaders.loadmap(listOfFile[userFileInput - 1]));
-				std::cout << ("Please choose another file. \n");
+			Map x = *maploaders.loadmap(listOfFile[userFileInput - 1]);
+			map = new Map(x);
+		}
+		catch (...)
+		{
+			try
+			{
+				ConquestFileReader reader;
+				ConquestFileReaderAdapter mapAdapter = ConquestFileReader(reader);
+				Map x = *mapAdapter.loadmap(listOfFile[userFileInput - 1]);
+				map = new Map(x);
+			}
+			catch (...)
+			{
+				std::cout << "Incorrect input. Please select among the selection number" << std::endl;
+				continue;
 			}
 		}
-		//maploaders.loadmap(listOfFile[userFileInput - 1]);
+
 		map = new Map(*maploaders.loadmap(listOfFile[userFileInput - 1]));
 		break;
 	}
@@ -156,7 +172,28 @@ void GameEngine::initGame() {
 	issueOrderPhase();
 	executeOrdersPhase();
 
+
 	std::cout << "======================================= Part 3 end =======================================\n" << std::endl;
+
+	while (true) {
+		cin >> observerOption;
+		if (observerOption == 1) {
+			enableStatObserver = true;
+			std::cout << "Statistics observer turned on!\n" << endl;
+			break;
+		}
+		if (observerOption == 2) {
+			enableStatObserver = false;
+			std::cout << "Statistics observer turned off!\n" << endl;
+			break;
+		}
+
+		if (observerOption != (1 || 2)) {
+			cin.clear();
+			cin.ignore(1000, '\n');
+			std::cout << "Please enter the number 1 or 2" << endl;
+		}
+	}
 }
 //===StartUp Class (Part 2)===//
 
