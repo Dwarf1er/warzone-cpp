@@ -101,7 +101,7 @@ void GameEngine::initGame() {
 			Map x = *maploader.loadmap(listOfFile[userFileInput - 1]);
 			map = new Map(x);
 
-		if(!maploader.continentCheck || !maploader.countryCheck || !maploader.borderCheck)
+		if(!maploader.getMapStatus())
 		{
 				ConquestFileReader reader;
 				ConquestFileReaderAdapter mapAdapter = ConquestFileReader(reader);
@@ -138,14 +138,11 @@ void GameEngine::initGame() {
 
 	//Creating the players based on the number of player from user
 	for (int i = 0; i < numOfPlayer; i++) {
-		vector<Territory*> playerTerritories;
-		Territory* t = new Territory();
 		deck = new Deck();
 		Hand* playerCard = new Hand(deck);
 		Player* p = new Player();
 		p->setPlayerID(i + 1);
 		p->setPlayerArmies(5);
-		p->setPlayerTerritories(playerTerritories);
 		p->setPlayerCards(playerCard);
 
 		if (i == 0) {
@@ -425,24 +422,35 @@ void StartUp::startupPhase() {
 
 	//2 - assign territories to players one by one in a round-robin fashion
 	std::cout << "Assigning the territories randomly to all players..." << endl;
-	if (!engine->getMap()->nodeList.empty()) {
-		shuffle(begin(engine->getMap()->nodeList), end(engine->getMap()->nodeList), default_random_engine());
-		while (!engine->getMap()->nodeList.empty()) {
-			for (Player* p : engine->getPlayers()) {
-				if (!engine->getMap()->nodeList.empty()) {
+
+	Map* map = engine->getMap();
+
+	
+	if (!map->nodeList.empty()) {
+		shuffle(begin(map->nodeList), end(map->nodeList), default_random_engine());
+
+		while (!map->nodeList.empty()) {
+			vector<Player*> players = engine->getPlayers();
+			
+			for (Player* p : players) {
+				if (!map->nodeList.empty()) {
 					vector<Territory*> territories;
-					territories.push_back(engine->getMap()->nodeList.back());
-					p->setPlayerTerritories(territories);
-					engine->getMap()->nodeList.pop_back();
+					territories.push_back(map->nodeList.back());
+					p->pushBackTerritories(territories);
+					map->nodeList.pop_back();
 				}
 			}
+			
 		}
+		
 		for (Player* p : engine->getPlayers()) {
 			cout << *p << endl;
 		}
 	}
 	else
+	{
 		cout << "The map has loading problems" << endl;
+	}
 
 	//3 - giving players an initial number of armies
 	cout << "Giving players their initial amount of armies..." << endl;

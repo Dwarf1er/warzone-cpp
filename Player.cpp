@@ -71,7 +71,7 @@ bool Player::getCardCheck()
 
 
 //mutators
-void Player::setPlayerTerritories(vector<Territory*> playerTerritories_) {
+void Player::pushBackTerritories(vector<Territory*> playerTerritories_) {
 	for (Territory* t : playerTerritories_) {
 		this->playerTerritories.push_back(t);
 	}

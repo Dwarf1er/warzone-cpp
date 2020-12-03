@@ -229,11 +229,11 @@ void Advance::execute(Player* p1, Player* p2, Territory* t1, Territory* t2, int 
 				}
 			}
 
-			p2->setPlayerTerritories(temp);
+			p2->pushBackTerritories(temp);
 
 			temp = p1->getPlayerTerritories();//transfers to neutral player
 			temp.push_back(t2);
-			p1->setPlayerTerritories(temp);
+			p1->pushBackTerritories(temp);
 
 			if (!(p1->getCardCheck())) {
 				cout << "the victorious player has received a card" << endl;
@@ -407,12 +407,12 @@ void Blockade::execute(Player* p, Player* n, Territory* t) {
 		}
 	}
 
-	p->setPlayerTerritories(temp);
+	p->pushBackTerritories(temp);
 
 
 	temp = n->getPlayerTerritories();//transfers to winning player
 	temp.push_back(t);
-	n->setPlayerTerritories(temp);
+	n->pushBackTerritories(temp);
 
 	cout << "\nThe blockade will be imposed on the following territory: " << t->getID() << endl;
 	cout << "Players army has been doubled " << "current armies:" << t->getNumberOfArmies() << " and the current territory is now neutral\n";
@@ -565,12 +565,12 @@ void Airlift::execute(Player* p1, Player* p2, Territory* t1, Territory* t2, int 
 					}
 				}
 
-				p2->setPlayerTerritories(temp);
+				p2->pushBackTerritories(temp);
 
 
 				temp = p1->getPlayerTerritories();//transfers to winning player
 				temp.push_back(t2);
-				p1->setPlayerTerritories(temp);
+				p1->pushBackTerritories(temp);
 
 				cout << "The victorious player " << p1->getPlayerID() << " got a card" << endl;;
 				p1->setCardCheck(true);

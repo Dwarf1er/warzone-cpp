@@ -47,7 +47,7 @@ public:
 	bool getCardCheck();
 
 	//mutators
-	void setPlayerTerritories(vector<Territory*> playerTerritories_);
+	void pushBackTerritories(vector<Territory*> playerTerritories_);
 	void setPlayerCards(Hand* playerCards_);
 	void setPlayerOrders(Orders* playerOrderList_);
 	void setPlayerArmies(int playerArmies_);
