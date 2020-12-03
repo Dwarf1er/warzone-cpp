@@ -1,10 +1,13 @@
 #include "PlayerStrategies.h"
 #include "Player.h"
 #include <algorithm>
+#include <time.h>
 
-// Huamn Player Section
-void HumanPlayerStrategy::issueOrder(Player* player, std::vector<Player*> playersVec, Player* neutralP)
+
+// Human Player Section
+void HumanPlayerStrategy::issueOrder(Player* player, std::vector<Player*> playersVec, Player* neutralP, Map* map)
 {
+
 	std::cout << "This is human player strategy" << std::endl;
 
 	int userAttackTerritory = 0;
@@ -70,6 +73,9 @@ void HumanPlayerStrategy::issueOrder(Player* player, std::vector<Player*> player
 		if (player->getPlayerOrders()->getOList()[i]->getDescription() == "Deploy") {
 			while (true) {
 				std::cout << "\n=====Deploy Section=====" << std::endl;
+				for (int j = 0; j < player->getPlayerTerritories().size(); j++) {
+					std::cout << player->getPlayerTerritories()[j]->getID() << std::endl;
+				}
 				std::cout << "Which territory to deploy to ?" << std::endl;
 				std::cin >> *tempTerritory1;
 				std::cout << "How many armies to deploy ? " << std::endl;
@@ -87,8 +93,6 @@ void HumanPlayerStrategy::issueOrder(Player* player, std::vector<Player*> player
 				std::cout << "\n=====Bomb Section=====" << std::endl;
 				std::cout << "Which territory to bomb ?" << std::endl;
 				std::cin >> *tempTerritory1;
-				std::cout << "How many armies to deploy ? " << std::endl;
-				std::cin >> army;
 				if (Bomb().validate(player, tempTerritory1)) {
 					Bomb().execute(tempTerritory1);
 					break;
@@ -123,8 +127,8 @@ void HumanPlayerStrategy::issueOrder(Player* player, std::vector<Player*> player
 				std::cin >> playerID;
 
 				// Change the neutraltemp
-				if (Negotiate().validate(player, playersVec[playerID])) {
-					Negotiate().execute(player, playersVec[playerID]);
+				if (Negotiate().validate(player, playersVec[playerID-1])) {
+					Negotiate().execute(player, playersVec[playerID-1]);
 					break;
 				}
 				else {
@@ -139,8 +143,23 @@ void HumanPlayerStrategy::issueOrder(Player* player, std::vector<Player*> player
 				std::cout << "\n=====Advance Section=====" << std::endl;
 				std::cout << "Current player territories: " << std::endl;
 
+				// Printing player territories
 				for (int j = 0; j < player->getPlayerTerritories().size(); j++) {
 					std::cout << player->getPlayerTerritories()[j]->getID() << std::endl;
+				}
+
+				// Print map 
+				for (int j = 0; j < map->listOfContinent.size(); j++) {
+					for (int k = 0; k < map->listOfContinent[j]->territories.size(); k++)
+					{
+						int index = map->listOfContinent[j]->territories[k]->getID();
+						printf("Country %d's neighbors\t", index);
+						for (int l = 1; l < map->listOfNeightbors[index].size(); l++)
+						{
+							printf("-> %d ", map->listOfNeightbors[index][l]->getID());
+						}
+						printf("\n");
+					}
 				}
 
 				std::cout << "From which territory do you want to attack ?" << std::endl;
@@ -157,10 +176,9 @@ void HumanPlayerStrategy::issueOrder(Player* player, std::vector<Player*> player
 						}
 					}
 				}
-				//m->listOfNeightbors[t1->getID()][j]->getID() == t2->getID()
 
 				if (Advance().validate(player, tempTerritory1, tempTerritory2, map)) {
-					Advance().execute(player, playersVec[playerID], tempTerritory1, tempTerritory2, army, deck);
+					Advance().execute(player, playersVec[playerID-1], tempTerritory1, tempTerritory2, army, deck);
 					break;
 				}
 				else {
@@ -189,7 +207,7 @@ void HumanPlayerStrategy::issueOrder(Player* player, std::vector<Player*> player
 				}
 
 				if (Airlift().validate(player, tempTerritory1, tempTerritory2)) {
-					Airlift().execute(player, playersVec[playerID], tempTerritory1, tempTerritory2, army, deck);
+					Airlift().execute(player, playersVec[playerID-1], tempTerritory1, tempTerritory2, army, deck);
 					break;
 				}
 				else {
@@ -200,7 +218,7 @@ void HumanPlayerStrategy::issueOrder(Player* player, std::vector<Player*> player
 	}
 }
 
-std::vector<int> HumanPlayerStrategy::toAttack(Player* player)
+std::vector<int> HumanPlayerStrategy::toAttack(Player* player, Map* map)
 {
 	int userAttackTerritory = 0;
 	std::vector<int> myvector;
@@ -232,7 +250,7 @@ std::vector<int> HumanPlayerStrategy::toAttack(Player* player)
 }
 
 
-std::vector<int> HumanPlayerStrategy::toDefend(Player* player)
+std::vector<int> HumanPlayerStrategy::toDefend(Player* player, Map* map)
 {
 	vector<int> myvector;
 	vector<int> myvector2;
@@ -262,7 +280,7 @@ std::vector<int> HumanPlayerStrategy::toDefend(Player* player)
 }
 
 // Aggressive player section
-void AggressivePlayerStrategy::issueOrder(Player* player, std::vector<Player*> playersVec, Player* neutralP)
+void AggressivePlayerStrategy::issueOrder(Player* player, std::vector<Player*> playersVec, Player* neutralP, Map* map)
 {
 	std::cout << "This is AggressivePlayerStrategy" << std::endl;
 	int userAttackTerritory = 0;
@@ -279,6 +297,7 @@ void AggressivePlayerStrategy::issueOrder(Player* player, std::vector<Player*> p
 	Territory* tempTerritory1 = new Territory();
 	Territory* tempTerritory2 = new Territory();
 	int playerID = 0;
+	srand((int)time(0));
 
 	// Get Player card in hand
 	for (int i = 0; i < player->getPlayerCards()->get_cards_in_hand().size(); i++) {
@@ -319,9 +338,12 @@ void AggressivePlayerStrategy::issueOrder(Player* player, std::vector<Player*> p
 			while (true) {
 				std::cout << "\n=====Deploy Section=====" << std::endl;
 				std::cout << "Which territory to deploy to ?" << std::endl;
-				std::cin >> *tempTerritory1;
+				int x;
+				x = rand() % (player->getPlayerTerritories().size() - 1);
+				tempTerritory1 = player->getPlayerTerritories()[x];
+
 				std::cout << "How many armies to deploy ? " << std::endl;
-				std::cin >> army;
+				army = (rand() % player->getPlayerArmies()) + 1;
 				if (Deploy().validate(player, tempTerritory1)) {
 					Deploy().execute(player, army, tempTerritory1);
 					break;
@@ -337,9 +359,10 @@ void AggressivePlayerStrategy::issueOrder(Player* player, std::vector<Player*> p
 			while (true) {
 				std::cout << "\n=====Bomb Section=====" << std::endl;
 				std::cout << "Which territory to bomb ?" << std::endl;
-				std::cin >> *tempTerritory1;
-				std::cout << "How many armies to deploy ? " << std::endl;
-				std::cin >> army;
+				int x;
+				x = rand() % (player->getPlayerTerritories().size() - 1);
+				tempTerritory1 = player->getPlayerTerritories()[x];
+
 				if (Bomb().validate(player, tempTerritory1)) {
 					Bomb().execute(tempTerritory1);
 					break;
@@ -355,11 +378,24 @@ void AggressivePlayerStrategy::issueOrder(Player* player, std::vector<Player*> p
 			while (true) {
 				std::cout << "\n=====Advance Section=====" << std::endl;
 				std::cout << "From which territory do you want to attack ?" << std::endl;
-				std::cin >> *tempTerritory1;
+				int x;
+				x = rand() % (player->getPlayerTerritories().size() - 1);
+				tempTerritory1 = player->getPlayerTerritories()[x];
 				std::cout << "Which territory do you want to attack ?" << std::endl;
-				std::cin >> *tempTerritory2;
+				int y;
+				y = rand() % (player->getPlayerTerritories().size() - 1);
+				tempTerritory2 = player->getPlayerTerritories()[x];
+				for (int j = 0; j < map->listOfContinent.size(); j++) {
+					for (int k = 0; k < map->listOfContinent[j]->territories.size(); k++) {
+						if (tempTerritory2->getID() == player->getPlayerTerritories()[k]->getID()) {
+							y = rand() % (player->getPlayerTerritories().size() - 1);
+							tempTerritory2 = player->getPlayerTerritories()[x];
+						}
+					}
+				}
+				
 				std::cout << "How many armies to deploy ? " << std::endl;
-				std::cin >> army;
+				army = (rand() % player->getPlayerArmies()) + 1;
 
 				for (int j = 0; j < playersVec.size(); j++) {
 					for (int k = 0; k < playersVec[j]->getPlayerTerritories().size(); k++) {
@@ -370,7 +406,7 @@ void AggressivePlayerStrategy::issueOrder(Player* player, std::vector<Player*> p
 				}
 
 				if (Advance().validate(player, tempTerritory1, tempTerritory2, map)) {
-					Advance().execute(player, playersVec[playerID], tempTerritory1, tempTerritory2, army, deck);
+					Advance().execute(player, playersVec[playerID-1], tempTerritory1, tempTerritory2, army, deck);
 					break;
 				}
 				else {
@@ -384,11 +420,13 @@ void AggressivePlayerStrategy::issueOrder(Player* player, std::vector<Player*> p
 			while (true) {
 				std::cout << "\n=====Airlift Section=====" << std::endl;
 				std::cout << "From which territory do you want to use airlift attack ?" << std::endl;
-				std::cin >> *tempTerritory1;
+				int x;
+				x = rand() % (player->getPlayerTerritories().size() - 1);
+				tempTerritory1 = player->getPlayerTerritories()[x];
 				std::cout << "Which territory do you want to attack ?" << std::endl;
-				std::cin >> *tempTerritory2;
-				std::cout << "How many armies to deploy ? " << std::endl;
-				std::cin >> army;
+				int y;
+				y = rand() % (player->getPlayerTerritories().size() - 1);
+				tempTerritory2 = player->getPlayerTerritories()[x];
 
 				for (int j = 0; j < playersVec.size(); j++) {
 					for (int k = 0; k < playersVec[j]->getPlayerTerritories().size(); k++) {
@@ -399,7 +437,7 @@ void AggressivePlayerStrategy::issueOrder(Player* player, std::vector<Player*> p
 				}
 
 				if (Airlift().validate(player, tempTerritory1, tempTerritory2)) {
-					Airlift().execute(player, playersVec[playerID], tempTerritory1, tempTerritory2, army, deck);
+					Airlift().execute(player, playersVec[playerID-1], tempTerritory1, tempTerritory2, army, deck);
 					break;
 				}
 				else {
@@ -410,7 +448,7 @@ void AggressivePlayerStrategy::issueOrder(Player* player, std::vector<Player*> p
 	}
 }
 
-std::vector<int> AggressivePlayerStrategy::toAttack(Player* player)
+std::vector<int> AggressivePlayerStrategy::toAttack(Player* player, Map* map)
 {
 	std::vector<int> myvector;
 	std::vector<int> myvector2;
@@ -432,12 +470,12 @@ std::vector<int> AggressivePlayerStrategy::toAttack(Player* player)
 	return player->getToAttackVec();
 }
 
-std::vector<int> AggressivePlayerStrategy::toDefend(Player* player)
+std::vector<int> AggressivePlayerStrategy::toDefend(Player* player, Map* map)
 {
 	return std::vector<int>();
 }
 
-void BenevolentPlayerStrategy::issueOrder(Player* player, std::vector<Player*> playersVec, Player* neutralP)
+void BenevolentPlayerStrategy::issueOrder(Player* player, std::vector<Player*> playersVec, Player* neutralP, Map* map)
 {
 	std::cout << "This is Benevolent Player Strategy" << std::endl;
 	int userAttackTerritory = 0;
@@ -489,9 +527,12 @@ void BenevolentPlayerStrategy::issueOrder(Player* player, std::vector<Player*> p
 			while (true) {
 				std::cout << "\n=====Deploy Section=====" << std::endl;
 				std::cout << "Which territory to deploy to ?" << std::endl;
-				std::cin >> *tempTerritory1;
+				int x;
+				x = rand() % (player->getPlayerTerritories().size() - 1);
+				tempTerritory1 = player->getPlayerTerritories()[x];
+
 				std::cout << "How many armies to deploy ? " << std::endl;
-				std::cin >> army;
+				army = (rand() % player->getPlayerArmies()) + 1;
 				if (Deploy().validate(player, tempTerritory1)) {
 					Deploy().execute(player, army, tempTerritory1);
 					break;
@@ -507,9 +548,9 @@ void BenevolentPlayerStrategy::issueOrder(Player* player, std::vector<Player*> p
 			while (true) {
 				std::cout << "\n=====Bomb Section=====" << std::endl;
 				std::cout << "Which territory to bomb ?" << std::endl;
-				std::cin >> *tempTerritory1;
-				std::cout << "How many armies to deploy ? " << std::endl;
-				std::cin >> army;
+				int x;
+				x = rand() % (player->getPlayerTerritories().size() - 1);
+				tempTerritory1 = player->getPlayerTerritories()[x];
 				if (Bomb().validate(player, tempTerritory1)) {
 					Bomb().execute(tempTerritory1);
 					break;
@@ -525,9 +566,11 @@ void BenevolentPlayerStrategy::issueOrder(Player* player, std::vector<Player*> p
 			while (true) {
 				std::cout << "\n=====Blockade Section=====" << std::endl;
 				std::cout << "Which territory to put a blockade ?" << std::endl;
-				std::cin >> *tempTerritory1;
+				int x;
+				x = rand() % (player->getPlayerTerritories().size() - 1);
+				tempTerritory1 = player->getPlayerTerritories()[x];
 				if (Blockade().validate(player, tempTerritory1)) {
-					Blockade().execute(player, neutralP, tempTerritory1); //Temp 
+					Blockade().execute(player, neutralP, tempTerritory1); 
 					break;
 				}
 				else {
@@ -541,11 +584,11 @@ void BenevolentPlayerStrategy::issueOrder(Player* player, std::vector<Player*> p
 			while (true) {
 				std::cout << "\n=====Negotiate Section=====" << std::endl;
 				std::cout << "Which player would you like to negotiate with ?" << std::endl;
-				std::cin >> playerID;
+				playerID = rand() % (playersVec.size() - 1);
 
 				// Change the neutraltemp
-				if (Negotiate().validate(player, playersVec[playerID])) {
-					Negotiate().execute(player, playersVec[playerID]);
+				if (Negotiate().validate(player, playersVec[playerID-1])) {
+					Negotiate().execute(player, playersVec[playerID-1]);
 					break;
 				}
 				else {
@@ -559,11 +602,17 @@ void BenevolentPlayerStrategy::issueOrder(Player* player, std::vector<Player*> p
 			while (true) {
 				std::cout << "\n=====Advance Section=====" << std::endl;
 				std::cout << "From which territory do you want to attack ?" << std::endl;
-				std::cin >> *tempTerritory1;
+				int x;
+				x = rand() % (player->getPlayerTerritories().size() - 1);
+				tempTerritory1 = player->getPlayerTerritories()[x];
+
 				std::cout << "Which territory do you want to attack ?" << std::endl;
-				std::cin >> *tempTerritory2;
+				int y;
+				y = rand() % (player->getPlayerTerritories().size() - 1);
+				tempTerritory2 = player->getPlayerTerritories()[x];
+
 				std::cout << "How many armies to deploy ? " << std::endl;
-				std::cin >> army;
+				army = (rand() % player->getPlayerArmies()) + 1;
 
 				for (int j = 0; j < playersVec.size(); j++) {
 					for (int k = 0; k < playersVec[j]->getPlayerTerritories().size(); k++) {
@@ -574,7 +623,7 @@ void BenevolentPlayerStrategy::issueOrder(Player* player, std::vector<Player*> p
 				}
 
 				if (Advance().validate(player, tempTerritory1, tempTerritory2, map)) {
-					Advance().execute(player, playersVec[playerID], tempTerritory1, tempTerritory2, army, deck);
+					Advance().execute(player, playersVec[playerID-1], tempTerritory1, tempTerritory2, army, deck);
 					break;
 				}
 				else {
@@ -588,11 +637,14 @@ void BenevolentPlayerStrategy::issueOrder(Player* player, std::vector<Player*> p
 			while (true) {
 				std::cout << "\n=====Airlift Section=====" << std::endl;
 				std::cout << "From which territory do you want to use airlift attack ?" << std::endl;
-				std::cin >> *tempTerritory1;
+				int x;
+				x = rand() % (player->getPlayerTerritories().size() - 1);
+				tempTerritory1 = player->getPlayerTerritories()[x];
+
 				std::cout << "Which territory do you want to attack ?" << std::endl;
-				std::cin >> *tempTerritory2;
-				std::cout << "How many armies to deploy ? " << std::endl;
-				std::cin >> army;
+				int y;
+				y = rand() % (player->getPlayerTerritories().size() - 1);
+				tempTerritory2 = player->getPlayerTerritories()[x];
 
 				for (int j = 0; j < playersVec.size(); j++) {
 					for (int k = 0; k < playersVec[j]->getPlayerTerritories().size(); k++) {
@@ -603,7 +655,7 @@ void BenevolentPlayerStrategy::issueOrder(Player* player, std::vector<Player*> p
 				}
 
 				if (Airlift().validate(player, tempTerritory1, tempTerritory2)) {
-					Airlift().execute(player, playersVec[playerID], tempTerritory1, tempTerritory2, army, deck);
+					Airlift().execute(player, playersVec[playerID-1], tempTerritory1, tempTerritory2, army, deck);
 					break;
 				}
 				else {
@@ -614,12 +666,12 @@ void BenevolentPlayerStrategy::issueOrder(Player* player, std::vector<Player*> p
 	}
 }
 
-std::vector<int> BenevolentPlayerStrategy::toAttack(Player* player)
+std::vector<int> BenevolentPlayerStrategy::toAttack(Player* player, Map* map)
 {
 	return std::vector<int>();
 }
 
-std::vector<int> BenevolentPlayerStrategy::toDefend(Player* player)
+std::vector<int> BenevolentPlayerStrategy::toDefend(Player* player, Map* map)
 {
 	vector<int> myvector;
 	vector<int> myvector2;
@@ -645,18 +697,18 @@ std::vector<int> BenevolentPlayerStrategy::toDefend(Player* player)
 	return player->getToDefendVec();
 }
 
-void NeutralPlayerStrategy::issueOrder(Player* player, std::vector<Player*> playersVec, Player* neutralP)
+void NeutralPlayerStrategy::issueOrder(Player* player, std::vector<Player*> playersVec, Player* neutralP, Map* map)
 {
 	std::cout << "This is Neutral Player Strategy" << std::endl;
 	std::cout << " This Player Does not issue any orders (Neutral Player)" << std::endl;
 }
 
-std::vector<int> NeutralPlayerStrategy::toAttack(Player* player)
+std::vector<int> NeutralPlayerStrategy::toAttack(Player* player, Map* map)
 {
 	return std::vector<int>();
 }
 
-std::vector<int> NeutralPlayerStrategy::toDefend(Player* player)
+std::vector<int> NeutralPlayerStrategy::toDefend(Player* player, Map* map)
 {
 	return std::vector<int>();
 }

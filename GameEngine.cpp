@@ -73,6 +73,10 @@ Map* GameEngine::getMap() {
 	return map;
 }
 
+std::vector<Player*> GameEngine::getPlayersVec() {
+	return playersVec;
+}
+
 //Initialize the game 
 void GameEngine::initGame() {
 	//Get userinput for the file chosen 
@@ -100,6 +104,8 @@ void GameEngine::initGame() {
 		map = new Map(*maploaders.loadmap(listOfFile[userFileInput - 1]));
 		break;
 	}
+
+	map->printBoard();
 
 	//Ask the user for the number of player to play	
 	while (true) {
@@ -233,11 +239,6 @@ ostream& operator<<(ostream& out, const StartUp& s) {
 	return out;
 }
 
-std::vector<Player*> GameEngine::getPlayersVec()
-{
-	return playersVec;
-}
-
 // Reinforcement Phase
 void GameEngine::reinforcementPhase()
 {
@@ -315,7 +316,7 @@ void GameEngine::issueOrderPhase()
 
 	// Going over each players issueOrder
 	for (int i = 0; i < playersVec.size(); i++) {
-		playersVec[i]->issueOrder(playersVec[i], playersVec, playersVec[0]);
+		playersVec[i]->issueOrder(getPlayersVec()[i], getPlayersVec(), getPlayersVec()[0], getMap());
 	}
 
 	Notify();

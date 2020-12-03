@@ -66,7 +66,7 @@ public:
 	friend istream& operator>>(istream& in, Player& p);
 
 	//required methods
-	void issueOrder(Player* player, std::vector<Player*> playersVec, Player* neutralP); //creates an Order object and adds it to playerOrderList
+	void issueOrder(Player* player, std::vector<Player*> playersVec, Player* neutralP, Map* map); //creates an Order object and adds it to playerOrderList
 	vector<Territory*> toDefend(Player* player); //returns a list of territories owned by the player that need to be defended
 	vector<Territory*> toAttack(Player* player); //returns a list of territories that are attacked by the player
 };

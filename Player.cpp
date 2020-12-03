@@ -168,8 +168,8 @@ istream& operator>>(istream& in, Player& p) {
 }
 
 //required methods
-void Player::issueOrder(Player* player, std::vector<Player*> playersVec, Player* neutralP) {
-	this->playerStrategy_->issueOrder(player, playersVec, neutralP);
+void Player::issueOrder(Player* player, std::vector<Player*> playersVec, Player* neutralP, Map* map) {
+	this->playerStrategy_->issueOrder(player, playersVec, neutralP, map);
 }
 
 // Error here return value 

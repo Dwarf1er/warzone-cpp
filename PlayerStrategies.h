@@ -9,9 +9,9 @@ class Deck;
 class PlayerStrategy {
 public:
 	virtual ~PlayerStrategy();
-	virtual void issueOrder(Player* player, std::vector<Player*> playersVec, Player* neutralP) = 0;
-	virtual std::vector<int> toAttack(Player* player) = 0;
-	virtual std::vector<int> toDefend(Player* player) = 0;
+	virtual void issueOrder(Player* player, std::vector<Player*> playersVec, Player* neutralP, Map* map) = 0;
+	virtual std::vector<int> toAttack(Player* player, Map* map) = 0;
+	virtual std::vector<int> toDefend(Player* player, Map* map) = 0;
 
 private:
 	Map* map;
@@ -20,9 +20,9 @@ private:
 
 class HumanPlayerStrategy : public PlayerStrategy {
 public:
-	void issueOrder(Player* player, std::vector<Player*> playersVec, Player* neutralP);
-	std::vector<int> toAttack(Player* player);
-	std::vector<int> toDefend(Player* player);
+	void issueOrder(Player* player, std::vector<Player*> playersVec, Player* neutralP, Map* map);
+	std::vector<int> toAttack(Player* player, Map* map);
+	std::vector<int> toDefend(Player* player, Map* map);
 private:
 	Map* map;
 	Deck* deck;
@@ -30,9 +30,9 @@ private:
 
 class AggressivePlayerStrategy : public PlayerStrategy {
 public:
-	void issueOrder(Player* player, std::vector<Player*> playersVec, Player* neutralP);
-	std::vector<int> toAttack(Player* player);
-	std::vector<int> toDefend(Player* player);
+	void issueOrder(Player* player, std::vector<Player*> playersVec, Player* neutralP, Map* map);
+	std::vector<int> toAttack(Player* player, Map* map);
+	std::vector<int> toDefend(Player* player, Map* map);
 private:
 	Map* map;
 	Deck* deck;
@@ -40,9 +40,9 @@ private:
 
 class BenevolentPlayerStrategy : public PlayerStrategy {
 public:
-	void issueOrder(Player* player, std::vector<Player*> playersVec, Player* neutralP);
-	std::vector<int> toAttack(Player* player);
-	std::vector<int> toDefend(Player* player);
+	void issueOrder(Player* player, std::vector<Player*> playersVec, Player* neutralP, Map* map);
+	std::vector<int> toAttack(Player* player, Map* map);
+	std::vector<int> toDefend(Player* player, Map* map);
 private:
 	Map* map;
 	Deck* deck;
@@ -50,9 +50,9 @@ private:
 
 class NeutralPlayerStrategy : public PlayerStrategy {
 public:
-	void issueOrder(Player* player, std::vector<Player*> playersVec, Player* neutralP);
-	std::vector<int> toAttack(Player* player);
-	std::vector<int> toDefend(Player* player);
+	void issueOrder(Player* player, std::vector<Player*> playersVec, Player* neutralP, Map* map);
+	std::vector<int> toAttack(Player* player, Map* map);
+	std::vector<int> toDefend(Player* player, Map* map);
 private:
 	Map* map;
 	Deck* deck;

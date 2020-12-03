@@ -164,14 +164,15 @@ void Advance::execute()
 bool Advance::validate(Player* p, Territory* t1, Territory* t2, Map* m) {
 	for (int i = 0; i < p->getPlayerTerritories().size(); i++) {
 		if (p->getPlayerTerritories()[i]->getID() == t1->getID()) { //checks if territory belongs to player
-			for (int j = 0; j < t1->getneighbors();j++) {
-				if (m->listOfNeightbors[t1->getID()][j]->getID() == t2->getID()) {  //checks if territories are adjacent
+		//	for (int j = 0; j < t1->getneighbors();j++) {
+				//if (m->listOfNeightbors[t1->getID()][j]->getID() == t2->getID()) {  //checks if territories are adjacent
 					cout << "validation succesful" << endl;
 					return true;
 					break;
-				}
-			}
+			//	}
+			//}
 		}
+		return true;
 	}
 }
 
