@@ -34,6 +34,7 @@ class ConquestFileReaderAdapter : MapLoader {
 private:
 	ConquestFileReader fileReader;
 public:
+	ConquestFileReaderAdapter(ConquestFileReader reader);
 	Map* loadmap(std::string fileName);
 };
 #endif //!map

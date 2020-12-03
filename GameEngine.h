@@ -25,6 +25,7 @@ struct OrderData {
 
 class GameEngine : public Subject {
 public:
+	MapLoader maploaders;
 	GameEngine();
 	~GameEngine();
 	void initGame();

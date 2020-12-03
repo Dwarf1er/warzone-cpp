@@ -41,11 +41,8 @@ istream& operator>>(std::istream& in, MapLoader& ml) {
 	return in;
 }
 
-
 //Method to load map from a .map file
-//Previous Map MapLoader::loadmap(string file)
 Map* MapLoader::loadmap(string file) {
-
 	//Get the file name with extension 
 	fstream infile;
 
@@ -220,11 +217,9 @@ Map* MapLoader::loadmap(string file) {
 	if (continentCheck == false) {
 		cout << "Error 1: continent section invalid" << endl;
 	}
-
 	if (countryCheck == false) {
 		cout << "Error 2: country section invalid" << endl;
 	}
-
 	if (borderCheck == false) {
 		cout << "Error 3: border section invalid" << endl;
 	}
@@ -236,13 +231,18 @@ Map* MapLoader::loadmap(string file) {
 		//return graph;
 		graph->printBoard();
 	}
+	
 	infile.close();
 
 	return graph;
 }
 
+ConquestFileReaderAdapter::ConquestFileReaderAdapter(ConquestFileReader reader)
+{
+	fileReader = reader;
+}
+
 Map* ConquestFileReaderAdapter::loadmap(std::string fileName) {
-	fileReader = ConquestFileReader();
 	return fileReader.loadConquestMap(fileName);
 }
 
@@ -328,7 +328,7 @@ std::vector<std::string> ConquestFileReader::splitString(std::string str, const 
 	stringstream lineStringStream(str);
 	string part;
 
-	while (getline(lineStringStream, part, separator)) 	//split line at the comma
+	while (getline(lineStringStream, part, separator)) //split line at the comma
 	{
 		parts.push_back(part); //add content to vector parts
 	}

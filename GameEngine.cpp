@@ -25,9 +25,7 @@ GameEngine::~GameEngine() {
 	currentPlayer = nullptr;
 }
 
-ConquestFileReaderAdapter maploaders;
-Continent continent;
-Map* map;
+
 
 //Get List of maps in directory
 void GameEngine::getListOfMap() {
@@ -99,7 +97,6 @@ void GameEngine::initGame() {
 				std::cout << ("Please choose another file. \n");
 			}
 		}
-		//maploaders.loadmap(listOfFile[userFileInput - 1]);
 		map = new Map(*maploaders.loadmap(listOfFile[userFileInput - 1]));
 		break;
 	}
