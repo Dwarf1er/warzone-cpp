@@ -146,14 +146,9 @@
     <ClCompile Include="GameEngine.cpp" />
     <ClCompile Include="GameObservers.cpp" />
     <ClCompile Include="Map.cpp" />
-    <ClCompile Include="MapDriver.cpp" />
     <ClCompile Include="MapLoader.cpp" />
-    <ClCompile Include="MapLoaderDriver.cpp" />
-    <ClCompile Include="Orderexe.cpp" />
     <ClCompile Include="Orders.cpp" />
-    <ClCompile Include="OrdersDriver.cpp" />
     <ClCompile Include="Player.cpp" />
-    <ClCompile Include="PlayerDriver.cpp" />
     <ClCompile Include="PlayerStrategies.cpp" />
     <ClCompile Include="WarzoneDriver.cpp" />
   </ItemGroup>
@@ -162,7 +157,6 @@
     <ClInclude Include="CardsDriver.h" />
     <ClInclude Include="GameEngine.h" />
     <ClInclude Include="GameObservers.h" />
-    <ClInclude Include="MapDriver.h" />
     <ClInclude Include="MapLoader.h" />
     <ClInclude Include="Map.h" />
     <ClInclude Include="MapLoaderDriver.h" />
@@ -178,6 +172,7 @@
     <None Include="bad map2.map" />
     <None Include="bad map3.map" />
     <None Include="europe.map" />
+    <None Include="World_2007.map" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

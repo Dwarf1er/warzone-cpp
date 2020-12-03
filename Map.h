@@ -1,7 +1,7 @@
 #pragma once
 #ifndef MAP_H
 #define MAP_H
-#define MAX_SIZE 100
+#define MAX_SIZE 255
 
 #include <string>
 #include <vector>
@@ -56,6 +56,7 @@ public:
 	int fillNodes();
 	int createContinent(std::string _name, int numOfCountries);
 	int addToContinent(int index, Territory* u);
+	int getContinentIndexByName(std::string name);
 	int validate();
 	int duplicateCheck();
 	int DFS(Territory* currentNode, std::vector<Territory*>* _nodeVec);
@@ -67,4 +68,4 @@ public:
 private:
 	int counter;
 };
-#endif //!map
+#endif

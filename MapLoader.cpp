@@ -3,6 +3,7 @@
 #include <fstream>
 #include <sstream>
 #include <direct.h>
+#include <map>
 #include "Map.h"
 
 using namespace std;
@@ -11,6 +12,67 @@ MapLoader::MapLoader() {
 }
 
 MapLoader::~MapLoader() {
+}
+
+std::vector<std::string> MapLoader::splitString(std::string str, const char separator)
+{
+	vector<string> parts;
+	stringstream lineStringStream(str);
+	string part;
+
+	while (getline(lineStringStream, part, separator)) //split line at the comma
+	{
+		parts.push_back(part); //add content to vector parts
+	}
+
+	return parts;
+}
+
+bool MapLoader::getMapStatus()
+{
+	return mapStatus;
+}
+
+void MapLoader::goTo(std::fstream& infile, std::string header)
+{
+	infile.clear();
+	infile.seekg(0);
+
+	string line;
+	while (std::getline(infile, line))
+	{
+		if (line.find(header) != std::string::npos)
+		{
+			break;
+		}
+	}
+}
+
+bool MapLoader::checkIfContainsHeader(std::fstream& infile, std::string header)
+{
+	infile.clear();
+	infile.seekg(0);
+
+	string line;
+	bool found = false;
+
+	while (std::getline(infile, line))
+	{
+		if (line.find(header) != std::string::npos)
+		{
+			found = true;
+		}
+	}
+
+	if (!found)
+	{
+		cout << "Warning: File doesn't contain " << header << endl;
+	}
+
+	infile.clear();
+	infile.seekg(0);
+
+	return found;
 }
 
 //copy constructor
@@ -39,208 +101,229 @@ istream& operator>>(std::istream& in, MapLoader& ml) {
 	return in;
 }
 
-
 //Method to load map from a .map file
-//Previous Map MapLoader::loadmap(string file)
-Map* MapLoader::loadmap(string file) {
-
-	//Get the file name with extension 
+Map* MapLoader::loadmap(string fileName) {
+	cout << "\nLoading map domination..... " << fileName << endl;
 	fstream infile;
-
-	string map;
-	map = file;
-	//cout << "Enter map name with extension: ";
-	cout << "Loading map..... " << map << endl;
-	printf("\n");
-
-	infile.open(map);
-
-	string s;
-	int cont = 0;
-	int country = 0;
-	bool check = true;
-	int x;
-
+	infile.open(fileName);
 	Map* graph = new Map();
-	continentCheck = false;
-	countryCheck = false;
-	borderCheck = false;
-	mapCheck = false;
+
+	//check if the map follows the conquest map format
+	if (!checkIfContainsHeader(infile, "[files]")
+		|| !checkIfContainsHeader(infile, "[continents]")
+		|| !checkIfContainsHeader(infile, "[countries]")
+		|| !checkIfContainsHeader(infile, "[borders]"))
+	{
+		mapStatus = false;
+		return graph;
+	}
 
 	graph->initList();
+	string line;
 
-	// Extracting words from the file 
-	int error = 0;
-	while (infile >> s)
+	//go to until [Continents]
+	goTo(infile, "[continents]");
+
+	int continentIndex = 1;
+	//while haven't reached [countries]
+	while (getline(infile, line) && line.compare("[countries]"))
 	{
-		int more = 0;
-		if (!s.compare("[continents]")) {
-			continentCheck = true;
-			int g = 0;
-			while (check) {
-				if (g >= 100) {
-					cout << "major";
-					break;
-				}
-				g++;
+		if (line.empty()) { continue; } //skip empty lines
+		std::vector<std::string> lineVector = splitString(line, ' ');
+		string continentName = lineVector.at(0);
+		graph->createContinent(continentName, continentIndex);
+		continentIndex++;
+	}
 
-				infile >> s;
-				if (!s.compare("[countries]")) {
-					break;
-				}
+	//go to [countries]
+	goTo(infile, "[countries]");
 
-				string name = s;
+	//set countries in continent from [countries] to 
+	while (getline(infile, line) && line.compare("[borders]"))
+	{
+		//skip empty lines
+		if (line.empty()) { continue; }
 
-				//num
-				infile >> x;
-				int num = x;
-				graph->createContinent(name, more);
-				more++;
-				infile >> s;  //color ignorer
-			}
-		}
+		//extract details from the row
+		std::vector<std::string> lineVector = splitString(line, ' ');
+		int countryIndex = stoi(lineVector.at(0));
+		int continentIndex = stoi(lineVector.at(2));
 
-		if (continentCheck == true) {
-			if (!s.compare("[countries]")) {
-				countryCheck = true;
-				getline(infile, s);
-				string::iterator a;
-				int add = 1;
-				int o = 0;
-				while (check) {
-					if (o >= 100) {
-						break;
-					}
+		//set country in corresponding continent
+		graph->addToContinent(continentIndex-1, graph->nodeList[countryIndex-1]);
+	}
 
-					//Gets Country number
-					infile >> s;
-					if (!s.compare("[borders]")) {
-						break;
-					}
+	//go to [borders]
+	goTo(infile, "[borders]");
 
-					if (s.empty()) {
-						cout << "major ";
-						break;
-					}
+	//set borders
+	while (getline(infile, line))
+	{
+		std::vector<std::string> lineVector = splitString(line, ' ');
 
-					infile >> s;
-
-					if (s.empty()) {
-						cout << "major";
-						break;
-					}
-
-					//Gets the continent it belongs to
-					infile >> x;
-					int num2 = x;
-
-					try {
-						graph->addToContinent(num2 - 1, graph->nodeList[add]);
-					}
-
-					catch (...) {
-						cout << "major ";
-						break;
-					}
-
-					add++;
-					infile >> s;
-
-					if (s.empty()) {
-						cout << "major";
-						break;
-					}
-
-					infile >> s;
-
-					if (s.empty()) {
-						cout << "major";
-						break;
-					}
-					o++;
-				}
-			}
-		}
-
-		if (!s.compare("[borders]")) {
-			if (countryCheck == true) {
-				string::iterator a;
-				string::iterator first;
-
-				getline(infile, s);
-
-				borderCheck = true;
-				int u = 0;
-				while (check) {
-
-					if (u >= 100) {
-						cout << "major error";
-						break;
-					}
-					u++;
-
-					getline(infile, s);
-
-					if (s.empty()) {
-
-						break;
-					}
-
-					char* index = NULL;
-					char* neighbor = NULL;
-					char* context = NULL;
-					char delim[] = " ";
-
-					index = strtok_s((char*)s.c_str(), delim, &context);
-					neighbor = strtok_s(NULL, delim, &context);
-					do
-					{
-						graph->addEdge(graph->nodeList[atoi(index) - 1], graph->nodeList[atoi(neighbor) - 1]);
-						neighbor = strtok_s(NULL, delim, &context);
-					} while (neighbor);
-				}
-			}
-		}
-		error++;
-		if (error >= 200) {
-			cout << "major error";
-			break;
-		}
-
-		//Checks for error in the file
-		if (mapCheck) {
-			cout << "INVALID FORMAT" << endl;
-			break;
+		int countryIndex = stoi(lineVector.at(0));
+		lineVector.erase(lineVector.begin() + 1);
+		
+		for (const string& stringNeighbor : lineVector)
+		{
+			int neighbor = stoi(stringNeighbor);
+			graph->addEdge(graph->nodeList[countryIndex-1], graph->nodeList[neighbor-1]);
 		}
 	}
 
-	//Different section of errors
-	if (continentCheck == false) {
-		cout << "Error 1: continent section invalid" << endl;
-	}
-
-	if (countryCheck == false) {
-		cout << "Error 2: country section invalid" << endl;
-	}
-
-	if (borderCheck == false) {
-		cout << "Error 3: border section invalid" << endl;
-	}
-	if (continentCheck == true && countryCheck == true && borderCheck == true) {
-		//Call method to check for duplicate territories 
-		graph->validate();
-		printf("\n");
-		//graph.printBoard();
-		//return graph;
-		graph->printBoard();
-	}
 	infile.close();
-
 	return graph;
 }
 
-bool MapLoader::getContinentCheck()
+ConquestFileReaderAdapter::ConquestFileReaderAdapter(ConquestFileReader reader)
 {
-	return continentCheck;
+	fileReader = reader;
 }
 
+Map* ConquestFileReaderAdapter::loadmap(std::string fileName) {
+	return fileReader.loadConquestMap(fileName);
+}
+
+bool ConquestFileReaderAdapter::getMapStatus()
+{
+	return fileReader.getMapStatus();
+}
+
+bool ConquestFileReader::checkIfContainsHeader(fstream& infile, string header)
+{
+	infile.clear();
+	infile.seekg(0);
+	
+	string line;
+	bool found = false;
+	
+	while (std::getline(infile, line))
+	{
+		if (line.find(header) != std::string::npos)
+		{
+			found = true;
+		}
+	}
+
+	if(!found)
+	{
+		cout << "Warning: File doesn't contain " << header << endl;
+	}
+	
+	infile.clear();
+	infile.seekg(0);
+	
+	return found;
+}
+
+void ConquestFileReader::goTo(fstream& infile, string header)
+{
+	infile.clear();
+	infile.seekg(0);
+
+	string line;
+	while (std::getline(infile, line))
+	{
+		if (line.find(header) != std::string::npos)
+		{
+			break;
+		}
+	}
+}
+
+void ConquestFileReader::createTerritoriesIndexes(fstream &infile, string line)
+{
+	int index = 0;
+	goTo(infile, "[Territories]");
+	while (getline(infile, line)) {
+		if (line.empty()) { continue; } //skip empty lines
+		std::vector<std::string> lineVector = splitString(line, ',');
+		territoriesIndexes.insert(std::pair<string, int>(lineVector.at(0), index++));
+	}
+}
+
+Map* ConquestFileReader::loadConquestMap(std::string fileName)
+{
+	cout << "\nLoading map conquest..... " << fileName << endl;
+	fstream infile;
+	infile.open(fileName);
+	Map* graph = new Map();
+
+	//check if the map follows the conquest map format
+	if (!checkIfContainsHeader(infile, "[Continents]")
+		|| !checkIfContainsHeader(infile, "[Territories]")
+		|| !checkIfContainsHeader(infile, "[Map]"))
+	{
+		mapStatus = false;
+		return graph;
+	}
+	
+	graph->initList();
+	string line;
+
+	//go to until [Continents]
+	goTo(infile, "[Continents]");
+	
+	int ContinentIndex = 0;
+	//while haven't reached [Territories]
+	while (getline(infile, line) && line.compare("[Territories]"))
+	{
+		if (line.empty()) { continue; } //skip empty lines
+		std::vector<std::string> lineVector = splitString(line, '=');
+		string continentName = lineVector.at(0);
+		graph->createContinent(continentName, ContinentIndex);
+		ContinentIndex++;
+	}
+
+	createTerritoriesIndexes(infile, line);
+
+	//go to [Territories]
+	goTo(infile, "[Territories]");
+
+	//add territories to continents and create borders
+	while (getline(infile, line)) 
+	{
+		//skip empty lines
+		if (line.empty()) { continue; }
+
+		//extract details from the row
+		std::vector<std::string> lineVector = splitString(line, ',');
+		string territoryName = lineVector.at(0);
+		string continentName = lineVector.at(3);
+
+		//set territories in corresponding continent
+		int continentIndex = graph->getContinentIndexByName(continentName);
+		graph->addToContinent(continentIndex, graph->nodeList[territoriesIndexes.at(territoryName)]);
+
+		//remove first 4 variables of the row to only keep neighbors
+		lineVector.erase(lineVector.begin(), lineVector.begin() + 4);
+
+		//set borders
+		for (const string& neighbor : lineVector)
+		{
+			graph->addEdge(graph->nodeList[territoriesIndexes.at(territoryName)], graph->nodeList[territoriesIndexes.at(neighbor)]);
+		}
+	}
+
+	infile.close();
+	return graph;
+}
+
+std::vector<std::string> ConquestFileReader::splitString(std::string str, const char separator)
+{
+	vector<string> parts;
+	stringstream lineStringStream(str);
+	string part;
+
+	while (getline(lineStringStream, part, separator)) //split line at the comma
+	{
+		parts.push_back(part); //add content to vector parts
+	}
+
+	return parts;
+}
+
+bool ConquestFileReader::getMapStatus()
+{
+	return mapStatus;
+}

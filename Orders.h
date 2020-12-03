@@ -86,8 +86,6 @@ private:
 public:
 	Advance();
 	Advance(Player* p1, Player* p2, Territory* t1, Territory* t2, int army, Map* m, Deck* d);
-	//Advance(int army, string tr1, string tr2);
-	//Advance(Player* p1, int army, int source, int target);
 
 	// Copy Constructor 
 	Advance(const Advance& a2);
@@ -132,11 +130,9 @@ public:
 	friend ostream& operator<<(ostream& out, const Bomb &b);
 	friend istream& operator>>(istream& in, Bomb &d);
 
-	//string  orderName();
 	void execute();
 	bool validate(Player* p, Territory* t);
 	void execute(Territory* t);
-	//void orderProcedure();
 
 	//getters & setters
 	bool getCheckValid();
@@ -166,14 +162,12 @@ public:
 	friend ostream& operator<<(ostream& out, const Blockade &b);
 	friend istream& operator>>(istream& in, Blockade &b);
 
-	//string orderName();
 	void execute();
 	bool validate(Player* p, Territory* t);
 	void execute(Player* p, Player* n, Territory* t);
 
 	string getBlockedTerritory();
 	void setBlockedTerritory(string btt);
-	//void orderProcedure();
 };
 
 //-------------------Airlift----------------//

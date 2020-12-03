@@ -31,6 +31,12 @@ Player::~Player() {
 	pacifism = false;
 }
 
+void Player::set_strategy(PlayerStrategy* playerStrategy)
+{
+	delete playerStrategy_;
+	this->playerStrategy_ = playerStrategy;
+}
+
 //accessors
 vector<Territory*> Player::getPlayerTerritories() {
 	return playerTerritories;
@@ -53,7 +59,7 @@ int Player::getPlayerID()
 	return playerID;
 }
 
-bool Player::getPacifism() 
+bool Player::getPacifism()
 {
 	return pacifism;
 }
@@ -65,7 +71,7 @@ bool Player::getCardCheck()
 
 
 //mutators
-void Player::setPlayerTerritories(vector<Territory*> playerTerritories_) {
+void Player::pushBackTerritories(vector<Territory*> playerTerritories_) {
 	for (Territory* t : playerTerritories_) {
 		this->playerTerritories.push_back(t);
 	}
@@ -123,12 +129,12 @@ ostream& operator<<(ostream& out, const Player& p) {
 	out << "\nPlayer ID: " << p.playerID << endl;
 
 	out << "Player Armies: " << p.playerArmies << endl;
-	
+
 	out << "Territories: " << endl;
 	for (Territory* t : p.playerTerritories) {
 		out << *t << endl;
 	}
-	
+
 	if (p.playerOrderList != nullptr) {
 		for (Orders* o : p.playerOrderList->getOList()) {
 			out << "Orders: " << *o << endl;
@@ -154,24 +160,14 @@ ostream& operator<<(ostream& out, const Player& p) {
 }
 
 istream& operator>>(istream& in, Player& p) {
-	//in >> p.playerTerritories;
-	//in >> p.playerCards;
-	//in >> p.playerOrders;
 	in >> p.playerID;
 	return in;
 }
 
 //required methods
-void Player::issueOrder(Orders* order) {
-	this->setPlayerOrders(order);
-	
+void Player::issueOrder(Player* player, std::vector<Player*> playersVec, Player* neutralP, Map* map) {
+	this->playerStrategy_->issueOrder(player, playersVec, neutralP, map);
 }
-
-//vector<Territory*> Player::toDefend() {
-//	vector<Territory*> toDefend{ new Territory(), new Territory() };
-//	return toDefend;
-//}
-
 
 std::vector<int> Player::getToAttackVec()
 {

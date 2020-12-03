@@ -56,10 +56,9 @@ void PhaseObserver::Update()
 
 void PhaseObserver::display()
 {
-	if (!_subject->enableObserver) 
-		return;
+	if (!_subject->enablePhaseObserver){ return; }
 
-	std::cout << "\n" << "======================================= PART 5 - OBSERVER =======================================" << "\n";
+	std::cout << "\n" << "======================================= Phase Observer =======================================" << "\n";
 	
 	std::map<Player*, int> armiesCountsBasedOnTerritories = _subject->armiesCountsBasedOnTerritories;
 	std::map<Player*, int> armiesCountsMinimums = _subject->armiesCountsMinimums;
@@ -88,12 +87,12 @@ void PhaseObserver::display()
 			<< "\n";
 	}
 
-	cout << "========================================================================================" << "\n\n";
+	cout << "==============================================================================================" << "\n\n";
 }
 
 StatisticsObserver::StatisticsObserver() {}
 
-StatisticsObserver::StatisticsObserver(Subject* s)
+StatisticsObserver::StatisticsObserver(GameEngine* s)
 {
 	_subject = s;
 	_subject->Attach(this);
@@ -111,7 +110,26 @@ void StatisticsObserver::Update()
 
 void StatisticsObserver::display()
 {
-	//get variables from model
-	cout << endl; //add variables
+	if (!_subject->enableStatObserver) { return; }
+	std::cout << "\n" << "======================================= Stats Observer =======================================" << "\n";
+
+	vector<Player*> players = _subject->getPlayers();
+
+	float totalNbrOfTerritories = 0;
+	for (Player* player : players) { totalNbrOfTerritories += player->getPlayerTerritories().size(); }
+
+	for (Player* player : players)
+	{
+		float nbrOfTerritories = player->getPlayerTerritories().size();
+		if (nbrOfTerritories < 1) { continue; }
+
+		float percentageOfTheWorld = nbrOfTerritories / totalNbrOfTerritories * 100;
+
+		cout << "Player " << player->getPlayerID() << " | controls ";
+		printf("%.2f", percentageOfTheWorld);
+		cout << "% of the map" << "\n";
+	}
+
+	cout << "==============================================================================================" << "\n\n";
 }
 

@@ -42,8 +42,6 @@ std::ostream& operator<<(std::ostream& out, const Territory& t) {
 std::istream& operator>>(std::istream& in, Territory& t) {
 	std::cout << "Enter territory ID: ";
 	in >> t.ID;
-	std::cout << "Enter the number of armies: ";
-	in >> t.numberOfArmies;
 	return in;
 }
 
@@ -63,7 +61,6 @@ Territory* Map::createNode() {
 //Add edge methods
 int Map::addEdge(Territory* u, Territory* v) {
 	listOfNeightbors[u->getID()].push_back(v);
-	//listOfNeightbors[v->getID()].push_back(u);
 	return 0;
 }
 
@@ -188,6 +185,20 @@ int Map::addToContinent(int index, Territory* u) {
 	return 0;
 }
 
+int Map::getContinentIndexByName(std::string name)
+{
+	for (int i = 0; i < listOfContinent.size(); i++)
+	{
+		std::string a = listOfContinent.at(i)->name;
+		if(!name.compare(a))
+		{
+			return i;
+		}
+	}
+
+	return -1;
+}
+
 //Check the size of territory of a continent
 int Map::territorySizeCheck() {
 	int nodeCounter = 0;
@@ -250,11 +261,6 @@ int Map::validate() {
 	int territorySize = territorySizeCheck();
 
 	DFS(listOfContinent[0]->territories[0], &visited);
-
-	//If needed uncomment, it checks all visited nodes
-	/*for (int i = 0; i < visited.size(); i++) {
-		std::cout << visited[i]->getID() << std::endl;
-	}*/
 
 	//Checking if the visited nodes = territory size
 	if (visited.size() == territorySize) {

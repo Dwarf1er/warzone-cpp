@@ -16,7 +16,7 @@ private:
 	OrderList* playerOrderList; //represents the OrderList queued by the player
 
 	// Strategy for player
-	PlayerStrategy* playerStrategy_ = nullptr;
+	PlayerStrategy* playerStrategy_;
 
 	//helper attributes
 	int playerArmies; //represent the number of armies of the player
@@ -33,10 +33,7 @@ public:
 	Player(const Player& p);
 	~Player();
 
-	/*void set_strategy(PlayerStrategy* playerStrategy) {
-		delete this->playerStrategy_;
-		this->playerStrategy_ = playerStrategy;
-	}*/
+	void set_strategy(PlayerStrategy* playerStrategy);
 
 	//accessors
 	vector<Territory*> getPlayerTerritories(); //returns the collection of territories of the player
@@ -50,7 +47,7 @@ public:
 	bool getCardCheck();
 
 	//mutators
-	void setPlayerTerritories(vector<Territory*> playerTerritories_);
+	void pushBackTerritories(vector<Territory*> playerTerritories_);
 	void setPlayerCards(Hand* playerCards_);
 	void setPlayerOrders(Orders* playerOrderList_);
 	void setPlayerArmies(int playerArmies_);
@@ -61,14 +58,15 @@ public:
 	void setCardCheck(bool check);
 
 	//operator overloading
-		//assignment operator overloading
+	//assignment operator overloading
 	void operator=(const Player& p);
+
 	//stream insertion operator overloading
 	friend ostream& operator<<(ostream& out, const Player& p);
 	friend istream& operator>>(istream& in, Player& p);
 
 	//required methods
-	void issueOrder(Orders* order); //creates an Order object and adds it to playerOrderList
-	vector<Territory*> toDefend(); //returns a list of territories owned by the player that need to be defended
-	vector<Territory*> toAttack(); //returns a list of territories that are attacked by the player
+	void issueOrder(Player* player, std::vector<Player*> playersVec, Player* neutralP, Map* map); //creates an Order object and adds it to playerOrderList
+	vector<Territory*> toDefend(Player* player); //returns a list of territories owned by the player that need to be defended
+	vector<Territory*> toAttack(Player* player); //returns a list of territories that are attacked by the player
 };

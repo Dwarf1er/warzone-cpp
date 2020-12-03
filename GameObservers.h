@@ -42,10 +42,10 @@ class StatisticsObserver : public Observer
 {
 public:
 	StatisticsObserver();
-	StatisticsObserver(Subject* s); //parameter: Model Pointer
+	StatisticsObserver(GameEngine* s); //parameter: Model Pointer
 	~StatisticsObserver();
 	void Update() override;
 	void display();
 private:
-	Subject* _subject; //Model Pointer
+	GameEngine* _subject; //Model Pointer
 };
