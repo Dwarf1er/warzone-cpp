@@ -430,7 +430,7 @@ void StartUp::startupPhase() {
 		}
 	}
 	else
-		cout << "The map has loading problems, it is not Antoine's fault, he has been asking his team to communicate since the beginning of the semester" << endl;
+		cout << "The map has loading problems" << endl;
 
 	//3 - giving players an initial number of armies
 	cout << "Giving players their initial amount of armies..." << endl;

@@ -42,6 +42,11 @@ void HumanPlayerStrategy::issueOrder(Player* player, std::vector<Player*> player
 			std::cout << "Player " << " human " << " Card in hand: " << std::endl << player->getPlayerCards()->get_cards_in_hand()[i]->get_card_type() << ":" << player->getPlayerCards()->get_cards_in_hand()[i]->get_card_type_name() << std::endl;
 		}
 		std::cin >> cardChoice;
+		while (!(cardChoice <= player->getPlayerCards()->get_cards_in_hand().size() && cardChoice >= 0)) {
+			std::cout << "Please enter the correct number" << std::endl;
+			std::cin >> cardChoice;
+		}
+		
 
 		switch (cardChoice) {
 		case 0:
@@ -126,7 +131,7 @@ void HumanPlayerStrategy::issueOrder(Player* player, std::vector<Player*> player
 				std::cout << "Which player would you like to negotiate with ?" << std::endl;
 				std::cin >> playerID;
 
-				// Change the neutraltemp
+				
 				if (Negotiate().validate(player, playersVec[playerID-1])) {
 					Negotiate().execute(player, playersVec[playerID-1]);
 					break;
