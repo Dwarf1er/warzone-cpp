@@ -7,7 +7,6 @@
 // Human Player Section
 void HumanPlayerStrategy::issueOrder(Player* player, std::vector<Player*> playersVec, Player* neutralP, Map* map)
 {
-
 	std::cout << "This is human player strategy" << std::endl;
 
 	int userAttackTerritory = 0;
@@ -39,15 +38,14 @@ void HumanPlayerStrategy::issueOrder(Player* player, std::vector<Player*> player
 		for (int i = 0; i < player->getPlayerCards()->get_cards_in_hand().size(); i++) {
 			std::cout << "Player " << " Human " << std::endl;
 			std::cout << *player->getPlayerCards()->get_cards_in_hand()[i] << std::endl;
-			std::cout << "Player " << " human " << " Card in hand: " << std::endl << player->getPlayerCards()->get_cards_in_hand()[i]->get_card_type() << ":" << player->getPlayerCards()->get_cards_in_hand()[i]->get_card_type_name() << std::endl;
+			std::cout << "Player " << " human " << " Card in hand: " << std::endl << i +1 << ": " << player->getPlayerCards()->get_cards_in_hand()[i]->get_card_type() << ":" << player->getPlayerCards()->get_cards_in_hand()[i]->get_card_type_name() << std::endl;
 		}
 		std::cin >> cardChoice;
-		while (!(cardChoice <= player->getPlayerCards()->get_cards_in_hand().size() && cardChoice >= 0)) {
+		while (!(cardChoice >= 0 && player->getPlayerCards()->get_cards_in_hand().size())) {
 			std::cout << "Please enter the correct number" << std::endl;
 			std::cin >> cardChoice;
 		}
 		
-
 		switch (cardChoice) {
 		case 0:
 			player->setPlayerOrders(new Bomb());
@@ -81,6 +79,7 @@ void HumanPlayerStrategy::issueOrder(Player* player, std::vector<Player*> player
 				for (int j = 0; j < player->getPlayerTerritories().size(); j++) {
 					std::cout << player->getPlayerTerritories()[j]->getID() << std::endl;
 				}
+
 				std::cout << "Which territory to deploy to ?" << std::endl;
 				std::cin >> *tempTerritory1;
 				std::cout << "How many armies to deploy ? " << std::endl;
