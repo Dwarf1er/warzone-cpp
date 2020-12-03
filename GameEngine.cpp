@@ -117,8 +117,6 @@ void GameEngine::initGame() {
 		break;
 	}
 	
-	map = new Map(*maploader.loadmap(listOfFile[userFileInput - 1]));
-	
 	map->printBoard();
 
 	//Ask the user for the number of player to play	
