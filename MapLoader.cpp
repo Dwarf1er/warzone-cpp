@@ -227,8 +227,6 @@ Map* MapLoader::loadmap(string file) {
 		//Call method to check for duplicate territories 
 		graph->validate();
 		printf("\n");
-		//graph.printBoard();
-		//return graph;
 		graph->printBoard();
 	}
 	
@@ -288,9 +286,6 @@ Map* ConquestFileReader::loadConquestMap(std::string fileName) {
 		std::vector<std::string> lineVector = splitString(line, '=');
 
 		string continentName = lineVector.at(0);
-
-		//num TODO
-		//int num = stoi(lineVector.at(1)); 
 
 		graph->createContinent(continentName, ContinentIndex);
 		ContinentIndex++;

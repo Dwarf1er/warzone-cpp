@@ -160,9 +160,6 @@ ostream& operator<<(ostream& out, const Player& p) {
 }
 
 istream& operator>>(istream& in, Player& p) {
-	//in >> p.playerTerritories;
-	//in >> p.playerCards;
-	//in >> p.playerOrders;
 	in >> p.playerID;
 	return in;
 }
@@ -171,17 +168,6 @@ istream& operator>>(istream& in, Player& p) {
 void Player::issueOrder(Player* player, std::vector<Player*> playersVec, Player* neutralP, Map* map) {
 	this->playerStrategy_->issueOrder(player, playersVec, neutralP, map);
 }
-
-// Error here return value 
-//vector<Territory*> Player::toDefend(Player* player)
-//{
-//	playerStrategy_->toDefend(player);
-//}
-
-//vector<Territory*> Player::toAttack(Player* player)
-//{
-//	playerStrategy_->toAttack(player);
-//}
 
 std::vector<int> Player::getToAttackVec()
 {

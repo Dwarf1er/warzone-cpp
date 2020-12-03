@@ -61,7 +61,6 @@ Territory* Map::createNode() {
 //Add edge methods
 int Map::addEdge(Territory* u, Territory* v) {
 	listOfNeightbors[u->getID()].push_back(v);
-	//listOfNeightbors[v->getID()].push_back(u);
 	return 0;
 }
 

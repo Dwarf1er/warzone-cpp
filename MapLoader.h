@@ -8,7 +8,6 @@ class MapLoader {
 public:
 	MapLoader();
 	~MapLoader();
-	// Previous Map loadmap(std::string file);
 	Map* loadmap(std::string file);
 	//copy constructor
 	MapLoader(const MapLoader& ml1);

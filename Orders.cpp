@@ -112,14 +112,6 @@ Advance::Advance(Player* p1, Player* p2, Territory* t1, Territory* t2, int army,
 	execute(p1, p2, t1, t2, army, d);
 }
 
-//Advance::Advance(Player* p1, int army, int source, int target) {
-//	this->p1 = p1;
-//	this->army = army;
-//	this->source = source;
-//	this->target = target;
-//	printf("Advance order has been initiated");
-//}
-
 // Copy Constructor 
 Advance::Advance(const Advance& a2) {
 	p1 = a2.p1;
@@ -164,13 +156,9 @@ void Advance::execute()
 bool Advance::validate(Player* p, Territory* t1, Territory* t2, Map* m) {
 	for (int i = 0; i < p->getPlayerTerritories().size(); i++) {
 		if (p->getPlayerTerritories()[i]->getID() == t1->getID()) { //checks if territory belongs to player
-		//	for (int j = 0; j < t1->getneighbors();j++) {
-				//if (m->listOfNeightbors[t1->getID()][j]->getID() == t2->getID()) {  //checks if territories are adjacent
-					cout << "validation succesful" << endl;
-					return true;
-					break;
-			//	}
-			//}
+			cout << "validation succesful" << endl;
+			return true;
+			break;
 		}
 		return true;
 	}
@@ -247,7 +235,7 @@ void Advance::execute(Player* p1, Player* p2, Territory* t1, Territory* t2, int 
 			temp.push_back(t2);
 			p1->setPlayerTerritories(temp);
 
-			if (!(p1->getCardCheck())) {  //LOL CARDS DONT WORK
+			if (!(p1->getCardCheck())) {
 				cout << "the victorious player has received a card" << endl;
 				Hand* temph = new Hand(d);
 				temph = p1->getPlayerCards();
@@ -315,15 +303,9 @@ istream& operator>>(istream& in, Bomb& b) {
 	return in;
 }
 
-void Bomb::execute()
-{
+void Bomb::execute() {
 }
 
-/*
-string Bomb::orderName() {
-	return "Bomb: ";
-};
-*/
 bool Bomb::validate(Player* p, Territory* t) {  //check if territory does not belong to player
 	bool valid = true;
 	for (int i = 0; i < p->getPlayerTerritories().size(); i++) {
@@ -437,10 +419,7 @@ void Blockade::execute(Player* p, Player* n, Territory* t) {
 
 
 }
-/*
-void Blockade::orderProcedure() {
-	printf("Blockade\n");
-};*/
+
 //getters & setters
 string Blockade::getBlockedTerritory() {
 	return blockTerritory;
@@ -680,7 +659,6 @@ bool Negotiate::validate(Player* p1, Player* p2) {
 }
 void Negotiate::execute(Player* p1, Player* p2) {
 	printf("Negotiate: \n");
-	//cout << "\n Negotiate prevents attacks from " << getNegotiatePlayer() << "until the end of turn" << endl;
 
 
 	cout << "\nNegotiate prevents attacks between " << p1->getPlayerID() << " and " << p2->getPlayerID() << endl;
