@@ -398,9 +398,8 @@ void AggressivePlayerStrategy::issueOrder(Player* player, std::vector<Player*> p
 						}
 					}
 				}
-				
 				std::cout << "How many armies to deploy ? " << std::endl;
-				//army = (rand() % player->getPlayerArmies()) + 1;
+				army = (rand() % player->getPlayerArmies()) + 1;
 
 				for (int j = 0; j < playersVec.size(); j++) {
 					for (int k = 0; k < playersVec[j]->getPlayerTerritories().size(); k++) {
