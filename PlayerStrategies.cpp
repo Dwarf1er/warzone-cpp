@@ -374,6 +374,7 @@ void AggressivePlayerStrategy::issueOrder(Player* player, std::vector<Player*> p
 				else {
 					std::cout << "Invalid statement" << std::endl;
 				}
+				break;
 			}
 		}
 
@@ -399,7 +400,7 @@ void AggressivePlayerStrategy::issueOrder(Player* player, std::vector<Player*> p
 				}
 				
 				std::cout << "How many armies to deploy ? " << std::endl;
-				army = (rand() % player->getPlayerArmies()) + 1;
+				//army = (rand() % player->getPlayerArmies()) + 1;
 
 				for (int j = 0; j < playersVec.size(); j++) {
 					for (int k = 0; k < playersVec[j]->getPlayerTerritories().size(); k++) {
@@ -609,14 +610,21 @@ void BenevolentPlayerStrategy::issueOrder(Player* player, std::vector<Player*> p
 				int x;
 				x = rand() % (player->getPlayerTerritories().size() - 1);
 				tempTerritory1 = player->getPlayerTerritories()[x];
-
 				std::cout << "Which territory do you want to attack ?" << std::endl;
 				int y;
 				y = rand() % (player->getPlayerTerritories().size() - 1);
 				tempTerritory2 = player->getPlayerTerritories()[x];
+				for (int j = 0; j < map->listOfContinent.size(); j++) {
+					for (int k = 0; k < map->listOfContinent[j]->territories.size(); k++) {
+						if (tempTerritory2->getID() == player->getPlayerTerritories()[k]->getID()) {
+							y = rand() % (player->getPlayerTerritories().size() - 1);
+							tempTerritory2 = player->getPlayerTerritories()[x];
+						}
+					}
+				}
 
 				std::cout << "How many armies to deploy ? " << std::endl;
-				army = (rand() % player->getPlayerArmies()) + 1;
+				//army = (rand() % player->getPlayerArmies()) + 1;
 
 				for (int j = 0; j < playersVec.size(); j++) {
 					for (int k = 0; k < playersVec[j]->getPlayerTerritories().size(); k++) {
@@ -627,7 +635,7 @@ void BenevolentPlayerStrategy::issueOrder(Player* player, std::vector<Player*> p
 				}
 
 				if (Advance().validate(player, tempTerritory1, tempTerritory2, map)) {
-					Advance().execute(player, playersVec[playerID-1], tempTerritory1, tempTerritory2, army, deck);
+					Advance().execute(player, playersVec[playerID - 1], tempTerritory1, tempTerritory2, army, deck);
 					break;
 				}
 				else {
