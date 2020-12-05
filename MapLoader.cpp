@@ -301,7 +301,15 @@ Map* ConquestFileReader::loadConquestMap(std::string fileName)
 		//set borders
 		for (const string& neighbor : lineVector)
 		{
-			graph->addEdge(graph->nodeList[territoriesIndexes.at(territoryName)], graph->nodeList[territoriesIndexes.at(neighbor)]);
+			int territoryIndex = 0;
+			int neighborIndex = 0;
+			try
+			{
+				territoryIndex = territoriesIndexes.at(territoryName);
+				neighborIndex = territoriesIndexes.at(neighbor);
+			}
+			catch (...){}
+			graph->addEdge(graph->nodeList[territoryIndex], graph->nodeList[neighborIndex]);
 		}
 	}
 

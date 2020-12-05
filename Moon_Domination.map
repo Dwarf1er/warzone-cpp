@@ -1,0 +1,29 @@
+[Map]
+image=Moon.bmp
+wrap=no
+scroll=none
+author=Jeff S
+warn=yes
+
+[Continents]
+Sajon=4
+Cresinion=2
+Delphot=2
+
+[Territories]
+Bay of Dew,60,222,Cresinion,Byrgius,Ocean of Storms,Sea of Rains,Harpalus
+Ocean of Storms,145,300,Cresinion,Bay of Dew, Sea of Rains,Byrgius,Sea of Clouds
+Sea of Rains,279,236,Cresinion,Ocean of Storms,Bay of Dew,Harpalus,Aristotle,Sea of Serenity,Rhaeticus,Sea of Clouds
+Harpalus,208,73,Cresinion,Bay of Dew, Sea of Rains, Aristotle
+
+Aristotle,425,73,Delphot,Harpalus,Sea of Rains,Sea of Serenity,Sea of Crisis
+Sea of Serenity,469,215,Delphot,Sea of Rains,Rhaeticus,Sea of Nectar,Sea of Crisis,Aristotle 
+Sea of Crisis,612,203,Delphot,Aristotle,Sea of Serenity,Sea of Nectar
+Sea of Nectar,601,347,Delphot,Sea of Crisis,Sea of Serenity,Rhaeticus,Straight Wall
+
+Byrgius,76,410,Sajon,Bay of Dew,Ocean of Storms,Sea of Clouds,Marsh of Diseases
+Marsh of Diseases,202,488,Sajon,Byrgius,Sea of Clouds,Tycho
+Sea of Clouds,220,407,Sajon,Byrgius,Marsh of Diseases,Tycho,Straight Wall,Rhaeticus,Sea of Rains,Ocean of Storms
+Rhaeticus,406,370,Sajon,Sea of Clouds,Straight Wall,Sea of Nectar,Sea of Serenity,Sea of Rains
+Tycho,367,519,Sajon,Marsh of Diseases,Sea of Clouds,Straight Wall
+Straight Wall,485,452,Sajon,Tycho,Sea of Clouds,Rhaeticus,Sea of Nectar
