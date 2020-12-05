@@ -55,6 +55,18 @@ void GameEngine::mainGameLoop()
 		issueOrderPhase();
 		std::cout << "Execute Order Phase" << std::endl;
 		executeOrdersPhase();
+
+		for (int i = 0; i < playersVec.size(); i++) {
+			if (playersVec[i]->getPlayerTerritories().empty()) {
+				playersVec.pop_back(); //remove player with no territories
+			}
+
+			if (playersVec[i]->getPlayerTerritories() == map->getTerritories()) {
+				cout << "WINNER: " << playersVec[i] << endl;
+				endgame = true;
+				break;
+			}
+		}
 	}
 }
 
